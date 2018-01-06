@@ -8,5 +8,10 @@ module.exports = {
         react: 'React'
       }
     }
+  },
+  webpack: {
+    html: {
+      template: 'demo/src/index.html'
+    }
   }
 }

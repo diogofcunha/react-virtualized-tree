@@ -1,9 +1,6 @@
-import React, {Component} from 'react'
+import Tree from './TreeContainer';
+import * as selectors from './selectors/nodes';
+import renderers from './renderers';
 
-export default class extends Component {
-  render() {
-    return <div>
-      <h2>Welcome to React components</h2>
-    </div>
-  }
-}
+export default Tree;
+export { selectors, renderers }

@@ -1,0 +1,305 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`selectors -> nodes -> Tree actions deleteNodeFromTree when a node is deleted, should delete that node and all children nodes 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "id": 5,
+        "name": "Leaf 5",
+      },
+    ],
+    "id": 0,
+    "name": "Leaf 1",
+    "state": Object {
+      "expanded": true,
+    },
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [
+          Object {
+            "id": 7,
+            "name": "Leaf 8",
+          },
+          Object {
+            "id": 8,
+            "name": "Leaf 9",
+          },
+        ],
+        "id": 6,
+        "name": "Leaf 7",
+        "state": Object {
+          "expanded": false,
+        },
+      },
+      Object {
+        "id": 9,
+        "name": "Leaf 10",
+      },
+    ],
+    "id": 1,
+    "name": "Leaf 6",
+    "state": Object {
+      "deletable": true,
+      "expanded": false,
+    },
+  },
+]
+`;
+
+exports[`selectors -> nodes -> Tree actions deleteNodeFromTree when root node is deleted, should delete that node and all children nodes 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [
+          Object {
+            "id": 7,
+            "name": "Leaf 8",
+          },
+          Object {
+            "id": 8,
+            "name": "Leaf 9",
+          },
+        ],
+        "id": 6,
+        "name": "Leaf 7",
+        "state": Object {
+          "expanded": false,
+        },
+      },
+      Object {
+        "id": 9,
+        "name": "Leaf 10",
+      },
+    ],
+    "id": 1,
+    "name": "Leaf 6",
+    "state": Object {
+      "deletable": true,
+      "expanded": false,
+    },
+  },
+]
+`;
+
+exports[`selectors -> nodes -> Tree actions replaceNodeFromTree should replace a node in the tree without mutations 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [
+          Object {
+            "id": 3,
+            "name": "Leaf 3",
+            "state": Object {
+              "deletable": true,
+              "favorite": true,
+            },
+          },
+          Object {
+            "id": 4,
+            "name": "Leaf 4",
+          },
+        ],
+        "id": 2,
+        "name": "Leaf 2",
+        "state": Object {
+          "deletable": true,
+          "expanded": true,
+        },
+      },
+      Object {
+        "id": 5,
+        "name": "Leaf 5",
+      },
+    ],
+    "id": 0,
+    "name": "Leaf 1",
+    "state": Object {
+      "expanded": true,
+    },
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [
+          Object {
+            "id": 7,
+            "name": "Leaf 8",
+          },
+          Object {
+            "id": 8,
+            "name": "Leaf 9",
+          },
+        ],
+        "id": 6,
+        "name": "Leaf 7",
+        "state": Object {
+          "expanded": false,
+        },
+      },
+      Object {
+        "id": 9,
+        "name": "Leaf 10",
+      },
+    ],
+    "id": 1,
+    "name": "Leaf 6",
+    "state": Object {
+      "deletable": true,
+      "expanded": false,
+    },
+  },
+]
+`;
+
+exports[`selectors -> nodes -> getNodeRenderOptions should extract state from nodes correctly when there are children 1`] = `
+Object {
+  "hasChildren": true,
+  "isDeletable": true,
+  "isExpanded": false,
+  "isFavorite": false,
+}
+`;
+
+exports[`selectors -> nodes -> getNodeRenderOptions should extract state from nodes correctly when there are no children 1`] = `
+Object {
+  "hasChildren": false,
+  "isDeletable": false,
+  "isExpanded": true,
+  "isFavorite": true,
+}
+`;
+
+exports[`selectors -> nodes -> single node actions addNode should create the expected object 1`] = `
+Object {
+  "node": Object {
+    "children": Array [
+      Object {
+        "children": Array [
+          Object {
+            "id": 3,
+            "name": "Leaf 3",
+            "state": Object {
+              "deletable": true,
+              "favorite": true,
+            },
+          },
+          Object {
+            "id": 4,
+            "name": "Leaf 4",
+          },
+        ],
+        "id": 2,
+        "name": "Leaf 2",
+        "state": Object {
+          "deletable": true,
+          "expanded": true,
+        },
+      },
+      Object {
+        "id": 5,
+        "name": "Leaf 5",
+      },
+    ],
+    "deepness": 0,
+    "id": 0,
+    "name": "Leaf 1",
+    "parents": Array [],
+    "state": Object {
+      "expanded": true,
+    },
+  },
+  "type": 0,
+}
+`;
+
+exports[`selectors -> nodes -> single node actions deleteNode should create the expected object 1`] = `
+Object {
+  "node": Object {
+    "children": Array [
+      Object {
+        "children": Array [
+          Object {
+            "id": 3,
+            "name": "Leaf 3",
+            "state": Object {
+              "deletable": true,
+              "favorite": true,
+            },
+          },
+          Object {
+            "id": 4,
+            "name": "Leaf 4",
+          },
+        ],
+        "id": 2,
+        "name": "Leaf 2",
+        "state": Object {
+          "deletable": true,
+          "expanded": true,
+        },
+      },
+      Object {
+        "id": 5,
+        "name": "Leaf 5",
+      },
+    ],
+    "deepness": 0,
+    "id": 0,
+    "name": "Leaf 1",
+    "parents": Array [],
+    "state": Object {
+      "expanded": true,
+    },
+  },
+  "type": 1,
+}
+`;
+
+exports[`selectors -> nodes -> single node actions updateNode should update the supplied node state without mutations 1`] = `
+Object {
+  "node": Object {
+    "children": Array [
+      Object {
+        "children": Array [
+          Object {
+            "id": 3,
+            "name": "Leaf 3",
+            "state": Object {
+              "deletable": true,
+              "favorite": true,
+            },
+          },
+          Object {
+            "id": 4,
+            "name": "Leaf 4",
+          },
+        ],
+        "id": 2,
+        "name": "Leaf 2",
+        "state": Object {
+          "deletable": true,
+          "expanded": true,
+        },
+      },
+      Object {
+        "id": 5,
+        "name": "Leaf 5",
+      },
+    ],
+    "deepness": 0,
+    "id": 0,
+    "name": "Leaf 1",
+    "parents": Array [],
+    "state": Object {
+      "expanded": false,
+      "favorite": true,
+    },
+  },
+  "type": 2,
+}
+`;

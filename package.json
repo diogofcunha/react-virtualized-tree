@@ -15,6 +15,7 @@
     "clean": "nwb clean-module && nwb clean-demo",
     "start": "nwb serve-react-demo",
     "test": "node config/test/test.js --env=jsdom",
+    "test:coverage": "node config/test/test.js --env=jsdom --coverage",
     "postpublish": "node config/pages"
   },
   "dependencies": {

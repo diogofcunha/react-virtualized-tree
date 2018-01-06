@@ -12,10 +12,10 @@
   ],
   "scripts": {
     "build": "nwb build-react-component",
-    "deploy": "node config/pages",
     "clean": "nwb clean-module && nwb clean-demo",
     "start": "nwb serve-react-demo",
-    "test": "node config/test/test.js --env=jsdom"
+    "test": "node config/test/test.js --env=jsdom",
+    "postpublish": "node config/pages"
   },
   "dependencies": {
     "classnames": "^2.2.5",

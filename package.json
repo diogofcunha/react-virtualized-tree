@@ -11,7 +11,8 @@
     "umd"
   ],
   "scripts": {
-    "build": "nwb build-react-component",
+    "build": "nwb build-react-component --no-demo",
+    "pages": "nwb build-react-app demo/src/index.js docs/",
     "clean": "nwb clean-module && nwb clean-demo",
     "start": "nwb serve-react-demo",
     "test": "node config/test/test.js --env=jsdom"
@@ -33,7 +34,6 @@
     "deep-freeze": "^0.0.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "gh-pages": "^1.1.0",
     "jest": "^22.0.4",
     "nwb": "0.20.x",
     "react": "^16.2.0",

@@ -14,3 +14,8 @@ after_success:
 branches:
   only:
     - master
+
+env:
+  global:
+    - CI: true
+

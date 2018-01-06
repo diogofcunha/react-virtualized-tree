@@ -2,10 +2,14 @@ sudo: false
 
 language: node_js
 node_js:
-  - 6
+  - 8
 
 before_install:
   - npm install codecov.io coveralls
+
+script:
+  - yarn run build
+  - yarn run test:coverage
 
 after_success:
   - cat ./coverage/lcov.info | ./node_modules/codecov.io/bin/codecov.io.js
@@ -14,3 +18,7 @@ after_success:
 branches:
   only:
     - master
+
+env:
+  global:
+    - CI: true

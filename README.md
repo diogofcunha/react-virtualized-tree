@@ -6,11 +6,11 @@
 
 Describe react-virtualized-tree here.
 
-[build-badge]: https://img.shields.io/travis/user/repo/master.png?style=flat-square
-[build]: https://travis-ci.org/user/repo
+[build-badge]: https://img.shields.io/travis/diogofcunha/react-virtualized-tree/master.png?style=flat-square
+[build]: https://travis-ci.org/diogofcunha/react-virtualized-tree
 
-[npm-badge]: https://img.shields.io/npm/v/npm-package.png?style=flat-square
-[npm]: https://www.npmjs.org/package/npm-package
+[npm-badge]: https://img.shields.io/npm/v/react-virtualized-tree.png?style=flat-square
+[npm]: https://www.npmjs.com/package/react-virtualized-tree
 
-[coveralls-badge]: https://img.shields.io/coveralls/user/repo/master.png?style=flat-square
-[coveralls]: https://coveralls.io/github/user/repo
+[coveralls-badge]: https://img.shields.io/coveralls/diogofcunha/react-virtualized-tree/master.png?style=flat-square
+[coveralls]: https://coveralls.io/github/diogofcunha/react-virtualized-tree

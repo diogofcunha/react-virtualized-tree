@@ -12,9 +12,9 @@ import './index.css';
 ReactDOM.render((
   <BrowserRouter>
     <NavBar>
-      <Route exact path="/" component={Home} />
-      <Route path="/examples" component={ExamplesContainer} />
-      <Route path="/docs" component={DocumentsContainer} />
+      <Route exact path="/react-virtualized-tree" component={Home} />
+      <Route path="/react-virtualized-tree/examples" component={ExamplesContainer} />
+      <Route path="/react-virtualized-tree/docs" component={DocumentsContainer} />
     </NavBar>  
   </BrowserRouter>
 ), document.getElementById('demo'))

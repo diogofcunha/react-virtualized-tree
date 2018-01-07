@@ -37,13 +37,13 @@ class NavBar extends Component {
               inverted
             >
               <Menu.Item name='home'>
-                <Link to='/'>Setup</Link>
+                <Link to='/react-virtualized-tree'>Setup</Link>
               </Menu.Item>
               <Menu.Item name='docs'>
-                <Link to='/docs/renderers'>Documentation</Link>
+                <Link to='/react-virtualized-tree/docs/renderers'>Documentation</Link>
               </Menu.Item>
               <Menu.Item name='examples'>
-                <Link to='/examples/basic-tree'>Examples</Link>
+                <Link to='/react-virtualized-tree/examples/basic-tree'>Examples</Link>
               </Menu.Item>
               <Menu.Item name='examples'>
                 <a href={getRepoPath()}>GitHub</a>

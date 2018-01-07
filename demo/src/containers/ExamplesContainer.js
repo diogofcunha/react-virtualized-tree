@@ -4,6 +4,8 @@ import App from '../App';
 import { Route } from 'react-router';
 import examples from '../examples';
 import { Link } from 'react-router-dom';
+import { getExamplePath } from '../toolbelt';
+import './ExamplesContainer.css';
 
 export default class ExamplesContainer extends Component {
   render() {    
@@ -30,12 +32,20 @@ export default class ExamplesContainer extends Component {
               render={
                 p => {
                   const selectedExample = examples[p.match.params.example];
-                  const { component: Component, name, description } = selectedExample;
+                  const { component: Component, name, description, fileName } = selectedExample;
             
                   return (
                     <div>
-                      <Header as='h1'>{ name }</Header>
-                      <Segment>{ description }</Segment>
+                      <span
+                        className='jump-to-source'>
+                        <a href={getExamplePath(fileName)}>
+                          Jump to source
+                        </a>
+                      </span>
+                      <Header as='h1'>
+                        { name }
+                      </Header>
+                      { description && <Segment>{ description }</Segment> }
                       <div style={{ height: 500 }}>
                         <Component {...p}/>
                       </div>

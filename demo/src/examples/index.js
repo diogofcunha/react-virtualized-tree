@@ -1,8 +1,5 @@
 import React from 'react';
 
-import Renderers from './Renderers';
-import ChangeRenderers from './ChangeRenderers';
-
 const createEntry = (key, fileName, name, description) => ({
   [key]: {
     name,
@@ -13,8 +10,26 @@ const createEntry = (key, fileName, name, description) => ({
 })
  
 export default {
-  ...createEntry('basic-tree', 'Basic', 'Basic Tree'),
-  ...createEntry('renderers', 'Renderers', 'Create a custom renderer'),
+  ...createEntry(
+    'basic-tree',
+    'Basic',
+    'Basic Tree',
+    (
+      <div>
+        <p>A tree that enables favorite toogle, expansion and deletion, this example only makes use of the default renderers</p>
+      </div>
+    )
+  ),
+  ...createEntry(
+    'renderers',
+    'Renderers',
+    'Create a custom renderer',
+    (
+      <div>
+        <p>A tree that makes use of a custom renderer</p>
+      </div>
+    )
+  ),
   ...createEntry(
     'customize-renderers',
     'ChangeRenderers',

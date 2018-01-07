@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Grid, Menu, Segment, Header } from 'semantic-ui-react'
-import App from '../App';
 import { Route } from 'react-router';
 import examples from '../examples';
 import { Link } from 'react-router-dom';
@@ -11,7 +10,6 @@ export default class ExamplesContainer extends Component {
   render() {    
     return (
       <div>
-        <Header>Examples</Header>
         <Grid>
           <Grid.Column width={4}>
             <Menu fluid vertical tabular>

@@ -1,8 +1,10 @@
 import React from 'react';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 
 import { submitEvent } from '../eventWrappers';
 import { getNodeRenderOptions, udpateNode } from '../selectors/nodes';
+import { Renderer } from '../shapes/rendererShapes';
 
 const Favorite = ({
   onChange,
@@ -31,5 +33,13 @@ const Favorite = ({
       { children }
     </span>);
 };
+
+Favorite.propTypes = {
+  ...Renderer,
+  iconsClassNameMap: PropTypes.shape({
+    favorite: PropTypes.string,
+    notFavorite: PropTypes.string
+  })
+}
 
 export default Favorite;

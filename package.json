@@ -1,6 +1,6 @@
 {
   "name": "react-virtualized-tree",
-  "version": "0.0.1-rc6",
+  "version": "0.0.1-rc7",
   "description": "react-virtualized-tree React component",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -20,12 +20,18 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
+    "flag-icon-css": "^2.9.0",
     "material-icons": "^0.1.0",
-    "react-virtualized": "^9.13.0",
-    "reselect": "^3.0.1"
+    "react-markdown": "^3.1.4",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+    "reselect": "^3.0.1",
+    "semantic-ui-react": "^0.77.1"
   },
   "peerDependencies": {
-    "react": "16.x"
+    "react": "16.x",
+    "react-dom": "^16.2.0",
+    "react-virtualized": "^9.13.0"
   },
   "devDependencies": {
     "babel-jest": "^22.0.4",
@@ -38,9 +44,11 @@
     "gh-pages": "^1.1.0",
     "jest": "^22.0.4",
     "nwb": "0.20.x",
+    "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-test-renderer": "^16.2.0"
+    "react-test-renderer": "^16.2.0",
+    "react-virtualized": "^9.13.0"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -67,11 +75,16 @@
       "react-app"
     ]
   },
-  "author": "",
-  "homepage": "",
+  "author": "Diogo Cunha",
+  "homepage": "https://diogofcunha.github.io/react-virtualized-tree/",
   "license": "MIT",
-  "repository": "",
+  "repository": "https://github.com/diogofcunha/react-virtualized-tree",
   "keywords": [
+    "react",
+    "tree",
+    "foder-structure",
+    "react-virtualized-tree",
+    "react-tree-view",
     "react-component"
   ]
 }

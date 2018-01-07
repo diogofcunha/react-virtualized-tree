@@ -1,9 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Tree from './Tree';
 import { UPDATE_TYPE } from './contants';
 import { getFlattenedTree } from './selectors/getFlattenedTree';
 import { deleteNodeFromTree, replaceNodeFromTree } from './selectors/nodes';
+import { Node } from './shapes/nodeShapes';
 
 export default class TreeContainer extends React.Component {
   updateTypeMap = {
@@ -24,4 +26,10 @@ export default class TreeContainer extends React.Component {
       </Tree>
     );
   }
+};
+
+TreeContainer.propTypes = {
+  list: PropTypes.arrayOf(PropTypes.shape(Node)).isRequired,
+  onChange: PropTypes.func,
+  children: PropTypes.func.isRequired
 };

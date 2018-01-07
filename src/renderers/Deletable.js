@@ -1,8 +1,10 @@
 import React from 'react';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 
 import { submitEvent } from '../eventWrappers';
 import { getNodeRenderOptions, deleteNode } from '../selectors/nodes';
+import { Renderer } from '../shapes/rendererShapes';
 
 const Deletable = ({
   onChange,
@@ -31,5 +33,12 @@ const Deletable = ({
       { children }
     </span>);
 };
+
+Deletable.propTypes = {
+  ...Renderer,
+  iconsClassNameMap: PropTypes.shape({
+    delete: PropTypes.string,
+  })
+}
 
 export default Deletable;

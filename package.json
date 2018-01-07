@@ -21,8 +21,11 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "material-icons": "^0.1.0",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
     "react-virtualized": "^9.13.0",
-    "reselect": "^3.0.1"
+    "reselect": "^3.0.1",
+    "semantic-ui-react": "^0.77.1"
   },
   "peerDependencies": {
     "react": "16.x"
@@ -38,6 +41,7 @@
     "gh-pages": "^1.1.0",
     "jest": "^22.0.4",
     "nwb": "0.20.x",
+    "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-test-renderer": "^16.2.0"

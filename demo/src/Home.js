@@ -26,6 +26,7 @@ export default () => <div>
   <Header as='h2'>
     Dependencies
   </Header>
-  <Segment>
+  <Segment basic>
+    <p>Most react-virtualized-tree Dependencies are managed internally, the only required peerDependencies are <b>react</b>, <b>react-dom</b> and <b>react-virtualized</b>.</p>
   </Segment>
 </div>;

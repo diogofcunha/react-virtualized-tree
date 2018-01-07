@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { getRepoPath } from './toolbelt';
 import './NavBar.css';
 
-class SidebarRightOverlay extends Component {
+class NavBar extends Component {
   render() {
     return (
       <div className='content'>
@@ -56,4 +56,4 @@ class SidebarRightOverlay extends Component {
   }
 }
 
-export default SidebarRightOverlay
+export default NavBar

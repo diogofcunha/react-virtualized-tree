@@ -22,15 +22,16 @@
     "classnames": "^2.2.5",
     "flag-icon-css": "^2.9.0",
     "material-icons": "^0.1.0",
+    "react-markdown": "^3.1.4",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "reselect": "^3.0.1",
     "semantic-ui-react": "^0.77.1"
   },
   "peerDependencies": {
-    "react-virtualized": "^9.13.0",    
     "react": "16.x",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "react-virtualized": "^9.13.0"
   },
   "devDependencies": {
     "babel-jest": "^22.0.4",
@@ -46,8 +47,8 @@
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-virtualized": "^9.13.0",    
-    "react-test-renderer": "^16.2.0"
+    "react-test-renderer": "^16.2.0",
+    "react-virtualized": "^9.13.0"
   },
   "jest": {
     "collectCoverageFrom": [

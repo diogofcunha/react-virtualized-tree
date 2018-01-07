@@ -40,7 +40,7 @@ class NavBar extends Component {
                 <Link to='/'>Setup</Link>
               </Menu.Item>
               <Menu.Item name='docs'>
-                <Link to='/docs'>Documentation</Link>
+                <Link to='/docs/renderers'>Documentation</Link>
               </Menu.Item>
               <Menu.Item name='examples'>
                 <Link to='/examples/basic-tree'>Examples</Link>

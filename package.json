@@ -71,11 +71,16 @@
       "react-app"
     ]
   },
-  "author": "",
-  "homepage": "",
+  "author": "Diogo Cunha",
+  "homepage": "https://diogofcunha.github.io/react-virtualized-tree/",
   "license": "MIT",
-  "repository": "",
+  "repository": "https://github.com/diogofcunha/react-virtualized-tree",
   "keywords": [
+    "react",
+    "tree",
+    "foder-structure",
+    "react-virtualized-tree",
+    "react-tree-view",
     "react-component"
   ]
 }

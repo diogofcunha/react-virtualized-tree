@@ -14,3 +14,12 @@ export const getDocumentFetchUrl = doc => {
 
   return url.href;
 }
+
+export const createEntry = (key, fileName, name, description, component) => ({
+  [key]: {
+    name,
+    fileName,
+    description,
+    component
+  }
+})

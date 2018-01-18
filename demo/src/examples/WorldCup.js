@@ -3,6 +3,7 @@ import 'flag-icon-css/css/flag-icon.min.css';
 
 import Tree from '../../../src/TreeContainer';
 import Renderers from '../../../src/renderers';
+import { createEntry } from '../toolbelt';
 
 const { Expandable } = Renderers;
 
@@ -70,7 +71,7 @@ const worldCup = Object.keys(groups).reduce((wc, g) => {
   return [ ...wc, group ];
 }, []);
 
-export default class WorldCupExample extends Component {
+class WorldCupExample extends Component {
   state = {
     nodes: worldCup
   }
@@ -104,3 +105,14 @@ export default class WorldCupExample extends Component {
     );
   }
 }
+
+export default createEntry(
+  'world-cup',
+  'WorldCup',
+  'World cup groups',
+  (<div>
+    <p>FIFA world cup is back in 2018, in this special example the tree view is used to display the group stage draw results!</p>
+    <p>Let the best team win.</p>
+  </div>),
+  WorldCupExample
+);

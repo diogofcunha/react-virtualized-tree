@@ -3,10 +3,11 @@ import React, { Component } from 'react';
 import Tree from '../../../src/TreeContainer';
 import Renderers from '../../../src/renderers';
 import { Nodes } from '../../../testData/sampleTree';
+import { createEntry } from '../toolbelt';
 
 const { Deletable, Expandable, Favorite } = Renderers;
 
-export default class BasicTree extends Component {
+class BasicTree extends Component {
   state = {
     nodes: Nodes
   }
@@ -31,3 +32,15 @@ export default class BasicTree extends Component {
     );
   }
 }
+
+export default createEntry(
+  'basic-tree',
+  'Basic',
+  'Basic Tree',
+  (
+    <div>
+      <p>A tree that enables favorite toogle, expansion and deletion, this example only makes use of the default renderers</p>
+    </div>
+  ),
+  BasicTree
+);

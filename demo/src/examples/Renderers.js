@@ -3,6 +3,7 @@ import classNames from 'classnames';
 
 import Tree from '../../../src/TreeContainer';
 import { Nodes } from '../../../testData/sampleTree';
+import { createEntry } from '../toolbelt';
 
 const Deepness = ({ node, children }) => {
   const deepness = node.deepness + 1;
@@ -21,7 +22,7 @@ const Deepness = ({ node, children }) => {
     </span>);
 };
 
-export default class BasicTree extends Component {
+class Renderers extends Component {
   render() {
     return (
       <Tree list={Nodes}>
@@ -35,3 +36,15 @@ export default class BasicTree extends Component {
     );
   }
 }
+
+export default createEntry(
+  'renderers',
+  'Renderers',
+  'Create a custom renderer',
+  (
+    <div>
+      <p>A tree that makes use of a custom renderer</p>
+    </div>
+  ),
+  Renderers
+);

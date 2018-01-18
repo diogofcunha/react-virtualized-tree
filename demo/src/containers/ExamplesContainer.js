@@ -15,10 +15,10 @@ export default class ExamplesContainer extends Component {
             <Menu fluid vertical tabular>
               {
                 Object.keys(examples).map(path => (
-                  <Link to={`/react-virtualized-tree/examples/${path}`} key={path}>
+                  <Link to={`/examples/${path}`} key={path}>
                     <Menu.Item
                       name={examples[path].name}
-                      active={this.props.location.pathname === `/react-virtualized-tree/examples/${path}`} 
+                      active={this.props.location.pathname === `/examples/${path}`} 
                     />
                   </Link>)
                 )
@@ -28,7 +28,7 @@ export default class ExamplesContainer extends Component {
 
           <Grid.Column width={10} heigth={1000}>
               <Route
-                path="/react-virtualized-tree/examples/:example" 
+                path="/examples/:example" 
                 render={
                   p => {
                     const selectedExample = examples[p.match.params.example];

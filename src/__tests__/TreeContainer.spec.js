@@ -10,7 +10,7 @@ import { UPDATE_TYPE } from '../contants';
 describe('TreeContainer', () => {
   const setup = (children = null) => {
     const props = {
-      list: Nodes,
+      nodes: Nodes,
       onChange: jest.fn()
     };
 

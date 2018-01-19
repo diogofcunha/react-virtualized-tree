@@ -60,6 +60,19 @@ describe('renderers Expandable', () => {
           )
         )
       });
+
+      it('double clicking in the parent node should call onChange with the correct params', () => {
+        const { props, wrapper } = setup({ expanded: true });
+        
+        wrapper.first().simulate('doubleClick');
+
+        expect(props.onChange).toHaveBeenCalledWith(
+          udpateNode(
+            props.node, 
+            { expanded: false }
+          )
+        );
+      });
     });
 
     describe('when collapsed', () => {
@@ -93,6 +106,19 @@ describe('renderers Expandable', () => {
             { expanded: true }
           )
         )
+      });
+
+      it('double clicking in the parent node should call onChange with the correct params', () => {
+        const { props, wrapper } = setup({ expanded: false });
+        
+        wrapper.first().simulate('doubleClick');
+
+        expect(props.onChange).toHaveBeenCalledWith(
+          udpateNode(
+            props.node, 
+            { expanded: true }
+          )
+        );
       });
     });
   });

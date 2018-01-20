@@ -1,5 +1,48 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Tree rowRenderer should render the Node renderer with the correct props 1`] = `
+Object {
+  "node": Object {
+    "children": Array [
+      Object {
+        "children": Array [
+          Object {
+            "id": 3,
+            "name": "Leaf 3",
+            "state": Object {
+              "deletable": true,
+              "favorite": true,
+            },
+          },
+          Object {
+            "id": 4,
+            "name": "Leaf 4",
+          },
+        ],
+        "id": 2,
+        "name": "Leaf 2",
+        "state": Object {
+          "deletable": true,
+          "expanded": true,
+        },
+      },
+      Object {
+        "id": 5,
+        "name": "Leaf 5",
+      },
+    ],
+    "deepness": 0,
+    "id": 0,
+    "name": "Leaf 1",
+    "parents": Array [],
+    "state": Object {
+      "expanded": true,
+    },
+  },
+  "onChange": [MockFunction],
+}
+`;
+
 exports[`Tree should render a Tree with children and the correct props 1`] = `
 initialize {
   "0": Object {

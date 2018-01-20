@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import reactElementToJSXString from 'react-element-to-jsx-string';
 import { Grid, Header, Label, Icon } from 'semantic-ui-react'
+import update from 'immutability-helper'
 
-import Tree from '../../../src/TreeContainer';
-import Renderers from '../../../src/renderers';
-import { Nodes } from '../../../testData/sampleTree';
-import { createEntry } from '../toolbelt';
+import Tree from '../../../../src/TreeContainer';
+import Renderers from '../../../../src/renderers';
+import { Nodes } from '../../../../testData/sampleTree';
+import { createEntry } from '../../toolbelt';
+import RendererDragContainer from './RendererDragContainer';
 
 const { Deletable, Expandable, Favorite } = Renderers;
 
@@ -22,6 +24,19 @@ class BasicTree extends Component {
     availableRenderers: [ Expandable, Deletable, Favorite ],
     selectedRenderers: [ Expandable, NodeNameRenderer ]
   }
+
+  handleRendererMove = (dragIndex, hoverIndex) => {
+		const { selectedRenderers } = this.state
+		const dragCard = selectedRenderers[dragIndex]
+
+		this.setState(
+			update(this.state, {
+				selectedRenderers: {
+					$splice: [[dragIndex, 1], [hoverIndex, 0, dragCard]],
+				},
+			}),
+		)
+	}
 
   handleChange = (nodes) => {
     this.setState({ nodes });
@@ -106,20 +121,11 @@ class BasicTree extends Component {
             <Header as='h4'>Node renderer builder</Header>
 
             <Label.Group color='blue'>
-              { 
-                this.state.selectedRenderers.map((r, i) => {
-                  const isNodeName = r.name === NodeNameRenderer.name;
-                  const name = isNodeName ? 'Node Name' : r.name;
-
-                  return (
-                    <Label as='a' tag={isNodeName}>
-                      { name }
-                      { !isNodeName && <Icon name='close'
-                        onClick={this.handleRendererDeselection(i)} /> 
-                      }
-                    </Label>);
-                }) 
-              }
+              <RendererDragContainer
+                selectedRenderers={this.state.selectedRenderers} 
+                moveRenderer={this.handleRendererMove}
+                handleRendererDeselection={this.handleRendererDeselection}
+              />
             </Label.Group>
           </Grid.Column>
           <Grid.Column>

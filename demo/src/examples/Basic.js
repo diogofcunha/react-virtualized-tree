@@ -41,10 +41,23 @@ class BasicTree extends Component {
     return this.renderNodeDisplay(nextNode, props, this.createNodeRenderer(remainingNodes, props))
   }
 
+  getRenderedComponentTree = () => reactElementToJSXString(
+      this.createNodeRenderer(this.state.nodeDisplay, { node: { name: 'X' } })
+    ).split('>')
+    .filter(c => c)
+    .map((c, i) => {
+      const { nodeDisplay: { length } } = this.state;
+      const isClosingTag = i >= length;
+
+      const marginLeft = !isClosingTag ? 10 * i : 10 * (length - 2 - Math.abs(length - i));
+
+      return <div style={{ marginLeft }}>{ c }></div>;
+    })
+
   render() {
     return (
       <div>
-        { reactElementToJSXString(this.createNodeRenderer(this.state.nodeDisplay, { node: { name: 'X' } })) }
+        { this.getRenderedComponentTree() }
         <div style={{ height: 700 }}>
           <Tree nodes={this.state.nodes} onChange={this.handleChange}>
             {

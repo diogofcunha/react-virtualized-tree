@@ -25,6 +25,7 @@ const Deletable = ({
     <span>
       { isDeletable &&
         <i
+          tabIndex={0}
           onKeyDown={submitEvent(handleChange)}
           onClick={handleChange}
           className={className}>

@@ -5,6 +5,7 @@ import 'react-virtualized/styles.css'; // only needs to be imported once
 import 'material-icons/css/material-icons.css';
 
 import { FlattenedNode } from './shapes/nodeShapes';
+import './Tree.css';
 
 export default class Tree extends React.Component {
   rowRenderer =  (nodes) => ({ key, index, style}) => {
@@ -13,6 +14,7 @@ export default class Tree extends React.Component {
     return (
       <div
         key={key}
+        className="tree-node"
         style={{ ...style, marginLeft: node.deepness * 30}}
       >
         <NodeRenderer node={node} onChange={this.props.onChange}/>

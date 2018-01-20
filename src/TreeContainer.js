@@ -14,14 +14,14 @@ export default class TreeContainer extends React.Component {
   }
 
   handleChange = ({ node, type }) => {    
-    const updatedNodes = this.updateTypeMap[type](this.props.list, node);
+    const updatedNodes = this.updateTypeMap[type](this.props.nodes, node);
 
     this.props.onChange(updatedNodes);
   }
 
   render() {
     return (
-      <Tree nodes={getFlattenedTree(this.props.list)} onChange={this.handleChange}> 
+      <Tree nodes={getFlattenedTree(this.props.nodes)} onChange={this.handleChange}> 
         { this.props.children }
       </Tree>
     );
@@ -29,7 +29,7 @@ export default class TreeContainer extends React.Component {
 };
 
 TreeContainer.propTypes = {
-  list: PropTypes.arrayOf(PropTypes.shape(Node)).isRequired,
+  nodes: PropTypes.arrayOf(PropTypes.shape(Node)).isRequired,
   onChange: PropTypes.func,
   children: PropTypes.func.isRequired
 };

@@ -76,5 +76,11 @@ describe('selectors -> nodes ->', () => {
         nodeSelectors.getNodeRenderOptions({ children: [{}], state: { deletable: true } })
       ).toMatchSnapshot();
     });
+
+    it('should extract state from nodes correctly when there is no state', () => {
+      expect(
+        nodeSelectors.getNodeRenderOptions({ children: [{}] })
+      ).toMatchSnapshot();
+    });
   });
 });

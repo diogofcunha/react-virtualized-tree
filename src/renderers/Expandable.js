@@ -26,8 +26,9 @@ const Expandable = ({
   const handleChange = () => onChange(udpateNode(node, { expanded: !isExpanded }));
   
   return (
-    <span>
+    <span onDoubleClick={handleChange}>
       <i
+        tabIndex={0}
         id={node.id}
         onKeyDown={submitEvent(handleChange)}
         onClick={handleChange}

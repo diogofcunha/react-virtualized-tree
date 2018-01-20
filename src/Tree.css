@@ -1,0 +1,4 @@
+.tree-node {
+  user-select: none;
+  cursor: pointer;
+}

@@ -25,7 +25,7 @@ const Deepness = ({ node, children }) => {
 class Renderers extends Component {
   render() {
     return (
-      <Tree list={Nodes}>
+      <Tree nodes={Nodes}>
         {
           ({ node, ...rest }) =>
             <Deepness node={node} {...rest}>

@@ -28,6 +28,7 @@ const Expandable = ({
   return (
     <span onDoubleClick={handleChange}>
       <i
+        tabIndex={0}
         id={node.id}
         onKeyDown={submitEvent(handleChange)}
         onClick={handleChange}

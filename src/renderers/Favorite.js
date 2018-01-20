@@ -26,6 +26,7 @@ const Favorite = ({
   return (
     <span>
       <i
+        tabIndex={0}
         onKeyDown={submitEvent(handleChange)}
         onClick={handleChange}
         className={className}>

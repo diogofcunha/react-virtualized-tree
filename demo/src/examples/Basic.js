@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import reactElementToJSXString from 'react-element-to-jsx-string';
 
 import Tree from '../../../src/TreeContainer';
 import Renderers from '../../../src/renderers';
@@ -7,28 +8,51 @@ import { createEntry } from '../toolbelt';
 
 const { Deletable, Expandable, Favorite } = Renderers;
 
+const NodeNameRenderer = ({ node: { name }, children }) => (
+  <span>
+    { name }
+    { children }
+  </span>
+);
+
 class BasicTree extends Component {
   state = {
-    nodes: Nodes
+    nodes: Nodes,
+    nodeDisplay: [ Expandable, NodeNameRenderer, Deletable, Favorite ]
   }
 
   handleChange = (nodes) => {
     this.setState({ nodes });
   }
 
+  renderNodeDisplay = (display, props, children = []) => React.createElement(
+    display,
+    props,
+    children
+  );
+
+  createNodeRenderer = (nodeDisplay = this.state.nodeDisplay, props) => {
+    const [ nextNode, ...remainingNodes ] = nodeDisplay;
+
+    if (remainingNodes.length === 0) {
+      return this.renderNodeDisplay(nextNode, props);
+    }
+
+    return this.renderNodeDisplay(nextNode, props, this.createNodeRenderer(remainingNodes, props))
+  }
+
   render() {
     return (
-      <Tree nodes={this.state.nodes} onChange={this.handleChange}>
-        {
-          ({ node, ...rest }) =>
-            <Expandable node={node} {...rest}>
-              { node.name }
-              <Deletable node={node} {...rest}>
-                <Favorite node={node} {...rest}/>
-              </Deletable>
-            </Expandable>
-        }
-      </Tree>
+      <div>
+        { reactElementToJSXString(this.createNodeRenderer(this.state.nodeDisplay, { node: { name: 'X' } })) }
+        <div style={{ height: 700 }}>
+          <Tree nodes={this.state.nodes} onChange={this.handleChange}>
+            {
+              p => this.createNodeRenderer(this.state.nodeDisplay, p)
+            }
+          </Tree>
+        </div>
+      </div>
     );
   }
 }

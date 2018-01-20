@@ -22,6 +22,18 @@ export default () => <div>
     <Segment compact>
       <code>yarn add react-virtualized-tree</code>
     </Segment>
+    To get the basic styles for free you need to import react-virtualized styles only once.
+    <Segment compact>
+    <code>import 'react-virtualized/styles.css'</code>;
+    </Segment>
+    <Segment compact>
+    <code>import 'react-virtualized-tree/lib/main.css'</code>;
+    </Segment>
+
+    <p>If you want to use the icons in the default renderers do the same for material icons.</p>
+    <Segment compact>
+    <code>import 'material-icons/css/material-icons.css'</code>;
+    </Segment>
   </Segment>
   <Header as='h2'>
     Dependencies

@@ -1,11 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { AutoSizer, List } from 'react-virtualized';
-import 'react-virtualized/styles.css'; // only needs to be imported once
-import 'material-icons/css/material-icons.css';
 
 import { FlattenedNode } from './shapes/nodeShapes';
-import './Tree.css';
 
 export default class Tree extends React.Component {
   rowRenderer =  (nodes) => ({ key, index, style}) => {

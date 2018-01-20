@@ -4,8 +4,6 @@
 [![npm package][npm-badge]][npm]
 [![Coveralls][coveralls-badge]][coveralls]
 
-Describe react-virtualized-tree here.
-
 [build-badge]: https://img.shields.io/travis/diogofcunha/react-virtualized-tree/master.png?style=flat-square
 [build]: https://travis-ci.org/diogofcunha/react-virtualized-tree
 

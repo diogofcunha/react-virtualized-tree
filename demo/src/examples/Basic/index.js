@@ -26,17 +26,17 @@ class BasicTree extends Component {
   }
 
   handleRendererMove = (dragIndex, hoverIndex) => {
-		const { selectedRenderers } = this.state
-		const dragCard = selectedRenderers[dragIndex]
+    const { selectedRenderers } = this.state
+    const dragCard = selectedRenderers[dragIndex]
 
-		this.setState(
-			update(this.state, {
-				selectedRenderers: {
-					$splice: [[dragIndex, 1], [hoverIndex, 0, dragCard]],
-				},
-			}),
-		)
-	}
+    this.setState(
+      update(this.state, {
+        selectedRenderers: {
+          $splice: [[dragIndex, 1], [hoverIndex, 0, dragCard]],
+        },
+      }),
+    )
+  }
 
   handleChange = (nodes) => {
     this.setState({ nodes });

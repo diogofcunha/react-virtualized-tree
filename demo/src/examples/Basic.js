@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import reactElementToJSXString from 'react-element-to-jsx-string';
+import { Grid, Header, Label, Icon } from 'semantic-ui-react'
 
 import Tree from '../../../src/TreeContainer';
 import Renderers from '../../../src/renderers';
@@ -18,7 +19,8 @@ const NodeNameRenderer = ({ node: { name }, children }) => (
 class BasicTree extends Component {
   state = {
     nodes: Nodes,
-    nodeDisplay: [ Expandable, NodeNameRenderer, Deletable, Favorite ]
+    availableRenderers: [ Expandable, Deletable, Favorite ],
+    selectedRenderers: [ Expandable, NodeNameRenderer ]
   }
 
   handleChange = (nodes) => {
@@ -42,11 +44,11 @@ class BasicTree extends Component {
   }
 
   getRenderedComponentTree = () => reactElementToJSXString(
-      this.createNodeRenderer(this.state.nodeDisplay, { node: { name: 'X' } })
+      this.createNodeRenderer(this.state.selectedRenderers, { node: { name: 'X' } })
     ).split('>')
     .filter(c => c)
     .map((c, i) => {
-      const { nodeDisplay: { length } } = this.state;
+      const { selectedRenderers: { length } } = this.state;
       const isClosingTag = i >= length;
 
       const marginLeft = !isClosingTag ? 10 * i : 10 * (length - 2 - Math.abs(length - i));
@@ -54,18 +56,79 @@ class BasicTree extends Component {
       return <div style={{ marginLeft }}>{ c }></div>;
     })
 
+  handleRendererDeselection = (i) => () => {
+    this.setState(({ selectedRenderers }) => ({
+      selectedRenderers: [
+        ...selectedRenderers.slice(0, i),
+        ...selectedRenderers.slice(i + 1)
+      ]
+    }));
+  }
+
+  handleRendererSelection = (renderer) => () => {
+    this.setState(({ selectedRenderers }) => ({
+      selectedRenderers: [ ...selectedRenderers, renderer ]
+    }));
+  }
+
   render() {
+    const renderersAvailableForAdd = this.state.availableRenderers.filter(r => this.state.selectedRenderers.indexOf(r) === -1);
+
     return (
-      <div>
-        { this.getRenderedComponentTree() }
-        <div style={{ height: 700 }}>
-          <Tree nodes={this.state.nodes} onChange={this.handleChange}>
-            {
-              p => this.createNodeRenderer(this.state.nodeDisplay, p)
-            }
-          </Tree>
-        </div>
-      </div>
+      <Grid columns={2} divided>
+        <Grid.Row>
+          <Grid.Column>
+            <Header as='h4'>Available Renderers</Header>
+
+            <Label.Group color='blue'>
+              { 
+                renderersAvailableForAdd.map((r, i) => {
+                  return (
+                    <Label as='a'>
+                      { r.name }
+                      <Icon name='plus' onClick={this.handleRendererSelection(r)} style={{ marginLeft: 3 }}/>
+                    </Label>);
+                })
+              }
+            </Label.Group>
+          </Grid.Column>
+          <Grid.Column>
+            <Header as='h4'>Ouput tree</Header>
+            <div style={{ height: 200 }}>
+              <Tree nodes={this.state.nodes} onChange={this.handleChange}>
+                { p => this.createNodeRenderer(this.state.selectedRenderers, p) }
+              </Tree>
+            </div>
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row>
+          <Grid.Column>
+            <Header as='h4'>Node renderer builder</Header>
+
+            <Label.Group color='blue'>
+              { 
+                this.state.selectedRenderers.map((r, i) => {
+                  const isNodeName = r.name === NodeNameRenderer.name;
+                  const name = isNodeName ? 'Node Name' : r.name;
+
+                  return (
+                    <Label as='a' tag={isNodeName}>
+                      { name }
+                      { !isNodeName && <Icon name='close'
+                        onClick={this.handleRendererDeselection(i)} /> 
+                      }
+                    </Label>);
+                }) 
+              }
+            </Label.Group>
+          </Grid.Column>
+          <Grid.Column>
+            <Header as='h4'>JSX</Header>
+
+            { this.getRenderedComponentTree() }
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
     );
   }
 }

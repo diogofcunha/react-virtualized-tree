@@ -8,7 +8,7 @@ describe('FilteringContainer', () => {
   const setup = (extraProps = {}) => {
     const child = jest.fn();
 
-    const props = { nodes: Nodes, ...extraProps };
+    const props = { nodes: Nodes, debouncer: v => v, ...extraProps };
 
     const wrapper = shallow(
       <FilteringContainer {...props}>

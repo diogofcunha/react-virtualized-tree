@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { debounce } from 'lodash';
 
 const nameMatchesSearchTerm = (name, searchTerm) => {
   const upperCaseName = name.toUpperCase();
@@ -29,21 +30,23 @@ const filterNodes = (searchTerm, nodes) => nodes.reduce((nds, n) => {
 }, []);
 
 export default class FilteringContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleFilterTermChange = this.handleFilterTermChange.bind(this);
-
-    this.state = {
-      filterText: '',
-      filteredNodes: props.nodes
-    };
+  state = {
+    filterText: '',
+    filterTerm: ''
   }
 
+  static defaultProps = {
+    debouncer: debounce
+  }
 
-  handleFilterTermChange() {
-    this.setState(ps => ({
-      filteredNodes: ps.filterText ? filterNodes(ps.filterText, this.props.nodes) : this.props.nodes
-    }))
+  constructor(props) {
+    super(props);
+
+    this.setFilterTerm = props.debouncer(this.setFilterTerm, 300);
+  }
+
+  setFilterTerm() {
+    this.setState(ps => ({ filterTerm: ps.filterText }));
   }
 
   handleFilterTextChange = e => {
@@ -51,23 +54,23 @@ export default class FilteringContainer extends React.Component {
 
     this.setState({ filterText });
 
-    this.handleFilterTermChange();
+    this.setFilterTerm();
   }
 
   render() {
-    const { filterText, filteredNodes } = this.state;
+    const { filterTerm, filterText } = this.state;
+    const filteredNodes = filterTerm ? filterNodes(filterTerm, this.props.nodes) : this.props.nodes;
 
     return (
       <div>
         <input value={filterText} onChange={this.handleFilterTextChange}></input>
-        { 
-          this.props.children({ nodes: filteredNodes })
-        }
+        { this.props.children({ nodes: filteredNodes }) }
       </div>
     )
   }
 }
 
 FilteringContainer.propTypes = {
-  children: PropTypes.func.isRequired
+  children: PropTypes.func.isRequired,
+  debouncer: PropTypes.func
 }

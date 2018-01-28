@@ -14,11 +14,11 @@
 [coveralls]: https://coveralls.io/github/diogofcunha/react-virtualized-tree
 
 ## Introduction
-**react-virtualized-tree** is a react library built on top of [react-virtualized](https://bvaughn.github.io/react-virtualized/#/components/List)
+**react-virtualized-tree** is a tree view react library built on top of [react-virtualized](https://bvaughn.github.io/react-virtualized/#/components/List)
 
-Its main goal is to display tree like data in a beautiful and fast way.
-Being a reactive library it uses children functions to achieve maximum extansability.
-The core idea behind it is that anyone using it is enable to create a tree as they wich just by rendering their own components or components exported by the tree.
+Its main goal is to display tree like data in a beautiful and fast way. Being a reactive library it uses children functions to achieve maximum extensibility. The core idea behind it is that anyone using it is enable to create a tree as they intent just by rendering their own components or components exported by the tree.
+
+Demo and docs can be found [in here](https://diogofcunha.github.io/react-virtualized-tree/#/).
 
 ## Installation
 You can install via npm or yarn.
@@ -36,7 +36,18 @@ import 'react-virtualized-tree/lib/main.css'
 
 If you want to use the icons in the default renderers do the same for material icons.
 
-`import 'material-icons/css/material-icons.css'`    
+`import 'material-icons/css/material-icons.css'`
+
+## Usage
+
+To use the standalone tree
+
+`import Tree from 'react-virtualized-tree'`
+
+To use the FilteringContainer
+
+`import { FilteringContainer } from 'react-virtualized-tree'`
+
 
 ## Dependencies
 Most react-virtualized-tree Dependencies are managed internally, the only required peerDependencies are **react**, **react-dom** and **react-virtualized**.

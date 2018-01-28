@@ -111,3 +111,39 @@ Array [
   },
 ]
 `;
+
+exports[`FilteringContainer groups when groups exist should filter results based on the selected group 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "id": 2,
+        "name": "Leaf 2",
+        "state": Object {
+          "deletable": true,
+          "expanded": true,
+        },
+      },
+    ],
+    "id": 0,
+    "name": "Leaf 1",
+    "state": Object {
+      "expanded": true,
+    },
+  },
+]
+`;
+
+exports[`FilteringContainer groups when groups exist should work when matched with filtering 1`] = `
+Array [
+  Object {
+    "children": Array [],
+    "id": 0,
+    "name": "Leaf 1",
+    "state": Object {
+      "expanded": true,
+    },
+  },
+]
+`;

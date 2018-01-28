@@ -1,22 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { debounce } from 'lodash';
+import classNames from 'classnames';
 
-const nameMatchesSearchTerm = (name, searchTerm) => {
+import DefaultGroupRenderer from './filtering/DefaultGroupRenderer';
+
+const nameMatchesSearchTerm = (searchTerm) => ({ name }) => {
   const upperCaseName = name.toUpperCase();
   const upperCaseSearchTerm = searchTerm.toUpperCase();
 
   return upperCaseName.indexOf(upperCaseSearchTerm.trim()) > -1
 }
 
-const filterNodes = (searchTerm, nodes) => nodes.reduce((nds, n) => {
+const filterNodes = (filter, nodes) => nodes.reduce((nds, n) => {
   let filteredChildren = [];
 
   if (n.children) {
-    filteredChildren = filterNodes(searchTerm, n.children);
+    filteredChildren = filterNodes(filter, n.children);
   }
 
-  if (nameMatchesSearchTerm(n.name, searchTerm) || filteredChildren.length) {
+  if (filter(n) || filteredChildren.length) {
     return [
       ...nds,
       {
@@ -36,7 +39,8 @@ export default class FilteringContainer extends React.Component {
   }
 
   static defaultProps = {
-    debouncer: debounce
+    debouncer: debounce,
+    groupRenderer: DefaultGroupRenderer
   }
 
   constructor(props) {
@@ -57,20 +61,45 @@ export default class FilteringContainer extends React.Component {
     this.setFilterTerm();
   }
 
+  handleSelectedGroupChange = g => {
+    this.props.onSelectedGroupChange(g);
+  }
+
   render() {
     const { filterTerm, filterText } = this.state;
-    const filteredNodes = filterTerm ? filterNodes(filterTerm, this.props.nodes) : this.props.nodes;
+    const {
+      nodes,
+      children: treeRenderer,
+      groups,
+      selectedGroup,
+      groupRenderer: GroupRenderer,
+      onSelectedGroupChange } = this.props;
+
+    const relevantNodes = groups && selectedGroup && groups[selectedGroup] ? 
+      filterNodes(groups[selectedGroup], nodes) :
+      nodes;
+      
+    const filteredNodes = filterTerm ?
+      filterNodes(nameMatchesSearchTerm(filterTerm), relevantNodes) :
+      relevantNodes;
 
     return (
       <div className="tree-filter-container">
-        <div className="tree-lookup-input">
+        <div className={classNames('tree-lookup-input', { group: !!groups })}>
           <input
             value={filterText}
             onChange={this.handleFilterTextChange}
             placeholder="Search..."/>
-          <i aria-hidden="true" class="mi mi-11 mi-search"></i>
+          <i aria-hidden="true" className="mi mi-11 mi-search"></i>
+          { groups && 
+            <GroupRenderer
+              groups={groups}
+              selectedGroup={selectedGroup}
+              onChange={onSelectedGroupChange}
+            /> 
+          }
         </div>
-        { this.props.children({ nodes: filteredNodes }) }
+        { treeRenderer({ nodes: filteredNodes }) }
       </div>
     )
   }
@@ -78,6 +107,9 @@ export default class FilteringContainer extends React.Component {
 
 FilteringContainer.propTypes = {
   children: PropTypes.func.isRequired,
-  className: PropTypes.string.isRequired,
-  debouncer: PropTypes.func
+  debouncer: PropTypes.func,
+  groups: PropTypes.object,
+  selectedGroup: PropTypes.string,
+  groupRenderer: PropTypes.func,
+  onSelectedGroupChange: PropTypes.func
 }

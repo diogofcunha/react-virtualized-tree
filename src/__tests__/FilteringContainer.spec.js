@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 
 import FilteringContainer from '../FilteringContainer';
 import { Nodes } from '../../testData/sampleTree';
+import DefaultGroupRenderer from '../filtering/DefaultGroupRenderer';
 
 describe('FilteringContainer', () => {
   const setup = (extraProps = {}) => {
@@ -73,5 +74,83 @@ describe('FilteringContainer', () => {
     
       expect(getInjectedNodes()).toMatchSnapshot();
     })
+  });
+
+  describe('groups', () => {
+    it('when groups do not exist should not render groups related info', () => {
+      const { wrapper } = setup();
+
+      expect(
+        wrapper.find('div').at(1).hasClass('group')
+      ).toBe(false);
+
+      expect(
+        wrapper.find(DefaultGroupRenderer).length
+      ).toEqual(0);
+    });
+
+    describe('when groups exist', () => {
+      const EXPANDED = 'EXPANDED';
+
+      const setupWithGroups = (extraProps = {}) => setup({
+        groups: {
+          [EXPANDED]: node => (node.state || {}).expanded,
+          FAVORITES: node => (node.state || {}).favorite
+        },
+        selectedGroup: EXPANDED,
+        onSelectedGroupChange: jest.fn(),
+        ...extraProps
+      });
+
+      it('should render the expected className', () => {
+        const { wrapper } = setupWithGroups();
+
+        expect(
+          wrapper.find('div').at(1).hasClass('group')
+        ).toBe(true);
+      });
+
+      it('should render the DefaultGroupRenderer when one is not injected as a prop', () => {
+        const { wrapper, props } = setupWithGroups();
+
+        expect(
+          wrapper.find(DefaultGroupRenderer).props()
+        ).toEqual({
+          groups: props.groups,
+          selectedGroup: props.selectedGroup,
+          onChange: props.onSelectedGroupChange
+        });
+      });
+
+      it('should render a injected groupRenderer', () => {
+        const GroupRenderer = () => <div>Group renderer!</div>
+
+        const { wrapper, props } = setupWithGroups({
+          groupRenderer: GroupRenderer
+        });
+
+        expect(
+          wrapper.find(GroupRenderer).props()
+        ).toEqual({
+          groups: props.groups,
+          selectedGroup: props.selectedGroup,
+          onChange: props.onSelectedGroupChange
+        });
+      });
+  
+      it('should filter results based on the selected group', () => {
+        const { getInjectedNodes } = setupWithGroups();
+  
+        expect(getInjectedNodes()).toMatchSnapshot();
+      });
+  
+      it('should work when matched with filtering', () => {
+        const { getInjectedNodes, changeFilter } = setupWithGroups();
+  
+        changeFilter('1');
+  
+        expect(getInjectedNodes()).toMatchSnapshot();
+      });
+    });
   });
 });

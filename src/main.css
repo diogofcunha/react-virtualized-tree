@@ -30,6 +30,10 @@
   margin-bottom: 7px;
 }
 
+.tree-lookup-input.group input {
+  width: 80%;
+}
+
 .tree-lookup-input input:focus {
   border: 1px solid #85b7d9;
   background: #fff;
@@ -48,4 +52,9 @@
   border: 1px solid rgba(0, 0, 0, .3);
   box-shadow: 0 0 10px rgba(0, 0, 0, .2);
   padding: 2%;
+}
+
+.tree-group {
+  appearance: none;
+  padding: .7em 1em;
 }

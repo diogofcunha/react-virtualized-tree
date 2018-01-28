@@ -29,9 +29,18 @@ class Filterable extends Component {
     return this.state.groupsEnabled ? 
       {
         groups: {
-          ALL: node => true,
-          [EXPANDED]: node => (node.state || {}).expanded,
-          FAVORITES: node => (node.state || {}).favorite
+          ALL: {
+            name: 'All',
+            filter: node => true
+          },
+          [EXPANDED]: {
+            name: 'Expanded',
+            filter: node => (node.state || {}).expanded
+          },
+          FAVORITES: {
+            name: 'Favorites',
+            filter: node => (node.state || {}).favorite
+          }
         },
         selectedGroup: this.state.selectedGroup,
         onSelectedGroupChange: this.handleSelectedGroupChange

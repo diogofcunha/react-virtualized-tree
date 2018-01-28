@@ -2,8 +2,8 @@
 
 exports[`DefaultGroupRenderer should render an option for each group 1`] = `
 Array [
-  "ALL",
-  "TOP",
-  "BOTTOM",
+  "All",
+  "Top",
+  "Bottom",
 ]
 `;

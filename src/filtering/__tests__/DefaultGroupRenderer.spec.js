@@ -10,9 +10,18 @@ describe('DefaultGroupRenderer', () => {
     const props = {
       onChange,
       groups: {
-        ALL: () => {},
-        TOP: () => {},
-        BOTTOM: () => {}
+        ALL: {
+          name: 'All',
+          filter: () => {}
+        },
+        TOP: {
+          name: 'Top',
+          filter: () => {}
+        },
+        BOTTOM: {
+          name: 'Bottom',
+          filter: () => {}
+        }
       },
       selectedGroup: 'TOP',
       ...extraProps 

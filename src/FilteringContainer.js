@@ -76,7 +76,7 @@ export default class FilteringContainer extends React.Component {
       onSelectedGroupChange } = this.props;
 
     const relevantNodes = groups && selectedGroup && groups[selectedGroup] ? 
-      filterNodes(groups[selectedGroup], nodes) :
+      filterNodes(groups[selectedGroup].filter, nodes) :
       nodes;
       
     const filteredNodes = filterTerm ?

@@ -8,7 +8,7 @@ const DefaultGroupRenderer = ({ onChange, groups, selectedGroup }) => {
       value={selectedGroup}
     >
       { 
-        Object.keys(groups).map(g => <option key={g}>{ g }</option>) 
+        Object.keys(groups).map(g => <option key={g} value={g}>{ groups[g].name }</option>) 
       }
     </select>
   )

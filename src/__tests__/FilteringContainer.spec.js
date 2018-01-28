@@ -94,8 +94,14 @@ describe('FilteringContainer', () => {
 
       const setupWithGroups = (extraProps = {}) => setup({
         groups: {
-          [EXPANDED]: node => (node.state || {}).expanded,
-          FAVORITES: node => (node.state || {}).favorite
+          [EXPANDED]: {
+            name: 'Expanded',
+            filter: node => (node.state || {}).expanded
+          },
+          FAVORITES: {
+            name: 'Favorites',
+            filter: node => (node.state || {}).favorite
+          }
         },
         selectedGroup: EXPANDED,
         onSelectedGroupChange: jest.fn(),

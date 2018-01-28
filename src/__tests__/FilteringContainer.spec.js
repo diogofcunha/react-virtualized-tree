@@ -5,41 +5,73 @@ import FilteringContainer from '../FilteringContainer';
 import { Nodes } from '../../testData/sampleTree';
 
 describe('FilteringContainer', () => {
-  const setup = () => shallow(
-    <FilteringContainer nodes={Nodes}>
-      {
-        () => <div></div>
-      }
-    </FilteringContainer>
-  );
+  const setup = (extraProps = {}) => {
+    const child = jest.fn();
 
-  it('should filter for deepsearch', () => {
-    const wrapper = setup();
+    const props = { nodes: Nodes, ...extraProps };
 
-    wrapper.find('input').simulate('change', { target: { value: '2' } });
+    const wrapper = shallow(
+      <FilteringContainer {...props}>
+        { child }
+      </FilteringContainer>
+    );
 
-    const { filteredNodes } = wrapper.state();
+    return {
+      changeFilter: value => wrapper.find('input').simulate('change', { target: { value } }),
+      getInjectedNodes: () => child.mock.calls.slice(-1)[0][0].nodes,
+      wrapper,
+      child,
+      props
+    }
+  }
 
-    expect(filteredNodes).toMatchSnapshot();
-  });
+  describe('filtering', () => {
+    it('should not filter when searchTerm is empty', () => {
+      const { wrapper , changeFilter, props, getInjectedNodes } = setup();
 
-  it('should filter when results match more then 1 node', () => {
-    const wrapper = setup();
+      changeFilter('');
 
-    wrapper.find('input').simulate('change', { target: { value: '1' } });
+      expect(getInjectedNodes()).toEqual(props.nodes);
+    });
 
-    const { filteredNodes } = wrapper.state();
+    it('should filter for deepsearch', () => {
+      const { wrapper , changeFilter, getInjectedNodes } = setup();
+  
+      changeFilter('2');
+      
+      expect(getInjectedNodes()).toMatchSnapshot();
+    });
+  
+    it('should filter when results match more then 1 node', () => {
+      const { wrapper , changeFilter, getInjectedNodes } = setup();
+  
+      changeFilter('1');
+    
+      expect(getInjectedNodes()).toMatchSnapshot();
+    });
+  
+    it('should filter when there are no results', () => {
+      const { wrapper , changeFilter, getInjectedNodes } = setup();
+  
+      changeFilter('Node');
+    
+      expect(getInjectedNodes()).toEqual([]);
+    });
 
-    expect(filteredNodes).toMatchSnapshot();
-  });
+    it('should ignore boundarie spaces when filtering', () => {
+      const { wrapper , changeFilter, getInjectedNodes } = setup();
+  
+      changeFilter('1 ');
+    
+      expect(getInjectedNodes()).toMatchSnapshot();
+    });
 
-  it('should filter when there are no results', () => {
-    const wrapper = setup();
-
-    wrapper.find('input').simulate('change', { target: { value: 'Node' } });
-
-    const { filteredNodes } = wrapper.state();
-
-    expect(filteredNodes).toMatchSnapshot();
+    it('should ignore casing when filtering', () => {
+      const { wrapper , changeFilter, getInjectedNodes } = setup();
+  
+      changeFilter('LEAf 3');
+    
+      expect(getInjectedNodes()).toMatchSnapshot();
+    })
   });
 });

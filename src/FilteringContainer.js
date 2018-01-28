@@ -1,6 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const nameMatchesSearchTerm = (name, searchTerm) => {
+  const upperCaseName = name.toUpperCase();
+  const upperCaseSearchTerm = searchTerm.toUpperCase();
+
+  return upperCaseName.indexOf(upperCaseSearchTerm.trim()) > -1
+}
+
 const filterNodes = (searchTerm, nodes) => nodes.reduce((nds, n) => {
   let filteredChildren = [];
 
@@ -8,7 +15,7 @@ const filterNodes = (searchTerm, nodes) => nodes.reduce((nds, n) => {
     filteredChildren = filterNodes(searchTerm, n.children);
   }
 
-  if (n.name.indexOf(searchTerm) > -1 || filteredChildren.length) {
+  if (nameMatchesSearchTerm(n.name, searchTerm) || filteredChildren.length) {
     return [
       ...nds,
       {
@@ -34,7 +41,9 @@ export default class FilteringContainer extends React.Component {
 
 
   handleFilterTermChange() {
-    this.setState(ps => ({ filteredNodes: filterNodes(ps.filterText, this.props.nodes) }))
+    this.setState(ps => ({
+      filteredNodes: ps.filterText ? filterNodes(ps.filterText, this.props.nodes) : this.props.nodes
+    }))
   }
 
   handleFilterTextChange = e => {
@@ -46,14 +55,13 @@ export default class FilteringContainer extends React.Component {
   }
 
   render() {
-    const { nodes } = this.props;
-    const { filterText } = this.state;
+    const { filterText, filteredNodes } = this.state;
 
     return (
       <div>
         <input value={filterText} onChange={this.handleFilterTextChange}></input>
         { 
-          this.props.children()
+          this.props.children({ nodes: filteredNodes })
         }
       </div>
     )

@@ -141,7 +141,7 @@ class BasicTree extends Component {
 
 export default createEntry(
   'basic-tree',
-  'Basic',
+  'Basic/index',
   'Basic Tree',
   (
     <div>

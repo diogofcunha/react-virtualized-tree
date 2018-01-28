@@ -7,14 +7,45 @@ import { getFlattenedTree } from './selectors/getFlattenedTree';
 import { deleteNodeFromTree, replaceNodeFromTree } from './selectors/nodes';
 import { Node } from './shapes/nodeShapes';
 
+const DEFAULT_UPDATE_TYPES = {
+  [UPDATE_TYPE.DELETE]: deleteNodeFromTree,
+  [UPDATE_TYPE.UPDATE]: replaceNodeFromTree 
+};
+
 export default class TreeContainer extends React.Component {
-  updateTypeMap = {
-    [UPDATE_TYPE.DELETE]: deleteNodeFromTree,
-    [UPDATE_TYPE.UPDATE]: replaceNodeFromTree 
+  constructor(props) {
+    super(props);
+
+    this.extensions = props;
   }
 
-  handleChange = ({ node, type }) => {    
-    const updatedNodes = this.updateTypeMap[type](this.props.nodes, node);
+  get extensions() {
+    return this._extensions;
+  }
+
+  set extensions(props) {
+    const {
+      extensions: {
+        updateTypeHandlers = { }
+      } = { } 
+    } = props;
+
+    this._extensions = {
+      updateTypeHandlers: {
+        ...DEFAULT_UPDATE_TYPES,
+        ...updateTypeHandlers
+      }
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.extensions !== this.props.extensions) {
+      this.extensions = nextProps;
+    }
+  }
+
+  handleChange = ({ node, type }) => {
+    const updatedNodes = this.extensions.updateTypeHandlers[type](this.props.nodes, node);
 
     this.props.onChange(updatedNodes);
   }
@@ -29,6 +60,9 @@ export default class TreeContainer extends React.Component {
 };
 
 TreeContainer.propTypes = {
+  extensions: PropTypes.shape({
+    updateTypeHandlers: PropTypes.object
+  }),
   nodes: PropTypes.arrayOf(PropTypes.shape(Node)).isRequired,
   onChange: PropTypes.func,
   children: PropTypes.func.isRequired

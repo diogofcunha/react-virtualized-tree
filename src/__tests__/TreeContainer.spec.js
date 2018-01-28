@@ -6,13 +6,16 @@ import Tree from '../Tree';
 import { Nodes } from '../../testData/sampleTree';
 import { getFlattenedTree } from '../selectors/getFlattenedTree';
 import { UPDATE_TYPE } from '../contants';
+import { replaceNodeFromTree, udpateNode } from '../selectors/nodes';
 
 describe('TreeContainer', () => {
-  const setup = (children = null) => {
-    const props = {
+  const setup = (children = () => <span></span>, extraProps = {}) => {
+    const defaultProps = {
       nodes: Nodes,
       onChange: jest.fn()
     };
+
+    const props = { ...defaultProps, ...extraProps };
 
     const wrapper = shallow(
       <TreeContainer {...props}>
@@ -28,13 +31,11 @@ describe('TreeContainer', () => {
   };
 
   it('should render a Tree with children and the correct props', () => {
-    const ExampleChild = () => <div>I am a child of the Summer!</div>;
-    const { treeWrapper, wrapper } = setup(<ExampleChild/>);
+    const exampleChild = jest.fn();
+    const { treeWrapper, wrapper } = setup(exampleChild);
     const { nodes } = treeWrapper.props();
 
     expect(nodes).toMatchSnapshot();
-
-    expect(wrapper.find(ExampleChild).length).toBe(1);
   });
 
   describe('change handle', () => {
@@ -61,6 +62,60 @@ describe('TreeContainer', () => {
       expect(
         props.onChange.mock.calls[0]
       ).toMatchSnapshot();
+    });
+  });
+
+  describe('extensions', () => {
+    const getSampleNode = () => getFlattenedTree(Nodes)[2];
+
+    describe('updateTypeHandlers', () => {
+      it('should call injected prop onChange with the correct params for custom handlers', () => {
+        const EXPAND_ALL = 3;
+
+        const expandAll = nodes => nodes.map(node => ({
+          ...node,
+          state: {
+            ...node.state,
+            expanded: true
+          },
+          children: node.children ? expandAll(node.children) : []
+        }));
+
+        const { treeWrapper, props } = setup(() => <span></span>, { 
+          extensions: {
+            updateTypeHandlers: {
+              [EXPAND_ALL]: expandAll
+            }
+          }
+        });
+  
+        treeWrapper.simulate('change', { node: getSampleNode(), type: EXPAND_ALL });
+  
+        expect(
+          props.onChange.mock.calls[0]
+        ).toMatchSnapshot();
+      });
+
+      it('should call injected prop onChange with the correct params for handler overrides', () => {
+        const updateAndFlag = (nodes, updatedNode) => replaceNodeFromTree(
+          nodes,
+          { ...updatedNode, updated: true }
+        );
+
+        const { treeWrapper, props } = setup(() => <span></span>, { 
+          extensions: {
+            updateTypeHandlers: {
+              [UPDATE_TYPE.UPDATE]: updateAndFlag
+            }
+          }
+        });
+  
+        treeWrapper.simulate('change', { node: getSampleNode(), type: UPDATE_TYPE.UPDATE });
+  
+        expect(
+          props.onChange.mock.calls[0]
+        ).toMatchSnapshot();
+      });
     });
   });
 });

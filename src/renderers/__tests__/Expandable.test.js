@@ -12,7 +12,10 @@ describe('renderers Expandable', () => {
     const baseProps = {
       onChange: jest.fn(),
       node: {
+        id: 1,
+        name: 'Node 1',
         state,
+        deepness: 0,
         children: [{}]        
       },
       iconsClassNameMap: {

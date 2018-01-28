@@ -5,6 +5,7 @@ import Renderers from './Renderers';
 import WorldCup from './WorldCup';
 import ChangeRenderers from './ChangeRenderers';
 import Extensions from './Extensions';
+import Filterable from './Filterable';
  
 export default {
   ...Basic,
@@ -12,5 +13,6 @@ export default {
   ...ChangeRenderers,
   ...WorldCup,
   ...LargeCollection,
-  ...Extensions
+  ...Extensions,
+  ...Filterable
 }

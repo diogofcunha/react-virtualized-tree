@@ -19,6 +19,10 @@ export default class TreeContainer extends React.Component {
     this.extensions = props;
   }
 
+  static contextTypes = {
+    unfilteredNodes: PropTypes.arrayOf(PropTypes.shape(Node))
+  };
+
   get extensions() {
     return this._extensions;
   }
@@ -38,6 +42,10 @@ export default class TreeContainer extends React.Component {
     }
   }
 
+  get nodes() {
+    return this.context.unfilteredNodes || this.props.nodes;
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.extensions !== this.props.extensions) {
       this.extensions = nextProps;
@@ -45,7 +53,7 @@ export default class TreeContainer extends React.Component {
   }
 
   handleChange = ({ node, type }) => {
-    const updatedNodes = this.extensions.updateTypeHandlers[type](this.props.nodes, node);
+    const updatedNodes = this.extensions.updateTypeHandlers[type](this.nodes, node);
 
     this.props.onChange(updatedNodes);
   }

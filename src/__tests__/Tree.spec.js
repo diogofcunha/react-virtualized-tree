@@ -39,7 +39,7 @@ describe('Tree', () => {
 
     const { rowRenderer: rowRendererCb } = wrapper.instance();
     const RowRenderer = rowRendererCb(nodes);
-    const rowRendererProps = { key: 'a', index: 0, style: {} };
+    const rowRendererProps = { index: 0, style: {} };
     
     const rowRendererWrapper = shallow(<RowRenderer {...rowRendererProps}/>);
 

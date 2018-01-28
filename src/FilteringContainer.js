@@ -62,8 +62,14 @@ export default class FilteringContainer extends React.Component {
     const filteredNodes = filterTerm ? filterNodes(filterTerm, this.props.nodes) : this.props.nodes;
 
     return (
-      <div>
-        <input value={filterText} onChange={this.handleFilterTextChange}></input>
+      <div className="tree-filter-container">
+        <div className="tree-lookup-input">
+          <input
+            value={filterText}
+            onChange={this.handleFilterTextChange}
+            placeholder="Search..."/>
+          <i aria-hidden="true" class="mi mi-11 mi-search"></i>
+        </div>
         { this.props.children({ nodes: filteredNodes }) }
       </div>
     )
@@ -72,5 +78,6 @@ export default class FilteringContainer extends React.Component {
 
 FilteringContainer.propTypes = {
   children: PropTypes.func.isRequired,
+  className: PropTypes.string.isRequired,
   debouncer: PropTypes.func
 }

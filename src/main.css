@@ -2,3 +2,50 @@
   user-select: none;
   cursor: pointer;
 }
+
+.tree-lookup-input {
+  font-size: 1em;
+  position: relative;
+  font-weight: 400;
+  font-style: normal;
+  color: rgba(0,0,0,.87);
+}
+
+.tree-lookup-input input {
+  width: 100%;
+  margin: 0;
+  outline: 0;
+  -webkit-tap-highlight-color: rgba(255,255,255,0);
+  text-align: left;
+  line-height: 1.21428571em;
+  padding: .7em 1em;
+  background: #fff;
+  border: 1px solid rgba(34,36,38,.15);
+  color: rgba(0,0,0,.87);
+  border-radius: .28571429rem;
+  -webkit-transition: box-shadow .1s ease,border.1s ease;
+  transition: box-shadow .1s ease, border .1s ease;
+  box-shadow: none;
+  padding-right: 2.67142857em!important;
+  margin-bottom: 7px;
+}
+
+.tree-lookup-input input:focus {
+  border: 1px solid #85b7d9;
+  background: #fff;
+  color: rgba(0,0,0,.8);
+  box-shadow: none;
+}
+
+.tree-lookup-input i {
+  margin-left: -3em;
+  padding: .7em 1em;
+  color: rgba(0,0,0,.3);
+  cursor: text;
+}
+
+.tree-filter-container {
+  border: 1px solid rgba(0, 0, 0, .3);
+  box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+  padding: 2%;
+}

@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FilteringContainer should filter for deepsearch 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "id": 2,
+        "name": "Leaf 2",
+        "state": Object {
+          "deletable": true,
+          "expanded": true,
+        },
+      },
+    ],
+    "id": 0,
+    "name": "Leaf 1",
+    "state": Object {
+      "expanded": true,
+    },
+  },
+]
+`;
+
+exports[`FilteringContainer should filter when results match more then 1 node 1`] = `
+Array [
+  Object {
+    "children": Array [],
+    "id": 0,
+    "name": "Leaf 1",
+    "state": Object {
+      "expanded": true,
+    },
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [],
+        "id": 9,
+        "name": "Leaf 10",
+      },
+    ],
+    "id": 1,
+    "name": "Leaf 6",
+    "state": Object {
+      "deletable": true,
+      "expanded": false,
+    },
+  },
+]
+`;
+
+exports[`FilteringContainer should filter when there are no results 1`] = `Array []`;

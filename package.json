@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
+    "lodash": "^4.17.4",
     "material-icons": "^0.1.0",
     "reselect": "^3.0.1"
   },

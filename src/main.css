@@ -55,6 +55,12 @@
 }
 
 .tree-group {
+  width: 20%;
   appearance: none;
+  background-color: #2185d0;
+  color: #fff;
+  cursor: pointer;
+  border: 1px solid #2185d0;
+  font-weight: 700;
   padding: .7em 1em;
 }

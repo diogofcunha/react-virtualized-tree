@@ -9,7 +9,7 @@ import { UPDATE_TYPE } from '../contants';
 import { replaceNodeFromTree, udpateNode } from '../selectors/nodes';
 
 describe('TreeContainer', () => {
-  const setup = (children = () => <span></span>, extraProps = {}) => {
+  const setup = (children = () => <span></span>, extraProps = {}, context = {}) => {
     const defaultProps = {
       nodes: Nodes,
       onChange: jest.fn()
@@ -20,7 +20,8 @@ describe('TreeContainer', () => {
     const wrapper = shallow(
       <TreeContainer {...props}>
         { children }
-      </TreeContainer>
+      </TreeContainer>,
+      { context }
     );
 
     return {
@@ -41,9 +42,8 @@ describe('TreeContainer', () => {
   describe('change handle', () => {
     const getSampleNode = () => getFlattenedTree(Nodes)[2]
 
-    it('should call injected prop onChange with the correct params when a nome is deleted', () => {
+    it('should call injected prop onChange with the correct params when a node is deleted', () => {
       const { treeWrapper, props } = setup();
-
       treeWrapper.simulate('change', { node: getSampleNode(), type: UPDATE_TYPE.DELETE });
 
       expect(
@@ -51,8 +51,25 @@ describe('TreeContainer', () => {
       ).toMatchSnapshot();
     });
 
-    it('should call injected prop onChange with the correct params when a nome is updated', () => {
+    it('should call injected prop onChange with the correct params when a node is updated', () => {
       const { treeWrapper, props } = setup();
+
+      treeWrapper.simulate('change', {
+        node: { ...getSampleNode(), state: { favorite: false, deletable: false } },
+        type: UPDATE_TYPE.UPDATE 
+      });
+
+      expect(
+        props.onChange.mock.calls[0]
+      ).toMatchSnapshot();
+    });
+
+    it('should call injected prop onChange with the correct params when a node is updated when nodes come from context', () => {
+      const { treeWrapper, props } = setup(
+        jest.fn(),
+        { nodes: Nodes.map((n, i) => i % 2 === 0) },
+        { unfilteredNodes: Nodes }
+      );
 
       treeWrapper.simulate('change', {
         node: { ...getSampleNode(), state: { favorite: false, deletable: false } },

@@ -1,4 +1,6 @@
 import { createSelector } from 'reselect';
+import { omit } from 'lodash';
+
 import { UPDATE_TYPE } from '../contants';
 
 export const getNodeRenderOptions = createSelector(
@@ -14,17 +16,28 @@ export const getNodeRenderOptions = createSelector(
   })
 );
 
-export const replaceNodeFromTree = (nodes, updatedNode) => {
+const PICK_CHILDREN_FROM = {
+  ORIGIN: 0,
+  CURRENT: 1
+}
+
+const FLATTEN_TREE_PROPERTIES = [ 'deepness', 'parents' ];
+
+export const replaceNodeFromTree = (nodes, updatedNode, pickChildrenFrom = PICK_CHILDREN_FROM.ORIGIN) => {
   return nodes.map(node => {
+    const children = node.children ? replaceNodeFromTree(node.children, updatedNode, pickChildrenFrom) : node.children;
+
     if (node.id === updatedNode.id) {
-      return updatedNode;
+      return {
+        ...omit(updatedNode, FLATTEN_TREE_PROPERTIES),
+        ...pickChildrenFrom === PICK_CHILDREN_FROM.ORIGIN && children ? { children } : {}
+      };
     }
 
-    if (node.children) {
-      return { ...node, children: replaceNodeFromTree(node.children, updatedNode) };
-    }
-
-    return node;
+    return {
+      ...node,
+      ...children ? { children } : {}
+    };
   });
 }
 
@@ -66,7 +79,8 @@ export const deleteNodeFromTree = (nodes, deletedNode) => {
         ...parent.children.slice(0, childIndex),
         ...parent.children.slice(childIndex + 1)
       ]
-    }
+    },
+    PICK_CHILDREN_FROM.CURRENT
   );
 }
 

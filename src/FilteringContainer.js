@@ -4,6 +4,7 @@ import { debounce } from 'lodash';
 import classNames from 'classnames';
 
 import DefaultGroupRenderer from './filtering/DefaultGroupRenderer';
+import { Node } from './shapes/nodeShapes';
 
 const nameMatchesSearchTerm = (searchTerm) => ({ name }) => {
   const upperCaseName = name.toUpperCase();
@@ -36,6 +37,14 @@ export default class FilteringContainer extends React.Component {
   state = {
     filterText: '',
     filterTerm: ''
+  }
+
+  getChildContext = () => {
+    return { unfilteredNodes: this.props.nodes };
+  }
+
+  static childContextTypes = {
+    unfilteredNodes: PropTypes.arrayOf(PropTypes.shape(Node)).isRequired
   }
 
   static defaultProps = {

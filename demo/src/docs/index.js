@@ -4,5 +4,8 @@ export default {
   },
   extensions: {
     name: 'Extensions'
+  },
+  filtering: {
+    name: 'Filtering'
   }
 };

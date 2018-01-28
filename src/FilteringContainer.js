@@ -70,10 +70,6 @@ export default class FilteringContainer extends React.Component {
     this.setFilterTerm();
   }
 
-  handleSelectedGroupChange = g => {
-    this.props.onSelectedGroupChange(g);
-  }
-
   render() {
     const { filterTerm, filterText } = this.state;
     const {

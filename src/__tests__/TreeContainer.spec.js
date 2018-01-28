@@ -67,7 +67,7 @@ describe('TreeContainer', () => {
     it('should call injected prop onChange with the correct params when a node is updated when nodes come from context', () => {
       const { treeWrapper, props } = setup(
         jest.fn(),
-        { nodes: Nodes.map((n, i) => i % 2 === 0) },
+        { nodes: Nodes.filter((n, i) => i % 2 === 0) },
         { unfilteredNodes: Nodes }
       );
 

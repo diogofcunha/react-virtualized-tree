@@ -10,6 +10,7 @@ module.exports = {
     }
   },
   webpack: {
+    uglify: false,
     html: {
       template: 'demo/src/index.html'
     }

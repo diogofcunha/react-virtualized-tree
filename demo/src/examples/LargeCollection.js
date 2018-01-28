@@ -2,47 +2,15 @@ import React, { Component } from 'react';
 
 import Tree from '../../../src/TreeContainer';
 import Renderers from '../../../src/renderers';
-import { createEntry } from '../toolbelt';
+import { createEntry, constructTree } from '../toolbelt';
 
 const MIN_NUMBER_OF_PARENTS = 300;
 const MAX_NUMBER_OF_CHILDREN = 10;
 const MAX_DEEPNESS = 4;
 
-let ids = {};
-
-const getUniqueId = () => {
-  const candidateId = Math.round(Math.random() * 1000000);
-
-  if (ids[candidateId]) {
-    return getUniqueId();
-  }
-
-  ids[candidateId] = true;
-
-  return candidateId;
-}
-
-const constructTree = (minNumOfNodes, deepness = 1) => {
-  return new Array(minNumOfNodes).fill(deepness).map((si, i) => {
-    const id = getUniqueId();
-    const numberOfChildren = deepness === MAX_DEEPNESS ? 0 : Math.round(Math.random() * MAX_NUMBER_OF_CHILDREN);
-
-    return {
-      id,
-      name: `Leaf ${id}`,
-      children: numberOfChildren ? constructTree(numberOfChildren, deepness + 1) : [],
-      state: {
-        expanded: Boolean(Math.round(Math.random())),
-        favorite: Boolean(Math.round(Math.random())),
-        deletable: Boolean(Math.round(Math.random()))
-      }
-    };
-  })
-};
-
 const { Deletable, Expandable, Favorite } = Renderers;
 
-const Nodes = constructTree(MIN_NUMBER_OF_PARENTS);
+const Nodes = constructTree(MAX_DEEPNESS, MAX_NUMBER_OF_CHILDREN ,MIN_NUMBER_OF_PARENTS);
 const getTotalNumberOfElements = (nodes, counter = 0) => {
   return counter + nodes.length + nodes.reduce((acc, n) => getTotalNumberOfElements(n.children, acc) ,0)
 }

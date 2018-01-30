@@ -46,6 +46,14 @@ Array [
       "expanded": false,
     },
   },
+  Object {
+    "id": "z",
+    "name": "Leaf z",
+    "state": Object {
+      "deletable": true,
+      "favorite": true,
+    },
+  },
 ]
 `;
 
@@ -80,6 +88,14 @@ Array [
     "state": Object {
       "deletable": true,
       "expanded": false,
+    },
+  },
+  Object {
+    "id": "z",
+    "name": "Leaf z",
+    "state": Object {
+      "deletable": true,
+      "favorite": true,
     },
   },
 ]
@@ -151,6 +167,14 @@ Array [
     "state": Object {
       "deletable": true,
       "expanded": false,
+    },
+  },
+  Object {
+    "id": "z",
+    "name": "Leaf z",
+    "state": Object {
+      "deletable": true,
+      "favorite": true,
     },
   },
 ]

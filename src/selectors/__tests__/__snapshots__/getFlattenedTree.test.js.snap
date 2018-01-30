@@ -128,5 +128,15 @@ Array [
       "expanded": false,
     },
   },
+  Object {
+    "deepness": 0,
+    "id": "z",
+    "name": "Leaf z",
+    "parents": Array [],
+    "state": Object {
+      "deletable": true,
+      "favorite": true,
+    },
+  },
 ]
 `;

@@ -63,5 +63,13 @@ export const Nodes = [{
         id: 9,
         name: 'Leaf 10'
      }
-  ]
+  ],
+},
+{
+  id: 'z',
+  name: 'Leaf z',
+  state: {
+    deletable: true,
+    favorite: true
+  }
 }];

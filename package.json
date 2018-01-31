@@ -1,6 +1,6 @@
 {
   "name": "react-virtualized-tree",
-  "version": "1.2.3",
+  "version": "1.2.5",
   "description": "react-virtualized-tree React component",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -8,7 +8,8 @@
     "css",
     "es",
     "lib",
-    "umd"
+    "umd",
+    "index.d.ts"
   ],
   "scripts": {
     "build": "nwb build-react-component --copy-files",

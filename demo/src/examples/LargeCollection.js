@@ -4,8 +4,8 @@ import Tree from '../../../src/TreeContainer';
 import Renderers from '../../../src/renderers';
 import { createEntry, constructTree } from '../toolbelt';
 
-const MIN_NUMBER_OF_PARENTS = 300;
-const MAX_NUMBER_OF_CHILDREN = 10;
+const MIN_NUMBER_OF_PARENTS = 500;
+const MAX_NUMBER_OF_CHILDREN = 15;
 const MAX_DEEPNESS = 4;
 
 const { Deletable, Expandable, Favorite } = Renderers;

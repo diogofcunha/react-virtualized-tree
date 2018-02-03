@@ -59,7 +59,7 @@ describe('selectors -> nodes ->', () => {
       );
 
       expect(
-        nodeSelectors.replaceNodeFromTree(Nodes, updatedNode)
+        nodeSelectors.replaceNodeFromTree(Nodes, updatedNode.node)
       ).toMatchSnapshot();
     });
   });

@@ -96,14 +96,14 @@ interface NodeRenderOptions {
   isDeletable: boolean;
 }
 
-export enum PICK_CHILDREN_FROM {
-  ORIGIN = 0,
-  CURRENT = 1
+export enum NODE_CHANGE_OPERATIONS {
+  CHANGE_NODE = 'CHANGE_NODE',
+  DELETE_NODE = 'DELETE_NODE'
 }
 
 interface Selectors {
   getNodeRenderOptions: (node: FlattenedNode) => NodeRenderOptions,
-  replaceNodeFromTree: (nodes: Node[], updatedNode: FlattenedNode, pickChildrenFrom?: PICK_CHILDREN_FROM) => Node[],
+  replaceNodeFromTree: (nodes: Node[], updatedNode: FlattenedNode, operation?: NODE_CHANGE_OPERATIONS) => Node[],
   deleteNodeFromTree: (nodes: Node[], nodeToDelete: FlattenedNode) => Node[],
   deleteNode: (node: FlattenedNode[]) => NodeAction,
   addNode: (node: FlattenedNode[]) => NodeAction,

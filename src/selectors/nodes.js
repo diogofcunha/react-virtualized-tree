@@ -16,71 +16,54 @@ export const getNodeRenderOptions = createSelector(
   })
 );
 
-const PICK_CHILDREN_FROM = {
-  ORIGIN: 0,
-  CURRENT: 1
-}
-
 const FLATTEN_TREE_PROPERTIES = [ 'deepness', 'parents' ];
 
-export const replaceNodeFromTree = (nodes, updatedNode, pickChildrenFrom = PICK_CHILDREN_FROM.ORIGIN) => {
-  return nodes.map(node => {
-    const children = node.children ? replaceNodeFromTree(node.children, updatedNode, pickChildrenFrom) : node.children;
-
-    if (node.id === updatedNode.id) {
-      return {
-        ...omit(updatedNode, FLATTEN_TREE_PROPERTIES),
-        ...pickChildrenFrom === PICK_CHILDREN_FROM.ORIGIN && children ? { children } : {}
-      };
-    }
-
-    return {
-      ...node,
-      ...children ? { children } : {}
-    };
-  });
+const NODE_OPERATION_TYPES = {
+  CHANGE_NODE: 'CHANGE_NODE',
+  DELETE_NODE: 'DELETE_NODE'
 }
 
-const findNodeOnTree = (parents, parentNode, id) => {
+const NODE_CHANGE_OPERATIONS = {
+  CHANGE_NODE: (nodes, updatedNode) => nodes.map(n => n.id === updatedNode.id ? omit(updatedNode, FLATTEN_TREE_PROPERTIES) : n),
+  DELETE_NODE: (nodes, updatedNode) => nodes.filter(n => n.id !== updatedNode.id) 
+}
+
+export const replaceNodeFromTree = (nodes, updatedNode, operation = NODE_OPERATION_TYPES.CHANGE_NODE) => {
+  if (!NODE_CHANGE_OPERATIONS[operation]) {
+    return nodes;
+  }
+  
+  const { parents } = updatedNode;
+
   if (!parents.length) {
-    return {
-      node: parentNode.children.find(n => n.id === id),
-      parent: parentNode
-    };
+    return NODE_CHANGE_OPERATIONS[operation](nodes, updatedNode);
   }
 
-  const [ nextParent ] = parents;
+  const parentIndex = nodes.findIndex(n => n.id === parents[0])
+  const preSiblings = nodes[parentIndex - 1] || [];
+  const postSiblings = nodes.slice(parentIndex + 1);
 
-  return findNodeOnTree(
-    parents.slice(1),
-    parentNode.children.find(n => n.id === nextParent),
-    id
-  );
+  return [
+    ...preSiblings,
+    {
+      ...nodes[parentIndex], 
+      ...nodes[parentIndex].children ? 
+        { children: replaceNodeFromTree(
+            nodes[parentIndex].children,
+            { ...updatedNode, parents: parents.slice(1) },
+            operation
+          )
+        } : {}
+    },
+    ...postSiblings
+  ]
 }
-
-const isNodeInTreeRoot = n => n.id === undefined;
 
 export const deleteNodeFromTree = (nodes, deletedNode) => {
-  const { parent } = findNodeOnTree(deletedNode.parents, { children: nodes }, deletedNode.id);
-  const childIndex = parent.children.findIndex(c => c.id === deletedNode.id);
-
-  if (isNodeInTreeRoot(parent)) {
-    return [
-      ...nodes.slice(0, childIndex),
-      ...nodes.slice(childIndex + 1)
-    ]
-  }
-
   return replaceNodeFromTree(
     nodes,
-    { 
-      ...parent,
-      children: [
-        ...parent.children.slice(0, childIndex),
-        ...parent.children.slice(childIndex + 1)
-      ]
-    },
-    PICK_CHILDREN_FROM.CURRENT
+    deletedNode,
+    NODE_OPERATION_TYPES.DELETE_NODE
   );
 }
 

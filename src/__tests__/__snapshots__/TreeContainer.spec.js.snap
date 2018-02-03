@@ -562,3 +562,9 @@ Array [
   },
 ]
 `;
+
+exports[`TreeContainer when draggable should render a DraggingContainer 1`] = `
+Object {
+  "onChange": [Function],
+}
+`;

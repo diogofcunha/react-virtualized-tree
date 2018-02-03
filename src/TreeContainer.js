@@ -2,14 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Tree from './Tree';
+import DraggingContainer from './DraggingContainer';
 import { UPDATE_TYPE } from './contants';
 import { getFlattenedTree } from './selectors/getFlattenedTree';
-import { deleteNodeFromTree, replaceNodeFromTree } from './selectors/nodes';
+import { deleteNodeFromTree, replaceNodeFromTree, moveNodeFromTree } from './selectors/nodes';
 import { Node } from './shapes/nodeShapes';
 
 const DEFAULT_UPDATE_TYPES = {
   [UPDATE_TYPE.DELETE]: deleteNodeFromTree,
-  [UPDATE_TYPE.UPDATE]: replaceNodeFromTree 
+  [UPDATE_TYPE.UPDATE]: replaceNodeFromTree,
+  [UPDATE_TYPE.MOVE]: moveNodeFromTree
 };
 
 export default class TreeContainer extends React.Component {
@@ -58,11 +60,20 @@ export default class TreeContainer extends React.Component {
     this.props.onChange(updatedNodes);
   }
 
+  getContainer = () => !this.props.draggable ?
+    { Container: 'div', props: {} } : 
+    { Container: DraggingContainer, props: { onChange: this.handleChange } }
+
   render() {
+    const { children, nodes } = this.props;
+    const { Container, props } = this.getContainer();
+
     return (
-      <Tree nodes={getFlattenedTree(this.props.nodes)} onChange={this.handleChange}> 
-        { this.props.children }
-      </Tree>
+      <Container {...props}>
+        <Tree nodes={getFlattenedTree(nodes)} onChange={this.handleChange}> 
+          { children }
+        </Tree>
+      </Container>
     );
   }
 };
@@ -73,5 +84,6 @@ TreeContainer.propTypes = {
   }),
   nodes: PropTypes.arrayOf(PropTypes.shape(Node)).isRequired,
   onChange: PropTypes.func,
+  draggable: PropTypes.bool,
   children: PropTypes.func.isRequired
 };

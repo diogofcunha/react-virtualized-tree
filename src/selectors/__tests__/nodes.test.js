@@ -62,6 +62,47 @@ describe('selectors -> nodes ->', () => {
         nodeSelectors.replaceNodeFromTree(Nodes, updatedNode.node)
       ).toMatchSnapshot();
     });
+
+    describe('moveNodeFromTree', () => {
+      it('should move a node from the root correctly without mutations', () => {
+        deepFreeze(Nodes);
+
+        const movedNodes = [
+          getSampleNode(6),
+          getSampleNode(0)
+        ];
+
+        expect(
+          nodeSelectors.moveNodeFromTree(Nodes, movedNodes)
+        ).toMatchSnapshot();
+      });
+
+      it('should move a node to a parentless node without mutations', () => {
+        deepFreeze(Nodes);
+
+        const movedNodes = [
+          getSampleNode(2), // node 3
+          getSampleNode(6) // node z
+        ];
+
+        expect(
+          nodeSelectors.moveNodeFromTree(Nodes, movedNodes)
+        ).toMatchSnapshot();
+      });
+
+      it('should move a node to with children without mutations', () => {
+        deepFreeze(Nodes);
+
+        const movedNodes = [
+          getSampleNode(1), // node 2
+          getSampleNode(5) // node 6
+        ];
+
+        expect(
+          nodeSelectors.moveNodeFromTree(Nodes, movedNodes)
+        ).toMatchSnapshot();
+      });
+    });
   });
 
   describe('getNodeRenderOptions', () => {

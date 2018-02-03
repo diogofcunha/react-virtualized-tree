@@ -1,7 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { omit } from 'lodash';
 
 import TreeContainer from '../TreeContainer';
+import DraggingContainer from '../DraggingContainer';
 import Tree from '../Tree';
 import { Nodes } from '../../testData/sampleTree';
 import { getFlattenedTree } from '../selectors/getFlattenedTree';
@@ -37,6 +39,15 @@ describe('TreeContainer', () => {
     const { nodes } = treeWrapper.props();
 
     expect(nodes).toMatchSnapshot();
+  });
+
+  it('when draggable should render a DraggingContainer', () => {
+    const exampleChild = jest.fn();
+    const { treeWrapper, wrapper } = setup(exampleChild, { draggable: true });
+
+    expect(
+      omit(wrapper.find(DraggingContainer).props(), 'children')
+    ).toMatchSnapshot();
   });
 
   describe('change handle', () => {

@@ -101,6 +101,245 @@ Array [
 ]
 `;
 
+exports[`selectors -> nodes -> Tree actions moveNodeFromTree should move a node from the root correctly without mutations 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [
+          Object {
+            "id": 3,
+            "name": "Leaf 3",
+            "state": Object {
+              "deletable": true,
+              "favorite": true,
+            },
+          },
+          Object {
+            "id": 4,
+            "name": "Leaf 4",
+          },
+        ],
+        "id": 2,
+        "name": "Leaf 2",
+        "state": Object {
+          "deletable": true,
+          "expanded": true,
+        },
+      },
+      Object {
+        "id": 5,
+        "name": "Leaf 5",
+      },
+      Object {
+        "id": "z",
+        "name": "Leaf z",
+        "state": Object {
+          "deletable": true,
+          "favorite": true,
+        },
+      },
+    ],
+    "id": 0,
+    "name": "Leaf 1",
+    "state": Object {
+      "expanded": true,
+    },
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [
+          Object {
+            "id": 7,
+            "name": "Leaf 8",
+          },
+          Object {
+            "id": 8,
+            "name": "Leaf 9",
+          },
+        ],
+        "id": 6,
+        "name": "Leaf 7",
+        "state": Object {
+          "expanded": false,
+        },
+      },
+      Object {
+        "id": 9,
+        "name": "Leaf 10",
+      },
+    ],
+    "id": 1,
+    "name": "Leaf 6",
+    "state": Object {
+      "deletable": true,
+      "expanded": false,
+    },
+  },
+]
+`;
+
+exports[`selectors -> nodes -> Tree actions moveNodeFromTree should move a node to a parentless node without mutations 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [
+          Object {
+            "id": 4,
+            "name": "Leaf 4",
+          },
+        ],
+        "id": 2,
+        "name": "Leaf 2",
+        "state": Object {
+          "deletable": true,
+          "expanded": true,
+        },
+      },
+      Object {
+        "id": 5,
+        "name": "Leaf 5",
+      },
+    ],
+    "id": 0,
+    "name": "Leaf 1",
+    "state": Object {
+      "expanded": true,
+    },
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [
+          Object {
+            "id": 7,
+            "name": "Leaf 8",
+          },
+          Object {
+            "id": 8,
+            "name": "Leaf 9",
+          },
+        ],
+        "id": 6,
+        "name": "Leaf 7",
+        "state": Object {
+          "expanded": false,
+        },
+      },
+      Object {
+        "id": 9,
+        "name": "Leaf 10",
+      },
+    ],
+    "id": 1,
+    "name": "Leaf 6",
+    "state": Object {
+      "deletable": true,
+      "expanded": false,
+    },
+  },
+  Object {
+    "children": Array [
+      Object {
+        "id": 3,
+        "name": "Leaf 3",
+        "state": Object {
+          "deletable": true,
+          "favorite": true,
+        },
+      },
+    ],
+    "id": "z",
+    "name": "Leaf z",
+    "state": Object {
+      "deletable": true,
+      "favorite": true,
+    },
+  },
+]
+`;
+
+exports[`selectors -> nodes -> Tree actions moveNodeFromTree should move a node to with children without mutations 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "id": 5,
+        "name": "Leaf 5",
+      },
+    ],
+    "id": 0,
+    "name": "Leaf 1",
+    "state": Object {
+      "expanded": true,
+    },
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [
+          Object {
+            "id": 7,
+            "name": "Leaf 8",
+          },
+          Object {
+            "id": 8,
+            "name": "Leaf 9",
+          },
+        ],
+        "id": 6,
+        "name": "Leaf 7",
+        "state": Object {
+          "expanded": false,
+        },
+      },
+      Object {
+        "id": 9,
+        "name": "Leaf 10",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "id": 3,
+            "name": "Leaf 3",
+            "state": Object {
+              "deletable": true,
+              "favorite": true,
+            },
+          },
+          Object {
+            "id": 4,
+            "name": "Leaf 4",
+          },
+        ],
+        "id": 2,
+        "name": "Leaf 2",
+        "state": Object {
+          "deletable": true,
+          "expanded": true,
+        },
+      },
+    ],
+    "id": 1,
+    "name": "Leaf 6",
+    "state": Object {
+      "deletable": true,
+      "expanded": false,
+    },
+  },
+  Object {
+    "id": "z",
+    "name": "Leaf z",
+    "state": Object {
+      "deletable": true,
+      "favorite": true,
+    },
+  },
+]
+`;
+
 exports[`selectors -> nodes -> Tree actions replaceNodeFromTree should replace a node in the tree without mutations 1`] = `
 Array [
   Object {

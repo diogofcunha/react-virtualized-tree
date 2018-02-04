@@ -24,17 +24,23 @@ export default class DraggingContainer extends React.Component {
 
   getChildContext = () => ({
     handleDrag: this.handleDrag,
-    handleDrop: this.handleDrop
+    handleDrop: this.handleDrop,
+    fromNode: this.state.fromNode
   })
 
   static childContextTypes = {
     handleDrag: PropTypes.func,
-    handleDrop: PropTypes.func
+    handleDrop: PropTypes.func,
+    fromNode: PropTypes.object
   }
 
   render() {
     return (
-      <div>
+      <div
+        className={this.props.className}
+        onDrop={() => this.handleDrop({ ...this.state.fromNode, parents: [] })}
+        onDragOver={e => e.preventDefault()}
+      > 
         { this.props.children }
       </div>
     )
@@ -43,5 +49,6 @@ export default class DraggingContainer extends React.Component {
 
 DraggingContainer.propTypes = {
   onChange: PropTypes.func.isRequired,
+  className: PropTypes.string.isRequired,
   children: PropTypes.element.isRequired
 }

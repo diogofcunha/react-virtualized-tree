@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DraggingContainer Container DnD when something is dropped on the root, should call onChange with fromNode, without parents 1`] = `
+Array [
+  Object {
+    "node": Array [
+      Object {
+        "deepness": 2,
+        "id": 3,
+        "name": "Leaf 3",
+        "parents": Array [
+          0,
+          2,
+        ],
+        "state": Object {
+          "deletable": true,
+          "favorite": true,
+        },
+      },
+      Object {
+        "deepness": 2,
+        "id": 3,
+        "name": "Leaf 3",
+        "parents": Array [],
+        "state": Object {
+          "deletable": true,
+          "favorite": true,
+        },
+      },
+    ],
+    "type": 3,
+  },
+]
+`;

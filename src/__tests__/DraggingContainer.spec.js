@@ -10,14 +10,18 @@ import { UPDATE_TYPE } from '../contants';
 describe('DraggingContainer', () => {
   const getSampleNode = (i) => getFlattenedTree(Nodes)[i];
 
-  const setup = (extraProps = {}) => {
-    const props = { onChange: jest.fn() };
+  const setup = (extraProps = {}, state) => {
+    const props = { onChange: jest.fn(), className: '' };
 
     const wrapper = shallow(
       <DraggingContainer {...props}>
         <span></span>
       </DraggingContainer>
     );
+
+    if (state) {
+      wrapper.setState(state);
+    }
 
     return {
       wrapper,
@@ -53,6 +57,38 @@ describe('DraggingContainer', () => {
         node: [ fromNode, toNode ],
         type: UPDATE_TYPE.MOVE
       });
+    });
+
+    it('should add node from state to context', () => {
+      const { createdContext } = setup();
+
+      expect(createdContext.fromNode).toEqual({});
+
+      const fromNode = getSampleNode(2);
+      const { createdContext: createdContextWithFromNode } = setup({}, { fromNode });
+
+      expect(createdContextWithFromNode.fromNode).toEqual(fromNode);
+    });
+  });
+
+  describe('Container DnD', () => {
+    it('when something is dropped on the root, should call onChange with fromNode, without parents', () => {
+      const fromNode = getSampleNode(2);
+
+      const { wrapper, props } = setup({}, { fromNode });
+
+      wrapper.first().simulate('drop');
+
+      expect(props.onChange.mock.calls[0]).toMatchSnapshot();
+    });
+
+    it('drag over should prevent default', () => {
+      const { wrapper } = setup();
+      const event = { preventDefault: jest.fn() };
+
+      wrapper.first().simulate('dragOver', event);
+
+      expect(event.preventDefault).toHaveBeenCalled();
     });
   });
 });

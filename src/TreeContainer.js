@@ -69,7 +69,7 @@ export default class TreeContainer extends React.Component {
     const { Container, props } = this.getContainer();
 
     return (
-      <Container {...props}>
+      <Container {...props} className="tree-container" >
         <Tree nodes={getFlattenedTree(nodes)} onChange={this.handleChange}> 
           { children }
         </Tree>

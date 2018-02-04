@@ -83,8 +83,9 @@ export const moveNodeFromTree = (nodes, [ fromNode, toNode ]) => {
   );
 
   const { id: targetId, parents: targetParents } = toNode;
+  const parents = [ ...targetParents, ...targetId !== fromNode.id ? [targetId] : []];
 
-  const nodeToAdd =  { ...fromNode, parents: [ ...targetParents, targetId ] };
+  const nodeToAdd =  { ...fromNode, parents };
 
   return addNodeToTree(treeWithoutMovedNode, nodeToAdd);
 }

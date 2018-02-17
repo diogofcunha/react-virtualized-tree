@@ -6,6 +6,7 @@ import WorldCup from './WorldCup';
 import ChangeRenderers from './ChangeRenderers';
 import Extensions from './Extensions';
 import Filterable from './Filterable';
+import NodeMeasure from './NodeMeasure';
  
 export default {
   ...Basic,
@@ -14,5 +15,6 @@ export default {
   ...WorldCup,
   ...LargeCollection,
   ...Extensions,
-  ...Filterable
+  ...Filterable,
+  ...NodeMeasure
 }

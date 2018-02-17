@@ -21,7 +21,8 @@ describe('renderers Favorite', () => {
       iconsClassNameMap: {
         favorite: 'fav',
         notFavorite: 'non-fav'
-      }    
+      },
+      measure: jest.fn()
     }
 
     const props = { ...baseProps, ...extraProps };

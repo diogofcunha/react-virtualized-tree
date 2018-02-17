@@ -21,7 +21,8 @@ describe('renderers Expandable', () => {
       iconsClassNameMap: {
         expanded: 'expanded',
         collapsed: 'colpased'
-      }    
+      },
+      measure: jest.fn()
     }
 
     const props = { ...baseProps, ...extraProps };

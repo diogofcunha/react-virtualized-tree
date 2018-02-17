@@ -21,5 +21,5 @@ Node.children = PropTypes.arrayOf(PropTypes.shape(Node));
 export const FlattenedNode = {
   ...BasicNode,
   deepness: PropTypes.number.isRequired,
-  parents: PropTypes.arrayOf(PropTypes.number)
+  parents: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string]))
 };

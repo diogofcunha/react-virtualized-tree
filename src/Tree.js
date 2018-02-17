@@ -28,7 +28,7 @@ export default class Tree extends React.Component {
         <List
             height={height}
             rowCount={nodes.length}
-            rowHeight={20}
+            rowHeight={21}
             rowRenderer={this.rowRenderer(nodes)}
             width={width}
         />

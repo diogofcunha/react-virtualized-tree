@@ -17,6 +17,7 @@ export const getNodeRenderOptions = createSelector(
 );
 
 const FLATTEN_TREE_PROPERTIES = [ 'deepness', 'parents' ];
+const NODE_OPERATION_PROPERTIES = [ 'index' ];
 
 const NODE_OPERATION_TYPES = {
   CHANGE_NODE: 'CHANGE_NODE',
@@ -27,7 +28,7 @@ const NODE_OPERATION_TYPES = {
 const NODE_CHANGE_OPERATIONS = {
   CHANGE_NODE: (nodes, updatedNode) => nodes.map(n => n.id === updatedNode.id ? omit(updatedNode, FLATTEN_TREE_PROPERTIES) : n),
   DELETE_NODE: (nodes, updatedNode) => nodes.filter(n => n.id !== updatedNode.id),
-  ADD_NODE: (nodes, nodeToAdd) => [ ...nodes, omit(nodeToAdd, FLATTEN_TREE_PROPERTIES) ]
+  ADD_NODE: (nodes, nodeToAdd) => [ ...nodes, omit(nodeToAdd, [ ...FLATTEN_TREE_PROPERTIES, ...NODE_OPERATION_PROPERTIES] ) ]
 }
 
 export const replaceNodeFromTree = (nodes, updatedNode, operation = NODE_OPERATION_TYPES.CHANGE_NODE) => {
@@ -76,18 +77,20 @@ export const addNodeToTree = (nodes, nodeToAdd) => replaceNodeFromTree(
   NODE_OPERATION_TYPES.ADD_NODE
 )
 
+export const moveNodeToChildren = (nodes, [ fromNode, toNode ]) => {
+  const { id: targetId, parents: targetParents } = toNode;
+  const parents = [ ...targetParents, ...targetId !== fromNode.id ? [targetId] : []];
+
+  return moveNodeFromTree(nodes, [ fromNode, { ...toNode, parents } ]);
+}
+
 export const moveNodeFromTree = (nodes, [ fromNode, toNode ]) => {
   const treeWithoutMovedNode = deleteNodeFromTree(
     nodes,
     fromNode
   );
 
-  const { id: targetId, parents: targetParents } = toNode;
-  const parents = [ ...targetParents, ...targetId !== fromNode.id ? [targetId] : []];
-
-  const nodeToAdd =  { ...fromNode, parents };
-
-  return addNodeToTree(treeWithoutMovedNode, nodeToAdd);
+  return addNodeToTree(treeWithoutMovedNode, { ...fromNode, parents: toNode.parents });
 }
 
 export const udpateNode = (originalNode, newState) => ({

@@ -76,5 +76,30 @@
 }
 
 .dropable.droping {
+  animation: blink 2s step-start 1s infinite;
+  -webkit-animation: blink 2s step-start 1s infinite;
   border-bottom: 1px solid #2185d0
+}
+
+.draggable {
+  cursor: move;
+}
+
+.dragOverElement {
+  font-weight: 900;
+  animation: blink 2s step-start 1s infinite;
+  -webkit-animation: blink 2s step-start 1s infinite;
+}
+
+@keyframes blink {
+  50% {
+    transition: opacity .5s ease-in-out;
+    opacity: 0.5;
+  }
+}
+@-webkit-keyframes blink {
+  50% {
+    transition: opacity .5s ease-in-out;
+    opacity: 0.5;
+  }
 }

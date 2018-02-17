@@ -13,10 +13,10 @@ export default class DraggingContainer extends React.Component {
     this.setState({ fromNode });
   }
 
-  handleDrop = toNode => {
+  handleDrop = (toNode, type) => {
     this.props.onChange({
-      node: [ this.state.fromNode, toNode ],
-      type: UPDATE_TYPE.MOVE
+      type,
+      node: [ this.state.fromNode, toNode ]
     });
 
     this.setState({ fromNode: {} });
@@ -38,7 +38,7 @@ export default class DraggingContainer extends React.Component {
     return (
       <div
         className={this.props.className}
-        onDrop={() => this.handleDrop({ ...this.state.fromNode, parents: [] })}
+        onDrop={() => this.handleDrop({ ...this.state.fromNode, parents: [] }, UPDATE_TYPE.MOVE_AS_SIBLING)}
         onDragOver={e => e.preventDefault()}
       > 
         { this.props.children }

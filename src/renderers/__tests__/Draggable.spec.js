@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import Draggable from '../Draggable';
+import { UPDATE_TYPE } from '../../contants';
 
 describe('renderers Draggable', () => {
   const getFakeEvent = () => ({ preventDefault: jest.fn(), stopPropagation: jest.fn() });
@@ -14,7 +15,8 @@ describe('renderers Draggable', () => {
         name: 'Node 1',
         state: {},
         deepness: 0,
-        children: [{}]        
+        children: [{}],
+        parents: [ 2, 3 ] 
       }
     }
 
@@ -74,13 +76,22 @@ describe('renderers Draggable', () => {
       expect(event.preventDefault).toHaveBeenCalled();
     });
 
-
     it('drag leave should set draggingOver state to false', () => {
       const { wrapper, containerWrapper } = setup();
 
       containerWrapper.simulate('dragLeave');
 
       expect(wrapper.state().draggingOver).toBe(false);
+    });
+
+    it('drop should call injected handleDrop with the expected params and stop propagation', () => {
+      const { containerWrapper, context, props } = setup();
+      const event = getFakeEvent();
+
+      containerWrapper.simulate('drop', event);
+
+      expect(context.handleDrop).toHaveBeenCalledWith(props.node, UPDATE_TYPE.MOVE_AS_SIBLING);
+      expect(event.stopPropagation).toHaveBeenCalled();
     });
   });
 
@@ -109,7 +120,7 @@ describe('renderers Draggable', () => {
 
       draggableElementWrapper.simulate('drop', event);
 
-      expect(context.handleDrop).toHaveBeenCalledWith(props.node);
+      expect(context.handleDrop).toHaveBeenCalledWith(props.node, UPDATE_TYPE.MOVE_AS_CHILDREN);
       expect(event.stopPropagation).toHaveBeenCalled();
     });
   });

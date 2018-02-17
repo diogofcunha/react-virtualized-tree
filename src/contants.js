@@ -2,5 +2,6 @@ export const UPDATE_TYPE = {
   ADD: 0,
   DELETE: 1,
   UPDATE: 2,
-  MOVE: 3
+  MOVE_AS_CHILDREN: 3,
+  MOVE_AS_SIBLING: 4
 }

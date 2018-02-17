@@ -5,13 +5,14 @@ import Tree from './Tree';
 import DraggingContainer from './DraggingContainer';
 import { UPDATE_TYPE } from './contants';
 import { getFlattenedTree } from './selectors/getFlattenedTree';
-import { deleteNodeFromTree, replaceNodeFromTree, moveNodeFromTree } from './selectors/nodes';
+import { deleteNodeFromTree, replaceNodeFromTree, moveNodeFromTree, moveNodeToChildren } from './selectors/nodes';
 import { Node } from './shapes/nodeShapes';
 
 const DEFAULT_UPDATE_TYPES = {
   [UPDATE_TYPE.DELETE]: deleteNodeFromTree,
   [UPDATE_TYPE.UPDATE]: replaceNodeFromTree,
-  [UPDATE_TYPE.MOVE]: moveNodeFromTree
+  [UPDATE_TYPE.MOVE_AS_SIBLING]: moveNodeFromTree,
+  [UPDATE_TYPE.MOVE_AS_CHILDREN]: moveNodeToChildren
 };
 
 export default class TreeContainer extends React.Component {

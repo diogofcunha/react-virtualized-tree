@@ -39,6 +39,7 @@ export interface TreeProps {
 export default class Tree extends React.Component<TreeProps> {}
 
 export interface RendererProps {
+  measure: () => void;
   onChange: onChange,
   node: FlattenedNode
 }

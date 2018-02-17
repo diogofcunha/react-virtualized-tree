@@ -1,7 +1,34 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Tree measureRowRenderer should render a CellMeasurer 1`] = `
+Object {
+  "cache": CellMeasurerCache {
+    "_cellHeightCache": Object {},
+    "_cellWidthCache": Object {},
+    "_columnCount": 0,
+    "_columnWidthCache": Object {},
+    "_defaultHeight": 30,
+    "_defaultWidth": 100,
+    "_hasFixedHeight": false,
+    "_hasFixedWidth": true,
+    "_keyMapper": [Function],
+    "_minHeight": 20,
+    "_minWidth": 0,
+    "_rowCount": 0,
+    "_rowHeightCache": Object {},
+    "columnWidth": [Function],
+    "rowHeight": [Function],
+  },
+  "children": [Function],
+  "columnIndex": 0,
+  "parent": Object {},
+  "rowIndex": 0,
+}
+`;
+
 exports[`Tree rowRenderer should render the Node renderer with the correct props 1`] = `
 Object {
+  "measure": [MockFunction],
   "node": Object {
     "children": Array [
       Object {

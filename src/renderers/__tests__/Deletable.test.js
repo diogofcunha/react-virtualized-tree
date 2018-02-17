@@ -20,7 +20,8 @@ describe('renderers Deletable', () => {
       },
       iconsClassNameMap: {
         delete: 'delete'
-      }    
+      },
+      measure: jest.fn()
     }
 
     const props = { ...baseProps, ...extraProps };

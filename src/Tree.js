@@ -1,21 +1,42 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { AutoSizer, List } from 'react-virtualized';
+import { AutoSizer, List, CellMeasurerCache, CellMeasurer } from 'react-virtualized';
 
 import { FlattenedNode } from './shapes/nodeShapes';
 
 export default class Tree extends React.Component {
-  rowRenderer =  (nodes) => ({ key, index, style}) => {
-    const { children: NodeRenderer } = this.props;
-    const node = nodes[index];
+  _cache = new CellMeasurerCache({
+    fixedWidth: true,
+    minHeight: 20,
+  })
+
+  rowRenderer = ({ node, key, measure, style, NodeRenderer }) => {
     return (
       <div
         key={key}
         className="tree-node"
         style={{ ...style, marginLeft: node.deepness * 30}}
       >
-        <NodeRenderer node={node} onChange={this.props.onChange}/>
+        <NodeRenderer node={node} onChange={this.props.onChange} measure={measure}/>
       </div>
+    );
+  }
+
+  measureRowRenderer =  (nodes) => ({ key, index, style, parent }) => {
+    const { children: NodeRenderer } = this.props;
+    const node = nodes[index];
+
+    return (
+      <CellMeasurer
+        cache={this._cache}
+        columnIndex={0}
+        key={key}
+        rowIndex={index}
+        parent={parent}>
+        {
+          m => this.rowRenderer({ ...m, node, key, style, NodeRenderer })
+        }
+      </CellMeasurer>
     )
   }
 
@@ -26,11 +47,13 @@ export default class Tree extends React.Component {
       <AutoSizer>
         {({ height, width }) => (
         <List
-            height={height}
-            rowCount={nodes.length}
-            rowHeight={20}
-            rowRenderer={this.rowRenderer(nodes)}
-            width={width}
+          deferredMeasurementCache={this._cache}
+          ref={r => this._list = r}
+          height={height}
+          rowCount={nodes.length}
+          rowHeight={this._cache.rowHeight}
+          rowRenderer={this.measureRowRenderer(nodes)}
+          width={width}
         />
         )}
       </AutoSizer>

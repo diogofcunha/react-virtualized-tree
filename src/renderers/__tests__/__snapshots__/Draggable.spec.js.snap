@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renderers Draggable should throw an error when context is not supplied 1`] = `"You are trying to use Draggable renderer without the container"`;

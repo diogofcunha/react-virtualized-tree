@@ -32,6 +32,7 @@ export interface Extensions {
 export interface TreeProps {
   extensions: Extensions;
   nodes: Node[];
+  draggable: boolean;
   onChange: (nodes: Node[]) => void;
   children: (props: RendererProps) => JSX.Element
 }
@@ -98,16 +99,19 @@ interface NodeRenderOptions {
 
 export enum NODE_CHANGE_OPERATIONS {
   CHANGE_NODE = 'CHANGE_NODE',
-  DELETE_NODE = 'DELETE_NODE'
+  DELETE_NODE = 'DELETE_NODE',
+  ADD_NODE = 'ADD_NODE'
 }
 
 interface Selectors {
-  getNodeRenderOptions: (node: FlattenedNode) => NodeRenderOptions,
-  replaceNodeFromTree: (nodes: Node[], updatedNode: FlattenedNode, operation?: NODE_CHANGE_OPERATIONS) => Node[],
-  deleteNodeFromTree: (nodes: Node[], nodeToDelete: FlattenedNode) => Node[],
-  deleteNode: (node: FlattenedNode[]) => NodeAction,
-  addNode: (node: FlattenedNode[]) => NodeAction,
-  udpateNode: (node: FlattenedNode, state: { [stateKey: string]: any }) => NodeAction
+  getNodeRenderOptions: (node: FlattenedNode) => NodeRenderOptions;
+  replaceNodeFromTree: (nodes: Node[], updatedNode: FlattenedNode, operation?: NODE_CHANGE_OPERATIONS) => Node[];
+  deleteNodeFromTree: (nodes: Node[], nodeToDelete: FlattenedNode) => Node[];
+  deleteNode: (node: FlattenedNode[]) => NodeAction;
+  addNode: (node: FlattenedNode[]) => NodeAction;
+  addNodeToTree: (nodes: Node[], nodeToAdd: FlattenedNode) => Node[];
+  udpateNode: (node: FlattenedNode, state: { [stateKey: string]: any }) => NodeAction;
+  moveNodeFromTree: (nodes: Node[], toAndFrom: FlattenedNode[]) => Node[];
 }
 
 export const selectors: Selectors;

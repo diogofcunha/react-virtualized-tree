@@ -17,15 +17,18 @@ export const getNodeRenderOptions = createSelector(
 );
 
 const FLATTEN_TREE_PROPERTIES = [ 'deepness', 'parents' ];
+const NODE_OPERATION_PROPERTIES = [ 'index' ];
 
 const NODE_OPERATION_TYPES = {
   CHANGE_NODE: 'CHANGE_NODE',
-  DELETE_NODE: 'DELETE_NODE'
+  DELETE_NODE: 'DELETE_NODE',
+  ADD_NODE: 'ADD_NODE'
 }
 
 const NODE_CHANGE_OPERATIONS = {
   CHANGE_NODE: (nodes, updatedNode) => nodes.map(n => n.id === updatedNode.id ? omit(updatedNode, FLATTEN_TREE_PROPERTIES) : n),
-  DELETE_NODE: (nodes, updatedNode) => nodes.filter(n => n.id !== updatedNode.id) 
+  DELETE_NODE: (nodes, updatedNode) => nodes.filter(n => n.id !== updatedNode.id),
+  ADD_NODE: (nodes, nodeToAdd) => [ ...nodes, omit(nodeToAdd, [ ...FLATTEN_TREE_PROPERTIES, ...NODE_OPERATION_PROPERTIES] ) ]
 }
 
 export const replaceNodeFromTree = (nodes, updatedNode, operation = NODE_OPERATION_TYPES.CHANGE_NODE) => {
@@ -40,16 +43,17 @@ export const replaceNodeFromTree = (nodes, updatedNode, operation = NODE_OPERATI
   }
 
   const parentIndex = nodes.findIndex(n => n.id === parents[0])
-  const preSiblings = nodes[parentIndex - 1] || [];
+
+  const preSiblings = nodes.slice(0, parentIndex);
   const postSiblings = nodes.slice(parentIndex + 1);
 
   return [
     ...preSiblings,
     {
       ...nodes[parentIndex], 
-      ...nodes[parentIndex].children ? 
+      ...nodes[parentIndex].children || operation === NODE_OPERATION_TYPES.ADD_NODE ? 
         { children: replaceNodeFromTree(
-            nodes[parentIndex].children,
+            nodes[parentIndex].children || [],
             { ...updatedNode, parents: parents.slice(1) },
             operation
           )
@@ -65,6 +69,28 @@ export const deleteNodeFromTree = (nodes, deletedNode) => {
     deletedNode,
     NODE_OPERATION_TYPES.DELETE_NODE
   );
+}
+
+export const addNodeToTree = (nodes, nodeToAdd) => replaceNodeFromTree(
+  nodes,
+  nodeToAdd,
+  NODE_OPERATION_TYPES.ADD_NODE
+)
+
+export const moveNodeToChildren = (nodes, [ fromNode, toNode ]) => {
+  const { id: targetId, parents: targetParents } = toNode;
+  const parents = [ ...targetParents, ...targetId !== fromNode.id ? [targetId] : []];
+
+  return moveNodeFromTree(nodes, [ fromNode, { ...toNode, parents } ]);
+}
+
+export const moveNodeFromTree = (nodes, [ fromNode, toNode ]) => {
+  const treeWithoutMovedNode = deleteNodeFromTree(
+    nodes,
+    fromNode
+  );
+
+  return addNodeToTree(treeWithoutMovedNode, { ...fromNode, parents: toNode.parents });
 }
 
 export const udpateNode = (originalNode, newState) => ({

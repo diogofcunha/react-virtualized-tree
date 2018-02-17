@@ -40,7 +40,7 @@ export const replaceNodeFromTree = (nodes, updatedNode, operation = NODE_OPERATI
   }
 
   const parentIndex = nodes.findIndex(n => n.id === parents[0])
-  const preSiblings = nodes[parentIndex - 1] || [];
+  const preSiblings = nodes.slice(0, parentIndex);
   const postSiblings = nodes.slice(parentIndex + 1);
 
   return [

@@ -48,7 +48,7 @@ export const constructTree = (maxDeepness, maxNumberOfChildren, minNumOfNodes, d
       name: `Leaf ${id}`,
       children: numberOfChildren ? constructTree(maxDeepness, maxNumberOfChildren, numberOfChildren, deepness + 1) : [],
       state: {
-        expanded: numberOfChildren && Boolean(Math.round(Math.random())),
+        expanded: numberOfChildren ? Boolean(Math.round(Math.random())) : false,
         favorite: Boolean(Math.round(Math.random())),
         deletable: Boolean(Math.round(Math.random()))
       }

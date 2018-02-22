@@ -64,3 +64,7 @@
   font-weight: 700;
   padding: .7em 1em;
 }
+
+.tree {
+  height: inherit;
+}

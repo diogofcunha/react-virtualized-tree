@@ -1,5 +1,175 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`TreeContainer bulkActionButton onChange should apply state to all nodes when filtering container is not on 1`] = `
+Array [
+  Array [
+    Object {
+      "children": Array [
+        Object {
+          "children": Array [
+            Object {
+              "id": 3,
+              "name": "Leaf 3",
+              "state": Object {
+                "deletable": true,
+                "expanded": true,
+                "favorite": true,
+              },
+            },
+            Object {
+              "id": 4,
+              "name": "Leaf 4",
+              "state": undefined,
+            },
+          ],
+          "id": 2,
+          "name": "Leaf 2",
+          "state": Object {
+            "deletable": true,
+            "expanded": true,
+          },
+        },
+        Object {
+          "id": 5,
+          "name": "Leaf 5",
+          "state": undefined,
+        },
+      ],
+      "id": 0,
+      "name": "Leaf 1",
+      "state": Object {
+        "expanded": true,
+      },
+    },
+    Object {
+      "children": Array [
+        Object {
+          "children": Array [
+            Object {
+              "id": 7,
+              "name": "Leaf 8",
+            },
+            Object {
+              "id": 8,
+              "name": "Leaf 9",
+            },
+          ],
+          "id": 6,
+          "name": "Leaf 7",
+          "state": Object {
+            "expanded": false,
+          },
+        },
+        Object {
+          "id": 9,
+          "name": "Leaf 10",
+        },
+      ],
+      "id": 1,
+      "name": "Leaf 6",
+      "state": Object {
+        "deletable": true,
+        "expanded": true,
+      },
+    },
+    Object {
+      "id": "z",
+      "name": "Leaf z",
+      "state": Object {
+        "deletable": true,
+        "expanded": true,
+        "favorite": true,
+      },
+    },
+  ],
+]
+`;
+
+exports[`TreeContainer bulkActionButton onChange should apply state to filtered nodes when container is on 1`] = `
+Array [
+  Array [
+    Object {
+      "children": Array [
+        Object {
+          "children": Array [
+            Object {
+              "id": 3,
+              "name": "Leaf 3",
+              "state": Object {
+                "deletable": true,
+                "expanded": true,
+                "favorite": true,
+              },
+            },
+            Object {
+              "id": 4,
+              "name": "Leaf 4",
+              "state": undefined,
+            },
+          ],
+          "id": 2,
+          "name": "Leaf 2",
+          "state": Object {
+            "deletable": true,
+            "expanded": true,
+          },
+        },
+        Object {
+          "id": 5,
+          "name": "Leaf 5",
+          "state": undefined,
+        },
+      ],
+      "id": 0,
+      "name": "Leaf 1",
+      "state": Object {
+        "expanded": true,
+      },
+    },
+    Object {
+      "children": Array [
+        Object {
+          "children": Array [
+            Object {
+              "id": 7,
+              "name": "Leaf 8",
+            },
+            Object {
+              "id": 8,
+              "name": "Leaf 9",
+            },
+          ],
+          "id": 6,
+          "name": "Leaf 7",
+          "state": Object {
+            "expanded": false,
+          },
+        },
+        Object {
+          "id": 9,
+          "name": "Leaf 10",
+        },
+      ],
+      "id": 1,
+      "name": "Leaf 6",
+      "state": Object {
+        "deletable": true,
+        "expanded": false,
+      },
+    },
+    Object {
+      "id": "z",
+      "name": "Leaf z",
+      "state": Object {
+        "deletable": true,
+        "expanded": true,
+        "favorite": true,
+      },
+    },
+  ],
+]
+`;
+
 exports[`TreeContainer change handle should call injected prop onChange with the correct params when a node is deleted 1`] = `
 Array [
   Array [

@@ -17,6 +17,7 @@ export default class TreeContainer extends React.Component {
     super(props);
 
     this.extensions = props;
+    this._flattenedTree = getFlattenedTree(props.nodes);
   }
 
   static contextTypes = {
@@ -50,6 +51,10 @@ export default class TreeContainer extends React.Component {
     if (nextProps.extensions !== this.props.extensions) {
       this.extensions = nextProps;
     }
+
+    if (nextProps.nodes !== this.props.nodes) {
+      this._flattenedTree = getFlattenedTree(nextProps.nodes);
+    }
   }
 
   handleChange = ({ node, type }) => {
@@ -58,16 +63,30 @@ export default class TreeContainer extends React.Component {
     this.props.onChange(updatedNodes);
   }
 
+  bulkChange = ({ type, setState }) => {
+    const updatedNodes = this._flattenedTree.reduce((updatedNodes, n) => {
+      return this.extensions.updateTypeHandlers[type](updatedNodes, { ...n, state: setState(n.state) })
+    }, this.nodes);
+
+    this.props.onChange(updatedNodes);
+  }
+
   render() {
     return (
-      <Tree nodes={getFlattenedTree(this.props.nodes)} onChange={this.handleChange}> 
-        { this.props.children }
-      </Tree>
+      <div className='tree'>
+        { this.props.renderBulkActionButton && this.props.renderBulkActionButton({ onChange: this.bulkChange }) }
+        <Tree
+          nodes={this._flattenedTree}
+          onChange={this.handleChange}
+          NodeRenderer={this.props.children}
+        />
+      </div>
     );
   }
 };
 
 TreeContainer.propTypes = {
+  renderBulkActionButton: PropTypes.func,
   extensions: PropTypes.shape({
     updateTypeHandlers: PropTypes.object
   }),

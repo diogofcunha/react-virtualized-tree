@@ -9,10 +9,13 @@ import { UPDATE_TYPE } from '../contants';
 import { replaceNodeFromTree, udpateNode } from '../selectors/nodes';
 
 describe('TreeContainer', () => {
+  const BulkButton = ({ onChange }) => <button onChange={onChange}>B</button>;
+
   const setup = (children = () => <span></span>, extraProps = {}, context = {}) => {
     const defaultProps = {
       nodes: Nodes,
-      onChange: jest.fn()
+      onChange: jest.fn(),
+      renderBulkActionButton: ({ onChange }) => <BulkButton onChange={onChange} />
     };
 
     const props = { ...defaultProps, ...extraProps };
@@ -128,6 +131,40 @@ describe('TreeContainer', () => {
         });
   
         treeWrapper.simulate('change', { node: getSampleNode(), type: UPDATE_TYPE.UPDATE });
+  
+        expect(
+          props.onChange.mock.calls[0]
+        ).toMatchSnapshot();
+      });
+    });
+  });
+
+  describe('bulkActionButton', () => {
+    describe('onChange', () => {
+      it('should apply state to all nodes when filtering container is not on', () => {
+        const { wrapper, props } = setup();
+
+        wrapper.find(BulkButton).simulate('change', {
+          type: UPDATE_TYPE.UPDATE,
+          setState: s => s ? ({ ...s, expanded: true }) : s
+        });
+  
+        expect(
+          props.onChange.mock.calls[0]
+        ).toMatchSnapshot();
+      });
+
+      it('should apply state to filtered nodes when container is on', () => {
+        const { wrapper, props } = setup(
+          jest.fn(),
+          { nodes: Nodes.filter((n, i) => i % 2 === 0) },
+          { unfilteredNodes: Nodes }
+        );
+  
+        wrapper.find(BulkButton).simulate('change', {
+          type: UPDATE_TYPE.UPDATE,
+          setState: s => s ? ({ ...s, expanded: true }) : s
+        });
   
         expect(
           props.onChange.mock.calls[0]

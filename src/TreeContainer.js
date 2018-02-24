@@ -74,7 +74,12 @@ export default class TreeContainer extends React.Component {
   render() {
     return (
       <div className='tree'>
-        { this.props.renderBulkActionButton && this.props.renderBulkActionButton({ onChange: this.bulkChange }) }
+        { this.props.renderBulkActionButton &&
+            this.props.renderBulkActionButton({
+              onChange: this.bulkChange,
+              nodes: this.props.nodes 
+            }) 
+        }
         <Tree
           nodes={this._flattenedTree}
           onChange={this.handleChange}

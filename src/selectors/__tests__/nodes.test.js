@@ -86,9 +86,10 @@ describe('selectors -> nodes ->', () => {
   });
 
   describe('getTreeState', () => {
-    const getTree = stateToAssign => getFlattenedTree(Nodes)
+    const getTree = (stateToAssign, nodes) => nodes
       .map(t => ({ 
         ...t,
+        children: t.children ? getTree(stateToAssign, t.children) : [],
         state: {
           ...t.state || {},
           ...stateToAssign
@@ -99,7 +100,7 @@ describe('selectors -> nodes ->', () => {
     const getStateKeys = () => [ 'expanded', 'deletable', 'favorite' ];
 
     it('should return the correct result when all nodes are true for a state key', () => {
-      const allExpandedTree = getTree({ expanded: true });
+      const allExpandedTree = getTree({ expanded: true }, Nodes);
       
       expect(
         nodeSelectors.getTreeState(allExpandedTree, getStateKeys())
@@ -111,13 +112,28 @@ describe('selectors -> nodes ->', () => {
     });
 
     it('should return the correct result when all nodes are false for a state key', () => {
-      const undetableTree = getTree({ deletable: false });
+      const undetableTree = getTree({ deletable: false }, Nodes);
 
       expect(
         nodeSelectors.getTreeState(undetableTree, getStateKeys())
       ).toEqual({
         expanded: COLLECTION_MATCH.Some,
         deletable: COLLECTION_MATCH.None,
+        favorite: COLLECTION_MATCH.Some
+      });
+    });
+
+    it('should return the correct result when all parent nodes are true for a state key, but some children are false', () => {
+      const favoriteTree = getTree({ favorite: false }, Nodes);
+
+      expect(
+        nodeSelectors.getTreeState(
+          favoriteTree.map(n => ({ ...n, state: { ...n.state, favorite: true } })),
+          getStateKeys()
+        )
+      ).toEqual({
+        expanded: COLLECTION_MATCH.Some,
+        deletable: COLLECTION_MATCH.Some,
         favorite: COLLECTION_MATCH.Some
       });
     });

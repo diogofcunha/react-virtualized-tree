@@ -405,6 +405,88 @@ Array [
 ]
 `;
 
+exports[`TreeContainer extensions should allow overrides after first render 1`] = `
+Array [
+  Array [
+    Object {
+      "children": Array [
+        Object {
+          "children": Array [
+            Object {
+              "id": 3,
+              "name": "Leaf 3",
+              "state": Object {
+                "deletable": true,
+                "favorite": true,
+              },
+              "updated": true,
+            },
+            Object {
+              "id": 4,
+              "name": "Leaf 4",
+            },
+          ],
+          "id": 2,
+          "name": "Leaf 2",
+          "state": Object {
+            "deletable": true,
+            "expanded": true,
+          },
+        },
+        Object {
+          "id": 5,
+          "name": "Leaf 5",
+        },
+      ],
+      "id": 0,
+      "name": "Leaf 1",
+      "state": Object {
+        "expanded": true,
+      },
+    },
+    Object {
+      "children": Array [
+        Object {
+          "children": Array [
+            Object {
+              "id": 7,
+              "name": "Leaf 8",
+            },
+            Object {
+              "id": 8,
+              "name": "Leaf 9",
+            },
+          ],
+          "id": 6,
+          "name": "Leaf 7",
+          "state": Object {
+            "expanded": false,
+          },
+        },
+        Object {
+          "id": 9,
+          "name": "Leaf 10",
+        },
+      ],
+      "id": 1,
+      "name": "Leaf 6",
+      "state": Object {
+        "deletable": true,
+        "expanded": false,
+      },
+    },
+    Object {
+      "id": "z",
+      "name": "Leaf z",
+      "state": Object {
+        "deletable": true,
+        "favorite": true,
+      },
+    },
+  ],
+]
+`;
+
 exports[`TreeContainer extensions updateTypeHandlers should call injected prop onChange with the correct params for custom handlers 1`] = `
 Array [
   Array [
@@ -727,6 +809,92 @@ Array [
     "parents": Array [],
     "state": Object {
       "deletable": true,
+      "favorite": true,
+    },
+  },
+]
+`;
+
+exports[`TreeContainer should render a Tree with children and the correct props after mount 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [
+          Object {
+            "id": 3,
+            "name": "Leaf 3",
+            "state": Object {
+              "deletable": true,
+              "favorite": true,
+            },
+          },
+          Object {
+            "id": 4,
+            "name": "Leaf 4",
+          },
+        ],
+        "id": 2,
+        "name": "Leaf 2",
+        "state": Object {
+          "deletable": true,
+          "expanded": true,
+        },
+      },
+      Object {
+        "id": 5,
+        "name": "Leaf 5",
+      },
+    ],
+    "deepness": 0,
+    "id": 0,
+    "name": "Leaf 1",
+    "parents": Array [],
+    "state": Object {
+      "expanded": false,
+    },
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [
+          Object {
+            "id": 7,
+            "name": "Leaf 8",
+          },
+          Object {
+            "id": 8,
+            "name": "Leaf 9",
+          },
+        ],
+        "id": 6,
+        "name": "Leaf 7",
+        "state": Object {
+          "expanded": false,
+        },
+      },
+      Object {
+        "id": 9,
+        "name": "Leaf 10",
+      },
+    ],
+    "deepness": 0,
+    "id": 1,
+    "name": "Leaf 6",
+    "parents": Array [],
+    "state": Object {
+      "deletable": true,
+      "expanded": false,
+    },
+  },
+  Object {
+    "deepness": 0,
+    "id": "z",
+    "name": "Leaf z",
+    "parents": Array [],
+    "state": Object {
+      "deletable": true,
+      "expanded": false,
       "favorite": true,
     },
   },

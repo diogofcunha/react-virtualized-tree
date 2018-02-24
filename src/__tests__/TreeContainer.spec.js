@@ -42,6 +42,25 @@ describe('TreeContainer', () => {
     expect(nodes).toMatchSnapshot();
   });
 
+  it('should render a Tree with children and the correct props after mount', () => {
+    const exampleChild = jest.fn();
+    const { wrapper } = setup(exampleChild);
+
+    const nodes = Nodes.map(n => ({
+      ...n,
+      state: {
+        ...n.state || {},
+        expanded: false
+      }
+    }));
+
+    wrapper.setProps({ nodes });
+  
+    const { nodes: treeNodes } = wrapper.find(Tree).props();
+
+    expect(treeNodes).toMatchSnapshot();
+  });
+
   describe('change handle', () => {
     const getSampleNode = () => getFlattenedTree(Nodes)[2]
 
@@ -88,6 +107,11 @@ describe('TreeContainer', () => {
   describe('extensions', () => {
     const getSampleNode = () => getFlattenedTree(Nodes)[2];
 
+    const updateAndFlag = (nodes, updatedNode) => replaceNodeFromTree(
+      nodes,
+      { ...updatedNode, updated: true }
+    );
+
     describe('updateTypeHandlers', () => {
       it('should call injected prop onChange with the correct params for custom handlers', () => {
         const EXPAND_ALL = 3;
@@ -117,11 +141,6 @@ describe('TreeContainer', () => {
       });
 
       it('should call injected prop onChange with the correct params for handler overrides', () => {
-        const updateAndFlag = (nodes, updatedNode) => replaceNodeFromTree(
-          nodes,
-          { ...updatedNode, updated: true }
-        );
-
         const { treeWrapper, props } = setup(() => <span></span>, { 
           extensions: {
             updateTypeHandlers: {
@@ -136,6 +155,24 @@ describe('TreeContainer', () => {
           props.onChange.mock.calls[0]
         ).toMatchSnapshot();
       });
+    });
+
+    it('should allow overrides after first render', () => {
+      const { wrapper, props } = setup();
+
+      wrapper.setProps({
+        extensions: {
+          updateTypeHandlers: {
+            [UPDATE_TYPE.UPDATE]: updateAndFlag
+          }
+        }
+      });
+
+      wrapper.find(Tree).simulate('change', { node: getSampleNode(), type: UPDATE_TYPE.UPDATE });
+
+      expect(
+        props.onChange.mock.calls[0]
+      ).toMatchSnapshot();
     });
   });
 

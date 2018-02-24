@@ -7,6 +7,8 @@ import Renderers from '../../../src/renderers';
 import { createEntry, constructTree } from '../toolbelt';
 import FilteringContainer from '../../../src/FilteringContainer';
 import Favorite from '../../../src/renderers/Favorite';
+import BulkAction from '../../../src/renderers/BulkAction';
+import { UPDATE_TYPE } from '../../../src/contants';
 
 const { Expandable } = Renderers;
 
@@ -18,11 +20,13 @@ const Nodes = constructTree(MAX_DEEPNESS, MAX_NUMBER_OF_CHILDREN, MIN_NUMBER_OF_
 
 const EXPANDED = 'EXPANDED';
 
+
 class Filterable extends Component {
   state = {
     nodes: Nodes,
     selectedGroup: EXPANDED,
-    groupsEnabled: true
+    groupsEnabled: true,
+    bulkButtonEnabled: false,
   }
 
   get _groupProps() {
@@ -59,6 +63,10 @@ class Filterable extends Component {
     this.setState({ groupsEnabled: !this.state.groupsEnabled })
   }
 
+  handleBulkButtonToggle = () => {
+    this.setState({ bulkButtonEnabled: !this.state.bulkButtonEnabled })
+  }
+
   render() {
     return (
       <div>
@@ -69,6 +77,13 @@ class Filterable extends Component {
           onChange={this.handleGroupsToogle}
           style={{ marginBottom: 15 }}
         />
+        <Checkbox
+          toggle
+          label="Use bulk action"
+          checked={this.state.bulkButtonEnabled}
+          onChange={this.handleBulkButtonToggle}
+          style={{ marginBottom: 15, marginLeft: 15 }}
+        />
         <FilteringContainer
           nodes={this.state.nodes}
           {...this._groupProps}
@@ -77,6 +92,7 @@ class Filterable extends Component {
             ({ nodes }) => <div style={{ height: 500 }}>
               <Tree
                 nodes={nodes}
+                renderBulkActionButton={this.state.bulkButtonEnabled ? p => <BulkAction {...p}/> : undefined}
                 onChange={this.handleChange}
               >
               {

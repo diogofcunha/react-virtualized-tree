@@ -3,6 +3,7 @@ import deepFreeze from 'deep-freeze';
 import * as nodeSelectors from '../nodes';
 import { Nodes } from '../../../testData/sampleTree';
 import { getFlattenedTree } from '../getFlattenedTree';
+import { COLLECTION_MATCH } from '../../contants';
 
 describe('selectors -> nodes ->', () => {
   const getSampleNode = (i = 0) => getFlattenedTree(Nodes)[i];
@@ -81,6 +82,44 @@ describe('selectors -> nodes ->', () => {
       expect(
         nodeSelectors.getNodeRenderOptions({ children: [{}] })
       ).toMatchSnapshot();
+    });
+  });
+
+  describe('getTreeState', () => {
+    const getTree = stateToAssign => getFlattenedTree(Nodes)
+      .map(t => ({ 
+        ...t,
+        state: {
+          ...t.state || {},
+          ...stateToAssign
+        }
+      })
+    );
+
+    const getStateKeys = () => [ 'expanded', 'deletable', 'favorite' ];
+
+    it('should return the correct result when all nodes are true for a state key', () => {
+      const allExpandedTree = getTree({ expanded: true });
+      
+      expect(
+        nodeSelectors.getTreeState(allExpandedTree, getStateKeys())
+      ).toEqual({
+        expanded: COLLECTION_MATCH.All,
+        deletable: COLLECTION_MATCH.Some,
+        favorite: COLLECTION_MATCH.Some
+      });
+    });
+
+    it('should return the correct result when all nodes are false for a state key', () => {
+      const undetableTree = getTree({ deletable: false });
+
+      expect(
+        nodeSelectors.getTreeState(undetableTree, getStateKeys())
+      ).toEqual({
+        expanded: COLLECTION_MATCH.Some,
+        deletable: COLLECTION_MATCH.None,
+        favorite: COLLECTION_MATCH.Some
+      });
     });
   });
 });

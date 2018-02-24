@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 import { omit } from 'lodash';
 
-import { UPDATE_TYPE } from '../contants';
+import { UPDATE_TYPE, COLLECTION_MATCH } from '../contants';
 
 export const getNodeRenderOptions = createSelector(
   (node => (node.state || {}).expanded),
@@ -87,3 +87,28 @@ export const addNode = node => ({
   node,
   type: UPDATE_TYPE.ADD
 });
+
+const getStateKeyValue = (stateKeyValue, collectionKeyValue = 'undef') => {
+  const decisionMap = {
+    undef: stateKeyValue ? COLLECTION_MATCH.All : COLLECTION_MATCH.None,
+    [COLLECTION_MATCH.Some]: COLLECTION_MATCH.Some,
+    [COLLECTION_MATCH.All]: stateKeyValue ? COLLECTION_MATCH.All : COLLECTION_MATCH.Some,
+    [COLLECTION_MATCH.None]: stateKeyValue ? COLLECTION_MATCH.Some : COLLECTION_MATCH.None
+  }
+
+  return decisionMap[collectionKeyValue];
+}
+
+
+const mergeStateWithCollectionResults = (collectionResult, stateKeys, state = {}) => ({
+  ...collectionResult,
+  ...stateKeys.reduce((v, k) => ({
+    ...v,
+    [k]: getStateKeyValue(state[k], collectionResult[k]) 
+  }), {})
+});
+
+export const getTreeState = (nodes, stateKeys) => nodes.reduce((acc, n) => ({
+  ...acc,
+  ...mergeStateWithCollectionResults(acc, stateKeys, n.state)
+}), {});

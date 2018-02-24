@@ -24,11 +24,21 @@ describe('FilteringContainer', () => {
       child,
       props
     }
-  }
+  };
+
+  it('should create context with the injected nodes', () => {
+    const { wrapper, props } = setup();
+
+    expect(
+      wrapper.instance().getChildContext()
+    ).toEqual({
+      unfilteredNodes: props.nodes
+    })
+  });
 
   describe('filtering', () => {
     it('should not filter when searchTerm is empty', () => {
-      const { wrapper , changeFilter, props, getInjectedNodes } = setup();
+      const { wrapper, changeFilter, props, getInjectedNodes } = setup();
 
       changeFilter('');
 

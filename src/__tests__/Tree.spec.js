@@ -16,8 +16,10 @@ describe('Tree', () => {
   const nodes = getFlattenedTree(Nodes);
 
   const setup = () => shallow(
-    <Tree nodes={nodes} onChange={jest.fn()}>
-      {
+    <Tree
+      nodes={nodes}
+      onChange={jest.fn()}
+      NodeRenderer={
         ({ node, ...rest }) =>
           <SampleRenderer
             node={node}
@@ -25,7 +27,7 @@ describe('Tree', () => {
             { node.name }
           </SampleRenderer>
       }
-    </Tree>
+    />
   );
 
   it('should render a Tree with children and the correct props', () => {    

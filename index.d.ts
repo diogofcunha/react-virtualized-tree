@@ -85,7 +85,8 @@ export enum UPDATE_TYPE {
 }
 
 interface Constants {
-  UPDATE_TYPE: UPDATE_TYPE
+  UPDATE_TYPE: UPDATE_TYPE,
+  COLLECTION_MATCH: COLLECTION_MATCH
 }
 
 export const constants: Constants
@@ -102,13 +103,20 @@ export enum NODE_CHANGE_OPERATIONS {
   DELETE_NODE = 'DELETE_NODE'
 }
 
+enum COLLECTION_MATCH {
+  All = 0,
+  Some = 1,
+  None = 2
+}
+
 interface Selectors {
-  getNodeRenderOptions: (node: FlattenedNode) => NodeRenderOptions,
-  replaceNodeFromTree: (nodes: Node[], updatedNode: FlattenedNode, operation?: NODE_CHANGE_OPERATIONS) => Node[],
-  deleteNodeFromTree: (nodes: Node[], nodeToDelete: FlattenedNode) => Node[],
-  deleteNode: (node: FlattenedNode[]) => NodeAction,
-  addNode: (node: FlattenedNode[]) => NodeAction,
-  udpateNode: (node: FlattenedNode, state: { [stateKey: string]: any }) => NodeAction
+  getNodeRenderOptions: (node: FlattenedNode) => NodeRenderOptions;
+  replaceNodeFromTree: (nodes: Node[], updatedNode: FlattenedNode, operation?: NODE_CHANGE_OPERATIONS) => Node[];
+  deleteNodeFromTree: (nodes: Node[], nodeToDelete: FlattenedNode) => Node[];
+  deleteNode: (node: FlattenedNode[]) => NodeAction;
+  addNode: (node: FlattenedNode[]) => NodeAction;
+  udpateNode: (node: FlattenedNode, state: { [stateKey: string]: any }) => NodeAction;
+  getTreeState: (nodes: FlattenedNode[], stateKeys: string[]) => { [stateKey: string]: COLLECTION_MATCH }
 }
 
 export const selectors: Selectors;

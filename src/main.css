@@ -64,3 +64,18 @@
   font-weight: 700;
   padding: .7em 1em;
 }
+
+.tree {
+  height: inherit;
+}
+
+.bulk-action {
+  font-size: 1.4em;
+  padding: 5px;
+  margin-bottom: 5px;
+  border-bottom: 1px dashed rgba(128, 128, 128, .7);
+}
+
+.bulk-action-icon-group {
+  float: right;
+}

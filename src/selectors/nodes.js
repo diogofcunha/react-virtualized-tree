@@ -7,7 +7,7 @@ export const getNodeRenderOptions = createSelector(
   (node => (node.state || {}).expanded),
   (node => (node.state || {}).favorite),
   (node => (node.state || {}).deletable),
-  (node => node.children), 
+  (node => node.children),
   (expanded, favorite, deletable, children = []) => ({
     hasChildren: !!children.length,
     isExpanded: !!expanded,
@@ -25,14 +25,14 @@ const NODE_OPERATION_TYPES = {
 
 const NODE_CHANGE_OPERATIONS = {
   CHANGE_NODE: (nodes, updatedNode) => nodes.map(n => n.id === updatedNode.id ? omit(updatedNode, FLATTEN_TREE_PROPERTIES) : n),
-  DELETE_NODE: (nodes, updatedNode) => nodes.filter(n => n.id !== updatedNode.id) 
+  DELETE_NODE: (nodes, updatedNode) => nodes.filter(n => n.id !== updatedNode.id)
 }
 
 export const replaceNodeFromTree = (nodes, updatedNode, operation = NODE_OPERATION_TYPES.CHANGE_NODE) => {
   if (!NODE_CHANGE_OPERATIONS[operation]) {
     return nodes;
   }
-  
+
   const { parents } = updatedNode;
 
   if (!parents.length) {
@@ -46,8 +46,8 @@ export const replaceNodeFromTree = (nodes, updatedNode, operation = NODE_OPERATI
   return [
     ...preSiblings,
     {
-      ...nodes[parentIndex], 
-      ...nodes[parentIndex].children ? 
+      ...nodes[parentIndex],
+      ...nodes[parentIndex].children ?
         { children: replaceNodeFromTree(
             nodes[parentIndex].children,
             { ...updatedNode, parents: parents.slice(1) },
@@ -67,7 +67,7 @@ export const deleteNodeFromTree = (nodes, deletedNode) => {
   );
 }
 
-export const udpateNode = (originalNode, newState) => ({
+export const updateNode = (originalNode, newState) => ({
   node: {
     ...originalNode,
     state : {

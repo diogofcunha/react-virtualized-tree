@@ -6,7 +6,7 @@ import Tree from '../Tree';
 import { Nodes } from '../../testData/sampleTree';
 import { getFlattenedTree } from '../selectors/getFlattenedTree';
 import { UPDATE_TYPE } from '../contants';
-import { replaceNodeFromTree, udpateNode } from '../selectors/nodes';
+import { replaceNodeFromTree, updateNode } from '../selectors/nodes';
 
 describe('TreeContainer', () => {
   const setup = (children = () => <span></span>, extraProps = {}, context = {}) => {
@@ -56,7 +56,7 @@ describe('TreeContainer', () => {
 
       treeWrapper.simulate('change', {
         node: { ...getSampleNode(), state: { favorite: false, deletable: false } },
-        type: UPDATE_TYPE.UPDATE 
+        type: UPDATE_TYPE.UPDATE
       });
 
       expect(
@@ -73,7 +73,7 @@ describe('TreeContainer', () => {
 
       treeWrapper.simulate('change', {
         node: { ...getSampleNode(), state: { favorite: false, deletable: false } },
-        type: UPDATE_TYPE.UPDATE 
+        type: UPDATE_TYPE.UPDATE
       });
 
       expect(
@@ -98,16 +98,16 @@ describe('TreeContainer', () => {
           children: node.children ? expandAll(node.children) : []
         }));
 
-        const { treeWrapper, props } = setup(() => <span></span>, { 
+        const { treeWrapper, props } = setup(() => <span></span>, {
           extensions: {
             updateTypeHandlers: {
               [EXPAND_ALL]: expandAll
             }
           }
         });
-  
+
         treeWrapper.simulate('change', { node: getSampleNode(), type: EXPAND_ALL });
-  
+
         expect(
           props.onChange.mock.calls[0]
         ).toMatchSnapshot();
@@ -119,16 +119,16 @@ describe('TreeContainer', () => {
           { ...updatedNode, updated: true }
         );
 
-        const { treeWrapper, props } = setup(() => <span></span>, { 
+        const { treeWrapper, props } = setup(() => <span></span>, {
           extensions: {
             updateTypeHandlers: {
               [UPDATE_TYPE.UPDATE]: updateAndFlag
             }
           }
         });
-  
+
         treeWrapper.simulate('change', { node: getSampleNode(), type: UPDATE_TYPE.UPDATE });
-  
+
         expect(
           props.onChange.mock.calls[0]
         ).toMatchSnapshot();

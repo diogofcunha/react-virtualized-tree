@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import Expandable from '../Expandable';
 import { KEY_CODES } from '../../eventWrappers';
-import { udpateNode } from '../../selectors/nodes';
+import { updateNode } from '../../selectors/nodes';
 
 describe('renderers Expandable', () => {
   const findExpandIcon = wrapper => wrapper.find('i');
@@ -16,7 +16,7 @@ describe('renderers Expandable', () => {
         name: 'Node 1',
         state,
         deepness: 0,
-        children: [{}]        
+        children: [{}]
       },
       iconsClassNameMap: {
         expanded: 'expanded',
@@ -41,12 +41,12 @@ describe('renderers Expandable', () => {
 
       it('clicking should call onChange with the correct params', () => {
         const { expandIconWrapper, props } = setup({ expanded: true });
-        
+
         expandIconWrapper.simulate('click');
 
         expect(props.onChange).toHaveBeenCalledWith(
-          udpateNode(
-            props.node, 
+          updateNode(
+            props.node,
             { expanded: false }
           )
         );
@@ -54,12 +54,12 @@ describe('renderers Expandable', () => {
 
       it('pressing enter should call onChange with the correct params', () => {
         const { expandIconWrapper, props } = setup({ expanded: true });
-        
+
         expandIconWrapper.simulate('keyDown', { keyCode: KEY_CODES.Enter });
 
         expect(props.onChange).toHaveBeenCalledWith(
-          udpateNode(
-            props.node, 
+          updateNode(
+            props.node,
             { expanded: false }
           )
         )
@@ -67,12 +67,12 @@ describe('renderers Expandable', () => {
 
       it('double clicking in the parent node should call onChange with the correct params', () => {
         const { props, wrapper } = setup({ expanded: true });
-        
+
         wrapper.first().simulate('doubleClick');
 
         expect(props.onChange).toHaveBeenCalledWith(
-          udpateNode(
-            props.node, 
+          updateNode(
+            props.node,
             { expanded: false }
           )
         );
@@ -82,18 +82,18 @@ describe('renderers Expandable', () => {
     describe('when collapsed', () => {
       it('should render a with the supplied className when expanded', () => {
         const { expandIconWrapper, props } = setup({ expanded: false });
-        
+
         expect(expandIconWrapper.hasClass(props.iconsClassNameMap.collapsed)).toBeTruthy();
       })
 
       it('clicking should call onChange with the correct params', () => {
         const { expandIconWrapper, props } = setup({ expanded: false });
-        
+
         expandIconWrapper.simulate('click');
 
         expect(props.onChange).toHaveBeenCalledWith(
-          udpateNode(
-            props.node, 
+          updateNode(
+            props.node,
             { expanded: true }
           )
         )
@@ -101,12 +101,12 @@ describe('renderers Expandable', () => {
 
       it('pressing enter should call onChange with the correct params', () => {
         const { expandIconWrapper, props } = setup({ expanded: false });
-        
+
         expandIconWrapper.simulate('keyDown', { keyCode: KEY_CODES.Enter });
 
         expect(props.onChange).toHaveBeenCalledWith(
-          udpateNode(
-            props.node, 
+          updateNode(
+            props.node,
             { expanded: true }
           )
         )
@@ -114,12 +114,12 @@ describe('renderers Expandable', () => {
 
       it('double clicking in the parent node should call onChange with the correct params', () => {
         const { props, wrapper } = setup({ expanded: false });
-        
+
         wrapper.first().simulate('doubleClick');
 
         expect(props.onChange).toHaveBeenCalledWith(
-          udpateNode(
-            props.node, 
+          updateNode(
+            props.node,
             { expanded: true }
           )
         );

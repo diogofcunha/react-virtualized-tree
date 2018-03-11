@@ -108,7 +108,7 @@ interface Selectors {
   deleteNodeFromTree: (nodes: Node[], nodeToDelete: FlattenedNode) => Node[],
   deleteNode: (node: FlattenedNode[]) => NodeAction,
   addNode: (node: FlattenedNode[]) => NodeAction,
-  udpateNode: (node: FlattenedNode, state: { [stateKey: string]: any }) => NodeAction
+  updateNode: (node: FlattenedNode, state: { [stateKey: string]: any }) => NodeAction
 }
 
 export const selectors: Selectors;

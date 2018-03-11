@@ -3,26 +3,26 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
 import { submitEvent } from '../eventWrappers';
-import { getNodeRenderOptions, udpateNode } from '../selectors/nodes';
+import { getNodeRenderOptions, updateNode } from '../selectors/nodes';
 import { Renderer } from '../shapes/rendererShapes';
 
 const Favorite = ({
   onChange,
   node,
-  iconsClassNameMap = { 
+  iconsClassNameMap = {
     favorite: 'mi mi-star',
     notFavorite: 'mi mi-star-border'
   },
   children }) => {
-  const { isFavorite } = getNodeRenderOptions(node); 
+  const { isFavorite } = getNodeRenderOptions(node);
 
   const className = classNames({
     [iconsClassNameMap.favorite]: isFavorite,
     [iconsClassNameMap.notFavorite]: !isFavorite,
   });
 
-  const handleChange = () => onChange(udpateNode(node, { favorite: !isFavorite }));
-  
+  const handleChange = () => onChange(updateNode(node, { favorite: !isFavorite }));
+
   return (
     <span>
       <i

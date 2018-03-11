@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import Favorite from '../Favorite';
 import { KEY_CODES } from '../../eventWrappers';
-import { udpateNode } from '../../selectors/nodes';
+import { updateNode } from '../../selectors/nodes';
 
 describe('renderers Favorite', () => {
   const findFavoriteIcon = wrapper => wrapper.find('i');
@@ -16,7 +16,7 @@ describe('renderers Favorite', () => {
         name: 'Node 1',
         state,
         deepness: 0,
-        children: [{}]        
+        children: [{}]
       },
       iconsClassNameMap: {
         favorite: 'fav',
@@ -33,7 +33,7 @@ describe('renderers Favorite', () => {
 
   describe('when favorite', () => {
     const setupFavorite = (extraProps = {}) => setup({ favorite: true }, extraProps);
-    
+
     it('should render a with the supplied className', () => {
       const { favoriteIconWrapper, props } = setupFavorite();
 
@@ -42,12 +42,12 @@ describe('renderers Favorite', () => {
 
     it('clicking should call onChange with the correct params', () => {
       const { favoriteIconWrapper, props } = setupFavorite();
-      
+
       favoriteIconWrapper.simulate('click');
 
       expect(props.onChange).toHaveBeenCalledWith(
-        udpateNode(
-          props.node, 
+        updateNode(
+          props.node,
           { favorite: false }
         )
       );
@@ -55,12 +55,12 @@ describe('renderers Favorite', () => {
 
     it('pressing enter should call onChange with the correct params', () => {
       const { favoriteIconWrapper, props } = setupFavorite();
-      
+
       favoriteIconWrapper.simulate('keyDown', { keyCode: KEY_CODES.Enter });
 
       expect(props.onChange).toHaveBeenCalledWith(
-        udpateNode(
-          props.node, 
+        updateNode(
+          props.node,
           { favorite: false }
         )
       )
@@ -69,21 +69,21 @@ describe('renderers Favorite', () => {
 
   describe('when not favorite', () => {
     const setupNotFavorite = (extraProps = {}) => setup({ favorite: false }, extraProps);
-    
+
     it('should render a with the supplied className', () => {
       const { favoriteIconWrapper, props } = setupNotFavorite();
-      
+
       expect(favoriteIconWrapper.hasClass(props.iconsClassNameMap.notFavorite)).toBeTruthy();
     })
 
     it('clicking should call onChange with the correct params', () => {
       const { favoriteIconWrapper, props } = setupNotFavorite();
-      
+
       favoriteIconWrapper.simulate('click');
 
       expect(props.onChange).toHaveBeenCalledWith(
-        udpateNode(
-          props.node, 
+        updateNode(
+          props.node,
           { favorite: true }
         )
       )
@@ -91,12 +91,12 @@ describe('renderers Favorite', () => {
 
     it('pressing enter should call onChange with the correct params', () => {
       const { favoriteIconWrapper, props } = setupNotFavorite();
-      
+
       favoriteIconWrapper.simulate('keyDown', { keyCode: KEY_CODES.Enter });
 
       expect(props.onChange).toHaveBeenCalledWith(
-        udpateNode(
-          props.node, 
+        updateNode(
+          props.node,
           { favorite: true }
         )
       )

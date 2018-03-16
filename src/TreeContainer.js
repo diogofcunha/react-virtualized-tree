@@ -60,7 +60,7 @@ export default class TreeContainer extends React.Component {
 
   render() {
     return (
-      <Tree leftMarginAmount={this.props.leftMarginAmount} nodes={getFlattenedTree(this.props.nodes)} onChange={this.handleChange}>
+      <Tree leftMarginAmount={this.props.nodeMarginLeft} nodes={getFlattenedTree(this.props.nodes)} onChange={this.handleChange}>
         { this.props.children }
       </Tree>
     );
@@ -74,9 +74,9 @@ TreeContainer.propTypes = {
   nodes: PropTypes.arrayOf(PropTypes.shape(Node)).isRequired,
   onChange: PropTypes.func,
   children: PropTypes.func.isRequired,
-  leftMarginAmount: PropTypes.number
+  nodeMarginLeft: PropTypes.number
 };
 
 TreeContainer.defaultProps = {
-  leftMarginAmount: 30
+  nodeMarginLeft: 30
 };

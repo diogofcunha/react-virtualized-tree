@@ -34,7 +34,7 @@ export interface TreeProps {
   nodes: Node[];
   onChange: (nodes: Node[]) => void;
   children: (props: RendererProps) => JSX.Element
-  leftMarginAmount: number;
+  nodeMarginLeft: number;
 }
 
 export default class Tree extends React.Component<TreeProps> {}

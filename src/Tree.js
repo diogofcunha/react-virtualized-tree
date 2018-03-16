@@ -11,7 +11,7 @@ export default class Tree extends React.Component {
   })
 
   rowRenderer = ({ node, key, measure, style, NodeRenderer }) => {
-    cost {leftMarginAmount} = this.props;
+    const {leftMarginAmount} = this.props;
 
     return (
       <div

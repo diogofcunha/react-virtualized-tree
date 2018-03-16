@@ -76,3 +76,7 @@ TreeContainer.propTypes = {
   children: PropTypes.func.isRequired,
   leftMarginAmount: PropTypes.number
 };
+
+TreeContainer.defaultProps = {
+  leftMarginAmount: 30
+};

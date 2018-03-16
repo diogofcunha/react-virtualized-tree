@@ -69,7 +69,3 @@ Tree.propTypes = {
   onChange: PropTypes.func.isRequired,
   leftMarginAmount: PropTypes.number,
 };
-
-Tree.defaultProps = {
-  leftMarginAmount: 30
-};

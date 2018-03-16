@@ -71,5 +71,5 @@ Tree.propTypes = {
 };
 
 Tree.defaultProps = {
-  leftMarginAmount: PropTypes.number
+  leftMarginAmount: 30
 };

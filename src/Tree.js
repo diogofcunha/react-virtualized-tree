@@ -11,11 +11,13 @@ export default class Tree extends React.Component {
   })
 
   rowRenderer = ({ node, key, measure, style, NodeRenderer }) => {
+    const {nodeMarginLeft} = this.props;
+
     return (
       <div
         key={key}
         className="tree-node"
-        style={{ ...style, marginLeft: node.deepness * 30}}
+        style={{ ...style, marginLeft: node.deepness * nodeMarginLeft}}
       >
         <NodeRenderer node={node} onChange={this.props.onChange} measure={measure}/>
       </div>
@@ -64,5 +66,6 @@ export default class Tree extends React.Component {
 Tree.propTypes = {
   nodes: PropTypes.arrayOf(PropTypes.shape(FlattenedNode)).isRequired,
   children: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  nodeMarginLeft: PropTypes.number,
 };

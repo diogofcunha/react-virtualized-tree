@@ -1,6 +1,6 @@
 {
   "name": "react-virtualized-tree",
-  "version": "1.2.5",
+  "version": "2.0.0",
   "description": "react-virtualized-tree React component",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -53,7 +53,7 @@
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-test-renderer": "^16.2.0",
-    "react-virtualized": "^9.13.0",
+    "react-virtualized": "^9.18.5",
     "semantic-ui-react": "^0.77.1"
   },
   "jest": {

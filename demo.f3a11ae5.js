@@ -1590,8 +1590,8 @@ module.exports = getSymbolsIn;
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__CellMeasurer__ = __webpack_require__("dU/I");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__CellMeasurerCache__ = __webpack_require__("6hwl");
-/* unused harmony reexport CellMeasurer */
-/* unused harmony reexport CellMeasurerCache */
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__CellMeasurer__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__CellMeasurerCache__["a"]; });
 
 
 
@@ -4544,14 +4544,6 @@ module.exports = listCacheHas;
 
 /***/ }),
 
-/***/ "2MIV":
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__("bFAv");
-
-
-/***/ }),
-
 /***/ "2N6f":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6491,6 +6483,36 @@ exports.default = function (name, hasValue, value, hasDefaultValue, defaultValue
 
 /***/ }),
 
+/***/ "3yIl":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* WEBPACK VAR INJECTION */(function(global, module) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ponyfill_js__ = __webpack_require__("Fnm7");
+/* global window */
+
+
+var root;
+
+if (typeof self !== 'undefined') {
+  root = self;
+} else if (typeof window !== 'undefined') {
+  root = window;
+} else if (typeof global !== 'undefined') {
+  root = global;
+} else if (true) {
+  root = module;
+} else {
+  root = Function('return this')();
+}
+
+var result = Object(__WEBPACK_IMPORTED_MODULE_0__ponyfill_js__["a" /* default */])(root);
+/* harmony default export */ __webpack_exports__["default"] = (result);
+
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__("DuR2"), __webpack_require__("f1Eh")(module)))
+
+/***/ }),
+
 /***/ "42HQ":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -6976,9 +6998,7 @@ module.exports = set;
 
 var cloneArrayBuffer = __webpack_require__("Kzd6"),
     cloneDataView = __webpack_require__("6Git"),
-    cloneMap = __webpack_require__("Jqj6"),
     cloneRegExp = __webpack_require__("WyC4"),
-    cloneSet = __webpack_require__("7jYp"),
     cloneSymbol = __webpack_require__("0uX4"),
     cloneTypedArray = __webpack_require__("Ilb/");
 
@@ -7008,16 +7028,15 @@ var arrayBufferTag = '[object ArrayBuffer]',
  * Initializes an object clone based on its `toStringTag`.
  *
  * **Note:** This function only supports cloning values with tags of
- * `Boolean`, `Date`, `Error`, `Number`, `RegExp`, or `String`.
+ * `Boolean`, `Date`, `Error`, `Map`, `Number`, `RegExp`, `Set`, or `String`.
  *
  * @private
  * @param {Object} object The object to clone.
  * @param {string} tag The `toStringTag` of the object to clone.
- * @param {Function} cloneFunc The function to clone values.
  * @param {boolean} [isDeep] Specify a deep clone.
  * @returns {Object} Returns the initialized clone.
  */
-function initCloneByTag(object, tag, cloneFunc, isDeep) {
+function initCloneByTag(object, tag, isDeep) {
   var Ctor = object.constructor;
   switch (tag) {
     case arrayBufferTag:
@@ -7036,7 +7055,7 @@ function initCloneByTag(object, tag, cloneFunc, isDeep) {
       return cloneTypedArray(object, isDeep);
 
     case mapTag:
-      return cloneMap(object, isDeep, cloneFunc);
+      return new Ctor;
 
     case numberTag:
     case stringTag:
@@ -7046,7 +7065,7 @@ function initCloneByTag(object, tag, cloneFunc, isDeep) {
       return cloneRegExp(object);
 
     case setTag:
-      return cloneSet(object, isDeep, cloneFunc);
+      return new Ctor;
 
     case symbolTag:
       return cloneSymbol(object);
@@ -7980,7 +7999,7 @@ function defaultHeaderRowRenderer(_ref) {
     columns
   );
 }
-defaultHeaderRowRenderer.propTypes = babelPluginFlowReactPropTypes_proptype_HeaderRowRendererParams === __webpack_require__("KSGD").any ? {} : babelPluginFlowReactPropTypes_proptype_HeaderRowRendererParams;
+defaultHeaderRowRenderer.propTypes =  true ? null : babelPluginFlowReactPropTypes_proptype_HeaderRowRendererParams === require('prop-types').any ? {} : babelPluginFlowReactPropTypes_proptype_HeaderRowRendererParams;
 
 /***/ }),
 
@@ -8739,7 +8758,11 @@ module.exports = (val, opts, pad) => {
 		}
 
 		if (isObj(val)) {
-			const objKeys = Object.keys(val).concat(getOwnEnumPropSymbols(val));
+			let objKeys = Object.keys(val).concat(getOwnEnumPropSymbols(val));
+
+			if (opts.filter) {
+				objKeys = objKeys.filter(el => opts.filter(val, el));
+			}
 
 			if (objKeys.length === 0) {
 				return '{}';
@@ -8748,10 +8771,6 @@ module.exports = (val, opts, pad) => {
 			seen.push(val);
 
 			const ret = '{' + tokens.newLine + objKeys.map((el, i) => {
-				if (opts.filter && !opts.filter(val, el)) {
-					return '';
-				}
-
 				const eol = objKeys.length - 1 === i ? tokens.newLine : ',' + tokens.newLineOrSpace;
 				const isSymbol = typeof el === 'symbol';
 				const isClassic = !isSymbol && /^[a-z$_][a-z$_0-9]*$/i.test(el);
@@ -9524,7 +9543,7 @@ module.exports = Array.isArray || function isArray(arg) {
 /***/ "7YgM":
 /***/ (function(module, exports) {
 
-module.exports = {"name":"react-virtualized-tree","version":"1.2.4","description":"react-virtualized-tree React component","main":"lib/index.js","module":"es/index.js","files":["css","es","lib","umd"],"scripts":{"build":"nwb build-react-component --copy-files","clean":"nwb clean-module && nwb clean-demo","start":"nwb serve-react-demo","test":"node config/test/test.js --env=jsdom","test:coverage":"node config/test/test.js --env=jsdom --coverage","postpublish":"node config/pages"},"dependencies":{"classnames":"^2.2.5","lodash":"^4.17.4","material-icons":"^0.1.0","reselect":"^3.0.1"},"peerDependencies":{"react":"16.x","react-dom":"^16.2.0","react-virtualized":"^9.13.0"},"devDependencies":{"babel-jest":"^22.0.4","babel-preset-es2015":"^6.24.1","babel-preset-react":"^6.24.1","babel-preset-react-app":"^3.1.0","deep-freeze":"^0.0.1","enzyme":"^3.3.0","enzyme-adapter-react-16":"^1.1.1","flag-icon-css":"^2.9.0","gh-pages":"^1.1.0","immutability-helper":"^2.6.4","jest":"^22.0.4","nwb":"0.20.x","prop-types":"^15.6.0","react":"^16.2.0","react-dnd":"^2.5.4","react-dnd-html5-backend":"^2.5.4","react-dom":"^16.2.0","react-element-to-jsx-string":"^13.1.0","react-markdown":"^3.1.4","react-router":"^4.2.0","react-router-dom":"^4.2.2","react-test-renderer":"^16.2.0","react-virtualized":"^9.13.0","semantic-ui-react":"^0.77.1"},"jest":{"collectCoverageFrom":["src/**/*.{js,jsx,mjs}","!src/**/index.js"],"setupTestFrameworkScriptFile":"<rootDir>/src/setupTests.js","testMatch":["<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}","<rootDir>/src/**/?(*.)(spec|test).{js,jsx,mjs}"],"testEnvironment":"node","testURL":"http://localhost","transform":{"^.+\\.(js|jsx|mjs)$":"<rootDir>/node_modules/babel-jest","^.+\\.css$":"<rootDir>/config/test/cssTransform.js","^(?!.*\\.(js|jsx|mjs|css|json)$)":"<rootDir>/config/test/fileTransform.js"},"transformIgnorePatterns":["[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"]},"babel":{"presets":["react-app"]},"author":"Diogo Cunha","homepage":"https://diogofcunha.github.io/react-virtualized-tree/","license":"MIT","repository":"https://github.com/diogofcunha/react-virtualized-tree/","keywords":["react","tree","view","react-virtualized","react-tree","tree-view","foder-structure","react-virtualized-tree","react-tree-view","react-component"]}
+module.exports = {"name":"react-virtualized-tree","version":"1.2.5","description":"react-virtualized-tree React component","main":"lib/index.js","module":"es/index.js","files":["css","es","lib","umd","index.d.ts"],"scripts":{"build":"nwb build-react-component --copy-files","clean":"nwb clean-module && nwb clean-demo","start":"nwb serve-react-demo","test":"node config/test/test.js --env=jsdom","test:coverage":"node config/test/test.js --env=jsdom --coverage","postpublish":"node config/pages"},"dependencies":{"classnames":"^2.2.5","lodash":"^4.17.4","material-icons":"^0.1.0","reselect":"^3.0.1"},"peerDependencies":{"react":"16.x","react-dom":"^16.2.0","react-virtualized":"^9.13.0"},"devDependencies":{"babel-jest":"^22.0.4","babel-preset-es2015":"^6.24.1","babel-preset-react":"^6.24.1","babel-preset-react-app":"^3.1.0","deep-freeze":"^0.0.1","enzyme":"^3.3.0","enzyme-adapter-react-16":"^1.1.1","flag-icon-css":"^2.9.0","gh-pages":"^1.1.0","immutability-helper":"^2.6.4","jest":"^22.0.4","nwb":"0.20.x","prop-types":"^15.6.0","react":"^16.2.0","react-dnd":"^2.5.4","react-dnd-html5-backend":"^2.5.4","react-dom":"^16.2.0","react-element-to-jsx-string":"^13.1.0","react-markdown":"^3.1.4","react-router":"^4.2.0","react-router-dom":"^4.2.2","react-test-renderer":"^16.2.0","react-virtualized":"^9.18.5","semantic-ui-react":"^0.77.1"},"jest":{"collectCoverageFrom":["src/**/*.{js,jsx,mjs}","!src/**/index.js"],"setupTestFrameworkScriptFile":"<rootDir>/src/setupTests.js","testMatch":["<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}","<rootDir>/src/**/?(*.)(spec|test).{js,jsx,mjs}"],"testEnvironment":"node","testURL":"http://localhost","transform":{"^.+\\.(js|jsx|mjs)$":"<rootDir>/node_modules/babel-jest","^.+\\.css$":"<rootDir>/config/test/cssTransform.js","^(?!.*\\.(js|jsx|mjs|css|json)$)":"<rootDir>/config/test/fileTransform.js"},"transformIgnorePatterns":["[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"]},"babel":{"presets":["react-app"]},"author":"Diogo Cunha","homepage":"https://diogofcunha.github.io/react-virtualized-tree/","license":"MIT","repository":"https://github.com/diogofcunha/react-virtualized-tree/","keywords":["react","tree","view","react-virtualized","react-tree","tree-view","foder-structure","react-virtualized-tree","react-tree-view","react-component"]}
 
 /***/ }),
 
@@ -9902,35 +9921,6 @@ Pagination.propTypes =  false ? {
 
 /***/ }),
 
-/***/ "7jYp":
-/***/ (function(module, exports, __webpack_require__) {
-
-var addSetEntry = __webpack_require__("nWuj"),
-    arrayReduce = __webpack_require__("3rZI"),
-    setToArray = __webpack_require__("octw");
-
-/** Used to compose bitmasks for cloning. */
-var CLONE_DEEP_FLAG = 1;
-
-/**
- * Creates a clone of `set`.
- *
- * @private
- * @param {Object} set The set to clone.
- * @param {Function} cloneFunc The function to clone values.
- * @param {boolean} [isDeep] Specify a deep clone.
- * @returns {Object} Returns the cloned set.
- */
-function cloneSet(set, isDeep, cloneFunc) {
-  var array = isDeep ? cloneFunc(setToArray(set), CLONE_DEEP_FLAG) : setToArray(set);
-  return arrayReduce(array, addSetEntry, new set.constructor);
-}
-
-module.exports = cloneSet;
-
-
-/***/ }),
-
 /***/ "7pyE":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10143,6 +10133,31 @@ function baseIsNaN(value) {
 }
 
 module.exports = baseIsNaN;
+
+
+/***/ }),
+
+/***/ "86tT":
+/***/ (function(module, exports, __webpack_require__) {
+
+var getTag = __webpack_require__("gHOb"),
+    isObjectLike = __webpack_require__("UnEC");
+
+/** `Object#toString` result references. */
+var mapTag = '[object Map]';
+
+/**
+ * The base implementation of `_.isMap` without Node.js optimizations.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a map, else `false`.
+ */
+function baseIsMap(value) {
+  return isObjectLike(value) && getTag(value) == mapTag;
+}
+
+module.exports = baseIsMap;
 
 
 /***/ }),
@@ -12049,6 +12064,8 @@ var _tree = __webpack_require__("u/VJ");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var supportFragment = Boolean(_react.Fragment);
+
 var getReactElementDisplayName = function getReactElementDisplayName(element) {
   return element.type.displayName || element.type.name || ( // function name
   typeof element.type === 'function' // function without a name, you should provide one
@@ -12105,6 +12122,10 @@ var parseReactElement = function parseReactElement(element, options) {
   var childrens = _react2.default.Children.toArray(element.props.children).filter(onlyMeaningfulChildren).map(function (child) {
     return parseReactElement(child, options);
   });
+
+  if (supportFragment && element.type === _react.Fragment) {
+    return (0, _tree.createReactFragmentTreeNode)(key, childrens);
+  }
 
   return (0, _tree.createReactElementTreeNode)(displayName, props, defaultProps, childrens);
 };
@@ -12889,7 +12910,9 @@ function baseConvert(util, name, func, options) {
     'curry': util.curry,
     'forEach': util.forEach,
     'isArray': util.isArray,
+    'isError': util.isError,
     'isFunction': util.isFunction,
+    'isWeakMap': util.isWeakMap,
     'iteratee': util.iteratee,
     'keys': util.keys,
     'rearg': util.rearg,
@@ -12903,7 +12926,9 @@ function baseConvert(util, name, func, options) {
       curry = helpers.curry,
       each = helpers.forEach,
       isArray = helpers.isArray,
+      isError = helpers.isError,
       isFunction = helpers.isFunction,
+      isWeakMap = helpers.isWeakMap,
       keys = helpers.keys,
       rearg = helpers.rearg,
       toInteger = helpers.toInteger,
@@ -13073,8 +13098,9 @@ function baseConvert(util, name, func, options) {
       var key = path[index],
           value = nested[key];
 
-      if (value != null) {
-        nested[path[index]] = clone(index == lastIndex ? value : Object(value));
+      if (value != null &&
+          !(isFunction(value) || isError(value) || isWeakMap(value))) {
+        nested[key] = clone(index == lastIndex ? value : Object(value));
       }
       nested = nested[key];
     }
@@ -13533,38 +13559,38 @@ WindowScroller.defaultProps = {
   serverHeight: 0,
   serverWidth: 0
 };
-WindowScroller.propTypes = {
+WindowScroller.propTypes =  true ? null : {
   /**
    * Function responsible for rendering children.
    * This function should implement the following signature:
    * ({ height, isScrolling, scrollLeft, scrollTop, width }) => PropTypes.element
    */
-  children: __webpack_require__("KSGD").func.isRequired,
+  children: require('prop-types').func.isRequired,
 
 
   /** Callback to be invoked on-resize: ({ height, width }) */
-  onResize: __webpack_require__("KSGD").func.isRequired,
+  onResize: require('prop-types').func.isRequired,
 
 
   /** Callback to be invoked on-scroll: ({ scrollLeft, scrollTop }) */
-  onScroll: __webpack_require__("KSGD").func.isRequired,
+  onScroll: require('prop-types').func.isRequired,
 
 
   /** Element to attach scroll event listeners. Defaults to window. */
-  scrollElement: __webpack_require__("KSGD").oneOfType([__webpack_require__("KSGD").any, typeof Element === 'function' ? __webpack_require__("KSGD").instanceOf(Element) : __webpack_require__("KSGD").any]),
+  scrollElement: require('prop-types').oneOfType([require('prop-types').any, typeof Element === 'function' ? require('prop-types').instanceOf(Element) : require('prop-types').any]),
 
   /**
    * Wait this amount of time after the last scroll event before resetting child `pointer-events`.
    */
-  scrollingResetTimeInterval: __webpack_require__("KSGD").number.isRequired,
+  scrollingResetTimeInterval: require('prop-types').number.isRequired,
 
 
   /** Height used for server-side rendering */
-  serverHeight: __webpack_require__("KSGD").number.isRequired,
+  serverHeight: require('prop-types').number.isRequired,
 
 
   /** Width used for server-side rendering */
-  serverWidth: __webpack_require__("KSGD").number.isRequired
+  serverWidth: require('prop-types').number.isRequired
 };
 /* harmony default export */ __webpack_exports__["a"] = (WindowScroller);
 
@@ -14914,93 +14940,93 @@ List.defaultProps = {
   scrollToIndex: -1,
   style: {}
 };
-List.propTypes = {
-  "aria-label": __webpack_require__("KSGD").string,
+List.propTypes =  true ? null : {
+  "aria-label": require('prop-types').string,
 
 
   /**
    * Removes fixed height from the scrollingContainer so that the total height
    * of rows can stretch the window. Intended for use with WindowScroller
    */
-  autoHeight: __webpack_require__("KSGD").bool.isRequired,
+  autoHeight: require('prop-types').bool.isRequired,
 
 
   /** Optional CSS class name */
-  className: __webpack_require__("KSGD").string,
+  className: require('prop-types').string,
 
 
   /**
    * Used to estimate the total height of a List before all of its rows have actually been measured.
    * The estimated total height is adjusted as rows are rendered.
    */
-  estimatedRowSize: __webpack_require__("KSGD").number.isRequired,
+  estimatedRowSize: require('prop-types').number.isRequired,
 
 
   /** Height constraint for list (determines how many actual rows are rendered) */
-  height: __webpack_require__("KSGD").number.isRequired,
+  height: require('prop-types').number.isRequired,
 
 
   /** Optional renderer to be used in place of rows when rowCount is 0 */
-  noRowsRenderer: typeof babelPluginFlowReactPropTypes_proptype_NoContentRenderer === 'function' ? babelPluginFlowReactPropTypes_proptype_NoContentRenderer.isRequired ? babelPluginFlowReactPropTypes_proptype_NoContentRenderer.isRequired : babelPluginFlowReactPropTypes_proptype_NoContentRenderer : __webpack_require__("KSGD").shape(babelPluginFlowReactPropTypes_proptype_NoContentRenderer).isRequired,
+  noRowsRenderer: typeof babelPluginFlowReactPropTypes_proptype_NoContentRenderer === 'function' ? babelPluginFlowReactPropTypes_proptype_NoContentRenderer.isRequired ? babelPluginFlowReactPropTypes_proptype_NoContentRenderer.isRequired : babelPluginFlowReactPropTypes_proptype_NoContentRenderer : require('prop-types').shape(babelPluginFlowReactPropTypes_proptype_NoContentRenderer).isRequired,
 
 
   /** Callback invoked with information about the slice of rows that were just rendered.  */
 
-  onRowsRendered: __webpack_require__("KSGD").func.isRequired,
+  onRowsRendered: require('prop-types').func.isRequired,
 
 
   /**
    * Callback invoked whenever the scroll offset changes within the inner scrollable region.
    * This callback can be used to sync scrolling between lists, tables, or grids.
    */
-  onScroll: __webpack_require__("KSGD").func.isRequired,
+  onScroll: require('prop-types').func.isRequired,
 
 
   /** See Grid#overscanIndicesGetter */
-  overscanIndicesGetter: typeof babelPluginFlowReactPropTypes_proptype_OverscanIndicesGetter === 'function' ? babelPluginFlowReactPropTypes_proptype_OverscanIndicesGetter.isRequired ? babelPluginFlowReactPropTypes_proptype_OverscanIndicesGetter.isRequired : babelPluginFlowReactPropTypes_proptype_OverscanIndicesGetter : __webpack_require__("KSGD").shape(babelPluginFlowReactPropTypes_proptype_OverscanIndicesGetter).isRequired,
+  overscanIndicesGetter: typeof babelPluginFlowReactPropTypes_proptype_OverscanIndicesGetter === 'function' ? babelPluginFlowReactPropTypes_proptype_OverscanIndicesGetter.isRequired ? babelPluginFlowReactPropTypes_proptype_OverscanIndicesGetter.isRequired : babelPluginFlowReactPropTypes_proptype_OverscanIndicesGetter : require('prop-types').shape(babelPluginFlowReactPropTypes_proptype_OverscanIndicesGetter).isRequired,
 
 
   /**
    * Number of rows to render above/below the visible bounds of the list.
    * These rows can help for smoother scrolling on touch devices.
    */
-  overscanRowCount: __webpack_require__("KSGD").number.isRequired,
+  overscanRowCount: require('prop-types').number.isRequired,
 
 
   /** Either a fixed row height (number) or a function that returns the height of a row given its index.  */
-  rowHeight: typeof babelPluginFlowReactPropTypes_proptype_CellSize === 'function' ? babelPluginFlowReactPropTypes_proptype_CellSize.isRequired ? babelPluginFlowReactPropTypes_proptype_CellSize.isRequired : babelPluginFlowReactPropTypes_proptype_CellSize : __webpack_require__("KSGD").shape(babelPluginFlowReactPropTypes_proptype_CellSize).isRequired,
+  rowHeight: typeof babelPluginFlowReactPropTypes_proptype_CellSize === 'function' ? babelPluginFlowReactPropTypes_proptype_CellSize.isRequired ? babelPluginFlowReactPropTypes_proptype_CellSize.isRequired : babelPluginFlowReactPropTypes_proptype_CellSize : require('prop-types').shape(babelPluginFlowReactPropTypes_proptype_CellSize).isRequired,
 
 
   /** Responsible for rendering a row given an index; ({ index: number }): node */
-  rowRenderer: typeof babelPluginFlowReactPropTypes_proptype_RowRenderer === 'function' ? babelPluginFlowReactPropTypes_proptype_RowRenderer.isRequired ? babelPluginFlowReactPropTypes_proptype_RowRenderer.isRequired : babelPluginFlowReactPropTypes_proptype_RowRenderer : __webpack_require__("KSGD").shape(babelPluginFlowReactPropTypes_proptype_RowRenderer).isRequired,
+  rowRenderer: typeof babelPluginFlowReactPropTypes_proptype_RowRenderer === 'function' ? babelPluginFlowReactPropTypes_proptype_RowRenderer.isRequired ? babelPluginFlowReactPropTypes_proptype_RowRenderer.isRequired : babelPluginFlowReactPropTypes_proptype_RowRenderer : require('prop-types').shape(babelPluginFlowReactPropTypes_proptype_RowRenderer).isRequired,
 
 
   /** Number of rows in list. */
-  rowCount: __webpack_require__("KSGD").number.isRequired,
+  rowCount: require('prop-types').number.isRequired,
 
 
   /** See Grid#scrollToAlignment */
-  scrollToAlignment: typeof babelPluginFlowReactPropTypes_proptype_Alignment === 'function' ? babelPluginFlowReactPropTypes_proptype_Alignment.isRequired ? babelPluginFlowReactPropTypes_proptype_Alignment.isRequired : babelPluginFlowReactPropTypes_proptype_Alignment : __webpack_require__("KSGD").shape(babelPluginFlowReactPropTypes_proptype_Alignment).isRequired,
+  scrollToAlignment: typeof babelPluginFlowReactPropTypes_proptype_Alignment === 'function' ? babelPluginFlowReactPropTypes_proptype_Alignment.isRequired ? babelPluginFlowReactPropTypes_proptype_Alignment.isRequired : babelPluginFlowReactPropTypes_proptype_Alignment : require('prop-types').shape(babelPluginFlowReactPropTypes_proptype_Alignment).isRequired,
 
 
   /** Row index to ensure visible (by forcefully scrolling if necessary) */
-  scrollToIndex: __webpack_require__("KSGD").number.isRequired,
+  scrollToIndex: require('prop-types').number.isRequired,
 
 
   /** Vertical offset. */
-  scrollTop: __webpack_require__("KSGD").number,
+  scrollTop: require('prop-types').number,
 
 
   /** Optional inline style */
-  style: __webpack_require__("KSGD").object.isRequired,
+  style: require('prop-types').object.isRequired,
 
 
   /** Tab index for focus */
-  tabIndex: __webpack_require__("KSGD").number,
+  tabIndex: require('prop-types').number,
 
 
   /** Width of list */
-  width: __webpack_require__("KSGD").number.isRequired
+  width: require('prop-types').number.isRequired
 };
 /* harmony default export */ __webpack_exports__["a"] = (List);
 
@@ -15499,6 +15525,7 @@ module.exports = basePickBy;
 "use strict";
 
 
+var xtend = __webpack_require__("q+vg");
 var entities = __webpack_require__("dTZW");
 
 module.exports = factory;
@@ -15553,11 +15580,11 @@ function factory(ctx) {
   }
 
   /* Decode `value` (at `position`) into a string. */
-  function decodeRaw(value, position) {
-    return entities(value, {
+  function decodeRaw(value, position, options) {
+    return entities(value, xtend(options, {
       position: normalize(position),
       warning: handleWarning
-    });
+    }));
   }
 }
 
@@ -17266,113 +17293,113 @@ Grid.defaultProps = {
   style: {},
   tabIndex: 0
 };
-Grid.propTypes = {
-  "aria-label": __webpack_require__("KSGD").string.isRequired,
-  "aria-readonly": __webpack_require__("KSGD").bool,
+Grid.propTypes =  true ? null : {
+  "aria-label": require('prop-types').string.isRequired,
+  "aria-readonly": require('prop-types').bool,
 
 
   /**
    * Set the width of the inner scrollable container to 'auto'.
    * This is useful for single-column Grids to ensure that the column doesn't extend below a vertical scrollbar.
    */
-  autoContainerWidth: __webpack_require__("KSGD").bool.isRequired,
+  autoContainerWidth: require('prop-types').bool.isRequired,
 
 
   /**
    * Removes fixed height from the scrollingContainer so that the total height of rows can stretch the window.
    * Intended for use with WindowScroller
    */
-  autoHeight: __webpack_require__("KSGD").bool.isRequired,
+  autoHeight: require('prop-types').bool.isRequired,
 
 
   /**
    * Removes fixed width from the scrollingContainer so that the total width of rows can stretch the window.
    * Intended for use with WindowScroller
    */
-  autoWidth: __webpack_require__("KSGD").bool.isRequired,
+  autoWidth: require('prop-types').bool.isRequired,
 
 
   /** Responsible for rendering a cell given an row and column index.  */
-  cellRenderer: typeof babelPluginFlowReactPropTypes_proptype_CellRenderer === 'function' ? babelPluginFlowReactPropTypes_proptype_CellRenderer.isRequired ? babelPluginFlowReactPropTypes_proptype_CellRenderer.isRequired : babelPluginFlowReactPropTypes_proptype_CellRenderer : __webpack_require__("KSGD").shape(babelPluginFlowReactPropTypes_proptype_CellRenderer).isRequired,
+  cellRenderer: typeof babelPluginFlowReactPropTypes_proptype_CellRenderer === 'function' ? babelPluginFlowReactPropTypes_proptype_CellRenderer.isRequired ? babelPluginFlowReactPropTypes_proptype_CellRenderer.isRequired : babelPluginFlowReactPropTypes_proptype_CellRenderer : require('prop-types').shape(babelPluginFlowReactPropTypes_proptype_CellRenderer).isRequired,
 
 
   /** Responsible for rendering a group of cells given their index ranges.  */
-  cellRangeRenderer: typeof babelPluginFlowReactPropTypes_proptype_CellRangeRenderer === 'function' ? babelPluginFlowReactPropTypes_proptype_CellRangeRenderer.isRequired ? babelPluginFlowReactPropTypes_proptype_CellRangeRenderer.isRequired : babelPluginFlowReactPropTypes_proptype_CellRangeRenderer : __webpack_require__("KSGD").shape(babelPluginFlowReactPropTypes_proptype_CellRangeRenderer).isRequired,
+  cellRangeRenderer: typeof babelPluginFlowReactPropTypes_proptype_CellRangeRenderer === 'function' ? babelPluginFlowReactPropTypes_proptype_CellRangeRenderer.isRequired ? babelPluginFlowReactPropTypes_proptype_CellRangeRenderer.isRequired : babelPluginFlowReactPropTypes_proptype_CellRangeRenderer : require('prop-types').shape(babelPluginFlowReactPropTypes_proptype_CellRangeRenderer).isRequired,
 
 
   /** Optional custom CSS class name to attach to root Grid element.  */
-  className: __webpack_require__("KSGD").string,
+  className: require('prop-types').string,
 
 
   /** Number of columns in grid.  */
-  columnCount: __webpack_require__("KSGD").number.isRequired,
+  columnCount: require('prop-types').number.isRequired,
 
 
   /** Either a fixed column width (number) or a function that returns the width of a column given its index.  */
-  columnWidth: typeof babelPluginFlowReactPropTypes_proptype_CellSize === 'function' ? babelPluginFlowReactPropTypes_proptype_CellSize.isRequired ? babelPluginFlowReactPropTypes_proptype_CellSize.isRequired : babelPluginFlowReactPropTypes_proptype_CellSize : __webpack_require__("KSGD").shape(babelPluginFlowReactPropTypes_proptype_CellSize).isRequired,
+  columnWidth: typeof babelPluginFlowReactPropTypes_proptype_CellSize === 'function' ? babelPluginFlowReactPropTypes_proptype_CellSize.isRequired ? babelPluginFlowReactPropTypes_proptype_CellSize.isRequired : babelPluginFlowReactPropTypes_proptype_CellSize : require('prop-types').shape(babelPluginFlowReactPropTypes_proptype_CellSize).isRequired,
 
 
   /** Unfiltered props for the Grid container. */
-  containerProps: __webpack_require__("KSGD").object,
+  containerProps: require('prop-types').object,
 
 
   /** ARIA role for the cell-container.  */
-  containerRole: __webpack_require__("KSGD").string.isRequired,
+  containerRole: require('prop-types').string.isRequired,
 
 
   /** Optional inline style applied to inner cell-container */
-  containerStyle: __webpack_require__("KSGD").object.isRequired,
+  containerStyle: require('prop-types').object.isRequired,
 
 
   /**
    * If CellMeasurer is used to measure this Grid's children, this should be a pointer to its CellMeasurerCache.
    * A shared CellMeasurerCache reference enables Grid and CellMeasurer to share measurement data.
    */
-  deferredMeasurementCache: __webpack_require__("KSGD").object,
+  deferredMeasurementCache: require('prop-types').object,
 
 
   /**
    * Used to estimate the total width of a Grid before all of its columns have actually been measured.
    * The estimated total width is adjusted as columns are rendered.
    */
-  estimatedColumnSize: __webpack_require__("KSGD").number.isRequired,
+  estimatedColumnSize: require('prop-types').number.isRequired,
 
 
   /**
    * Used to estimate the total height of a Grid before all of its rows have actually been measured.
    * The estimated total height is adjusted as rows are rendered.
    */
-  estimatedRowSize: __webpack_require__("KSGD").number.isRequired,
+  estimatedRowSize: require('prop-types').number.isRequired,
 
 
   /** Exposed for testing purposes only.  */
-  getScrollbarSize: __webpack_require__("KSGD").func.isRequired,
+  getScrollbarSize: require('prop-types').func.isRequired,
 
 
   /** Height of Grid; this property determines the number of visible (vs virtualized) rows.  */
-  height: __webpack_require__("KSGD").number.isRequired,
+  height: require('prop-types').number.isRequired,
 
 
   /** Optional custom id to attach to root Grid element.  */
-  id: __webpack_require__("KSGD").string,
+  id: require('prop-types').string,
 
 
   /**
    * Override internal is-scrolling state tracking.
    * This property is primarily intended for use with the WindowScroller component.
    */
-  isScrolling: __webpack_require__("KSGD").bool,
+  isScrolling: require('prop-types').bool,
 
 
   /** Optional renderer to be used in place of rows when either :rowCount or :columnCount is 0.  */
-  noContentRenderer: typeof babelPluginFlowReactPropTypes_proptype_NoContentRenderer === 'function' ? babelPluginFlowReactPropTypes_proptype_NoContentRenderer.isRequired ? babelPluginFlowReactPropTypes_proptype_NoContentRenderer.isRequired : babelPluginFlowReactPropTypes_proptype_NoContentRenderer : __webpack_require__("KSGD").shape(babelPluginFlowReactPropTypes_proptype_NoContentRenderer).isRequired,
+  noContentRenderer: typeof babelPluginFlowReactPropTypes_proptype_NoContentRenderer === 'function' ? babelPluginFlowReactPropTypes_proptype_NoContentRenderer.isRequired ? babelPluginFlowReactPropTypes_proptype_NoContentRenderer.isRequired : babelPluginFlowReactPropTypes_proptype_NoContentRenderer : require('prop-types').shape(babelPluginFlowReactPropTypes_proptype_NoContentRenderer).isRequired,
 
 
   /**
    * Callback invoked whenever the scroll offset changes within the inner scrollable region.
    * This callback can be used to sync scrolling between lists, tables, or grids.
    */
-  onScroll: __webpack_require__("KSGD").func.isRequired,
+  onScroll: require('prop-types').func.isRequired,
 
 
   /**
@@ -17380,55 +17407,55 @@ Grid.propTypes = {
    * This prop is not intended for end-user use;
    * It is used by MultiGrid to support fixed-row/fixed-column scroll syncing.
    */
-  onScrollbarPresenceChange: __webpack_require__("KSGD").func.isRequired,
+  onScrollbarPresenceChange: require('prop-types').func.isRequired,
 
 
   /** Callback invoked with information about the section of the Grid that was just rendered.  */
-  onSectionRendered: __webpack_require__("KSGD").func.isRequired,
+  onSectionRendered: require('prop-types').func.isRequired,
 
 
   /**
    * Number of columns to render before/after the visible section of the grid.
    * These columns can help for smoother scrolling on touch devices or browsers that send scroll events infrequently.
    */
-  overscanColumnCount: __webpack_require__("KSGD").number.isRequired,
+  overscanColumnCount: require('prop-types').number.isRequired,
 
 
   /**
    * Calculates the number of cells to overscan before and after a specified range.
    * This function ensures that overscanning doesn't exceed the available cells.
    */
-  overscanIndicesGetter: typeof babelPluginFlowReactPropTypes_proptype_OverscanIndicesGetter === 'function' ? babelPluginFlowReactPropTypes_proptype_OverscanIndicesGetter.isRequired ? babelPluginFlowReactPropTypes_proptype_OverscanIndicesGetter.isRequired : babelPluginFlowReactPropTypes_proptype_OverscanIndicesGetter : __webpack_require__("KSGD").shape(babelPluginFlowReactPropTypes_proptype_OverscanIndicesGetter).isRequired,
+  overscanIndicesGetter: typeof babelPluginFlowReactPropTypes_proptype_OverscanIndicesGetter === 'function' ? babelPluginFlowReactPropTypes_proptype_OverscanIndicesGetter.isRequired ? babelPluginFlowReactPropTypes_proptype_OverscanIndicesGetter.isRequired : babelPluginFlowReactPropTypes_proptype_OverscanIndicesGetter : require('prop-types').shape(babelPluginFlowReactPropTypes_proptype_OverscanIndicesGetter).isRequired,
 
 
   /**
    * Number of rows to render above/below the visible section of the grid.
    * These rows can help for smoother scrolling on touch devices or browsers that send scroll events infrequently.
    */
-  overscanRowCount: __webpack_require__("KSGD").number.isRequired,
+  overscanRowCount: require('prop-types').number.isRequired,
 
 
   /** ARIA role for the grid element.  */
-  role: __webpack_require__("KSGD").string.isRequired,
+  role: require('prop-types').string.isRequired,
 
 
   /**
    * Either a fixed row height (number) or a function that returns the height of a row given its index.
    * Should implement the following interface: ({ index: number }): number
    */
-  rowHeight: typeof babelPluginFlowReactPropTypes_proptype_CellSize === 'function' ? babelPluginFlowReactPropTypes_proptype_CellSize.isRequired ? babelPluginFlowReactPropTypes_proptype_CellSize.isRequired : babelPluginFlowReactPropTypes_proptype_CellSize : __webpack_require__("KSGD").shape(babelPluginFlowReactPropTypes_proptype_CellSize).isRequired,
+  rowHeight: typeof babelPluginFlowReactPropTypes_proptype_CellSize === 'function' ? babelPluginFlowReactPropTypes_proptype_CellSize.isRequired ? babelPluginFlowReactPropTypes_proptype_CellSize.isRequired : babelPluginFlowReactPropTypes_proptype_CellSize : require('prop-types').shape(babelPluginFlowReactPropTypes_proptype_CellSize).isRequired,
 
 
   /** Number of rows in grid.  */
-  rowCount: __webpack_require__("KSGD").number.isRequired,
+  rowCount: require('prop-types').number.isRequired,
 
 
   /** Wait this amount of time after the last scroll event before resetting Grid `pointer-events`. */
-  scrollingResetTimeInterval: __webpack_require__("KSGD").number.isRequired,
+  scrollingResetTimeInterval: require('prop-types').number.isRequired,
 
 
   /** Horizontal offset. */
-  scrollLeft: __webpack_require__("KSGD").number,
+  scrollLeft: require('prop-types').number,
 
 
   /**
@@ -17436,31 +17463,31 @@ Grid.propTypes = {
    * The default ("auto") scrolls the least amount possible to ensure that the specified cell is fully visible.
    * Use "start" to align cells to the top/left of the Grid and "end" to align bottom/right.
    */
-  scrollToAlignment: typeof babelPluginFlowReactPropTypes_proptype_Alignment === 'function' ? babelPluginFlowReactPropTypes_proptype_Alignment.isRequired ? babelPluginFlowReactPropTypes_proptype_Alignment.isRequired : babelPluginFlowReactPropTypes_proptype_Alignment : __webpack_require__("KSGD").shape(babelPluginFlowReactPropTypes_proptype_Alignment).isRequired,
+  scrollToAlignment: typeof babelPluginFlowReactPropTypes_proptype_Alignment === 'function' ? babelPluginFlowReactPropTypes_proptype_Alignment.isRequired ? babelPluginFlowReactPropTypes_proptype_Alignment.isRequired : babelPluginFlowReactPropTypes_proptype_Alignment : require('prop-types').shape(babelPluginFlowReactPropTypes_proptype_Alignment).isRequired,
 
 
   /** Column index to ensure visible (by forcefully scrolling if necessary) */
-  scrollToColumn: __webpack_require__("KSGD").number.isRequired,
+  scrollToColumn: require('prop-types').number.isRequired,
 
 
   /** Vertical offset. */
-  scrollTop: __webpack_require__("KSGD").number,
+  scrollTop: require('prop-types').number,
 
 
   /** Row index to ensure visible (by forcefully scrolling if necessary) */
-  scrollToRow: __webpack_require__("KSGD").number.isRequired,
+  scrollToRow: require('prop-types').number.isRequired,
 
 
   /** Optional inline style */
-  style: __webpack_require__("KSGD").object.isRequired,
+  style: require('prop-types').object.isRequired,
 
 
   /** Tab index for focus */
-  tabIndex: __webpack_require__("KSGD").number,
+  tabIndex: require('prop-types').number,
 
 
   /** Width of Grid; this property determines the number of visible (vs virtualized) columns.  */
-  width: __webpack_require__("KSGD").number.isRequired
+  width: require('prop-types').number.isRequired
 };
 /* harmony default export */ __webpack_exports__["a"] = (Grid);
 
@@ -17969,6 +17996,41 @@ module.exports = stackGet;
 
 /***/ }),
 
+/***/ "E7Bb":
+/***/ (function(module, exports, __webpack_require__) {
+
+var getTag = __webpack_require__("gHOb"),
+    isObjectLike = __webpack_require__("UnEC");
+
+/** `Object#toString` result references. */
+var weakMapTag = '[object WeakMap]';
+
+/**
+ * Checks if `value` is classified as a `WeakMap` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.3.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a weak map, else `false`.
+ * @example
+ *
+ * _.isWeakMap(new WeakMap);
+ * // => true
+ *
+ * _.isWeakMap(new Map);
+ * // => false
+ */
+function isWeakMap(value) {
+  return isObjectLike(value) && getTag(value) == weakMapTag;
+}
+
+module.exports = isWeakMap;
+
+
+/***/ }),
+
 /***/ "EAo+":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -18402,7 +18464,7 @@ exports.default = function (node, inline, lvl, options) {
       out += (0, _spacer2.default)(newLvl, tabStop);
     }
 
-    out += childrens.reduce(_mergeSiblingPlainStringChildrenReducer2.default, []).map(formatOneChildren(inline, newLvl, options)).join('\n' + (0, _spacer2.default)(newLvl, tabStop));
+    out += childrens.reduce(_mergeSiblingPlainStringChildrenReducer2.default, []).map(formatOneChildren(inline, newLvl, options)).join(!inline ? '\n' + (0, _spacer2.default)(newLvl, tabStop) : '');
 
     if (!inline) {
       out += '\n';
@@ -18970,6 +19032,79 @@ var convert = __webpack_require__("b6tY"),
 func.placeholder = __webpack_require__("qXkD");
 module.exports = func;
 
+
+/***/ }),
+
+/***/ "F1Jr":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _formatReactElementNode = __webpack_require__("EPWj");
+
+var _formatReactElementNode2 = _interopRequireDefault(_formatReactElementNode);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var REACT_FRAGMENT_TAG_NAME_SHORT_SYNTAX = '';
+var REACT_FRAGMENT_TAG_NAME_EXPLICIT_SYNTAX = 'React.Fragment';
+
+var toReactElementTreeNode = function toReactElementTreeNode(displayName, key, childrens) {
+  var props = {};
+  if (key) {
+    props = { key: key };
+  }
+
+  return {
+    type: 'ReactElement',
+    displayName: displayName,
+    props: props,
+    defaultProps: {},
+    childrens: childrens
+  };
+};
+
+var isKeyedFragment = function isKeyedFragment(_ref) {
+  var key = _ref.key;
+  return Boolean(key);
+};
+var hasNoChildren = function hasNoChildren(_ref2) {
+  var childrens = _ref2.childrens;
+  return childrens.length === 0;
+};
+
+exports.default = function (node, inline, lvl, options) {
+  var type = node.type,
+      key = node.key,
+      childrens = node.childrens;
+
+
+  if (type !== 'ReactFragment') {
+    throw new Error('The "formatReactFragmentNode" function could only format node of type "ReactFragment". Given: ' + type);
+  }
+
+  var useFragmentShortSyntax = options.useFragmentShortSyntax;
+
+
+  var displayName = void 0;
+  if (useFragmentShortSyntax) {
+    if (hasNoChildren(node) || isKeyedFragment(node)) {
+      displayName = REACT_FRAGMENT_TAG_NAME_EXPLICIT_SYNTAX;
+    } else {
+      displayName = REACT_FRAGMENT_TAG_NAME_SHORT_SYNTAX;
+    }
+  } else {
+    displayName = REACT_FRAGMENT_TAG_NAME_EXPLICIT_SYNTAX;
+  }
+
+  return (0, _formatReactElementNode2.default)(toReactElementTreeNode(displayName, key, childrens), inline, lvl, options);
+};
+//# sourceMappingURL=formatReactFragmentNode.js.map
 
 /***/ }),
 
@@ -19904,7 +20039,9 @@ var Stack = __webpack_require__("bJWQ"),
     initCloneObject = __webpack_require__("WQFf"),
     isArray = __webpack_require__("NGEn"),
     isBuffer = __webpack_require__("ggOT"),
+    isMap = __webpack_require__("dwsC"),
     isObject = __webpack_require__("yCNF"),
+    isSet = __webpack_require__("SGXn"),
     keys = __webpack_require__("ktak");
 
 /** Used to compose bitmasks for cloning. */
@@ -20012,7 +20149,7 @@ function baseClone(value, bitmask, customizer, key, object, stack) {
       if (!cloneableTags[tag]) {
         return object ? value : {};
       }
-      result = initCloneByTag(value, tag, baseClone, isDeep);
+      result = initCloneByTag(value, tag, isDeep);
     }
   }
   // Check for circular references and return its corresponding clone.
@@ -20022,6 +20159,22 @@ function baseClone(value, bitmask, customizer, key, object, stack) {
     return stacked;
   }
   stack.set(value, result);
+
+  if (isSet(value)) {
+    value.forEach(function(subValue) {
+      result.add(baseClone(subValue, bitmask, customizer, subValue, value, stack));
+    });
+
+    return result;
+  }
+
+  if (isMap(value)) {
+    value.forEach(function(subValue, key) {
+      result.set(key, baseClone(subValue, bitmask, customizer, key, value, stack));
+    });
+
+    return result;
+  }
 
   var keysFunc = isFull
     ? (isFlat ? getAllKeysIn : getAllKeys)
@@ -20057,6 +20210,32 @@ module.exports = baseClone;
 
 /***/ }),
 
+/***/ "Fnm7":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = symbolObservablePonyfill;
+function symbolObservablePonyfill(root) {
+	var result;
+	var Symbol = root.Symbol;
+
+	if (typeof Symbol === 'function') {
+		if (Symbol.observable) {
+			result = Symbol.observable;
+		} else {
+			result = Symbol('observable');
+			Symbol.observable = result;
+		}
+	} else {
+		result = '@@observable';
+	}
+
+	return result;
+};
+
+
+/***/ }),
+
 /***/ "Fo4I":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -20088,7 +20267,7 @@ Node.children = __WEBPACK_IMPORTED_MODULE_0_prop_types___default.a.arrayOf(__WEB
 
 var FlattenedNode = _extends({}, BasicNode, {
   deepness: __WEBPACK_IMPORTED_MODULE_0_prop_types___default.a.number.isRequired,
-  parents: __WEBPACK_IMPORTED_MODULE_0_prop_types___default.a.arrayOf(__WEBPACK_IMPORTED_MODULE_0_prop_types___default.a.number)
+  parents: __WEBPACK_IMPORTED_MODULE_0_prop_types___default.a.arrayOf(__WEBPACK_IMPORTED_MODULE_0_prop_types___default.a.oneOfType([__WEBPACK_IMPORTED_MODULE_0_prop_types___default.a.number, __WEBPACK_IMPORTED_MODULE_0_prop_types___default.a.string]))
 });
 
 /***/ }),
@@ -20462,176 +20641,162 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-var babelPluginFlowReactPropTypes_proptype_CellPosition = {
-  columnIndex: __webpack_require__("KSGD").number.isRequired,
-  rowIndex: __webpack_require__("KSGD").number.isRequired
+var babelPluginFlowReactPropTypes_proptype_CellPosition =  true ? null : {
+  columnIndex: require('prop-types').number.isRequired,
+  rowIndex: require('prop-types').number.isRequired
 };
-if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_CellPosition', {
+if (false) Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_CellPosition', {
   value: babelPluginFlowReactPropTypes_proptype_CellPosition,
   configurable: true
 });
-var babelPluginFlowReactPropTypes_proptype_CellRendererParams = {
-  columnIndex: __webpack_require__("KSGD").number.isRequired,
-  isScrolling: __webpack_require__("KSGD").bool.isRequired,
-  isVisible: __webpack_require__("KSGD").bool.isRequired,
-  key: __webpack_require__("KSGD").string.isRequired,
-  parent: __webpack_require__("KSGD").object.isRequired,
-  rowIndex: __webpack_require__("KSGD").number.isRequired,
-  style: __webpack_require__("KSGD").object.isRequired
+var babelPluginFlowReactPropTypes_proptype_CellRendererParams =  true ? null : {
+  columnIndex: require('prop-types').number.isRequired,
+  isScrolling: require('prop-types').bool.isRequired,
+  isVisible: require('prop-types').bool.isRequired,
+  key: require('prop-types').string.isRequired,
+  parent: require('prop-types').object.isRequired,
+  rowIndex: require('prop-types').number.isRequired,
+  style: require('prop-types').object.isRequired
 };
-if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_CellRendererParams', {
+if (false) Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_CellRendererParams', {
   value: babelPluginFlowReactPropTypes_proptype_CellRendererParams,
   configurable: true
 });
-
-var babelPluginFlowReactPropTypes_proptype_CellRenderer = __webpack_require__("KSGD").func;
-
-if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_CellRenderer', {
+var babelPluginFlowReactPropTypes_proptype_CellRenderer =  true ? null : require('prop-types').func;
+if (false) Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_CellRenderer', {
   value: babelPluginFlowReactPropTypes_proptype_CellRenderer,
   configurable: true
 });
-var babelPluginFlowReactPropTypes_proptype_CellRangeRendererParams = {
-  cellCache: __webpack_require__("KSGD").object.isRequired,
-  cellRenderer: __webpack_require__("KSGD").func.isRequired,
-  columnSizeAndPositionManager: typeof __WEBPACK_IMPORTED_MODULE_1__utils_ScalingCellSizeAndPositionManager__["a" /* default */] === 'function' ? __webpack_require__("KSGD").instanceOf(__WEBPACK_IMPORTED_MODULE_1__utils_ScalingCellSizeAndPositionManager__["a" /* default */]).isRequired : __webpack_require__("KSGD").any.isRequired,
-  columnStartIndex: __webpack_require__("KSGD").number.isRequired,
-  columnStopIndex: __webpack_require__("KSGD").number.isRequired,
-  deferredMeasurementCache: __webpack_require__("KSGD").object,
-  horizontalOffsetAdjustment: __webpack_require__("KSGD").number.isRequired,
-  isScrolling: __webpack_require__("KSGD").bool.isRequired,
-  parent: __webpack_require__("KSGD").object.isRequired,
-  rowSizeAndPositionManager: typeof __WEBPACK_IMPORTED_MODULE_1__utils_ScalingCellSizeAndPositionManager__["a" /* default */] === 'function' ? __webpack_require__("KSGD").instanceOf(__WEBPACK_IMPORTED_MODULE_1__utils_ScalingCellSizeAndPositionManager__["a" /* default */]).isRequired : __webpack_require__("KSGD").any.isRequired,
-  rowStartIndex: __webpack_require__("KSGD").number.isRequired,
-  rowStopIndex: __webpack_require__("KSGD").number.isRequired,
-  scrollLeft: __webpack_require__("KSGD").number.isRequired,
-  scrollTop: __webpack_require__("KSGD").number.isRequired,
-  styleCache: __webpack_require__("KSGD").object.isRequired,
-  verticalOffsetAdjustment: __webpack_require__("KSGD").number.isRequired,
-  visibleColumnIndices: __webpack_require__("KSGD").object.isRequired,
-  visibleRowIndices: __webpack_require__("KSGD").object.isRequired
+var babelPluginFlowReactPropTypes_proptype_CellRangeRendererParams =  true ? null : {
+  cellCache: require('prop-types').object.isRequired,
+  cellRenderer: require('prop-types').func.isRequired,
+  columnSizeAndPositionManager: typeof ScalingCellSizeAndPositionManager === 'function' ? require('prop-types').instanceOf(ScalingCellSizeAndPositionManager).isRequired : require('prop-types').any.isRequired,
+  columnStartIndex: require('prop-types').number.isRequired,
+  columnStopIndex: require('prop-types').number.isRequired,
+  deferredMeasurementCache: require('prop-types').object,
+  horizontalOffsetAdjustment: require('prop-types').number.isRequired,
+  isScrolling: require('prop-types').bool.isRequired,
+  parent: require('prop-types').object.isRequired,
+  rowSizeAndPositionManager: typeof ScalingCellSizeAndPositionManager === 'function' ? require('prop-types').instanceOf(ScalingCellSizeAndPositionManager).isRequired : require('prop-types').any.isRequired,
+  rowStartIndex: require('prop-types').number.isRequired,
+  rowStopIndex: require('prop-types').number.isRequired,
+  scrollLeft: require('prop-types').number.isRequired,
+  scrollTop: require('prop-types').number.isRequired,
+  styleCache: require('prop-types').object.isRequired,
+  verticalOffsetAdjustment: require('prop-types').number.isRequired,
+  visibleColumnIndices: require('prop-types').object.isRequired,
+  visibleRowIndices: require('prop-types').object.isRequired
 };
-if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_CellRangeRendererParams', {
+if (false) Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_CellRangeRendererParams', {
   value: babelPluginFlowReactPropTypes_proptype_CellRangeRendererParams,
   configurable: true
 });
-
-var babelPluginFlowReactPropTypes_proptype_CellRangeRenderer = __webpack_require__("KSGD").func;
-
-if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_CellRangeRenderer', {
+var babelPluginFlowReactPropTypes_proptype_CellRangeRenderer =  true ? null : require('prop-types').func;
+if (false) Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_CellRangeRenderer', {
   value: babelPluginFlowReactPropTypes_proptype_CellRangeRenderer,
   configurable: true
 });
-
-var babelPluginFlowReactPropTypes_proptype_CellSizeGetter = __webpack_require__("KSGD").func;
-
-if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_CellSizeGetter', {
+var babelPluginFlowReactPropTypes_proptype_CellSizeGetter =  true ? null : require('prop-types').func;
+if (false) Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_CellSizeGetter', {
   value: babelPluginFlowReactPropTypes_proptype_CellSizeGetter,
   configurable: true
 });
-
-var babelPluginFlowReactPropTypes_proptype_CellSize = __webpack_require__("KSGD").oneOfType([__webpack_require__("KSGD").func, __webpack_require__("KSGD").number]);
-
-if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_CellSize', {
+var babelPluginFlowReactPropTypes_proptype_CellSize =  true ? null : require('prop-types').oneOfType([require('prop-types').func, require('prop-types').number]);
+if (false) Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_CellSize', {
   value: babelPluginFlowReactPropTypes_proptype_CellSize,
   configurable: true
 });
-
-var babelPluginFlowReactPropTypes_proptype_NoContentRenderer = __webpack_require__("KSGD").func;
-
-if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_NoContentRenderer', {
+var babelPluginFlowReactPropTypes_proptype_NoContentRenderer =  true ? null : require('prop-types').func;
+if (false) Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_NoContentRenderer', {
   value: babelPluginFlowReactPropTypes_proptype_NoContentRenderer,
   configurable: true
 });
-var babelPluginFlowReactPropTypes_proptype_Scroll = {
-  clientHeight: __webpack_require__("KSGD").number.isRequired,
-  clientWidth: __webpack_require__("KSGD").number.isRequired,
-  scrollHeight: __webpack_require__("KSGD").number.isRequired,
-  scrollLeft: __webpack_require__("KSGD").number.isRequired,
-  scrollTop: __webpack_require__("KSGD").number.isRequired,
-  scrollWidth: __webpack_require__("KSGD").number.isRequired
+var babelPluginFlowReactPropTypes_proptype_Scroll =  true ? null : {
+  clientHeight: require('prop-types').number.isRequired,
+  clientWidth: require('prop-types').number.isRequired,
+  scrollHeight: require('prop-types').number.isRequired,
+  scrollLeft: require('prop-types').number.isRequired,
+  scrollTop: require('prop-types').number.isRequired,
+  scrollWidth: require('prop-types').number.isRequired
 };
-if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_Scroll', {
+if (false) Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_Scroll', {
   value: babelPluginFlowReactPropTypes_proptype_Scroll,
   configurable: true
 });
-var babelPluginFlowReactPropTypes_proptype_ScrollbarPresenceChange = {
-  horizontal: __webpack_require__("KSGD").bool.isRequired,
-  vertical: __webpack_require__("KSGD").bool.isRequired,
-  size: __webpack_require__("KSGD").number.isRequired
+var babelPluginFlowReactPropTypes_proptype_ScrollbarPresenceChange =  true ? null : {
+  horizontal: require('prop-types').bool.isRequired,
+  vertical: require('prop-types').bool.isRequired,
+  size: require('prop-types').number.isRequired
 };
-if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_ScrollbarPresenceChange', {
+if (false) Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_ScrollbarPresenceChange', {
   value: babelPluginFlowReactPropTypes_proptype_ScrollbarPresenceChange,
   configurable: true
 });
-var babelPluginFlowReactPropTypes_proptype_RenderedSection = {
-  columnOverscanStartIndex: __webpack_require__("KSGD").number.isRequired,
-  columnOverscanStopIndex: __webpack_require__("KSGD").number.isRequired,
-  columnStartIndex: __webpack_require__("KSGD").number.isRequired,
-  columnStopIndex: __webpack_require__("KSGD").number.isRequired,
-  rowOverscanStartIndex: __webpack_require__("KSGD").number.isRequired,
-  rowOverscanStopIndex: __webpack_require__("KSGD").number.isRequired,
-  rowStartIndex: __webpack_require__("KSGD").number.isRequired,
-  rowStopIndex: __webpack_require__("KSGD").number.isRequired
+var babelPluginFlowReactPropTypes_proptype_RenderedSection =  true ? null : {
+  columnOverscanStartIndex: require('prop-types').number.isRequired,
+  columnOverscanStopIndex: require('prop-types').number.isRequired,
+  columnStartIndex: require('prop-types').number.isRequired,
+  columnStopIndex: require('prop-types').number.isRequired,
+  rowOverscanStartIndex: require('prop-types').number.isRequired,
+  rowOverscanStopIndex: require('prop-types').number.isRequired,
+  rowStartIndex: require('prop-types').number.isRequired,
+  rowStopIndex: require('prop-types').number.isRequired
 };
-if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_RenderedSection', {
+if (false) Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_RenderedSection', {
   value: babelPluginFlowReactPropTypes_proptype_RenderedSection,
   configurable: true
 });
-var babelPluginFlowReactPropTypes_proptype_OverscanIndicesGetterParams = {
+var babelPluginFlowReactPropTypes_proptype_OverscanIndicesGetterParams =  true ? null : {
   // One of SCROLL_DIRECTION_HORIZONTAL or SCROLL_DIRECTION_VERTICAL
-  direction: __webpack_require__("KSGD").oneOf(['horizontal', 'vertical']).isRequired,
+  direction: require('prop-types').oneOf(['horizontal', 'vertical']).isRequired,
 
 
   // One of SCROLL_DIRECTION_BACKWARD or SCROLL_DIRECTION_FORWARD
-  scrollDirection: __webpack_require__("KSGD").oneOf([-1, 1]).isRequired,
+  scrollDirection: require('prop-types').oneOf([-1, 1]).isRequired,
 
 
   // Number of rows or columns in the current axis
-  cellCount: __webpack_require__("KSGD").number.isRequired,
+  cellCount: require('prop-types').number.isRequired,
 
 
   // Maximum number of cells to over-render in either direction
-  overscanCellsCount: __webpack_require__("KSGD").number.isRequired,
+  overscanCellsCount: require('prop-types').number.isRequired,
 
 
   // Begin of range of visible cells
-  startIndex: __webpack_require__("KSGD").number.isRequired,
+  startIndex: require('prop-types').number.isRequired,
 
 
   // End of range of visible cells
-  stopIndex: __webpack_require__("KSGD").number.isRequired
+  stopIndex: require('prop-types').number.isRequired
 };
-if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_OverscanIndicesGetterParams', {
+if (false) Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_OverscanIndicesGetterParams', {
   value: babelPluginFlowReactPropTypes_proptype_OverscanIndicesGetterParams,
   configurable: true
 });
-var babelPluginFlowReactPropTypes_proptype_OverscanIndices = {
-  overscanStartIndex: __webpack_require__("KSGD").number.isRequired,
-  overscanStopIndex: __webpack_require__("KSGD").number.isRequired
+var babelPluginFlowReactPropTypes_proptype_OverscanIndices =  true ? null : {
+  overscanStartIndex: require('prop-types').number.isRequired,
+  overscanStopIndex: require('prop-types').number.isRequired
 };
-if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_OverscanIndices', {
+if (false) Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_OverscanIndices', {
   value: babelPluginFlowReactPropTypes_proptype_OverscanIndices,
   configurable: true
 });
-
-var babelPluginFlowReactPropTypes_proptype_OverscanIndicesGetter = __webpack_require__("KSGD").func;
-
-if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_OverscanIndicesGetter', {
+var babelPluginFlowReactPropTypes_proptype_OverscanIndicesGetter =  true ? null : require('prop-types').func;
+if (false) Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_OverscanIndicesGetter', {
   value: babelPluginFlowReactPropTypes_proptype_OverscanIndicesGetter,
   configurable: true
 });
-
-var babelPluginFlowReactPropTypes_proptype_Alignment = __webpack_require__("KSGD").oneOf(['auto', 'end', 'start', 'center']);
-
-if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_Alignment', {
+var babelPluginFlowReactPropTypes_proptype_Alignment =  true ? null : require('prop-types').oneOf(['auto', 'end', 'start', 'center']);
+if (false) Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_Alignment', {
   value: babelPluginFlowReactPropTypes_proptype_Alignment,
   configurable: true
 });
-var babelPluginFlowReactPropTypes_proptype_VisibleCellRange = {
-  start: __webpack_require__("KSGD").number,
-  stop: __webpack_require__("KSGD").number
+var babelPluginFlowReactPropTypes_proptype_VisibleCellRange =  true ? null : {
+  start: require('prop-types').number,
+  stop: require('prop-types').number
 };
-if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_VisibleCellRange', {
+if (false) Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_VisibleCellRange', {
   value: babelPluginFlowReactPropTypes_proptype_VisibleCellRange,
   configurable: true
 });
@@ -22531,7 +22696,7 @@ function defaultHeaderRenderer(_ref) {
 
   return children;
 }
-defaultHeaderRenderer.propTypes = babelPluginFlowReactPropTypes_proptype_HeaderRendererParams === __webpack_require__("KSGD").any ? {} : babelPluginFlowReactPropTypes_proptype_HeaderRendererParams;
+defaultHeaderRenderer.propTypes =  true ? null : babelPluginFlowReactPropTypes_proptype_HeaderRendererParams === require('prop-types').any ? {} : babelPluginFlowReactPropTypes_proptype_HeaderRendererParams;
 
 /***/ }),
 
@@ -22737,22 +22902,46 @@ var Tree = function (_React$Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _React$Component.call.apply(_React$Component, [this].concat(args))), _this), _this.rowRenderer = function (nodes) {
-      return function (_ref) {
-        var key = _ref.key,
-            index = _ref.index,
-            style = _ref.style;
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _React$Component.call.apply(_React$Component, [this].concat(args))), _this), _this._cache = new __WEBPACK_IMPORTED_MODULE_2_react_virtualized__["c" /* CellMeasurerCache */]({
+      fixedWidth: true,
+      minHeight: 20
+    }), _this.rowRenderer = function (_ref) {
+      var node = _ref.node,
+          key = _ref.key,
+          measure = _ref.measure,
+          style = _ref.style,
+          NodeRenderer = _ref.NodeRenderer;
+
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        {
+          key: key,
+          className: 'tree-node',
+          style: _extends({}, style, { marginLeft: node.deepness * 30 })
+        },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(NodeRenderer, { node: node, onChange: _this.props.onChange, measure: measure })
+      );
+    }, _this.measureRowRenderer = function (nodes) {
+      return function (_ref2) {
+        var key = _ref2.key,
+            index = _ref2.index,
+            style = _ref2.style,
+            parent = _ref2.parent;
         var NodeRenderer = _this.props.children;
 
         var node = nodes[index];
+
         return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'div',
+          __WEBPACK_IMPORTED_MODULE_2_react_virtualized__["b" /* CellMeasurer */],
           {
+            cache: _this._cache,
+            columnIndex: 0,
             key: key,
-            className: 'tree-node',
-            style: _extends({}, style, { marginLeft: node.deepness * 30 })
-          },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(NodeRenderer, { node: node, onChange: _this.props.onChange })
+            rowIndex: index,
+            parent: parent },
+          function (m) {
+            return _this.rowRenderer(_extends({}, m, { node: node, key: key, style: style, NodeRenderer: NodeRenderer }));
+          }
         );
       };
     }, _temp), _possibleConstructorReturn(_this, _ret);
@@ -22769,14 +22958,18 @@ var Tree = function (_React$Component) {
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       __WEBPACK_IMPORTED_MODULE_2_react_virtualized__["a" /* AutoSizer */],
       null,
-      function (_ref2) {
-        var height = _ref2.height,
-            width = _ref2.width;
-        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_virtualized__["b" /* List */], {
+      function (_ref3) {
+        var height = _ref3.height,
+            width = _ref3.width;
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_virtualized__["d" /* List */], {
+          deferredMeasurementCache: _this2._cache,
+          ref: function ref(r) {
+            return _this2._list = r;
+          },
           height: height,
           rowCount: nodes.length,
-          rowHeight: 20,
-          rowRenderer: _this2.rowRenderer(nodes),
+          rowHeight: _this2._cache.rowHeight,
+          rowRenderer: _this2.measureRowRenderer(nodes),
           width: width
         });
       }
@@ -23338,41 +23531,41 @@ AutoSizer.defaultProps = {
   disableWidth: false,
   style: {}
 };
-AutoSizer.propTypes = {
+AutoSizer.propTypes =  true ? null : {
   /** Function responsible for rendering children.*/
-  children: __webpack_require__("KSGD").func.isRequired,
+  children: require('prop-types').func.isRequired,
 
 
   /** Optional custom CSS class name to attach to root AutoSizer element.  */
-  className: __webpack_require__("KSGD").string,
+  className: require('prop-types').string,
 
 
   /** Default height to use for initial render; useful for SSR */
-  defaultHeight: __webpack_require__("KSGD").number,
+  defaultHeight: require('prop-types').number,
 
 
   /** Default width to use for initial render; useful for SSR */
-  defaultWidth: __webpack_require__("KSGD").number,
+  defaultWidth: require('prop-types').number,
 
 
   /** Disable dynamic :height property */
-  disableHeight: __webpack_require__("KSGD").bool.isRequired,
+  disableHeight: require('prop-types').bool.isRequired,
 
 
   /** Disable dynamic :width property */
-  disableWidth: __webpack_require__("KSGD").bool.isRequired,
+  disableWidth: require('prop-types').bool.isRequired,
 
 
   /** Nonce of the inlined stylesheet for Content Security Policy */
-  nonce: __webpack_require__("KSGD").string,
+  nonce: require('prop-types').string,
 
 
   /** Callback to be invoked on-resize */
-  onResize: __webpack_require__("KSGD").func.isRequired,
+  onResize: require('prop-types').func.isRequired,
 
 
   /** Optional inline style */
-  style: __webpack_require__("KSGD").object
+  style: require('prop-types').object
 };
 /* harmony default export */ __webpack_exports__["a"] = (AutoSizer);
 
@@ -25301,7 +25494,7 @@ function definition(eat, value, silent) {
     }
 
     beforeURL = eat(beforeURL).test().end;
-    url = self.decode.raw(self.unescape(url), beforeURL);
+    url = self.decode.raw(self.unescape(url), beforeURL, {nonTerminated: false});
 
     if (title) {
       beforeTitle = eat(beforeTitle).test().end;
@@ -25387,35 +25580,6 @@ function arrayIncludes(array, value) {
 }
 
 module.exports = arrayIncludes;
-
-
-/***/ }),
-
-/***/ "Jqj6":
-/***/ (function(module, exports, __webpack_require__) {
-
-var addMapEntry = __webpack_require__("U7Aq"),
-    arrayReduce = __webpack_require__("3rZI"),
-    mapToArray = __webpack_require__("WFiI");
-
-/** Used to compose bitmasks for cloning. */
-var CLONE_DEEP_FLAG = 1;
-
-/**
- * Creates a clone of `map`.
- *
- * @private
- * @param {Object} map The map to clone.
- * @param {Function} cloneFunc The function to clone values.
- * @param {boolean} [isDeep] Specify a deep clone.
- * @returns {Object} Returns the cloned map.
- */
-function cloneMap(map, isDeep, cloneFunc) {
-  var array = isDeep ? cloneFunc(mapToArray(map), CLONE_DEEP_FLAG) : mapToArray(map);
-  return arrayReduce(array, addMapEntry, new map.constructor);
-}
-
-module.exports = cloneMap;
 
 
 /***/ }),
@@ -25733,7 +25897,7 @@ var _isPlainObject = __webpack_require__("9UkZ");
 
 var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 
-var _symbolObservable = __webpack_require__("2MIV");
+var _symbolObservable = __webpack_require__("3yIl");
 
 var _symbolObservable2 = _interopRequireDefault(_symbolObservable);
 
@@ -29130,10 +29294,16 @@ ListItem.create = Object(__WEBPACK_IMPORTED_MODULE_10__lib__["m" /* createShorth
 /***/ "Lpou":
 /***/ (function(module, exports, __webpack_require__) {
 
-var apply = __webpack_require__("8AZL"),
-    assignInWith = __webpack_require__("zZmx"),
-    baseRest = __webpack_require__("YkxI"),
-    customDefaultsAssignIn = __webpack_require__("blm4");
+var baseRest = __webpack_require__("YkxI"),
+    eq = __webpack_require__("22B7"),
+    isIterateeCall = __webpack_require__("zBOP"),
+    keysIn = __webpack_require__("t8rQ");
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
 
 /**
  * Assigns own and inherited enumerable string keyed properties of source
@@ -29156,9 +29326,35 @@ var apply = __webpack_require__("8AZL"),
  * _.defaults({ 'a': 1 }, { 'b': 2 }, { 'a': 3 });
  * // => { 'a': 1, 'b': 2 }
  */
-var defaults = baseRest(function(args) {
-  args.push(undefined, customDefaultsAssignIn);
-  return apply(assignInWith, undefined, args);
+var defaults = baseRest(function(object, sources) {
+  object = Object(object);
+
+  var index = -1;
+  var length = sources.length;
+  var guard = length > 2 ? sources[2] : undefined;
+
+  if (guard && isIterateeCall(sources[0], sources[1], guard)) {
+    length = 1;
+  }
+
+  while (++index < length) {
+    var source = sources[index];
+    var props = keysIn(source);
+    var propsIndex = -1;
+    var propsLength = props.length;
+
+    while (++propsIndex < propsLength) {
+      var key = props[propsIndex];
+      var value = object[key];
+
+      if (value === undefined ||
+          (eq(value, objectProto[key]) && !hasOwnProperty.call(object, key))) {
+        object[key] = source[key];
+      }
+    }
+  }
+
+  return object;
 });
 
 module.exports = defaults;
@@ -29951,7 +30147,7 @@ function blockHTML(eat, value, silent) {
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.17.4';
+  var VERSION = '4.17.5';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
@@ -30082,7 +30278,6 @@ function blockHTML(eat, value, silent) {
   /** Used to match property names within property paths. */
   var reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/,
       reIsPlainProp = /^\w*$/,
-      reLeadingDot = /^\./,
       rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g;
 
   /**
@@ -30182,8 +30377,8 @@ function blockHTML(eat, value, silent) {
       reOptMod = rsModifier + '?',
       rsOptVar = '[' + rsVarRange + ']?',
       rsOptJoin = '(?:' + rsZWJ + '(?:' + [rsNonAstral, rsRegional, rsSurrPair].join('|') + ')' + rsOptVar + reOptMod + ')*',
-      rsOrdLower = '\\d*(?:(?:1st|2nd|3rd|(?![123])\\dth)\\b)',
-      rsOrdUpper = '\\d*(?:(?:1ST|2ND|3RD|(?![123])\\dTH)\\b)',
+      rsOrdLower = '\\d*(?:1st|2nd|3rd|(?![123])\\dth)(?=\\b|[A-Z_])',
+      rsOrdUpper = '\\d*(?:1ST|2ND|3RD|(?![123])\\dTH)(?=\\b|[a-z_])',
       rsSeq = rsOptVar + reOptMod + rsOptJoin,
       rsEmoji = '(?:' + [rsDingbat, rsRegional, rsSurrPair].join('|') + ')' + rsSeq,
       rsSymbol = '(?:' + [rsNonAstral + rsCombo + '?', rsCombo, rsRegional, rsSurrPair, rsAstral].join('|') + ')';
@@ -30389,34 +30584,6 @@ function blockHTML(eat, value, silent) {
       nodeIsTypedArray = nodeUtil && nodeUtil.isTypedArray;
 
   /*--------------------------------------------------------------------------*/
-
-  /**
-   * Adds the key-value `pair` to `map`.
-   *
-   * @private
-   * @param {Object} map The map to modify.
-   * @param {Array} pair The key-value pair to add.
-   * @returns {Object} Returns `map`.
-   */
-  function addMapEntry(map, pair) {
-    // Don't return `map.set` because it's not chainable in IE 11.
-    map.set(pair[0], pair[1]);
-    return map;
-  }
-
-  /**
-   * Adds `value` to `set`.
-   *
-   * @private
-   * @param {Object} set The set to modify.
-   * @param {*} value The value to add.
-   * @returns {Object} Returns `set`.
-   */
-  function addSetEntry(set, value) {
-    // Don't return `set.add` because it's not chainable in IE 11.
-    set.add(value);
-    return set;
-  }
 
   /**
    * A faster alternative to `Function#apply`, this function invokes `func`
@@ -31182,6 +31349,20 @@ function blockHTML(eat, value, silent) {
       }
     }
     return result;
+  }
+
+  /**
+   * Gets the value at `key`, unless `key` is "__proto__".
+   *
+   * @private
+   * @param {Object} object The object to query.
+   * @param {string} key The key of the property to get.
+   * @returns {*} Returns the property value.
+   */
+  function safeGet(object, key) {
+    return key == '__proto__'
+      ? undefined
+      : object[key];
   }
 
   /**
@@ -32616,7 +32797,7 @@ function blockHTML(eat, value, silent) {
           if (!cloneableTags[tag]) {
             return object ? value : {};
           }
-          result = initCloneByTag(value, tag, baseClone, isDeep);
+          result = initCloneByTag(value, tag, isDeep);
         }
       }
       // Check for circular references and return its corresponding clone.
@@ -32626,6 +32807,22 @@ function blockHTML(eat, value, silent) {
         return stacked;
       }
       stack.set(value, result);
+
+      if (isSet(value)) {
+        value.forEach(function(subValue) {
+          result.add(baseClone(subValue, bitmask, customizer, subValue, value, stack));
+        });
+
+        return result;
+      }
+
+      if (isMap(value)) {
+        value.forEach(function(subValue, key) {
+          result.set(key, baseClone(subValue, bitmask, customizer, key, value, stack));
+        });
+
+        return result;
+      }
 
       var keysFunc = isFull
         ? (isFlat ? getAllKeysIn : getAllKeys)
@@ -33554,7 +33751,7 @@ function blockHTML(eat, value, silent) {
         }
         else {
           var newValue = customizer
-            ? customizer(object[key], srcValue, (key + ''), object, source, stack)
+            ? customizer(safeGet(object, key), srcValue, (key + ''), object, source, stack)
             : undefined;
 
           if (newValue === undefined) {
@@ -33581,8 +33778,8 @@ function blockHTML(eat, value, silent) {
      *  counterparts.
      */
     function baseMergeDeep(object, source, key, srcIndex, mergeFunc, customizer, stack) {
-      var objValue = object[key],
-          srcValue = source[key],
+      var objValue = safeGet(object, key),
+          srcValue = safeGet(source, key),
           stacked = stack.get(srcValue);
 
       if (stacked) {
@@ -34491,20 +34688,6 @@ function blockHTML(eat, value, silent) {
     }
 
     /**
-     * Creates a clone of `map`.
-     *
-     * @private
-     * @param {Object} map The map to clone.
-     * @param {Function} cloneFunc The function to clone values.
-     * @param {boolean} [isDeep] Specify a deep clone.
-     * @returns {Object} Returns the cloned map.
-     */
-    function cloneMap(map, isDeep, cloneFunc) {
-      var array = isDeep ? cloneFunc(mapToArray(map), CLONE_DEEP_FLAG) : mapToArray(map);
-      return arrayReduce(array, addMapEntry, new map.constructor);
-    }
-
-    /**
      * Creates a clone of `regexp`.
      *
      * @private
@@ -34515,20 +34698,6 @@ function blockHTML(eat, value, silent) {
       var result = new regexp.constructor(regexp.source, reFlags.exec(regexp));
       result.lastIndex = regexp.lastIndex;
       return result;
-    }
-
-    /**
-     * Creates a clone of `set`.
-     *
-     * @private
-     * @param {Object} set The set to clone.
-     * @param {Function} cloneFunc The function to clone values.
-     * @param {boolean} [isDeep] Specify a deep clone.
-     * @returns {Object} Returns the cloned set.
-     */
-    function cloneSet(set, isDeep, cloneFunc) {
-      var array = isDeep ? cloneFunc(setToArray(set), CLONE_DEEP_FLAG) : setToArray(set);
-      return arrayReduce(array, addSetEntry, new set.constructor);
     }
 
     /**
@@ -36125,7 +36294,7 @@ function blockHTML(eat, value, silent) {
      */
     function initCloneArray(array) {
       var length = array.length,
-          result = array.constructor(length);
+          result = new array.constructor(length);
 
       // Add properties assigned by `RegExp#exec`.
       if (length && typeof array[0] == 'string' && hasOwnProperty.call(array, 'index')) {
@@ -36152,16 +36321,15 @@ function blockHTML(eat, value, silent) {
      * Initializes an object clone based on its `toStringTag`.
      *
      * **Note:** This function only supports cloning values with tags of
-     * `Boolean`, `Date`, `Error`, `Number`, `RegExp`, or `String`.
+     * `Boolean`, `Date`, `Error`, `Map`, `Number`, `RegExp`, `Set`, or `String`.
      *
      * @private
      * @param {Object} object The object to clone.
      * @param {string} tag The `toStringTag` of the object to clone.
-     * @param {Function} cloneFunc The function to clone values.
      * @param {boolean} [isDeep] Specify a deep clone.
      * @returns {Object} Returns the initialized clone.
      */
-    function initCloneByTag(object, tag, cloneFunc, isDeep) {
+    function initCloneByTag(object, tag, isDeep) {
       var Ctor = object.constructor;
       switch (tag) {
         case arrayBufferTag:
@@ -36180,7 +36348,7 @@ function blockHTML(eat, value, silent) {
           return cloneTypedArray(object, isDeep);
 
         case mapTag:
-          return cloneMap(object, isDeep, cloneFunc);
+          return new Ctor;
 
         case numberTag:
         case stringTag:
@@ -36190,7 +36358,7 @@ function blockHTML(eat, value, silent) {
           return cloneRegExp(object);
 
         case setTag:
-          return cloneSet(object, isDeep, cloneFunc);
+          return new Ctor;
 
         case symbolTag:
           return cloneSymbol(object);
@@ -36237,10 +36405,13 @@ function blockHTML(eat, value, silent) {
      * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
      */
     function isIndex(value, length) {
+      var type = typeof value;
       length = length == null ? MAX_SAFE_INTEGER : length;
+
       return !!length &&
-        (typeof value == 'number' || reIsUint.test(value)) &&
-        (value > -1 && value % 1 == 0 && value < length);
+        (type == 'number' ||
+          (type != 'symbol' && reIsUint.test(value))) &&
+            (value > -1 && value % 1 == 0 && value < length);
     }
 
     /**
@@ -36690,11 +36861,11 @@ function blockHTML(eat, value, silent) {
      */
     var stringToPath = memoizeCapped(function(string) {
       var result = [];
-      if (reLeadingDot.test(string)) {
+      if (string.charCodeAt(0) === 46 /* . */) {
         result.push('');
       }
-      string.replace(rePropName, function(match, number, quote, string) {
-        result.push(quote ? string.replace(reEscapeChar, '$1') : (number || match));
+      string.replace(rePropName, function(match, number, quote, subString) {
+        result.push(quote ? subString.replace(reEscapeChar, '$1') : (number || match));
       });
       return result;
     });
@@ -40302,9 +40473,11 @@ function blockHTML(eat, value, silent) {
       function remainingWait(time) {
         var timeSinceLastCall = time - lastCallTime,
             timeSinceLastInvoke = time - lastInvokeTime,
-            result = wait - timeSinceLastCall;
+            timeWaiting = wait - timeSinceLastCall;
 
-        return maxing ? nativeMin(result, maxWait - timeSinceLastInvoke) : result;
+        return maxing
+          ? nativeMin(timeWaiting, maxWait - timeSinceLastInvoke)
+          : timeWaiting;
       }
 
       function shouldInvoke(time) {
@@ -42736,9 +42909,35 @@ function blockHTML(eat, value, silent) {
      * _.defaults({ 'a': 1 }, { 'b': 2 }, { 'a': 3 });
      * // => { 'a': 1, 'b': 2 }
      */
-    var defaults = baseRest(function(args) {
-      args.push(undefined, customDefaultsAssignIn);
-      return apply(assignInWith, undefined, args);
+    var defaults = baseRest(function(object, sources) {
+      object = Object(object);
+
+      var index = -1;
+      var length = sources.length;
+      var guard = length > 2 ? sources[2] : undefined;
+
+      if (guard && isIterateeCall(sources[0], sources[1], guard)) {
+        length = 1;
+      }
+
+      while (++index < length) {
+        var source = sources[index];
+        var props = keysIn(source);
+        var propsIndex = -1;
+        var propsLength = props.length;
+
+        while (++propsIndex < propsLength) {
+          var key = props[propsIndex];
+          var value = object[key];
+
+          if (value === undefined ||
+              (eq(value, objectProto[key]) && !hasOwnProperty.call(object, key))) {
+            object[key] = source[key];
+          }
+        }
+      }
+
+      return object;
     });
 
     /**
@@ -43135,6 +43334,11 @@ function blockHTML(eat, value, silent) {
      * // => { '1': 'c', '2': 'b' }
      */
     var invert = createInverter(function(result, value, key) {
+      if (value != null &&
+          typeof value.toString != 'function') {
+        value = nativeObjectToString.call(value);
+      }
+
       result[value] = key;
     }, constant(identity));
 
@@ -43165,6 +43369,11 @@ function blockHTML(eat, value, silent) {
      * // => { 'group1': ['a', 'c'], 'group2': ['b'] }
      */
     var invertBy = createInverter(function(result, value, key) {
+      if (value != null &&
+          typeof value.toString != 'function') {
+        value = nativeObjectToString.call(value);
+      }
+
       if (hasOwnProperty.call(result, value)) {
         result[value].push(key);
       } else {
@@ -50873,11 +51082,13 @@ function reference(eat, value, silent) {
   queue = '';
 
   /* Check whether we’re eating a footnote. */
-  if (
-    self.options.footnotes &&
-    type === T_LINK &&
-    value.charAt(index) === C_CARET
-  ) {
+  if (self.options.footnotes && value.charAt(index) === C_CARET) {
+    /* Exit if `![^` is found, so the `!` will be seen as text after this,
+     * and we’ll enter this function again when `[^` is found. */
+    if (type === T_IMAGE) {
+      return;
+    }
+
     intro += C_CARET;
     index++;
     type = T_FOOTNOTE;
@@ -52232,10 +52443,13 @@ var _formatReactElementNode = __webpack_require__("EPWj");
 
 var _formatReactElementNode2 = _interopRequireDefault(_formatReactElementNode);
 
+var _formatReactFragmentNode = __webpack_require__("F1Jr");
+
+var _formatReactFragmentNode2 = _interopRequireDefault(_formatReactFragmentNode);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var jsxStopChars = ['<', '>', '{', '}'];
-
 var shouldBeEscaped = function shouldBeEscaped(s) {
   return jsxStopChars.some(function (jsxStopChar) {
     return s.includes(jsxStopChar);
@@ -52274,6 +52488,10 @@ exports.default = function (node, inline, lvl, options) {
 
   if (node.type === 'ReactElement') {
     return (0, _formatReactElementNode2.default)(node, inline, lvl, options);
+  }
+
+  if (node.type === 'ReactFragment') {
+    return (0, _formatReactFragmentNode2.default)(node, inline, lvl, options);
   }
 
   throw new TypeError('Unknow format type "' + node.type + '"');
@@ -52782,11 +53000,12 @@ var MultiGrid = function (_PureComponent) {
       var _props5 = this.props,
           onScroll = _props5.onScroll,
           onSectionRendered = _props5.onSectionRendered,
+          onScrollbarPresenceChange = _props5.onScrollbarPresenceChange,
           scrollLeftProp = _props5.scrollLeft,
           scrollToColumn = _props5.scrollToColumn,
           scrollTopProp = _props5.scrollTop,
           scrollToRow = _props5.scrollToRow,
-          rest = __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_objectWithoutProperties___default()(_props5, ['onScroll', 'onSectionRendered', 'scrollLeft', 'scrollToColumn', 'scrollTop', 'scrollToRow']);
+          rest = __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_objectWithoutProperties___default()(_props5, ['onScroll', 'onSectionRendered', 'onScrollbarPresenceChange', 'scrollLeft', 'scrollToColumn', 'scrollTop', 'scrollToRow']);
 
       // Don't render any of our Grids if there are no cells.
       // This mirrors what Grid does,
@@ -53141,6 +53360,16 @@ var MultiGrid = function (_PureComponent) {
           showHorizontalScrollbar: horizontal,
           showVerticalScrollbar: vertical
         });
+
+        var onScrollbarPresenceChange = this.props.onScrollbarPresenceChange;
+
+        if (typeof onScrollbarPresenceChange === 'function') {
+          onScrollbarPresenceChange({
+            horizontal: horizontal,
+            size: size,
+            vertical: vertical
+          });
+        }
       }
     }
   }, {
@@ -53345,6 +53574,7 @@ MultiGrid.propTypes =  false ? {
   enableFixedRowScroll: PropTypes.bool.isRequired,
   fixedColumnCount: PropTypes.number.isRequired,
   fixedRowCount: PropTypes.number.isRequired,
+  onScrollbarPresenceChange: PropTypes.func,
   style: PropTypes.object.isRequired,
   styleBottomLeftGrid: PropTypes.object.isRequired,
   styleBottomRightGrid: PropTypes.object.isRequired,
@@ -53738,6 +53968,40 @@ Divider.propTypes =  false ? {
 } : {};
 
 /* unused harmony default export */ var _unused_webpack_default_export = (Divider);
+
+/***/ }),
+
+/***/ "SGXn":
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseIsSet = __webpack_require__("eP4g"),
+    baseUnary = __webpack_require__("S7p9"),
+    nodeUtil = __webpack_require__("Dc0G");
+
+/* Node.js helper references. */
+var nodeIsSet = nodeUtil && nodeUtil.isSet;
+
+/**
+ * Checks if `value` is classified as a `Set` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.3.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a set, else `false`.
+ * @example
+ *
+ * _.isSet(new Set);
+ * // => true
+ *
+ * _.isSet(new WeakSet);
+ * // => false
+ */
+var isSet = nodeIsSet ? baseUnary(nodeIsSet) : baseIsSet;
+
+module.exports = isSet;
+
 
 /***/ }),
 
@@ -55396,28 +55660,6 @@ module.exports = func;
 
 /***/ }),
 
-/***/ "U7Aq":
-/***/ (function(module, exports) {
-
-/**
- * Adds the key-value `pair` to `map`.
- *
- * @private
- * @param {Object} map The map to modify.
- * @param {Array} pair The key-value pair to add.
- * @returns {Object} Returns `map`.
- */
-function addMapEntry(map, pair) {
-  // Don't return `map.set` because it's not chainable in IE 11.
-  map.set(pair[0], pair[1]);
-  return map;
-}
-
-module.exports = addMapEntry;
-
-
-/***/ }),
-
 /***/ "UH7g":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -55958,7 +56200,7 @@ var hasOwnProperty = objectProto.hasOwnProperty;
  */
 function initCloneArray(array) {
   var length = array.length,
-      result = array.constructor(length);
+      result = new array.constructor(length);
 
   // Add properties assigned by `RegExp#exec`.
   if (length && typeof array[0] == 'string' && hasOwnProperty.call(array, 'index')) {
@@ -56015,8 +56257,7 @@ module.exports = isObjectLike;
 var memoizeCapped = __webpack_require__("fMqj");
 
 /** Used to match property names within property paths. */
-var reLeadingDot = /^\./,
-    rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g;
+var rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g;
 
 /** Used to match backslashes in property paths. */
 var reEscapeChar = /\\(\\)?/g;
@@ -56030,11 +56271,11 @@ var reEscapeChar = /\\(\\)?/g;
  */
 var stringToPath = memoizeCapped(function(string) {
   var result = [];
-  if (reLeadingDot.test(string)) {
+  if (string.charCodeAt(0) === 46 /* . */) {
     result.push('');
   }
-  string.replace(rePropName, function(match, number, quote, string) {
-    result.push(quote ? string.replace(reEscapeChar, '$1') : (number || match));
+  string.replace(rePropName, function(match, number, quote, subString) {
+    result.push(quote ? subString.replace(reEscapeChar, '$1') : (number || match));
   });
   return result;
 });
@@ -59783,6 +60024,49 @@ function locate(value, fromIndex) {
 
 /***/ }),
 
+/***/ "Xu6E":
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseGetTag = __webpack_require__("aCM0"),
+    isObjectLike = __webpack_require__("UnEC"),
+    isPlainObject = __webpack_require__("9UkZ");
+
+/** `Object#toString` result references. */
+var domExcTag = '[object DOMException]',
+    errorTag = '[object Error]';
+
+/**
+ * Checks if `value` is an `Error`, `EvalError`, `RangeError`, `ReferenceError`,
+ * `SyntaxError`, `TypeError`, or `URIError` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 3.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an error object, else `false`.
+ * @example
+ *
+ * _.isError(new Error);
+ * // => true
+ *
+ * _.isError(Error);
+ * // => false
+ */
+function isError(value) {
+  if (!isObjectLike(value)) {
+    return false;
+  }
+  var tag = baseGetTag(value);
+  return tag == errorTag || tag == domExcTag ||
+    (typeof value.message == 'string' && typeof value.name == 'string' && !isPlainObject(value));
+}
+
+module.exports = isError;
+
+
+/***/ }),
+
 /***/ "Y2+g":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -59948,7 +60232,7 @@ function defaultRowRenderer(_ref) {
     columns
   );
 }
-defaultRowRenderer.propTypes = babelPluginFlowReactPropTypes_proptype_RowRendererParams === __webpack_require__("KSGD").any ? {} : babelPluginFlowReactPropTypes_proptype_RowRendererParams;
+defaultRowRenderer.propTypes =  true ? null : babelPluginFlowReactPropTypes_proptype_RowRendererParams === require('prop-types').any ? {} : babelPluginFlowReactPropTypes_proptype_RowRendererParams;
 
 /***/ }),
 
@@ -60581,8 +60865,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
-var MIN_NUMBER_OF_PARENTS = 300;
-var MAX_NUMBER_OF_CHILDREN = 10;
+var MIN_NUMBER_OF_PARENTS = 500;
+var MAX_NUMBER_OF_CHILDREN = 15;
 var MAX_DEEPNESS = 4;
 
 var Deletable = __WEBPACK_IMPORTED_MODULE_2__src_renderers__["a" /* default */].Deletable,
@@ -61771,10 +62055,13 @@ var reIsUint = /^(?:0|[1-9]\d*)$/;
  * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
  */
 function isIndex(value, length) {
+  var type = typeof value;
   length = length == null ? MAX_SAFE_INTEGER : length;
+
   return !!length &&
-    (typeof value == 'number' || reIsUint.test(value)) &&
-    (value > -1 && value % 1 == 0 && value < length);
+    (type == 'number' ||
+      (type != 'symbol' && reIsUint.test(value))) &&
+        (value > -1 && value % 1 == 0 && value < length);
 }
 
 module.exports = isIndex;
@@ -62279,7 +62566,7 @@ var constructTree = function constructTree(maxDeepness, maxNumberOfChildren, min
       name: 'Leaf ' + id,
       children: numberOfChildren ? constructTree(maxDeepness, maxNumberOfChildren, numberOfChildren, deepness + 1) : [],
       state: {
-        expanded: numberOfChildren && Boolean(Math.round(Math.random())),
+        expanded: numberOfChildren ? Boolean(Math.round(Math.random())) : false,
         favorite: Boolean(Math.round(Math.random())),
         deletable: Boolean(Math.round(Math.random()))
       }
@@ -62704,7 +62991,7 @@ function link(eat, value, silent) {
 
   subvalue += C_PAREN_CLOSE;
 
-  url = self.decode.raw(self.unescape(url), eat(beforeURL).test().end);
+  url = self.decode.raw(self.unescape(url), eat(beforeURL).test().end, {nonTerminated: false});
 
   if (title) {
     beforeTitle = eat(beforeTitle).test().end;
@@ -63506,7 +63793,9 @@ module.exports = {
   'curry': __webpack_require__("OV5o"),
   'forEach': __webpack_require__("PqYH"),
   'isArray': __webpack_require__("NGEn"),
+  'isError': __webpack_require__("Xu6E"),
   'isFunction': __webpack_require__("gGqR"),
+  'isWeakMap': __webpack_require__("E7Bb"),
   'iteratee': __webpack_require__("pJm+"),
   'keys': __webpack_require__("/GnY"),
   'rearg': __webpack_require__("G5Zz"),
@@ -63638,43 +63927,6 @@ function convert(name, func, options) {
 
 module.exports = convert;
 
-
-/***/ }),
-
-/***/ "bFAv":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(global, module) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _ponyfill = __webpack_require__("zzRL");
-
-var _ponyfill2 = _interopRequireDefault(_ponyfill);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-var root; /* global window */
-
-
-if (typeof self !== 'undefined') {
-  root = self;
-} else if (typeof window !== 'undefined') {
-  root = window;
-} else if (typeof global !== 'undefined') {
-  root = global;
-} else if (true) {
-  root = module;
-} else {
-  root = Function('return this')();
-}
-
-var result = (0, _ponyfill2['default'])(root);
-exports['default'] = result;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("DuR2"), __webpack_require__("3IRH")(module)))
 
 /***/ }),
 
@@ -64750,42 +65002,6 @@ module.exports = freeGlobal;
 
 /***/ }),
 
-/***/ "blm4":
-/***/ (function(module, exports, __webpack_require__) {
-
-var eq = __webpack_require__("22B7");
-
-/** Used for built-in method references. */
-var objectProto = Object.prototype;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/**
- * Used by `_.defaults` to customize its `_.assignIn` use to assign properties
- * of source objects to the destination object for all destination properties
- * that resolve to `undefined`.
- *
- * @private
- * @param {*} objValue The destination value.
- * @param {*} srcValue The source value.
- * @param {string} key The key of the property to assign.
- * @param {Object} object The parent object of `objValue`.
- * @returns {*} Returns the value to assign.
- */
-function customDefaultsAssignIn(objValue, srcValue, key, object) {
-  if (objValue === undefined ||
-      (eq(objValue, objectProto[key]) && !hasOwnProperty.call(object, key))) {
-    return srcValue;
-  }
-  return objValue;
-}
-
-module.exports = customDefaultsAssignIn;
-
-
-/***/ }),
-
 /***/ "bndy":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -65703,12 +65919,10 @@ module.exports = function getOwnPropertyDescriptor(it, key) {
 
 "use strict";
 /**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
+ * Copyright (c) 2013-present, Facebook, Inc.
  *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 
@@ -67866,16 +68080,16 @@ var CellMeasurer = function (_React$PureComponent) {
 
 
 CellMeasurer.__internalCellMeasurerFlag = false;
-CellMeasurer.propTypes = {
-  cache: typeof __WEBPACK_IMPORTED_MODULE_7__CellMeasurerCache_js__["a" /* default */] === 'function' ? __webpack_require__("KSGD").instanceOf(__WEBPACK_IMPORTED_MODULE_7__CellMeasurerCache_js__["a" /* default */]).isRequired : __webpack_require__("KSGD").any.isRequired,
-  children: __webpack_require__("KSGD").oneOfType([__webpack_require__("KSGD").func, __webpack_require__("KSGD").node]).isRequired,
-  columnIndex: __webpack_require__("KSGD").number,
-  index: __webpack_require__("KSGD").number,
-  parent: __webpack_require__("KSGD").shape({
-    invalidateCellSizeAfterRender: __webpack_require__("KSGD").func,
-    recomputeGridSize: __webpack_require__("KSGD").func
+CellMeasurer.propTypes =  true ? null : {
+  cache: typeof CellMeasurerCache === 'function' ? require('prop-types').instanceOf(CellMeasurerCache).isRequired : require('prop-types').any.isRequired,
+  children: require('prop-types').oneOfType([require('prop-types').func, require('prop-types').node]).isRequired,
+  columnIndex: require('prop-types').number,
+  index: require('prop-types').number,
+  parent: require('prop-types').shape({
+    invalidateCellSizeAfterRender: require('prop-types').func,
+    recomputeGridSize: require('prop-types').func
   }).isRequired,
-  rowIndex: __webpack_require__("KSGD").number
+  rowIndex: require('prop-types').number
 };
 /* harmony default export */ __webpack_exports__["a"] = (CellMeasurer);
 if (false) {
@@ -68430,6 +68644,40 @@ var convert = __webpack_require__("b6tY"),
 
 func.placeholder = __webpack_require__("qXkD");
 module.exports = func;
+
+
+/***/ }),
+
+/***/ "dwsC":
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseIsMap = __webpack_require__("86tT"),
+    baseUnary = __webpack_require__("S7p9"),
+    nodeUtil = __webpack_require__("Dc0G");
+
+/* Node.js helper references. */
+var nodeIsMap = nodeUtil && nodeUtil.isMap;
+
+/**
+ * Checks if `value` is classified as a `Map` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.3.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a map, else `false`.
+ * @example
+ *
+ * _.isMap(new Map);
+ * // => true
+ *
+ * _.isMap(new WeakMap);
+ * // => false
+ */
+var isMap = nodeIsMap ? baseUnary(nodeIsMap) : baseIsMap;
+
+module.exports = isMap;
 
 
 /***/ }),
@@ -69257,6 +69505,31 @@ module.exports = baseMatchesProperty;
 
 /***/ }),
 
+/***/ "eP4g":
+/***/ (function(module, exports, __webpack_require__) {
+
+var getTag = __webpack_require__("gHOb"),
+    isObjectLike = __webpack_require__("UnEC");
+
+/** `Object#toString` result references. */
+var setTag = '[object Set]';
+
+/**
+ * The base implementation of `_.isSet` without Node.js optimizations.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a set, else `false`.
+ */
+function baseIsSet(value) {
+  return isObjectLike(value) && getTag(value) == setTag;
+}
+
+module.exports = baseIsSet;
+
+
+/***/ }),
+
 /***/ "eQ63":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -69545,7 +69818,7 @@ function url(eat, value, silent) {
   return eat(subvalue)({
     type: 'link',
     title: null,
-    url: decode(subvalue),
+    url: decode(subvalue, {nonTerminated: false}),
     children: content
   });
 }
@@ -70162,6 +70435,37 @@ CardDescription.propTypes =  false ? {
 } : {};
 
 /* harmony default export */ __webpack_exports__["a"] = (CardDescription);
+
+/***/ }),
+
+/***/ "f1Eh":
+/***/ (function(module, exports) {
+
+module.exports = function(originalModule) {
+	if(!originalModule.webpackPolyfill) {
+		var module = Object.create(originalModule);
+		// module.parent = undefined by default
+		if(!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		Object.defineProperty(module, "exports", {
+			enumerable: true,
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
 
 /***/ }),
 
@@ -71801,6 +72105,8 @@ var reactElementToJsxString = function reactElementToJsxString(element) {
       tabStop = _ref$tabStop === undefined ? 2 : _ref$tabStop,
       _ref$useBooleanShorth = _ref.useBooleanShorthandSyntax,
       useBooleanShorthandSyntax = _ref$useBooleanShorth === undefined ? true : _ref$useBooleanShorth,
+      _ref$useFragmentShort = _ref.useFragmentShortSyntax,
+      useFragmentShortSyntax = _ref$useFragmentShort === undefined ? true : _ref$useFragmentShort,
       _ref$sortProps = _ref.sortProps,
       sortProps = _ref$sortProps === undefined ? true : _ref$sortProps,
       maxInlineAttributesLineLength = _ref.maxInlineAttributesLineLength,
@@ -71817,6 +72123,7 @@ var reactElementToJsxString = function reactElementToJsxString(element) {
     functionValue: functionValue,
     tabStop: tabStop,
     useBooleanShorthandSyntax: useBooleanShorthandSyntax,
+    useFragmentShortSyntax: useFragmentShortSyntax,
     sortProps: sortProps,
     maxInlineAttributesLineLength: maxInlineAttributesLineLength,
     displayName: displayName
@@ -72227,72 +72534,78 @@ function unregisterScrollListener(component, element) {
 /***/ "hYij":
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
 /**
  * Copyright 2015, Yahoo! Inc.
  * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
  */
-
-
-var REACT_STATICS = {
-    childContextTypes: true,
-    contextTypes: true,
-    defaultProps: true,
-    displayName: true,
-    getDefaultProps: true,
-    mixins: true,
-    propTypes: true,
-    type: true
-};
-
-var KNOWN_STATICS = {
-  name: true,
-  length: true,
-  prototype: true,
-  caller: true,
-  callee: true,
-  arguments: true,
-  arity: true
-};
-
-var defineProperty = Object.defineProperty;
-var getOwnPropertyNames = Object.getOwnPropertyNames;
-var getOwnPropertySymbols = Object.getOwnPropertySymbols;
-var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
-var getPrototypeOf = Object.getPrototypeOf;
-var objectPrototype = getPrototypeOf && getPrototypeOf(Object);
-
-module.exports = function hoistNonReactStatics(targetComponent, sourceComponent, blacklist) {
-    if (typeof sourceComponent !== 'string') { // don't hoist over string (html) components
-
-        if (objectPrototype) {
-            var inheritedComponent = getPrototypeOf(sourceComponent);
-            if (inheritedComponent && inheritedComponent !== objectPrototype) {
-                hoistNonReactStatics(targetComponent, inheritedComponent, blacklist);
+(function (global, factory) {
+     true ? module.exports = factory() :
+    typeof define === 'function' && define.amd ? define(factory) :
+    (global.hoistNonReactStatics = factory());
+}(this, (function () {
+    'use strict';
+    
+    var REACT_STATICS = {
+        childContextTypes: true,
+        contextTypes: true,
+        defaultProps: true,
+        displayName: true,
+        getDefaultProps: true,
+        getDerivedStateFromProps: true,
+        mixins: true,
+        propTypes: true,
+        type: true
+    };
+    
+    var KNOWN_STATICS = {
+        name: true,
+        length: true,
+        prototype: true,
+        caller: true,
+        callee: true,
+        arguments: true,
+        arity: true
+    };
+    
+    var defineProperty = Object.defineProperty;
+    var getOwnPropertyNames = Object.getOwnPropertyNames;
+    var getOwnPropertySymbols = Object.getOwnPropertySymbols;
+    var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
+    var getPrototypeOf = Object.getPrototypeOf;
+    var objectPrototype = getPrototypeOf && getPrototypeOf(Object);
+    
+    return function hoistNonReactStatics(targetComponent, sourceComponent, blacklist) {
+        if (typeof sourceComponent !== 'string') { // don't hoist over string (html) components
+            
+            if (objectPrototype) {
+                var inheritedComponent = getPrototypeOf(sourceComponent);
+                if (inheritedComponent && inheritedComponent !== objectPrototype) {
+                    hoistNonReactStatics(targetComponent, inheritedComponent, blacklist);
+                }
             }
-        }
-
-        var keys = getOwnPropertyNames(sourceComponent);
-
-        if (getOwnPropertySymbols) {
-            keys = keys.concat(getOwnPropertySymbols(sourceComponent));
-        }
-
-        for (var i = 0; i < keys.length; ++i) {
-            var key = keys[i];
-            if (!REACT_STATICS[key] && !KNOWN_STATICS[key] && (!blacklist || !blacklist[key])) {
-                var descriptor = getOwnPropertyDescriptor(sourceComponent, key);
-                try { // Avoid failures from read-only properties
-                    defineProperty(targetComponent, key, descriptor);
-                } catch (e) {}
+            
+            var keys = getOwnPropertyNames(sourceComponent);
+            
+            if (getOwnPropertySymbols) {
+                keys = keys.concat(getOwnPropertySymbols(sourceComponent));
             }
+            
+            for (var i = 0; i < keys.length; ++i) {
+                var key = keys[i];
+                if (!REACT_STATICS[key] && !KNOWN_STATICS[key] && (!blacklist || !blacklist[key])) {
+                    var descriptor = getOwnPropertyDescriptor(sourceComponent, key);
+                    try { // Avoid failures from read-only properties
+                        defineProperty(targetComponent, key, descriptor);
+                    } catch (e) {}
+                }
+            }
+            
+            return targetComponent;
         }
-
+        
         return targetComponent;
-    }
-
-    return targetComponent;
-};
+    };
+})));
 
 
 /***/ }),
@@ -72977,6 +73290,7 @@ module.exports = ary;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ChangeRenderers__ = __webpack_require__("vNZe");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Extensions__ = __webpack_require__("ogZy");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Filterable__ = __webpack_require__("ThmK");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__NodeMeasure__ = __webpack_require__("o04M");
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 
@@ -72988,7 +73302,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
 
-/* harmony default export */ __webpack_exports__["a"] = (_extends({}, __WEBPACK_IMPORTED_MODULE_2__Basic__["a" /* default */], __WEBPACK_IMPORTED_MODULE_3__Renderers__["a" /* default */], __WEBPACK_IMPORTED_MODULE_5__ChangeRenderers__["a" /* default */], __WEBPACK_IMPORTED_MODULE_4__WorldCup__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__LargeCollection__["a" /* default */], __WEBPACK_IMPORTED_MODULE_6__Extensions__["a" /* default */], __WEBPACK_IMPORTED_MODULE_7__Filterable__["a" /* default */]));
+
+/* harmony default export */ __webpack_exports__["a"] = (_extends({}, __WEBPACK_IMPORTED_MODULE_2__Basic__["a" /* default */], __WEBPACK_IMPORTED_MODULE_3__Renderers__["a" /* default */], __WEBPACK_IMPORTED_MODULE_5__ChangeRenderers__["a" /* default */], __WEBPACK_IMPORTED_MODULE_4__WorldCup__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__LargeCollection__["a" /* default */], __WEBPACK_IMPORTED_MODULE_6__Extensions__["a" /* default */], __WEBPACK_IMPORTED_MODULE_7__Filterable__["a" /* default */], __WEBPACK_IMPORTED_MODULE_8__NodeMeasure__["a" /* default */]));
 
 /***/ }),
 
@@ -77563,8 +77878,8 @@ module.exports = toPath;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__AutoSizer__ = __webpack_require__("E19O");
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_1__AutoSizer__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__CellMeasurer__ = __webpack_require__("0Bz/");
-/* unused harmony reexport CellMeasurer */
-/* unused harmony reexport CellMeasurerCache */
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_2__CellMeasurer__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_2__CellMeasurer__["b"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Collection__ = __webpack_require__("C3rG");
 /* unused harmony reexport Collection */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ColumnSizer__ = __webpack_require__("9qMq");
@@ -77577,7 +77892,7 @@ module.exports = toPath;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__InfiniteLoader__ = __webpack_require__("Fm4H");
 /* unused harmony reexport InfiniteLoader */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__List__ = __webpack_require__("eQ63");
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_7__List__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_7__List__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Masonry__ = __webpack_require__("5yP5");
 /* unused harmony reexport createMasonryCellPositioner */
 /* unused harmony reexport Masonry */
@@ -77773,28 +78088,6 @@ HashRouter.propTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__createPaginationItems__ = __webpack_require__("eK5M");
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__createPaginationItems__["a"]; });
 
-
-
-/***/ }),
-
-/***/ "nWuj":
-/***/ (function(module, exports) {
-
-/**
- * Adds `value` to `set`.
- *
- * @private
- * @param {Object} set The set to modify.
- * @param {*} value The value to add.
- * @returns {Object} Returns `set`.
- */
-function addSetEntry(set, value) {
-  // Don't return `set.add` because it's not chainable in IE 11.
-  set.add(value);
-  return set;
-}
-
-module.exports = addSetEntry;
 
 
 /***/ }),
@@ -78295,44 +78588,44 @@ module.exports = EventListener;
 /***/ "o/+Y":
 /***/ (function(module, exports, __webpack_require__) {
 
-var babelPluginFlowReactPropTypes_proptype_Index = {
-  index: __webpack_require__("KSGD").number.isRequired
+var babelPluginFlowReactPropTypes_proptype_Index =  true ? null : {
+  index: require("prop-types").number.isRequired
 };
-if (true) Object.defineProperty(exports, "babelPluginFlowReactPropTypes_proptype_Index", {
+if (false) Object.defineProperty(exports, "babelPluginFlowReactPropTypes_proptype_Index", {
   value: babelPluginFlowReactPropTypes_proptype_Index,
   configurable: true
 });
-var babelPluginFlowReactPropTypes_proptype_PositionInfo = {
-  x: __webpack_require__("KSGD").number.isRequired,
-  y: __webpack_require__("KSGD").number.isRequired
+var babelPluginFlowReactPropTypes_proptype_PositionInfo =  true ? null : {
+  x: require("prop-types").number.isRequired,
+  y: require("prop-types").number.isRequired
 };
-if (true) Object.defineProperty(exports, "babelPluginFlowReactPropTypes_proptype_PositionInfo", {
+if (false) Object.defineProperty(exports, "babelPluginFlowReactPropTypes_proptype_PositionInfo", {
   value: babelPluginFlowReactPropTypes_proptype_PositionInfo,
   configurable: true
 });
-var babelPluginFlowReactPropTypes_proptype_ScrollPosition = {
-  scrollLeft: __webpack_require__("KSGD").number.isRequired,
-  scrollTop: __webpack_require__("KSGD").number.isRequired
+var babelPluginFlowReactPropTypes_proptype_ScrollPosition =  true ? null : {
+  scrollLeft: require("prop-types").number.isRequired,
+  scrollTop: require("prop-types").number.isRequired
 };
-if (true) Object.defineProperty(exports, "babelPluginFlowReactPropTypes_proptype_ScrollPosition", {
+if (false) Object.defineProperty(exports, "babelPluginFlowReactPropTypes_proptype_ScrollPosition", {
   value: babelPluginFlowReactPropTypes_proptype_ScrollPosition,
   configurable: true
 });
-var babelPluginFlowReactPropTypes_proptype_SizeAndPositionInfo = {
-  height: __webpack_require__("KSGD").number.isRequired,
-  width: __webpack_require__("KSGD").number.isRequired,
-  x: __webpack_require__("KSGD").number.isRequired,
-  y: __webpack_require__("KSGD").number.isRequired
+var babelPluginFlowReactPropTypes_proptype_SizeAndPositionInfo =  true ? null : {
+  height: require("prop-types").number.isRequired,
+  width: require("prop-types").number.isRequired,
+  x: require("prop-types").number.isRequired,
+  y: require("prop-types").number.isRequired
 };
-if (true) Object.defineProperty(exports, "babelPluginFlowReactPropTypes_proptype_SizeAndPositionInfo", {
+if (false) Object.defineProperty(exports, "babelPluginFlowReactPropTypes_proptype_SizeAndPositionInfo", {
   value: babelPluginFlowReactPropTypes_proptype_SizeAndPositionInfo,
   configurable: true
 });
-var babelPluginFlowReactPropTypes_proptype_SizeInfo = {
-  height: __webpack_require__("KSGD").number.isRequired,
-  width: __webpack_require__("KSGD").number.isRequired
+var babelPluginFlowReactPropTypes_proptype_SizeInfo =  true ? null : {
+  height: require("prop-types").number.isRequired,
+  width: require("prop-types").number.isRequired
 };
-if (true) Object.defineProperty(exports, "babelPluginFlowReactPropTypes_proptype_SizeInfo", {
+if (false) Object.defineProperty(exports, "babelPluginFlowReactPropTypes_proptype_SizeInfo", {
   value: babelPluginFlowReactPropTypes_proptype_SizeInfo,
   configurable: true
 });
@@ -78568,6 +78861,198 @@ var substr = 'ab'.substr(-1) === 'b'
 ;
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("W2nU")))
+
+/***/ }),
+
+/***/ "o04M":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__("GiK3");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__src_TreeContainer__ = __webpack_require__("tWbc");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__src_renderers__ = __webpack_require__("pF2M");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__toolbelt__ = __webpack_require__("ZnvV");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__src_selectors_nodes__ = __webpack_require__("xHY4");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+
+
+
+var Expandable = __WEBPACK_IMPORTED_MODULE_2__src_renderers__["a" /* default */].Expandable;
+
+
+var Nodes = [{
+  id: 'arg',
+  name: 'Argentina',
+  children: [{
+    id: 'messi',
+    name: 'Leo Messi',
+    children: [{ id: 'messi-desc', name: '' }]
+  }, {
+    id: 'maradona',
+    name: 'Diego Maradona',
+    children: [{ id: 'maradona-desc', name: '' }]
+  }]
+}, {
+  id: 'pt',
+  name: 'Portugal',
+  children: [{
+    id: 'cr',
+    name: 'Cristiano Ronaldo',
+    children: [{ id: 'cr-desc', name: '' }]
+  }, {
+    id: 'figo',
+    name: 'Luis Figo',
+    children: [{ id: 'figo-desc', name: '' }]
+  }]
+}, {
+  id: 'br',
+  name: 'Brazil',
+  children: [{
+    id: 'r',
+    name: 'Ronaldo',
+    children: [{ id: 'r-desc', name: '' }]
+  }, {
+    id: 'r10',
+    name: 'Ronaldinho',
+    children: [{ id: 'r10-desc', name: '' }]
+  }, {
+    id: 'pele',
+    name: 'Pele',
+    children: [{ id: 'pele-desc', name: '' }]
+  }]
+}, {
+  id: 'fr',
+  name: 'France',
+  children: [{
+    id: 'z',
+    name: 'Zinedine Zidane',
+    children: [{ id: 'z-desc', name: '' }]
+  }, {
+    id: 'pl',
+    name: 'Michel Platini',
+    children: [{ id: 'pl-desc', name: '' }]
+  }]
+}];
+
+var DESCRIPTIONS = {
+  fr: 'France (French: [fʁɑ̃s]), officially the French Republic (French: République française, pronounced [ʁepyblik fʁɑ̃sɛz]), is a country whose territory consists of metropolitan France in western Europe, as well as several overseas regions and territories.[XIII] The metropolitan area of France extends from the Mediterranean Sea to the English Channel and the North Sea, and from the Rhine to the Atlantic Ocean. The overseas territories include French Guiana in South America and several islands in the Atlantic, Pacific and Indian oceans. The countrys 18 integral regions (five of which are situated overseas) span a combined area of 643,801 square kilometres (248,573 sq mi) which, as of October 2017, has a population of 67.15 million people.[10] France is a unitary semi-presidential republic with its capital in Paris, the countrys largest city and main cultural and commercial centre. Other major urban centres include Marseille, Lyon, Lille, Nice, Toulouse and Bordeaux.',
+  arg: 'Argentina (/ˌɑːrdʒənˈtiːnə/ (About this sound listen); Spanish: [aɾxenˈtina]), officially the Argentine Republic[A] (Spanish: República Argentina), is a federal republic located mostly in the southern half of South America. Sharing the bulk of the Southern Cone with its neighbor Chile to the west, the country is also bordered by Bolivia and Paraguay to the north, Brazil to the northeast, Uruguay and the South Atlantic Ocean to the east, and the Drake Passage to the south. With a mainland area of 2,780,400 km2 (1,073,500 sq mi),[B] Argentina is the eighth-largest country in the world, the second largest in Latin America, and the largest Spanish-speaking nation. It is subdivided into twenty-three provinces (Spanish: provincias, singular provincia) and one autonomous city (ciudad autónoma), Buenos Aires, which is the federal capital of the nation (Spanish: Capital Federal) as decided by Congress.[11] The provinces and the capital have their own constitutions, but exist under a federal system. Argentina claims sovereignty over part of Antarctica, the Falkland Islands (Spanish: Islas Malvinas), and South Georgia and the South Sandwich Islands.',
+  pt: 'Portugal (Portuguese: [puɾtuˈɣaɫ]), officially the Portuguese Republic (Portuguese: República Portuguesa ,[note 1] is a sovereign state located mostly on the Iberian Peninsula in southwestern Europe. It is the westernmost country of mainland Europe, being bordered to the west and south by the Atlantic Ocean and to the north and east by Spain. Its territory also includes the Atlantic archipelagos of the Azores and Madeira, both autonomous regions with their own regional governments. At 1.7 million km2, its Exclusive Economic Zone is the 3rd largest in the European Union and the 11th largest in the world.[10]',
+  br: 'Brazil (/brəˈzɪl/ (About this sound listen); Portuguese: Brasil [bɾaˈziw][10]), officially the Federative Republic of Brazil (Portuguese: República Federativa do Brasil, About this sound listen (help·info)[11]), is the largest country in both South America and Latin America. At 8.5 million square kilometers (3.2 million square miles)[12] and with over 208 million people, Brazil is the worlds fifth-largest country by area and the sixth-most populous. The capital is Brasília, and the most-populated city is São Paulo. It is the largest country to have Portuguese as an official language and the only one in the Americas.[13][14] Bounded by the Atlantic Ocean on the east, Brazil has a coastline of 7,491 kilometers (4,655 mi).[15] It borders all other South American countries except Ecuador and Chile and covers 47.3% of the continents land area.[16] Its Amazon River basin includes a vast tropical forest, home to diverse wildlife, a variety of ecological systems, and extensive natural resources spanning numerous protected habitats.[15] This unique environmental heritage makes Brazil one of 17 megadiverse countries, and is the subject of significant global interest and debate regarding deforestation and environmental protection.',
+  messi: 'Lionel Andrés Messi Cuccittini[note 1] (Spanish pronunciation: [ljoˈnel anˈdɾez ˈmesi] (About this sound listen);[A] born 24 June 1987) is an Argentine professional footballer who plays as a forward for Spanish club FC Barcelona and the Argentina national team. Often considered the best player in the world and regarded by many as the greatest of all time, Messi has a record-tying five Ballon dOr awards,[note 2] four of which he won consecutively, and a record-tying four European Golden Shoes.[note 3] He has spent his entire professional career with Barcelona, where he has won 29 trophies, including eight La Liga titles, four UEFA Champions League titles, and five Copas del Rey. Both a prolific goalscorer and a creative playmaker, Messi holds the records for most official goals scored in La Liga (368), a La Liga season (50), a club football season in Europe (73), a calendar year (91), El Clásico (26), as well as those for most assists made in La Liga (146) and the Copa América (11). He has scored over 600 senior career goals for club and country.',
+  maradona: 'Diego Armando Maradona Franco (Spanish pronunciation: [ˈdjeɣo maɾaˈðona], born 30 October 1960) is an Argentine retired professional footballer and manager. Many in the sport, including football writers, players, and fans, regard Maradona as the greatest football player of all time.[7][8][9][10][11] He was joint FIFA Player of the 20th Century with Pelé.[12][13]',
+  cr: 'Cristiano Ronaldo dos Santos Aveiro GOIH, ComM (European Portuguese: [kɾiʃˈtjɐnu ʁoˈnaɫdu]; born 5 February 1985) is a Portuguese professional footballer who plays as a forward for Spanish club Real Madrid and the Portugal national team. Often considered the best player in the world and widely regarded as the greatest of all time,[note 1] Ronaldo has five Ballon dOr awards,[note 2] the most for a European player and is tied for most all-time. He is the first player in history to win four European Golden Shoes. He has won 25 trophies in his career, including five league titles, four UEFA Champions League titles and one UEFA European Championship. A prolific goalscorer, Ronaldo holds the records for most official goals scored in the top five European leagues (380), the UEFA Champions League (116), the UEFA European Championship (29) and the FIFA Club World Cup (7), as well as most goals scored in a UEFA Champions League season (17). He has scored more than 600 senior career goals for club and country.',
+  figo: 'Luís Filipe Madeira Caeiro Figo, OIH (Portuguese pronunciation: [luˈiʃ ˈfiɣu]; born 4 November 1972) is a retired Portuguese footballer. He played as a midfielder for Sporting CP, Barcelona, Real Madrid and Internazionale before retiring on 31 May 2009. He won 127 caps for the Portugal national team, a record at the time but later broken by Cristiano Ronaldo.',
+  r: 'Ronaldo Luís Nazário de Lima (locally [ʁoˈnawdu ˈlwiʒ nɐˈzaɾju dʒ ˈɫĩmɐ]; born 18 September 1976[2]), commonly known as Ronaldo, is a retired Brazilian professional footballer who played as a striker. Popularly dubbed "O Fenômeno" (The Phenomenon), he is widely considered to be one of the greatest football players of all time.[3][4][5][6][7] In his prime, he was known for his dribbling at speed, feints, and clinical finishing.',
+  r10: 'Ronaldo de Assis Moreira (born 21 March 1980), commonly known as Ronaldinho (Brazilian Portuguese: [ʁonawˈdʒĩɲu]) or Ronaldinho Gaúcho,[note 1] is a Brazilian former professional footballer and ambassador for Spanish club Barcelona.[4] He played mostly as an attacking midfielder, but was also deployed as a forward or a winger. He played the bulk of his career at European clubs Paris Saint-Germain, Barcelona and Milan as well as playing for the Brazilian national team. Often considered one of the best players of his generation and regarded by many as one of the greatest of all time,[note 2] Ronaldinho won two FIFA World Player of the Year awards and a Ballon dOr. He was renowned for his technical skills and creativity; due to his agility, pace and dribbling ability, as well as his use of tricks, overhead kicks, no-look passes and accuracy from free-kicks.',
+  pele: 'Edson Arantes do Nascimento (Brazilian Portuguese: [ˈɛtsõ (w)ɐˈɾɐ̃tʃiz du nɐsiˈmẽtu]; born 23 October 1940), known as Pelé ([peˈlɛ]), is a Brazilian retired professional footballer who played as a forward. He is widely regarded as the greatest football player of all time. In 1999, he was voted World Player of the Century by the International Federation of Football History & Statistics (IFFHS). That same year, Pelé was elected Athlete of the Century by the International Olympic Committee. According to the IFFHS, Pelé is the most successful league goal-scorer in the world, scoring 1281 goals in 1363 games, which included unofficial friendlies and tour games. During his playing days, Pelé was for a period the best-paid athlete in the world.',
+  z: 'Zinedine Yazid Zidane O.L.H., A.O.M.N. (French pronunciation: [zinedin zidan], born 23 June 1972), nicknamed "Zizou", is a French retired professional footballer and current manager of Real Madrid. He played as an attacking midfielder for the France national team, Cannes, Bordeaux, Juventus and Real Madrid.[3][4] An elite playmaker, renowned for his elegance, vision, ball control and technique, Zidane was named the best European footballer of the past 50 years in the UEFA Golden Jubilee Poll in 2004.[5] He is widely regarded as one of the greatest players of all time',
+  pl: 'Michel François Platini (born 21 June 1955) is a French former football player, manager and administrator. Nicknamed Le Roi (The King) for his ability and leadership, he is regarded as one of the greatest footballers of all time. Platini won the Ballon dOr three times, in 1983, 1984 and 1985,[3] and came sixth in the FIFA Player of the Century vote.[4] In recognition of his achievements, he was named Chevalier of the Legion of Honour in 1985 and became Officier in 1988.'
+};
+
+var FootballPlayerRenderer = function (_React$Component) {
+  _inherits(FootballPlayerRenderer, _React$Component);
+
+  function FootballPlayerRenderer() {
+    _classCallCheck(this, FootballPlayerRenderer);
+
+    return _possibleConstructorReturn(this, _React$Component.apply(this, arguments));
+  }
+
+  FootballPlayerRenderer.prototype.componentDidMount = function componentDidMount() {
+    this.props.measure();
+  };
+
+  FootballPlayerRenderer.prototype.render = function render() {
+    var _props = this.props,
+        node = _props.node,
+        children = _props.children;
+    var id = node.id,
+        name = node.name;
+
+    var _getNodeRenderOptions = Object(__WEBPACK_IMPORTED_MODULE_4__src_selectors_nodes__["c" /* getNodeRenderOptions */])(node),
+        isExpanded = _getNodeRenderOptions.isExpanded;
+
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'span',
+      null,
+      children,
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'b',
+        null,
+        name
+      ),
+      isExpanded && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'p',
+        null,
+        DESCRIPTIONS[id]
+      )
+    );
+  };
+
+  return FootballPlayerRenderer;
+}(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
+
+var NodeMeasure = function (_Component) {
+  _inherits(NodeMeasure, _Component);
+
+  function NodeMeasure() {
+    var _temp, _this2, _ret;
+
+    _classCallCheck(this, NodeMeasure);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this2 = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this2), _this2.state = {
+      nodes: Nodes
+    }, _this2.handleChange = function (nodes) {
+      _this2.setState({ nodes: nodes });
+    }, _temp), _possibleConstructorReturn(_this2, _ret);
+  }
+
+  NodeMeasure.prototype.render = function render() {
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      __WEBPACK_IMPORTED_MODULE_1__src_TreeContainer__["a" /* default */],
+      { nodes: this.state.nodes, onChange: this.handleChange },
+      function (p) {
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          FootballPlayerRenderer,
+          p,
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Expandable, p)
+        );
+      }
+    );
+  };
+
+  return NodeMeasure;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_3__toolbelt__["b" /* createEntry */])('node-measure', 'NodeMeasure', 'Nodes with auto measure', __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+  'div',
+  null,
+  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+    'p',
+    null,
+    'All cells in react-virtualized-tree implement react-virtualized\'s CellMeasurer'
+  ),
+  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+    'p',
+    null,
+    'All nodes receive a measure prop that can be used to measure nodes with different heights like what happens in this example'
+  )
+), NodeMeasure));
 
 /***/ }),
 
@@ -80101,8 +80586,8 @@ var rsMiscLower = '(?:' + rsLower + '|' + rsMisc + ')',
     reOptMod = rsModifier + '?',
     rsOptVar = '[' + rsVarRange + ']?',
     rsOptJoin = '(?:' + rsZWJ + '(?:' + [rsNonAstral, rsRegional, rsSurrPair].join('|') + ')' + rsOptVar + reOptMod + ')*',
-    rsOrdLower = '\\d*(?:(?:1st|2nd|3rd|(?![123])\\dth)\\b)',
-    rsOrdUpper = '\\d*(?:(?:1ST|2ND|3RD|(?![123])\\dTH)\\b)',
+    rsOrdLower = '\\d*(?:1st|2nd|3rd|(?![123])\\dth)(?=\\b|[A-Z_])',
+    rsOrdUpper = '\\d*(?:1ST|2ND|3RD|(?![123])\\dTH)(?=\\b|[a-z_])',
     rsSeq = rsOptVar + reOptMod + rsOptJoin,
     rsEmoji = '(?:' + [rsDingbat, rsRegional, rsSurrPair].join('|') + ')' + rsSeq;
 
@@ -80327,6 +80812,7 @@ proto.interruptParagraph = [
  * In the above example, the thematic break “interupts”
  * the list. */
 proto.interruptList = [
+  ['atxHeading', {pedantic: false}],
   ['fencedCode', {pedantic: false}],
   ['thematicBreak', {pedantic: false}],
   ['definition', {commonmark: false}],
@@ -80653,10 +81139,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__animationFrame__ = __webpack_require__("GyXx");
 
 
-var babelPluginFlowReactPropTypes_proptype_AnimationTimeoutId = {
-  id: __webpack_require__("KSGD").number.isRequired
+var babelPluginFlowReactPropTypes_proptype_AnimationTimeoutId =  true ? null : {
+  id: require('prop-types').number.isRequired
 };
-if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_AnimationTimeoutId', {
+if (false) Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_AnimationTimeoutId', {
   value: babelPluginFlowReactPropTypes_proptype_AnimationTimeoutId,
   configurable: true
 });
@@ -86399,6 +86885,14 @@ var createReactElementTreeNode = exports.createReactElementTreeNode = function c
     childrens: childrens
   };
 };
+
+var createReactFragmentTreeNode = exports.createReactFragmentTreeNode = function createReactFragmentTreeNode(key, childrens) {
+  return {
+    type: 'ReactFragment',
+    key: key,
+    childrens: childrens
+  };
+};
 //# sourceMappingURL=tree.js.map
 
 /***/ }),
@@ -86493,7 +86987,7 @@ function autoLink(eat, value, silent) {
   var link;
   var now;
   var content;
-  var tokenize;
+  var tokenizers;
   var exit;
 
   if (value.charAt(0) !== C_LT) {
@@ -86591,20 +87085,21 @@ function autoLink(eat, value, silent) {
     }
   }
 
-  /* Temporarily remove support for escapes in autolinks. */
-  tokenize = self.inlineTokenizers.escape;
-  self.inlineTokenizers.escape = null;
+  /* Temporarily remove all tokenizers except text in autolinks. */
+  tokenizers = self.inlineTokenizers;
+  self.inlineTokenizers = {text: tokenizers.text};
+
   exit = self.enterLink();
 
   content = self.tokenizeInline(content, now);
 
-  self.inlineTokenizers.escape = tokenize;
+  self.inlineTokenizers = tokenizers;
   exit();
 
   return eat(subvalue)({
     type: 'link',
     title: null,
-    url: decode(link),
+    url: decode(link, {nonTerminated: false}),
     children: content
   });
 }
@@ -88146,6 +88641,29 @@ Masonry.defaultProps = {
   style: emptyObject,
   tabIndex: 0
 };
+Masonry.propTypes =  true ? null : {
+  autoHeight: require('prop-types').bool.isRequired,
+  cellCount: require('prop-types').number.isRequired,
+  cellMeasurerCache: typeof CellMeasurerCache === 'function' ? require('prop-types').instanceOf(CellMeasurerCache).isRequired : require('prop-types').any.isRequired,
+  cellPositioner: typeof Positioner === 'function' ? require('prop-types').instanceOf(Positioner).isRequired : require('prop-types').any.isRequired,
+  cellRenderer: typeof CellRenderer === 'function' ? require('prop-types').instanceOf(CellRenderer).isRequired : require('prop-types').any.isRequired,
+  className: require('prop-types').string,
+  height: require('prop-types').number.isRequired,
+  id: require('prop-types').string,
+  keyMapper: typeof KeyMapper === 'function' ? require('prop-types').instanceOf(KeyMapper).isRequired : require('prop-types').any.isRequired,
+  onCellsRendered: typeof OnCellsRenderedCallback === 'function' ? require('prop-types').instanceOf(OnCellsRenderedCallback) : require('prop-types').any,
+  onScroll: typeof OnScrollCallback === 'function' ? require('prop-types').instanceOf(OnScrollCallback) : require('prop-types').any,
+  overscanByPixels: require('prop-types').number.isRequired,
+  role: require('prop-types').string.isRequired,
+  scrollingResetTimeInterval: require('prop-types').number.isRequired,
+  style: function style(props, propName, componentName) {
+    if (!Object.prototype.hasOwnProperty.call(props, propName)) {
+      throw new Error('Prop `' + propName + '` has type \'any\' or \'mixed\', but was not provided to `' + componentName + '`. Pass undefined or any other value.');
+    }
+  },
+  tabIndex: require('prop-types').number.isRequired,
+  width: require('prop-types').number.isRequired
+};
 /* harmony default export */ __webpack_exports__["default"] = (Masonry);
 
 
@@ -88155,20 +88673,18 @@ function identity(value) {
 
 function noop() {}
 
-var babelPluginFlowReactPropTypes_proptype_CellMeasurerCache = {
-  defaultHeight: __webpack_require__("KSGD").number.isRequired,
-  defaultWidth: __webpack_require__("KSGD").number.isRequired,
-  getHeight: __webpack_require__("KSGD").func.isRequired,
-  getWidth: __webpack_require__("KSGD").func.isRequired
+var babelPluginFlowReactPropTypes_proptype_CellMeasurerCache =  true ? null : {
+  defaultHeight: require('prop-types').number.isRequired,
+  defaultWidth: require('prop-types').number.isRequired,
+  getHeight: require('prop-types').func.isRequired,
+  getWidth: require('prop-types').func.isRequired
 };
-if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_CellMeasurerCache', {
+if (false) Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_CellMeasurerCache', {
   value: babelPluginFlowReactPropTypes_proptype_CellMeasurerCache,
   configurable: true
 });
-
-var babelPluginFlowReactPropTypes_proptype_Positioner = __webpack_require__("KSGD").func;
-
-if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_Positioner', {
+var babelPluginFlowReactPropTypes_proptype_Positioner =  true ? null : require('prop-types').func;
+if (false) Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_Positioner', {
   value: babelPluginFlowReactPropTypes_proptype_Positioner,
   configurable: true
 });
@@ -89770,7 +90286,10 @@ var defaultCommands = {
   }
 };
 
-module.exports = newContext();
+var contextForExport = newContext();
+
+module.exports = contextForExport;
+module.exports.default = contextForExport;
 module.exports.newContext = newContext;
 
 // invariants
@@ -90067,17 +90586,17 @@ ArrowKeyStepper.defaultProps = {
   scrollToColumn: 0,
   scrollToRow: 0
 };
-ArrowKeyStepper.propTypes = {
-  children: __webpack_require__("KSGD").func.isRequired,
-  className: __webpack_require__("KSGD").string,
-  columnCount: __webpack_require__("KSGD").number.isRequired,
-  disabled: __webpack_require__("KSGD").bool.isRequired,
-  isControlled: __webpack_require__("KSGD").bool.isRequired,
-  mode: __webpack_require__("KSGD").oneOf(['cells', 'edges']).isRequired,
-  onScrollToChange: __webpack_require__("KSGD").func,
-  rowCount: __webpack_require__("KSGD").number.isRequired,
-  scrollToColumn: __webpack_require__("KSGD").number.isRequired,
-  scrollToRow: __webpack_require__("KSGD").number.isRequired
+ArrowKeyStepper.propTypes =  true ? null : {
+  children: require('prop-types').func.isRequired,
+  className: require('prop-types').string,
+  columnCount: require('prop-types').number.isRequired,
+  disabled: require('prop-types').bool.isRequired,
+  isControlled: require('prop-types').bool.isRequired,
+  mode: require('prop-types').oneOf(['cells', 'edges']).isRequired,
+  onScrollToChange: require('prop-types').func,
+  rowCount: require('prop-types').number.isRequired,
+  scrollToColumn: require('prop-types').number.isRequired,
+  scrollToRow: require('prop-types').number.isRequired
 };
 /* unused harmony default export */ var _unused_webpack_default_export = (ArrowKeyStepper);
 
@@ -90154,11 +90673,11 @@ module.exports = getData;
 /***/ "wLrb":
 /***/ (function(module, exports, __webpack_require__) {
 
-var babelPluginFlowReactPropTypes_proptype_ScrollIndices = {
-  scrollToColumn: __webpack_require__("KSGD").number.isRequired,
-  scrollToRow: __webpack_require__("KSGD").number.isRequired
+var babelPluginFlowReactPropTypes_proptype_ScrollIndices =  true ? null : {
+  scrollToColumn: require("prop-types").number.isRequired,
+  scrollToRow: require("prop-types").number.isRequired
 };
-if (true) Object.defineProperty(exports, "babelPluginFlowReactPropTypes_proptype_ScrollIndices", {
+if (false) Object.defineProperty(exports, "babelPluginFlowReactPropTypes_proptype_ScrollIndices", {
   value: babelPluginFlowReactPropTypes_proptype_ScrollIndices,
   configurable: true
 });
@@ -90621,64 +91140,52 @@ var getNodeRenderOptions = Object(__WEBPACK_IMPORTED_MODULE_0_reselect__["create
   };
 });
 
-var PICK_CHILDREN_FROM = {
-  ORIGIN: 0,
-  CURRENT: 1
-};
-
 var FLATTEN_TREE_PROPERTIES = ['deepness', 'parents'];
 
-var replaceNodeFromTree = function replaceNodeFromTree(nodes, updatedNode) {
-  var pickChildrenFrom = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : PICK_CHILDREN_FROM.ORIGIN;
-
-  return nodes.map(function (node) {
-    var children = node.children ? replaceNodeFromTree(node.children, updatedNode, pickChildrenFrom) : node.children;
-
-    if (node.id === updatedNode.id) {
-      return _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_lodash__["omit"])(updatedNode, FLATTEN_TREE_PROPERTIES), pickChildrenFrom === PICK_CHILDREN_FROM.ORIGIN && children ? { children: children } : {});
-    }
-
-    return _extends({}, node, children ? { children: children } : {});
-  });
+var NODE_OPERATION_TYPES = {
+  CHANGE_NODE: 'CHANGE_NODE',
+  DELETE_NODE: 'DELETE_NODE'
 };
 
-var findNodeOnTree = function findNodeOnTree(parents, parentNode, id) {
-  if (!parents.length) {
-    return {
-      node: parentNode.children.find(function (n) {
-        return n.id === id;
-      }),
-      parent: parentNode
-    };
+var NODE_CHANGE_OPERATIONS = {
+  CHANGE_NODE: function CHANGE_NODE(nodes, updatedNode) {
+    return nodes.map(function (n) {
+      return n.id === updatedNode.id ? Object(__WEBPACK_IMPORTED_MODULE_1_lodash__["omit"])(updatedNode, FLATTEN_TREE_PROPERTIES) : n;
+    });
+  },
+  DELETE_NODE: function DELETE_NODE(nodes, updatedNode) {
+    return nodes.filter(function (n) {
+      return n.id !== updatedNode.id;
+    });
+  }
+};
+
+var replaceNodeFromTree = function replaceNodeFromTree(nodes, updatedNode) {
+  var operation = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : NODE_OPERATION_TYPES.CHANGE_NODE;
+
+  if (!NODE_CHANGE_OPERATIONS[operation]) {
+    return nodes;
   }
 
-  var nextParent = parents[0];
+  var parents = updatedNode.parents;
 
 
-  return findNodeOnTree(parents.slice(1), parentNode.children.find(function (n) {
-    return n.id === nextParent;
-  }), id);
-};
+  if (!parents.length) {
+    return NODE_CHANGE_OPERATIONS[operation](nodes, updatedNode);
+  }
 
-var isNodeInTreeRoot = function isNodeInTreeRoot(n) {
-  return n.id === undefined;
+  var parentIndex = nodes.findIndex(function (n) {
+    return n.id === parents[0];
+  });
+  var preSiblings = nodes.slice(0, parentIndex);
+  var postSiblings = nodes.slice(parentIndex + 1);
+
+  return [].concat(preSiblings, [_extends({}, nodes[parentIndex], nodes[parentIndex].children ? { children: replaceNodeFromTree(nodes[parentIndex].children, _extends({}, updatedNode, { parents: parents.slice(1) }), operation)
+  } : {})], postSiblings);
 };
 
 var deleteNodeFromTree = function deleteNodeFromTree(nodes, deletedNode) {
-  var _findNodeOnTree = findNodeOnTree(deletedNode.parents, { children: nodes }, deletedNode.id),
-      parent = _findNodeOnTree.parent;
-
-  var childIndex = parent.children.findIndex(function (c) {
-    return c.id === deletedNode.id;
-  });
-
-  if (isNodeInTreeRoot(parent)) {
-    return [].concat(nodes.slice(0, childIndex), nodes.slice(childIndex + 1));
-  }
-
-  return replaceNodeFromTree(nodes, _extends({}, parent, {
-    children: [].concat(parent.children.slice(0, childIndex), parent.children.slice(childIndex + 1))
-  }), PICK_CHILDREN_FROM.CURRENT);
+  return replaceNodeFromTree(nodes, deletedNode, NODE_OPERATION_TYPES.DELETE_NODE);
 };
 
 var udpateNode = function udpateNode(originalNode, newState) {
@@ -91968,68 +92475,68 @@ Link.contextTypes = {
 /***/ "yetj":
 /***/ (function(module, exports, __webpack_require__) {
 
-var babelPluginFlowReactPropTypes_proptype_CellDataGetterParams = {
-  columnData: __webpack_require__("KSGD").any,
-  dataKey: __webpack_require__("KSGD").string.isRequired,
+var babelPluginFlowReactPropTypes_proptype_CellDataGetterParams =  true ? null : {
+  columnData: require("prop-types").any,
+  dataKey: require("prop-types").string.isRequired,
   rowData: function rowData(props, propName, componentName) {
     if (!Object.prototype.hasOwnProperty.call(props, propName)) {
       throw new Error("Prop `" + propName + "` has type 'any' or 'mixed', but was not provided to `" + componentName + "`. Pass undefined or any other value.");
     }
   }
 };
-if (true) Object.defineProperty(exports, "babelPluginFlowReactPropTypes_proptype_CellDataGetterParams", {
+if (false) Object.defineProperty(exports, "babelPluginFlowReactPropTypes_proptype_CellDataGetterParams", {
   value: babelPluginFlowReactPropTypes_proptype_CellDataGetterParams,
   configurable: true
 });
-var babelPluginFlowReactPropTypes_proptype_CellRendererParams = {
-  cellData: __webpack_require__("KSGD").any,
-  columnData: __webpack_require__("KSGD").any,
-  dataKey: __webpack_require__("KSGD").string.isRequired,
+var babelPluginFlowReactPropTypes_proptype_CellRendererParams =  true ? null : {
+  cellData: require("prop-types").any,
+  columnData: require("prop-types").any,
+  dataKey: require("prop-types").string.isRequired,
   rowData: function rowData(props, propName, componentName) {
     if (!Object.prototype.hasOwnProperty.call(props, propName)) {
       throw new Error("Prop `" + propName + "` has type 'any' or 'mixed', but was not provided to `" + componentName + "`. Pass undefined or any other value.");
     }
   },
-  rowIndex: __webpack_require__("KSGD").number.isRequired
+  rowIndex: require("prop-types").number.isRequired
 };
-if (true) Object.defineProperty(exports, "babelPluginFlowReactPropTypes_proptype_CellRendererParams", {
+if (false) Object.defineProperty(exports, "babelPluginFlowReactPropTypes_proptype_CellRendererParams", {
   value: babelPluginFlowReactPropTypes_proptype_CellRendererParams,
   configurable: true
 });
-var babelPluginFlowReactPropTypes_proptype_HeaderRowRendererParams = {
-  className: __webpack_require__("KSGD").string.isRequired,
-  columns: __webpack_require__("KSGD").arrayOf(__webpack_require__("KSGD").any).isRequired,
+var babelPluginFlowReactPropTypes_proptype_HeaderRowRendererParams =  true ? null : {
+  className: require("prop-types").string.isRequired,
+  columns: require("prop-types").arrayOf(require("prop-types").any).isRequired,
   style: function style(props, propName, componentName) {
     if (!Object.prototype.hasOwnProperty.call(props, propName)) {
       throw new Error("Prop `" + propName + "` has type 'any' or 'mixed', but was not provided to `" + componentName + "`. Pass undefined or any other value.");
     }
   }
 };
-if (true) Object.defineProperty(exports, "babelPluginFlowReactPropTypes_proptype_HeaderRowRendererParams", {
+if (false) Object.defineProperty(exports, "babelPluginFlowReactPropTypes_proptype_HeaderRowRendererParams", {
   value: babelPluginFlowReactPropTypes_proptype_HeaderRowRendererParams,
   configurable: true
 });
-var babelPluginFlowReactPropTypes_proptype_HeaderRendererParams = {
-  columnData: __webpack_require__("KSGD").any,
-  dataKey: __webpack_require__("KSGD").string.isRequired,
-  disableSort: __webpack_require__("KSGD").bool,
-  label: __webpack_require__("KSGD").any,
-  sortBy: __webpack_require__("KSGD").string,
-  sortDirection: __webpack_require__("KSGD").string
+var babelPluginFlowReactPropTypes_proptype_HeaderRendererParams =  true ? null : {
+  columnData: require("prop-types").any,
+  dataKey: require("prop-types").string.isRequired,
+  disableSort: require("prop-types").bool,
+  label: require("prop-types").any,
+  sortBy: require("prop-types").string,
+  sortDirection: require("prop-types").string
 };
-if (true) Object.defineProperty(exports, "babelPluginFlowReactPropTypes_proptype_HeaderRendererParams", {
+if (false) Object.defineProperty(exports, "babelPluginFlowReactPropTypes_proptype_HeaderRendererParams", {
   value: babelPluginFlowReactPropTypes_proptype_HeaderRendererParams,
   configurable: true
 });
-var babelPluginFlowReactPropTypes_proptype_RowRendererParams = {
-  className: __webpack_require__("KSGD").string.isRequired,
-  columns: __webpack_require__("KSGD").arrayOf(__webpack_require__("KSGD").any).isRequired,
-  index: __webpack_require__("KSGD").number.isRequired,
-  isScrolling: __webpack_require__("KSGD").bool.isRequired,
-  onRowClick: __webpack_require__("KSGD").func,
-  onRowDoubleClick: __webpack_require__("KSGD").func,
-  onRowMouseOver: __webpack_require__("KSGD").func,
-  onRowMouseOut: __webpack_require__("KSGD").func,
+var babelPluginFlowReactPropTypes_proptype_RowRendererParams =  true ? null : {
+  className: require("prop-types").string.isRequired,
+  columns: require("prop-types").arrayOf(require("prop-types").any).isRequired,
+  index: require("prop-types").number.isRequired,
+  isScrolling: require("prop-types").bool.isRequired,
+  onRowClick: require("prop-types").func,
+  onRowDoubleClick: require("prop-types").func,
+  onRowMouseOver: require("prop-types").func,
+  onRowMouseOut: require("prop-types").func,
   rowData: function rowData(props, propName, componentName) {
     if (!Object.prototype.hasOwnProperty.call(props, propName)) {
       throw new Error("Prop `" + propName + "` has type 'any' or 'mixed', but was not provided to `" + componentName + "`. Pass undefined or any other value.");
@@ -92041,7 +92548,7 @@ var babelPluginFlowReactPropTypes_proptype_RowRendererParams = {
     }
   }
 };
-if (true) Object.defineProperty(exports, "babelPluginFlowReactPropTypes_proptype_RowRendererParams", {
+if (false) Object.defineProperty(exports, "babelPluginFlowReactPropTypes_proptype_RowRendererParams", {
   value: babelPluginFlowReactPropTypes_proptype_RowRendererParams,
   configurable: true
 });
@@ -92303,17 +92810,19 @@ function astToReact(node, options) {
   var parent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
   var index = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
 
-  if (node.type === 'text') {
-    return node.value;
-  }
-
   var renderer = options.renderers[node.type];
-  if (typeof renderer !== 'function' && typeof renderer !== 'string') {
-    throw new Error('Renderer for type `' + node.type + '` not defined or is not renderable');
-  }
 
   var pos = node.position.start;
   var key = [node.type, pos.line, pos.column].join('-');
+
+  if (node.type === 'text') {
+    return renderer ? renderer(node.value, key) : node.value;
+  }
+
+  if (typeof renderer !== 'function' && typeof renderer !== 'string' && !isReactFragment(renderer)) {
+    throw new Error('Renderer for type `' + node.type + '` not defined or is not renderable');
+  }
+
   var nodeProps = getNodeProps(node, key, options, renderer, parent, index);
 
   return React.createElement(renderer, nodeProps, nodeProps.children || resolveChildren() || undefined);
@@ -92323,6 +92832,10 @@ function astToReact(node, options) {
       return astToReact(childNode, options, { node: node, props: nodeProps }, i);
     });
   }
+}
+
+function isReactFragment(renderer) {
+  return React.Fragment && React.Fragment === renderer;
 }
 
 // eslint-disable-next-line max-params, complexity
@@ -92359,7 +92872,7 @@ function getNodeProps(node, key, opts, renderer, parent, index) {
       assignDefined(props, { identifier: node.identifier, title: node.title, url: node.url });
       break;
     case 'code':
-      assignDefined(props, { language: node.lang });
+      assignDefined(props, { language: node.lang && node.lang.split(/\s/, 1)[0] });
       break;
     case 'inlineCode':
       props.children = node.value;
@@ -92590,6 +93103,7 @@ module.exports = baseIsTypedArray;
 
 
 var Renderer = {
+  measure: __WEBPACK_IMPORTED_MODULE_0_prop_types___default.a.func.isRequired,
   onChange: __WEBPACK_IMPORTED_MODULE_0_prop_types___default.a.func.isRequired,
   node: __WEBPACK_IMPORTED_MODULE_0_prop_types___default.a.shape(__WEBPACK_IMPORTED_MODULE_1__nodeShapes__["a" /* FlattenedNode */])
 };
@@ -92811,51 +93325,6 @@ __webpack_require__("vIB/")(String, 'String', function (iterated) {
 
 /***/ }),
 
-/***/ "zZmx":
-/***/ (function(module, exports, __webpack_require__) {
-
-var copyObject = __webpack_require__("tv3T"),
-    createAssigner = __webpack_require__("0DSl"),
-    keysIn = __webpack_require__("t8rQ");
-
-/**
- * This method is like `_.assignIn` except that it accepts `customizer`
- * which is invoked to produce the assigned values. If `customizer` returns
- * `undefined`, assignment is handled by the method instead. The `customizer`
- * is invoked with five arguments: (objValue, srcValue, key, object, source).
- *
- * **Note:** This method mutates `object`.
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @alias extendWith
- * @category Object
- * @param {Object} object The destination object.
- * @param {...Object} sources The source objects.
- * @param {Function} [customizer] The function to customize assigned values.
- * @returns {Object} Returns `object`.
- * @see _.assignWith
- * @example
- *
- * function customizer(objValue, srcValue) {
- *   return _.isUndefined(objValue) ? srcValue : objValue;
- * }
- *
- * var defaults = _.partialRight(_.assignInWith, customizer);
- *
- * defaults({ 'a': 1 }, { 'b': 2 }, { 'a': 3 });
- * // => { 'a': 1, 'b': 2 }
- */
-var assignInWith = createAssigner(function(object, source, srcIndex, customizer) {
-  copyObject(source, keysIn(source), object, customizer);
-});
-
-module.exports = assignInWith;
-
-
-/***/ }),
-
 /***/ "zbo3":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -93001,41 +93470,39 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 
 
-var babelPluginFlowReactPropTypes_proptype_RowRendererParams = {
-  index: __webpack_require__("KSGD").number.isRequired,
-  isScrolling: __webpack_require__("KSGD").bool.isRequired,
-  isVisible: __webpack_require__("KSGD").bool.isRequired,
-  key: __webpack_require__("KSGD").string.isRequired,
-  parent: __webpack_require__("KSGD").object.isRequired,
-  style: __webpack_require__("KSGD").object.isRequired
+var babelPluginFlowReactPropTypes_proptype_RowRendererParams =  true ? null : {
+  index: require('prop-types').number.isRequired,
+  isScrolling: require('prop-types').bool.isRequired,
+  isVisible: require('prop-types').bool.isRequired,
+  key: require('prop-types').string.isRequired,
+  parent: require('prop-types').object.isRequired,
+  style: require('prop-types').object.isRequired
 };
-if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_RowRendererParams', {
+if (false) Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_RowRendererParams', {
   value: babelPluginFlowReactPropTypes_proptype_RowRendererParams,
   configurable: true
 });
-
-var babelPluginFlowReactPropTypes_proptype_RowRenderer = __webpack_require__("KSGD").func;
-
-if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_RowRenderer', {
+var babelPluginFlowReactPropTypes_proptype_RowRenderer =  true ? null : require('prop-types').func;
+if (false) Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_RowRenderer', {
   value: babelPluginFlowReactPropTypes_proptype_RowRenderer,
   configurable: true
 });
-var babelPluginFlowReactPropTypes_proptype_RenderedRows = {
-  overscanStartIndex: __webpack_require__("KSGD").number.isRequired,
-  overscanStopIndex: __webpack_require__("KSGD").number.isRequired,
-  startIndex: __webpack_require__("KSGD").number.isRequired,
-  stopIndex: __webpack_require__("KSGD").number.isRequired
+var babelPluginFlowReactPropTypes_proptype_RenderedRows =  true ? null : {
+  overscanStartIndex: require('prop-types').number.isRequired,
+  overscanStopIndex: require('prop-types').number.isRequired,
+  startIndex: require('prop-types').number.isRequired,
+  stopIndex: require('prop-types').number.isRequired
 };
-if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_RenderedRows', {
+if (false) Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_RenderedRows', {
   value: babelPluginFlowReactPropTypes_proptype_RenderedRows,
   configurable: true
 });
-var babelPluginFlowReactPropTypes_proptype_Scroll = {
-  clientHeight: __webpack_require__("KSGD").number.isRequired,
-  scrollHeight: __webpack_require__("KSGD").number.isRequired,
-  scrollTop: __webpack_require__("KSGD").number.isRequired
+var babelPluginFlowReactPropTypes_proptype_Scroll =  true ? null : {
+  clientHeight: require('prop-types').number.isRequired,
+  scrollHeight: require('prop-types').number.isRequired,
+  scrollTop: require('prop-types').number.isRequired
 };
-if (typeof exports !== 'undefined') Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_Scroll', {
+if (false) Object.defineProperty(exports, 'babelPluginFlowReactPropTypes_proptype_Scroll', {
   value: babelPluginFlowReactPropTypes_proptype_Scroll,
   configurable: true
 });
@@ -93105,37 +93572,7 @@ exports.default = function (self, call) {
   return call && ((typeof call === "undefined" ? "undefined" : (0, _typeof3.default)(call)) === "object" || typeof call === "function") ? call : self;
 };
 
-/***/ }),
-
-/***/ "zzRL":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-exports['default'] = symbolObservablePonyfill;
-function symbolObservablePonyfill(root) {
-	var result;
-	var _Symbol = root.Symbol;
-
-	if (typeof _Symbol === 'function') {
-		if (_Symbol.observable) {
-			result = _Symbol.observable;
-		} else {
-			result = _Symbol('observable');
-			_Symbol.observable = result;
-		}
-	} else {
-		result = '@@observable';
-	}
-
-	return result;
-};
-
 /***/ })
 
 },[0]);
-//# sourceMappingURL=demo.4fb679ea.js.map
+//# sourceMappingURL=demo.f3a11ae5.js.map

@@ -62,11 +62,11 @@ export default class FilteringContainer extends React.Component {
       onSelectedGroupChange } = this.props;
 
     const relevantNodes = groups && selectedGroup && groups[selectedGroup] ? 
-      filterNodes(groups[selectedGroup].filter, nodes).nodes :
-      nodes;
+      filterNodes(groups[selectedGroup].filter, nodes) :
+      { nodes, nodeParentMappings: [] };
       
-    const filteredNodes = filterTerm ?
-      filterNodes(nameMatchesSearchTerm(filterTerm), relevantNodes).nodes :
+    const { nodes: filteredNodes, nodeParentMappings } = filterTerm ?
+      filterNodes(nameMatchesSearchTerm(filterTerm), relevantNodes.nodes) :
       relevantNodes;
 
     return (
@@ -85,7 +85,7 @@ export default class FilteringContainer extends React.Component {
             /> 
           }
         </div>
-        { treeRenderer({ nodes: filteredNodes }) }
+        { treeRenderer({ nodes: filteredNodes, nodeParentMappings }) }
       </div>
     )
   }

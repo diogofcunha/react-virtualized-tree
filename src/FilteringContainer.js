@@ -5,6 +5,7 @@ import classNames from 'classnames';
 
 import DefaultGroupRenderer from './filtering/DefaultGroupRenderer';
 import { Node } from './shapes/nodeShapes';
+import { filterNodes } from './selectors/filtering';
 
 const nameMatchesSearchTerm = (searchTerm) => ({ name }) => {
   const upperCaseName = name.toUpperCase();
@@ -12,26 +13,6 @@ const nameMatchesSearchTerm = (searchTerm) => ({ name }) => {
 
   return upperCaseName.indexOf(upperCaseSearchTerm.trim()) > -1
 }
-
-const filterNodes = (filter, nodes) => nodes.reduce((nds, n) => {
-  let filteredChildren = [];
-
-  if (n.children) {
-    filteredChildren = filterNodes(filter, n.children);
-  }
-
-  if (filter(n) || filteredChildren.length) {
-    return [
-      ...nds,
-      {
-        ...n,
-        children: filteredChildren
-      }
-    ];
-  }
-
-  return [ ...nds ];
-}, []);
 
 export default class FilteringContainer extends React.Component {
   state = {
@@ -82,10 +63,10 @@ export default class FilteringContainer extends React.Component {
 
     const relevantNodes = groups && selectedGroup && groups[selectedGroup] ? 
       filterNodes(groups[selectedGroup].filter, nodes) :
-      nodes;
+      { nodes, nodeParentMappings: [] };
       
-    const filteredNodes = filterTerm ?
-      filterNodes(nameMatchesSearchTerm(filterTerm), relevantNodes) :
+    const { nodes: filteredNodes, nodeParentMappings } = filterTerm ?
+      filterNodes(nameMatchesSearchTerm(filterTerm), relevantNodes.nodes) :
       relevantNodes;
 
     return (
@@ -104,7 +85,7 @@ export default class FilteringContainer extends React.Component {
             /> 
           }
         </div>
-        { treeRenderer({ nodes: filteredNodes }) }
+        { treeRenderer({ nodes: filteredNodes, nodeParentMappings }) }
       </div>
     )
   }

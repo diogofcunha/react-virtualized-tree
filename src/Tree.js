@@ -25,7 +25,7 @@ export default class Tree extends React.Component {
   }
 
   measureRowRenderer =  (nodes) => ({ key, index, style, parent }) => {
-    const { children: NodeRenderer } = this.props;
+    const { NodeRenderer } = this.props;
     const node = nodes[index];
 
     return (
@@ -43,7 +43,7 @@ export default class Tree extends React.Component {
   }
 
   render() {
-    const { children, nodes } = this.props;
+    const { nodes } = this.props;
 
     return (
       <AutoSizer>
@@ -65,7 +65,7 @@ export default class Tree extends React.Component {
 
 Tree.propTypes = {
   nodes: PropTypes.arrayOf(PropTypes.shape(FlattenedNode)).isRequired,
-  children: PropTypes.func.isRequired,
+  NodeRenderer: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   nodeMarginLeft: PropTypes.number,
 };

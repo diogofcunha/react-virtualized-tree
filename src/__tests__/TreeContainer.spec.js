@@ -31,12 +31,13 @@ describe('TreeContainer', () => {
     }
   };
 
-  it('should render a Tree with children and the correct props', () => {
+  it('should render a Tree with the correct props', () => {
     const exampleChild = jest.fn();
     const { treeWrapper, wrapper } = setup(exampleChild);
-    const { nodes } = treeWrapper.props();
+    const { nodes, NodeRenderer } = treeWrapper.props();
 
     expect(nodes).toMatchSnapshot();
+    expect(NodeRenderer).toEqual(exampleChild);
   });
 
   describe('change handle', () => {

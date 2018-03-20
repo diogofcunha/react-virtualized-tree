@@ -74,9 +74,10 @@ class Filterable extends Component {
           {...this._groupProps}
         >
           {
-            ({ nodes }) => <div style={{ height: 500 }}>
+            ({ nodes, nodeParentMappings }) => <div style={{ height: 500 }}>
               <Tree
                 nodes={nodes}
+                nodeParentMappings={nodeParentMappings}
                 onChange={this.handleChange}
               >
               {

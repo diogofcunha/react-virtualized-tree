@@ -58,12 +58,37 @@ export default class TreeContainer extends React.Component {
     this.props.onChange(updatedNodes);
   }
 
+  apply = (nodes) => {
+    return nodes.reduce((acc, n) => {
+      const children = this.apply(n.children || []);
+  
+      return [ ...acc, n, ...children ]
+    }, [])
+  }
+
+  handleBulk = ({ node: { state }, type }) => {
+    const flattenedNodesToUpdate = this.apply(this.props.nodes);
+
+    this.props.onChange(
+      flattenedNodesToUpdate.reduce((acc, n) => {
+        const node = {
+          ...n,
+          state,
+          parents: this.props.nodeParentMappings[n.id]
+        }
+
+        return this.extensions.updateTypeHandlers[type](acc, node);
+
+      }, this.nodes)
+    );
+  }
+
   render() {
     return (
       <Tree
         nodeMarginLeft={this.props.nodeMarginLeft}
         nodes={getFlattenedTree(this.props.nodes)}
-        onChange={this.handleChange}
+        onChange={this.handleBulk}
         NodeRenderer={this.props.children}
       />
     );
@@ -75,6 +100,7 @@ TreeContainer.propTypes = {
     updateTypeHandlers: PropTypes.object
   }),
   nodes: PropTypes.arrayOf(PropTypes.shape(Node)).isRequired,
+  nodeParentMappings: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.number)),
   onChange: PropTypes.func,
   children: PropTypes.func.isRequired,
   nodeMarginLeft: PropTypes.number

@@ -85,8 +85,16 @@ export enum UPDATE_TYPE {
   UPDATE = 2
 }
 
+
+export enum COLLECTION_MATCH {
+  All = 0,
+  Some = 1,
+  None = 2
+}
+
 interface Constants {
   UPDATE_TYPE: UPDATE_TYPE
+  COLLECTION_MATCH: COLLECTION_MATCH
 }
 
 export const constants: Constants

@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`filtering selectors should create mappings matching filters 1`] = `
+Object {
+  "0": Array [],
+  "1": Array [],
+  "2": Array [
+    0,
+  ],
+  "4": Array [
+    0,
+    2,
+  ],
+  "6": Array [
+    1,
+  ],
+  "8": Array [
+    1,
+    6,
+  ],
+}
+`;
+
+exports[`filtering selectors should filter nodes based on injected filter 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "id": 4,
+            "name": "Leaf 4",
+          },
+        ],
+        "id": 2,
+        "name": "Leaf 2",
+        "state": Object {
+          "deletable": true,
+          "expanded": true,
+        },
+      },
+    ],
+    "id": 0,
+    "name": "Leaf 1",
+    "state": Object {
+      "expanded": true,
+    },
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [],
+            "id": 8,
+            "name": "Leaf 9",
+          },
+        ],
+        "id": 6,
+        "name": "Leaf 7",
+        "state": Object {
+          "expanded": false,
+        },
+      },
+    ],
+    "id": 1,
+    "name": "Leaf 6",
+    "state": Object {
+      "deletable": true,
+      "expanded": false,
+    },
+  },
+]
+`;

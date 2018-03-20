@@ -59,7 +59,7 @@ class BasicTree extends Component {
   }
 
   getRenderedComponentTree = () => reactElementToJSXString(
-      this.createNodeRenderer(this.state.selectedRenderers, { node: { name: 'X' } })
+      this.createNodeRenderer(this.state.selectedRenderers, { node: { name: 'X', id: 0 } })
     ).split('>')
     .filter(c => c)
     .map((c, i) => {

@@ -14,7 +14,7 @@ describe('selectors -> nodes ->', () => {
       deepFreeze(originalNode);
 
       expect(
-        nodeSelectors.udpateNode(originalNode, { favorite: true, expanded: false } )
+        nodeSelectors.updateNode(originalNode, { favorite: true, expanded: false } )
       ).toMatchSnapshot();
     });
 
@@ -53,7 +53,7 @@ describe('selectors -> nodes ->', () => {
     it('replaceNodeFromTree should replace a node in the tree without mutations', () => {
       deepFreeze(Nodes);
 
-      const updatedNode =  nodeSelectors.udpateNode(
+      const updatedNode =  nodeSelectors.updateNode(
         getSampleNode(),
         { favorite: true, expanded: false }
       );

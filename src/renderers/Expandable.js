@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
 import { submitEvent } from '../eventWrappers';
-import { getNodeRenderOptions, udpateNode } from '../selectors/nodes';
+import { getNodeRenderOptions, updateNode } from '../selectors/nodes';
 import { Renderer } from '../shapes/rendererShapes';
 
 const Expandable = ({
@@ -20,11 +20,11 @@ const Expandable = ({
   const className = classNames({
     [iconsClassNameMap.expanded]: hasChildren && isExpanded,
     [iconsClassNameMap.collapsed]: hasChildren && !isExpanded,
-    [iconsClassNameMap.lastChild]: !hasChildren  
+    [iconsClassNameMap.lastChild]: !hasChildren
   });
 
-  const handleChange = () => onChange(udpateNode(node, { expanded: !isExpanded }));
-  
+  const handleChange = () => onChange(updateNode(node, { expanded: !isExpanded }));
+
   return (
     <span onDoubleClick={handleChange}>
       <i

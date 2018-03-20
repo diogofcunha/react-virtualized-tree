@@ -34,6 +34,7 @@ export interface TreeProps {
   nodes: Node[];
   onChange: (nodes: Node[]) => void;
   children: (props: RendererProps) => JSX.Element
+  nodeMarginLeft?: number;
 }
 
 export default class Tree extends React.Component<TreeProps> {}
@@ -108,7 +109,7 @@ interface Selectors {
   deleteNodeFromTree: (nodes: Node[], nodeToDelete: FlattenedNode) => Node[],
   deleteNode: (node: FlattenedNode[]) => NodeAction,
   addNode: (node: FlattenedNode[]) => NodeAction,
-  udpateNode: (node: FlattenedNode, state: { [stateKey: string]: any }) => NodeAction
+  updateNode: (node: FlattenedNode, state: { [stateKey: string]: any }) => NodeAction
 }
 
 export const selectors: Selectors;

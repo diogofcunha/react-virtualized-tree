@@ -9,7 +9,7 @@ import { Node } from './shapes/nodeShapes';
 
 const DEFAULT_UPDATE_TYPES = {
   [UPDATE_TYPE.DELETE]: deleteNodeFromTree,
-  [UPDATE_TYPE.UPDATE]: replaceNodeFromTree 
+  [UPDATE_TYPE.UPDATE]: replaceNodeFromTree
 };
 
 export default class TreeContainer extends React.Component {
@@ -31,7 +31,7 @@ export default class TreeContainer extends React.Component {
     const {
       extensions: {
         updateTypeHandlers = { }
-      } = { } 
+      } = { }
     } = props;
 
     this._extensions = {
@@ -60,7 +60,7 @@ export default class TreeContainer extends React.Component {
 
   render() {
     return (
-      <Tree nodes={getFlattenedTree(this.props.nodes)} onChange={this.handleChange}> 
+      <Tree leftMarginAmount={this.props.nodeMarginLeft} nodes={getFlattenedTree(this.props.nodes)} onChange={this.handleChange}>
         { this.props.children }
       </Tree>
     );
@@ -73,5 +73,10 @@ TreeContainer.propTypes = {
   }),
   nodes: PropTypes.arrayOf(PropTypes.shape(Node)).isRequired,
   onChange: PropTypes.func,
-  children: PropTypes.func.isRequired
+  children: PropTypes.func.isRequired,
+  nodeMarginLeft: PropTypes.number
+};
+
+TreeContainer.defaultProps = {
+  nodeMarginLeft: 30
 };

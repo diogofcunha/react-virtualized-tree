@@ -1,3 +1,7 @@
+<div align="center" style="margin-bottom: 30px;">
+<img src="https://user-images.githubusercontent.com/1521183/37708046-14cf3fb4-2cfd-11e8-9fad-8c0d557397cd.gif" width="224"/>
+</div>
+
 # react-virtualized-tree
 
 [![Travis][build-badge]][build]
@@ -18,7 +22,7 @@
 
 Its main goal is to display tree like data in a beautiful and fast way. Being a reactive library it uses children functions to achieve maximum extensibility. The core idea behind it is that anyone using it is enable to create a tree as they intent just by rendering their own components or components exported by the tree.
 
-Demo and docs can be found [in here](https://diogofcunha.github.io/react-virtualized-tree/#/).
+Demo and docs can be found [in here](https://diogofcunha.github.io/react-virtualized-tree/#/examples/basic-tree).
 
 ## Installation
 You can install via npm or yarn.

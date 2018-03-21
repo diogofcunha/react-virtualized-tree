@@ -1,8 +1,5 @@
-<div align="center" style="margin-bottom: 30px;">
-<img src="https://user-images.githubusercontent.com/1521183/37708046-14cf3fb4-2cfd-11e8-9fad-8c0d557397cd.gif" width="224"/>
-</div>
-
 # react-virtualized-tree
+
 
 [![Travis][build-badge]][build]
 [![npm package][npm-badge]][npm]
@@ -16,6 +13,10 @@
 
 [coveralls-badge]: https://img.shields.io/coveralls/diogofcunha/react-virtualized-tree/master.png?style=flat-square
 [coveralls]: https://coveralls.io/github/diogofcunha/react-virtualized-tree
+
+<div align="center" style="margin-bottom: 30px;">
+<img src="https://user-images.githubusercontent.com/1521183/37708046-14cf3fb4-2cfd-11e8-9fad-8c0d557397cd.gif" width="650"/>
+</div>
 
 ## Introduction
 **react-virtualized-tree** is a tree view react library built on top of [react-virtualized](https://bvaughn.github.io/react-virtualized/#/components/List)

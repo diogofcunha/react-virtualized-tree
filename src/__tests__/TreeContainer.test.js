@@ -5,7 +5,7 @@ import TreeContainer from '../TreeContainer';
 import Tree from '../Tree';
 import { Nodes } from '../../testData/sampleTree';
 import { getFlattenedTree } from '../selectors/getFlattenedTree';
-import { UPDATE_TYPE } from '../contants';
+import { UPDATE_TYPE } from '../constants';
 import { replaceNodeFromTree, updateNode } from '../selectors/nodes';
 
 describe('TreeContainer', () => {

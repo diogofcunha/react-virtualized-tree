@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Tree from './Tree';
-import { UPDATE_TYPE } from './contants';
+import { UPDATE_TYPE } from './constants';
 import { getFlattenedTree } from './selectors/getFlattenedTree';
 import { deleteNodeFromTree, replaceNodeFromTree } from './selectors/nodes';
 import { Node } from './shapes/nodeShapes';
@@ -58,37 +58,37 @@ export default class TreeContainer extends React.Component {
     this.props.onChange(updatedNodes);
   }
 
-  apply = (nodes) => {
-    return nodes.reduce((acc, n) => {
-      const children = this.apply(n.children || []);
+  // apply = (nodes) => {
+  //   return nodes.reduce((acc, n) => {
+  //     const children = this.apply(n.children || []);
   
-      return [ ...acc, n, ...children ]
-    }, [])
-  }
+  //     return [ ...acc, n, ...children ]
+  //   }, [])
+  // }
 
-  handleBulk = ({ node: { state }, type }) => {
-    const flattenedNodesToUpdate = this.apply(this.props.nodes);
+  // handleBulk = ({ node: { state }, type }) => {
+  //   const flattenedNodesToUpdate = this.apply(this.props.nodes);
 
-    this.props.onChange(
-      flattenedNodesToUpdate.reduce((acc, n) => {
-        const node = {
-          ...n,
-          state,
-          parents: this.props.nodeParentMappings[n.id]
-        }
+  //   this.props.onChange(
+  //     flattenedNodesToUpdate.reduce((acc, n) => {
+  //       const node = {
+  //         ...n,
+  //         state,
+  //         parents: this.props.nodeParentMappings[n.id]
+  //       }
 
-        return this.extensions.updateTypeHandlers[type](acc, node);
+  //       return this.extensions.updateTypeHandlers[type](acc, node);
 
-      }, this.nodes)
-    );
-  }
+  //     }, this.nodes)
+  //   );
+  // }
 
   render() {
     return (
       <Tree
         nodeMarginLeft={this.props.nodeMarginLeft}
         nodes={getFlattenedTree(this.props.nodes)}
-        onChange={this.handleBulk}
+        onChange={this.handleChange}
         NodeRenderer={this.props.children}
       />
     );

@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 import { omit } from 'lodash';
 
-import { UPDATE_TYPE } from '../contants';
+import { UPDATE_TYPE } from '../constants';
 
 export const getNodeRenderOptions = createSelector(
   (node => (node.state || {}).expanded),

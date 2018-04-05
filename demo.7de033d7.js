@@ -1278,7 +1278,6 @@ var RendererCard = (_dec = Object(__WEBPACK_IMPORTED_MODULE_3_react_dnd__["DropT
 	index: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.number.isRequired,
 	isDragging: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool.isRequired,
 	id: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.any.isRequired,
-	text: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.string.isRequired,
 	moveRenderer: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func.isRequired
 }, _temp)) || _class) || _class);
 
@@ -9543,7 +9542,7 @@ module.exports = Array.isArray || function isArray(arg) {
 /***/ "7YgM":
 /***/ (function(module, exports) {
 
-module.exports = {"name":"react-virtualized-tree","version":"1.2.5","description":"react-virtualized-tree React component","main":"lib/index.js","module":"es/index.js","files":["css","es","lib","umd","index.d.ts"],"scripts":{"build":"nwb build-react-component --copy-files","clean":"nwb clean-module && nwb clean-demo","start":"nwb serve-react-demo","test":"node config/test/test.js --env=jsdom","test:coverage":"node config/test/test.js --env=jsdom --coverage","postpublish":"node config/pages"},"dependencies":{"classnames":"^2.2.5","lodash":"^4.17.4","material-icons":"^0.1.0","reselect":"^3.0.1"},"peerDependencies":{"react":"16.x","react-dom":"^16.2.0","react-virtualized":"^9.13.0"},"devDependencies":{"babel-jest":"^22.0.4","babel-preset-es2015":"^6.24.1","babel-preset-react":"^6.24.1","babel-preset-react-app":"^3.1.0","deep-freeze":"^0.0.1","enzyme":"^3.3.0","enzyme-adapter-react-16":"^1.1.1","flag-icon-css":"^2.9.0","gh-pages":"^1.1.0","immutability-helper":"^2.6.4","jest":"^22.0.4","nwb":"0.20.x","prop-types":"^15.6.0","react":"^16.2.0","react-dnd":"^2.5.4","react-dnd-html5-backend":"^2.5.4","react-dom":"^16.2.0","react-element-to-jsx-string":"^13.1.0","react-markdown":"^3.1.4","react-router":"^4.2.0","react-router-dom":"^4.2.2","react-test-renderer":"^16.2.0","react-virtualized":"^9.18.5","semantic-ui-react":"^0.77.1"},"jest":{"collectCoverageFrom":["src/**/*.{js,jsx,mjs}","!src/**/index.js"],"setupTestFrameworkScriptFile":"<rootDir>/src/setupTests.js","testMatch":["<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}","<rootDir>/src/**/?(*.)(spec|test).{js,jsx,mjs}"],"testEnvironment":"node","testURL":"http://localhost","transform":{"^.+\\.(js|jsx|mjs)$":"<rootDir>/node_modules/babel-jest","^.+\\.css$":"<rootDir>/config/test/cssTransform.js","^(?!.*\\.(js|jsx|mjs|css|json)$)":"<rootDir>/config/test/fileTransform.js"},"transformIgnorePatterns":["[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"]},"babel":{"presets":["react-app"]},"author":"Diogo Cunha","homepage":"https://diogofcunha.github.io/react-virtualized-tree/","license":"MIT","repository":"https://github.com/diogofcunha/react-virtualized-tree/","keywords":["react","tree","view","react-virtualized","react-tree","tree-view","foder-structure","react-virtualized-tree","react-tree-view","react-component"]}
+module.exports = {"name":"react-virtualized-tree","version":"2.0.0","description":"react-virtualized-tree React component","main":"lib/index.js","module":"es/index.js","files":["css","es","lib","umd","index.d.ts"],"scripts":{"build":"nwb build-react-component --copy-files","clean":"nwb clean-module && nwb clean-demo","start":"nwb serve-react-demo","test":"node config/test/test.js --env=jsdom","test:coverage":"node config/test/test.js --env=jsdom --coverage","postpublish":"node config/pages"},"dependencies":{"classnames":"^2.2.5","lodash":"^4.17.4","material-icons":"^0.1.0","reselect":"^3.0.1"},"peerDependencies":{"react":"16.x","react-dom":"^16.2.0","react-virtualized":"^9.13.0"},"devDependencies":{"babel-jest":"^22.0.4","babel-preset-es2015":"^6.24.1","babel-preset-react":"^6.24.1","babel-preset-react-app":"^3.1.0","deep-freeze":"^0.0.1","enzyme":"^3.3.0","enzyme-adapter-react-16":"^1.1.1","flag-icon-css":"^2.9.0","gh-pages":"^1.1.0","immutability-helper":"^2.6.4","jest":"^22.0.4","nwb":"0.20.x","prop-types":"^15.6.0","react":"^16.2.0","react-dnd":"^2.5.4","react-dnd-html5-backend":"^2.5.4","react-dom":"^16.2.0","react-element-to-jsx-string":"^13.1.0","react-markdown":"^3.1.4","react-router":"^4.2.0","react-router-dom":"^4.2.2","react-test-renderer":"^16.2.0","react-virtualized":"^9.18.5","semantic-ui-react":"^0.77.1"},"jest":{"collectCoverageFrom":["src/**/*.{js,jsx,mjs}","!src/**/index.js"],"setupTestFrameworkScriptFile":"<rootDir>/src/setupTests.js","testMatch":["<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}","<rootDir>/src/**/?(*.)(spec|test).{js,jsx,mjs}"],"testEnvironment":"node","testURL":"http://localhost","transform":{"^.+\\.(js|jsx|mjs)$":"<rootDir>/node_modules/babel-jest","^.+\\.css$":"<rootDir>/config/test/cssTransform.js","^(?!.*\\.(js|jsx|mjs|css|json)$)":"<rootDir>/config/test/fileTransform.js"},"transformIgnorePatterns":["[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"]},"babel":{"presets":["react-app"]},"author":"Diogo Cunha","homepage":"https://diogofcunha.github.io/react-virtualized-tree/","license":"MIT","repository":"https://github.com/diogofcunha/react-virtualized-tree/","keywords":["react","tree","view","react-virtualized","react-tree","tree-view","foder-structure","react-virtualized-tree","react-tree-view","react-component"]}
 
 /***/ }),
 
@@ -11880,7 +11879,7 @@ var Expandable = function Expandable(_ref) {
   var className = __WEBPACK_IMPORTED_MODULE_1_classnames___default()((_classNames = {}, _classNames[iconsClassNameMap.expanded] = hasChildren && isExpanded, _classNames[iconsClassNameMap.collapsed] = hasChildren && !isExpanded, _classNames[iconsClassNameMap.lastChild] = !hasChildren, _classNames));
 
   var handleChange = function handleChange() {
-    return onChange(Object(__WEBPACK_IMPORTED_MODULE_4__selectors_nodes__["e" /* udpateNode */])(node, { expanded: !isExpanded }));
+    return onChange(Object(__WEBPACK_IMPORTED_MODULE_4__selectors_nodes__["e" /* updateNode */])(node, { expanded: !isExpanded }));
   };
 
   return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -22911,13 +22910,15 @@ var Tree = function (_React$Component) {
           measure = _ref.measure,
           style = _ref.style,
           NodeRenderer = _ref.NodeRenderer;
+      var nodeMarginLeft = _this.props.nodeMarginLeft;
+
 
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
         {
           key: key,
           className: 'tree-node',
-          style: _extends({}, style, { marginLeft: node.deepness * 30 })
+          style: _extends({}, style, { marginLeft: node.deepness * nodeMarginLeft })
         },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(NodeRenderer, { node: node, onChange: _this.props.onChange, measure: measure })
       );
@@ -22927,7 +22928,7 @@ var Tree = function (_React$Component) {
             index = _ref2.index,
             style = _ref2.style,
             parent = _ref2.parent;
-        var NodeRenderer = _this.props.children;
+        var NodeRenderer = _this.props.NodeRenderer;
 
         var node = nodes[index];
 
@@ -22950,9 +22951,7 @@ var Tree = function (_React$Component) {
   Tree.prototype.render = function render() {
     var _this2 = this;
 
-    var _props = this.props,
-        children = _props.children,
-        nodes = _props.nodes;
+    var nodes = this.props.nodes;
 
 
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -22984,8 +22983,9 @@ var Tree = function (_React$Component) {
 
 Tree.propTypes = {
   nodes: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.arrayOf(__WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.shape(__WEBPACK_IMPORTED_MODULE_3__shapes_nodeShapes__["a" /* FlattenedNode */])).isRequired,
-  children: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func.isRequired,
-  onChange: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func.isRequired
+  NodeRenderer: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func.isRequired,
+  onChange: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func.isRequired,
+  nodeMarginLeft: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.number
 };
 
 /***/ }),
@@ -27979,7 +27979,7 @@ var BasicTree = function (_Component) {
 
       return _this.renderNodeDisplay(nextNode, props, _this.createNodeRenderer(remainingNodes, props));
     }, _this.getRenderedComponentTree = function () {
-      return __WEBPACK_IMPORTED_MODULE_1_react_element_to_jsx_string___default()(_this.createNodeRenderer(_this.state.selectedRenderers, { node: { name: 'X' } })).split('>').filter(function (c) {
+      return __WEBPACK_IMPORTED_MODULE_1_react_element_to_jsx_string___default()(_this.createNodeRenderer(_this.state.selectedRenderers, { node: { name: 'X', id: 0 } })).split('>').filter(function (c) {
         return c;
       }).map(function (c, i) {
         var length = _this.state.selectedRenderers.length;
@@ -72814,6 +72814,35 @@ function createTargetConnector(backend) {
 
 /***/ }),
 
+/***/ "hxDr":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return filterNodes; });
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var INITIAL_FILTERED_VALUE = { nodes: [], nodeParentMappings: {} };
+
+var filterNodes = function filterNodes(filter, nodes) {
+  var parents = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+  return nodes.reduce(function (filtered, n) {
+    var _extends2;
+
+    var _ref = n.children ? filterNodes(filter, n.children, [].concat(parents, [n.id])) : INITIAL_FILTERED_VALUE,
+        filteredChildren = _ref.nodes,
+        childrenNodeMappings = _ref.nodeParentMappings;
+
+    return !(filter(n) || filteredChildren.length) ? filtered : {
+      nodes: [].concat(filtered.nodes, [_extends({}, n, {
+        children: filteredChildren
+      })]),
+      nodeParentMappings: _extends({}, filtered.nodeParentMappings, childrenNodeMappings, (_extends2 = {}, _extends2[n.id] = parents, _extends2))
+    };
+  }, INITIAL_FILTERED_VALUE);
+};
+
+/***/ }),
+
 /***/ "hygk":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -85544,15 +85573,15 @@ ItemHeader.create = Object(__WEBPACK_IMPORTED_MODULE_4__lib__["m" /* createShort
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_classnames__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__filtering_DefaultGroupRenderer__ = __webpack_require__("uSz3");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shapes_nodeShapes__ = __webpack_require__("Fo4I");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__selectors_filtering__ = __webpack_require__("hxDr");
 var _class, _temp;
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 
 
 
@@ -85571,24 +85600,6 @@ var nameMatchesSearchTerm = function nameMatchesSearchTerm(searchTerm) {
 
     return upperCaseName.indexOf(upperCaseSearchTerm.trim()) > -1;
   };
-};
-
-var filterNodes = function filterNodes(filter, nodes) {
-  return nodes.reduce(function (nds, n) {
-    var filteredChildren = [];
-
-    if (n.children) {
-      filteredChildren = filterNodes(filter, n.children);
-    }
-
-    if (filter(n) || filteredChildren.length) {
-      return [].concat(nds, [_extends({}, n, {
-        children: filteredChildren
-      })]);
-    }
-
-    return [].concat(nds);
-  }, []);
 };
 
 var FilteringContainer = (_temp = _class = function (_React$Component) {
@@ -85639,9 +85650,11 @@ var FilteringContainer = (_temp = _class = function (_React$Component) {
         onSelectedGroupChange = _props.onSelectedGroupChange;
 
 
-    var relevantNodes = groups && selectedGroup && groups[selectedGroup] ? filterNodes(groups[selectedGroup].filter, nodes) : nodes;
+    var relevantNodes = groups && selectedGroup && groups[selectedGroup] ? Object(__WEBPACK_IMPORTED_MODULE_6__selectors_filtering__["a" /* filterNodes */])(groups[selectedGroup].filter, nodes) : { nodes: nodes, nodeParentMappings: [] };
 
-    var filteredNodes = filterTerm ? filterNodes(nameMatchesSearchTerm(filterTerm), relevantNodes) : relevantNodes;
+    var _ref2 = filterTerm ? Object(__WEBPACK_IMPORTED_MODULE_6__selectors_filtering__["a" /* filterNodes */])(nameMatchesSearchTerm(filterTerm), relevantNodes.nodes) : relevantNodes,
+        filteredNodes = _ref2.nodes,
+        nodeParentMappings = _ref2.nodeParentMappings;
 
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'div',
@@ -85660,7 +85673,7 @@ var FilteringContainer = (_temp = _class = function (_React$Component) {
           onChange: onSelectedGroupChange
         })
       ),
-      treeRenderer({ nodes: filteredNodes })
+      treeRenderer({ nodes: filteredNodes, nodeParentMappings: nodeParentMappings })
     );
   };
 
@@ -86401,11 +86414,12 @@ var TreeContainer = (_temp = _class = function (_React$Component) {
   };
 
   TreeContainer.prototype.render = function render() {
-    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-      __WEBPACK_IMPORTED_MODULE_2__Tree__["a" /* default */],
-      { nodes: Object(__WEBPACK_IMPORTED_MODULE_4__selectors_getFlattenedTree__["a" /* getFlattenedTree */])(this.props.nodes), onChange: this.handleChange },
-      this.props.children
-    );
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Tree__["a" /* default */], {
+      nodeMarginLeft: this.props.nodeMarginLeft,
+      nodes: Object(__WEBPACK_IMPORTED_MODULE_4__selectors_getFlattenedTree__["a" /* getFlattenedTree */])(this.props.nodes),
+      onChange: this.handleChange,
+      NodeRenderer: this.props.children
+    });
   };
 
   _createClass(TreeContainer, [{
@@ -86444,7 +86458,12 @@ TreeContainer.propTypes = {
   }),
   nodes: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.arrayOf(__WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.shape(__WEBPACK_IMPORTED_MODULE_6__shapes_nodeShapes__["b" /* Node */])).isRequired,
   onChange: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func,
-  children: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func.isRequired
+  children: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func.isRequired,
+  nodeMarginLeft: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.number
+};
+
+TreeContainer.defaultProps = {
+  nodeMarginLeft: 30
 };
 
 /***/ }),
@@ -91107,7 +91126,7 @@ addToUnscopables('entries');
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return getNodeRenderOptions; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return replaceNodeFromTree; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return deleteNodeFromTree; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return udpateNode; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return updateNode; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return deleteNode; });
 /* unused harmony export addNode */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_reselect__ = __webpack_require__("bndy");
@@ -91188,7 +91207,7 @@ var deleteNodeFromTree = function deleteNodeFromTree(nodes, deletedNode) {
   return replaceNodeFromTree(nodes, deletedNode, NODE_OPERATION_TYPES.DELETE_NODE);
 };
 
-var udpateNode = function udpateNode(originalNode, newState) {
+var updateNode = function updateNode(originalNode, newState) {
   return {
     node: _extends({}, originalNode, {
       state: _extends({}, originalNode.state, newState)
@@ -92335,7 +92354,7 @@ var Favorite = function Favorite(_ref) {
   var className = __WEBPACK_IMPORTED_MODULE_1_classnames___default()((_classNames = {}, _classNames[iconsClassNameMap.favorite] = isFavorite, _classNames[iconsClassNameMap.notFavorite] = !isFavorite, _classNames));
 
   var handleChange = function handleChange() {
-    return onChange(Object(__WEBPACK_IMPORTED_MODULE_4__selectors_nodes__["e" /* udpateNode */])(node, { favorite: !isFavorite }));
+    return onChange(Object(__WEBPACK_IMPORTED_MODULE_4__selectors_nodes__["e" /* updateNode */])(node, { favorite: !isFavorite }));
   };
 
   return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -93575,4 +93594,4 @@ exports.default = function (self, call) {
 /***/ })
 
 },[0]);
-//# sourceMappingURL=demo.f3a11ae5.js.map
+//# sourceMappingURL=demo.7de033d7.js.map

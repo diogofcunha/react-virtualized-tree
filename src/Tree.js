@@ -43,20 +43,20 @@ export default class Tree extends React.Component {
   }
 
   render() {
-    const { nodes } = this.props;
+    const { nodes, rowHeight } = this.props;
 
     return (
       <AutoSizer>
         {({ height, width }) => (
-        <List
-          deferredMeasurementCache={this._cache}
-          ref={r => this._list = r}
-          height={height}
-          rowCount={nodes.length}
-          rowHeight={this._cache.rowHeight}
-          rowRenderer={this.measureRowRenderer(nodes)}
-          width={width}
-        />
+          <List
+            deferredMeasurementCache={this._cache}
+            ref={r => this._list = r}
+            height={height}
+            rowCount={nodes.length}
+            rowHeight={rowHeight || this._cache.rowHeight}
+            rowRenderer={this.measureRowRenderer(nodes)}
+            width={width}
+          />
         )}
       </AutoSizer>
     );
@@ -68,4 +68,5 @@ Tree.propTypes = {
   NodeRenderer: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   nodeMarginLeft: PropTypes.number,
+  rowHeight: PropTypes.number,
 };

@@ -31,8 +31,8 @@ export default class TreeContainer extends React.Component {
     const {
       extensions: {
         updateTypeHandlers = { }
-      } = { }
-    } = props;
+        } = { }
+      } = props;
 
     this._extensions = {
       updateTypeHandlers: {
@@ -64,6 +64,7 @@ export default class TreeContainer extends React.Component {
         nodeMarginLeft={this.props.nodeMarginLeft}
         nodes={getFlattenedTree(this.props.nodes)}
         onChange={this.handleChange}
+        rowHeight={this.props.rowHeight}
         NodeRenderer={this.props.children}
       />
     );
@@ -77,7 +78,8 @@ TreeContainer.propTypes = {
   nodes: PropTypes.arrayOf(PropTypes.shape(Node)).isRequired,
   onChange: PropTypes.func,
   children: PropTypes.func.isRequired,
-  nodeMarginLeft: PropTypes.number
+  nodeMarginLeft: PropTypes.number,
+  rowHeight: PropTypes.number
 };
 
 TreeContainer.defaultProps = {

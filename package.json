@@ -17,11 +17,15 @@
     "start": "nwb serve-react-demo",
     "test": "node config/test/test.js --env=jsdom",
     "test:coverage": "node config/test/test.js --env=jsdom --coverage",
-    "postpublish": "node config/pages"
+    "postpublish": "node config/pages",
+    "stats:analyzer": "webpack-bundle-analyzer umd/stats.json umd"
   },
   "dependencies": {
     "classnames": "^2.2.5",
     "lodash": "^4.17.4",
+    "lodash.debounce": "^4.0.8",
+    "lodash.isequal": "^4.5.0",
+    "lodash.omit": "^4.5.0",
     "material-icons": "^0.1.0",
     "reselect": "^3.0.1"
   },
@@ -54,7 +58,9 @@
     "react-router-dom": "^4.2.2",
     "react-test-renderer": "^16.2.0",
     "react-virtualized": "^9.18.5",
-    "semantic-ui-react": "^0.77.1"
+    "semantic-ui-react": "^0.77.1",
+    "stats-webpack-plugin": "^0.6.2",
+    "webpack-bundle-analyzer": "^2.12.0"
   },
   "jest": {
     "collectCoverageFrom": [

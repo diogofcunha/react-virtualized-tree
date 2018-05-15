@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { debounce } from 'lodash';
+import debounce from 'lodash.debounce';
 import classNames from 'classnames';
 
 import DefaultGroupRenderer from './filtering/DefaultGroupRenderer';

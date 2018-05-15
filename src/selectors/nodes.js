@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { omit } from 'lodash';
+import omit from 'lodash.omit';
 
 import { UPDATE_TYPE } from '../contants';
 

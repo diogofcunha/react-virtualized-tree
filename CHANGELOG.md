@@ -4,6 +4,8 @@
 - :bug: - Bug fix
 
 ### 2.0.0
+- :lollipop: Nwb update to the latest release ([diogofcunha](https://github.com/diogofcunha) - [#41](https://github.com/diogofcunha/react-virtualized-tree/pull/41))
+
 - :lollipop: React 16.3 update ([diogofcunha](https://github.com/diogofcunha) - [#40](https://github.com/diogofcunha/react-virtualized-tree/pull/40))
 
 - :lollipop:/:rocket: Optimize bundle ([diogofcunha](https://github.com/diogofcunha) - [#38](https://github.com/diogofcunha/react-virtualized-tree/pull/38))

@@ -4,6 +4,8 @@
 - :bug: - Bug fix
 
 ### 2.0.0
+- :lollipop: React 16.3 update ([diogofcunha](https://github.com/diogofcunha) - [#40](https://github.com/diogofcunha/react-virtualized-tree/pull/40))
+
 - :lollipop:/:rocket: Optimize bundle ([diogofcunha](https://github.com/diogofcunha) - [#38](https://github.com/diogofcunha/react-virtualized-tree/pull/38))
   > react-dom, react-virtualized and full lodash were included in the build. umd module size 322.58 KB (:worried:) to 28.05 KB (:relaxed:)
 

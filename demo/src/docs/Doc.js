@@ -5,7 +5,9 @@ import ReactMarkdown from 'react-markdown';
 import documents from './';
 import { getDocumentFetchUrl } from '../toolbelt';
 
-export default class Doc extends Component {
+import { polyfill } from 'react-lifecycles-compat';
+
+class Doc extends Component {
   state = {
     doc: null
   }
@@ -23,7 +25,7 @@ export default class Doc extends Component {
     );
   }
 
-  componentWillReceiveProps({ match: { params: { document } } }) {
+  UNSAFE_componentWillReceiveProps({ match: { params: { document } } }) {
     const { match: { params: { document: selectedDocument } } } = this.props;
 
     if (document !== selectedDocument) {
@@ -43,3 +45,7 @@ export default class Doc extends Component {
     )
   }
 }
+
+polyfill(Doc);
+
+export default Doc;

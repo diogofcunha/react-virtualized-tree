@@ -47,7 +47,7 @@
     "gh-pages": "^1.1.0",
     "immutability-helper": "^2.6.4",
     "jest": "^22.0.4",
-    "nwb": "0.20.x",
+    "nwb": "^0.21.5",
     "prop-types": "^15.6.0",
     "react": "^16.3.2",
     "react-dnd": "^2.5.4",

@@ -1,7 +1,7 @@
 // Type definitions for react-virtualzed-tree
 // Definitions by: Diogo Cunha
 
-import * as React from 'React';
+import * as React from 'react';
 
 interface BasicNode {
   id: number | string;

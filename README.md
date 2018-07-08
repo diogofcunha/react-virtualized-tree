@@ -3,6 +3,8 @@
 [![Travis][build-badge]][build]
 [![npm package][npm-badge]][npm]
 [![Coveralls][coveralls-badge]][coveralls]
+[![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/react-virtualized-tree/Lobby)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
 [build-badge]: https://img.shields.io/travis/diogofcunha/react-virtualized-tree/master.png?style=flat-square
 [build]: https://travis-ci.org/diogofcunha/react-virtualized-tree
@@ -10,8 +12,6 @@
 [npm]: https://www.npmjs.com/package/react-virtualized-tree
 [coveralls-badge]: https://img.shields.io/coveralls/diogofcunha/react-virtualized-tree/master.png?style=flat-square
 [coveralls]: https://coveralls.io/github/diogofcunha/react-virtualized-tree
-
-[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
 <div align="center" style="margin-bottom: 30px;">
 <img src="https://user-images.githubusercontent.com/1521183/37708046-14cf3fb4-2cfd-11e8-9fad-8c0d557397cd.gif" width="650"/>

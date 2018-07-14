@@ -1,50 +1,47 @@
-import React, { Component } from 'react';
-import classNames from 'classnames';
+import React, { Component } from "react";
+import classNames from "classnames";
 
-import Tree from '../../../src/TreeContainer';
-import { Nodes } from '../../../testData/sampleTree';
-import { createEntry } from '../toolbelt';
+import Tree from "../../../src/TreeContainer";
+import { Nodes } from "../../../testData/sampleTree";
+import { createEntry } from "../toolbelt";
 
 const Deepness = ({ node, children }) => {
   const deepness = node.deepness + 1;
   const className = classNames({
     [`mi mi-filter-${deepness}`]: deepness <= 9,
-    'filter-9-plus': deepness > 9
+    "filter-9-plus": deepness > 9
   });
-  
+
   return (
     <span>
-      <i
-        id={node.id}
-        className={className}>
-      </i>
-      { children }
-    </span>);
+      <i id={node.id} className={className} />
+      {children}
+    </span>
+  );
 };
 
 class Renderers extends Component {
   render() {
     return (
       <Tree nodes={Nodes}>
-        {
-          ({ node, ...rest }) =>
+        {({ node, style, className, ...rest }) => (
+          <div style={style} className={className}>
             <Deepness node={node} {...rest}>
-              { node.name }
+              {node.name}
             </Deepness>
-        }
+          </div>
+        )}
       </Tree>
     );
   }
 }
 
 export default createEntry(
-  'renderers',
-  'Renderers',
-  'Create a custom renderer',
-  (
-    <div>
-      <p>A tree that makes use of a custom renderer</p>
-    </div>
-  ),
+  "renderers",
+  "Renderers",
+  "Create a custom renderer",
+  <div>
+    <p>A tree that makes use of a custom renderer</p>
+  </div>,
   Renderers
 );

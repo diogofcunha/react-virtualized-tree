@@ -1,42 +1,35 @@
-import React from 'react';
-import { shallow } from 'enzyme';
-import { List, CellMeasurer } from 'react-virtualized';
+import React from "react";
+import { shallow } from "enzyme";
+import { List, CellMeasurer } from "react-virtualized";
 
-import Tree from '../Tree';
-import { Nodes } from '../../testData/sampleTree';
-import { getFlattenedTree } from '../selectors/getFlattenedTree';
+import Tree from "../Tree";
+import { Nodes } from "../../testData/sampleTree";
+import { getFlattenedTree } from "../selectors/getFlattenedTree";
 
-describe('Tree', () => {
-  const SampleRenderer = ({ node }) => (
-    <div>
-      {`${node.id}`}
-    </div>
-  );
+describe("Tree", () => {
+  const SampleRenderer = ({ node }) => <div>{`${node.id}`}</div>;
 
   const nodes = getFlattenedTree(Nodes);
 
-  const setup = () => shallow(
-    <Tree
-      nodes={nodes}
-      onChange={jest.fn()}
-      NodeRenderer={
-        ({ node, ...rest }) =>
-          <SampleRenderer
-            node={node}
-          >
-            { node.name }
-          </SampleRenderer>
-      }
-    />
-  );
+  const setup = () =>
+    shallow(
+      <Tree
+        nodes={nodes}
+        onChange={jest.fn()}
+        nodeMarginLeft={30}
+        NodeRenderer={({ node, ...rest }) => (
+          <SampleRenderer node={node}>{node.name}</SampleRenderer>
+        )}
+      />
+    );
 
-  it('should render a Tree with children and the correct props', () => {    
+  it("should render a Tree with children and the correct props", () => {
     const wrapper = setup();
 
     expect(wrapper.render()).toMatchSnapshot();
   });
 
-  it('rowRenderer should render the Node renderer with the correct props', () => {
+  it("rowRenderer should render the Node renderer with the correct props", () => {
     const wrapper = setup();
 
     const { rowRenderer: RowRenderer } = wrapper.instance();
@@ -46,13 +39,13 @@ describe('Tree', () => {
       measure: jest.fn(),
       NodeRenderer: SampleRenderer
     };
-    
-    const rowRendererWrapper = shallow(<RowRenderer {...rowRendererProps}/>);
+
+    const rowRendererWrapper = shallow(<RowRenderer {...rowRendererProps} />);
 
     expect(rowRendererWrapper.find(SampleRenderer).props()).toMatchSnapshot();
   });
 
-  it('measureRowRenderer should render a CellMeasurer', () => {
+  it("measureRowRenderer should render a CellMeasurer", () => {
     const wrapper = setup();
 
     const { measureRowRenderer } = wrapper.instance();
@@ -63,7 +56,9 @@ describe('Tree', () => {
       parent: {}
     };
 
-    const measureRowRendererWrapper = shallow(<MeasureRowRenderer {...rowRendererProps}/>);
+    const measureRowRendererWrapper = shallow(
+      <MeasureRowRenderer {...rowRendererProps} />
+    );
 
     expect(
       measureRowRendererWrapper.find(CellMeasurer).props()

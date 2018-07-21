@@ -1,75 +1,76 @@
-export const Nodes = [{
-  id: 0,
-  name: 'Leaf 1',
-  state: {
-     expanded: true
-  },
-  children: [
-     {
+export const Nodes = [
+  {
+    id: 0,
+    name: 'Leaf 1',
+    state: {
+      expanded: true,
+    },
+    children: [
+      {
         id: 2,
         name: 'Leaf 2',
         state: {
-           expanded: true,
-           deletable: true
+          expanded: true,
+          deletable: true,
         },
         children: [
-           {
-              id: 3,
-              name: 'Leaf 3',
-              state : {
-                favorite: true,
-                deletable: true
-              }
-           },
-           {
-              id: 4,
-              name: 'Leaf 4'
-           }
-        ]
-     },
-     {
+          {
+            id: 3,
+            name: 'Leaf 3',
+            state: {
+              favorite: true,
+              deletable: true,
+            },
+          },
+          {
+            id: 4,
+            name: 'Leaf 4',
+          },
+        ],
+      },
+      {
         id: 5,
-        name: 'Leaf 5'
-     }
-  ]
-},
-{
-  id: 1,
-  name: 'Leaf 6',
-  state: {
-     expanded: false,
-     deletable: true
+        name: 'Leaf 5',
+      },
+    ],
   },
-  children: [
-     {
+  {
+    id: 1,
+    name: 'Leaf 6',
+    state: {
+      expanded: false,
+      deletable: true,
+    },
+    children: [
+      {
         id: 6,
         name: 'Leaf 7',
         state: {
-           expanded: false
+          expanded: false,
         },
         children: [
-           {
-              id: 7,
-              name: 'Leaf 8',
-              
-           },
-           {
-              id: 8,
-              name: 'Leaf 9'
-           }
-        ]
-     },
-     {
+          {
+            id: 7,
+            name: 'Leaf 8',
+          },
+          {
+            id: 8,
+            name: 'Leaf 9',
+          },
+        ],
+      },
+      {
         id: 9,
-        name: 'Leaf 10'
-     }
-  ],
-},
-{
-  id: 'z',
-  name: 'Leaf z',
-  state: {
-    deletable: true,
-    favorite: true
-  }
-}];
+        name: 'Leaf 10',
+      },
+    ],
+  },
+  {
+    id: 'z',
+    name: 'Leaf z',
+    state: {
+      deletable: true,
+      favorite: true,
+    },
+  },
+];

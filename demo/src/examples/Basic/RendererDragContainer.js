@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
-import { DragDropContext } from 'react-dnd'
-import HTML5Backend from 'react-dnd-html5-backend'
-import DraggableRenderer from './DraggableRenderer'
+import React, {Component} from 'react';
+import {DragDropContext} from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
+import DraggableRenderer from './DraggableRenderer';
 
 const style = {
   width: 400,
-}
+};
 
 @DragDropContext(HTML5Backend)
 export default class RendererDragContainer extends Component {
@@ -23,6 +23,6 @@ export default class RendererDragContainer extends Component {
           />
         ))}
       </div>
-    )
+    );
   }
 }

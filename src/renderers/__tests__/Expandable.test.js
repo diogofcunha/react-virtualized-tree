@@ -1,9 +1,9 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import {shallow} from 'enzyme';
 
 import Expandable from '../Expandable';
-import { KEY_CODES } from '../../eventWrappers';
-import { updateNode } from '../../selectors/nodes';
+import {KEY_CODES} from '../../eventWrappers';
+import {updateNode} from '../../selectors/nodes';
 
 describe('renderers Expandable', () => {
   const findExpandIcon = wrapper => wrapper.find('i');
@@ -16,113 +16,83 @@ describe('renderers Expandable', () => {
         name: 'Node 1',
         state,
         deepness: 0,
-        children: [{}]
+        children: [{}],
       },
       iconsClassNameMap: {
         expanded: 'expanded',
-        collapsed: 'colpased'
+        collapsed: 'colpased',
       },
-      measure: jest.fn()
-    }
+      measure: jest.fn(),
+    };
 
-    const props = { ...baseProps, ...extraProps };
-    const wrapper = shallow(<Expandable {...props} />)
+    const props = {...baseProps, ...extraProps};
+    const wrapper = shallow(<Expandable {...props} />);
 
-    return { props, wrapper, expandIconWrapper: findExpandIcon(wrapper) };
-  }
+    return {props, wrapper, expandIconWrapper: findExpandIcon(wrapper)};
+  };
 
   describe('when contains children', () => {
     describe('when expanded', () => {
       it('should render a with the supplied className when expanded', () => {
-        const { expandIconWrapper, props } = setup({ expanded: true });
+        const {expandIconWrapper, props} = setup({expanded: true});
 
         expect(expandIconWrapper.hasClass(props.iconsClassNameMap.expanded)).toBeTruthy();
       });
 
       it('clicking should call onChange with the correct params', () => {
-        const { expandIconWrapper, props } = setup({ expanded: true });
+        const {expandIconWrapper, props} = setup({expanded: true});
 
         expandIconWrapper.simulate('click');
 
-        expect(props.onChange).toHaveBeenCalledWith(
-          updateNode(
-            props.node,
-            { expanded: false }
-          )
-        );
+        expect(props.onChange).toHaveBeenCalledWith(updateNode(props.node, {expanded: false}));
       });
 
       it('pressing enter should call onChange with the correct params', () => {
-        const { expandIconWrapper, props } = setup({ expanded: true });
+        const {expandIconWrapper, props} = setup({expanded: true});
 
-        expandIconWrapper.simulate('keyDown', { keyCode: KEY_CODES.Enter });
+        expandIconWrapper.simulate('keyDown', {keyCode: KEY_CODES.Enter});
 
-        expect(props.onChange).toHaveBeenCalledWith(
-          updateNode(
-            props.node,
-            { expanded: false }
-          )
-        )
+        expect(props.onChange).toHaveBeenCalledWith(updateNode(props.node, {expanded: false}));
       });
 
       it('double clicking in the parent node should call onChange with the correct params', () => {
-        const { props, wrapper } = setup({ expanded: true });
+        const {props, wrapper} = setup({expanded: true});
 
         wrapper.first().simulate('doubleClick');
 
-        expect(props.onChange).toHaveBeenCalledWith(
-          updateNode(
-            props.node,
-            { expanded: false }
-          )
-        );
+        expect(props.onChange).toHaveBeenCalledWith(updateNode(props.node, {expanded: false}));
       });
     });
 
     describe('when collapsed', () => {
       it('should render a with the supplied className when expanded', () => {
-        const { expandIconWrapper, props } = setup({ expanded: false });
+        const {expandIconWrapper, props} = setup({expanded: false});
 
         expect(expandIconWrapper.hasClass(props.iconsClassNameMap.collapsed)).toBeTruthy();
-      })
+      });
 
       it('clicking should call onChange with the correct params', () => {
-        const { expandIconWrapper, props } = setup({ expanded: false });
+        const {expandIconWrapper, props} = setup({expanded: false});
 
         expandIconWrapper.simulate('click');
 
-        expect(props.onChange).toHaveBeenCalledWith(
-          updateNode(
-            props.node,
-            { expanded: true }
-          )
-        )
+        expect(props.onChange).toHaveBeenCalledWith(updateNode(props.node, {expanded: true}));
       });
 
       it('pressing enter should call onChange with the correct params', () => {
-        const { expandIconWrapper, props } = setup({ expanded: false });
+        const {expandIconWrapper, props} = setup({expanded: false});
 
-        expandIconWrapper.simulate('keyDown', { keyCode: KEY_CODES.Enter });
+        expandIconWrapper.simulate('keyDown', {keyCode: KEY_CODES.Enter});
 
-        expect(props.onChange).toHaveBeenCalledWith(
-          updateNode(
-            props.node,
-            { expanded: true }
-          )
-        )
+        expect(props.onChange).toHaveBeenCalledWith(updateNode(props.node, {expanded: true}));
       });
 
       it('double clicking in the parent node should call onChange with the correct params', () => {
-        const { props, wrapper } = setup({ expanded: false });
+        const {props, wrapper} = setup({expanded: false});
 
         wrapper.first().simulate('doubleClick');
 
-        expect(props.onChange).toHaveBeenCalledWith(
-          updateNode(
-            props.node,
-            { expanded: true }
-          )
-        );
+        expect(props.onChange).toHaveBeenCalledWith(updateNode(props.node, {expanded: true}));
       });
     });
   });

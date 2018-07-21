@@ -1,4 +1,4 @@
-export const wrapKeyDownEvent = availablekeys => handler => ({ keyCode }, ...params) => {
+export const wrapKeyDownEvent = availablekeys => handler => ({keyCode}, ...params) => {
   if (keyCode in availablekeys) {
     handler(...params);
   }
@@ -101,7 +101,7 @@ export const KEY_CODES = {
   OpenBracket: 219,
   BackSlash: 220,
   CloseBracket: 221,
-  SingleQuote: 222
+  SingleQuote: 222,
 };
 
-export const submitEvent = wrapKeyDownEvent({ [KEY_CODES.Enter]: null });
+export const submitEvent = wrapKeyDownEvent({[KEY_CODES.Enter]: null});

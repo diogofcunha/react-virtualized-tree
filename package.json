@@ -12,6 +12,7 @@
     "index.d.ts"
   ],
   "scripts": {
+    "prettier": "prettier --write '**/*.js'",
     "build": "nwb build-react-component --copy-files",
     "clean": "nwb clean-module && nwb clean-demo",
     "start": "nwb serve-react-demo",
@@ -45,9 +46,12 @@
     "enzyme-adapter-react-16": "^1.1.1",
     "flag-icon-css": "^2.9.0",
     "gh-pages": "^1.1.0",
+    "husky": "^1.0.0-rc.13",
     "immutability-helper": "^2.6.4",
     "jest": "^22.0.4",
+    "lint-staged": "^7.2.0",
     "nwb": "^0.21.5",
+    "prettier": "1.13.7",
     "prop-types": "^15.6.0",
     "react": "^16.3.2",
     "react-dnd": "^2.5.4",
@@ -89,6 +93,27 @@
     "presets": [
       "react-app"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.js": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "prettier": {
+    "printWidth": 120,
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "bracketSpacing": false,
+    "jsxBracketSameLine": false
   },
   "author": "Diogo Cunha",
   "homepage": "https://diogofcunha.github.io/react-virtualized-tree/",

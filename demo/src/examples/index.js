@@ -7,7 +7,7 @@ import ChangeRenderers from './ChangeRenderers';
 import Extensions from './Extensions';
 import Filterable from './Filterable';
 import NodeMeasure from './NodeMeasure';
- 
+
 export default {
   ...Basic,
   ...Renderers,
@@ -16,5 +16,5 @@ export default {
   ...LargeCollection,
   ...Extensions,
   ...Filterable,
-  ...NodeMeasure
-}
+  ...NodeMeasure,
+};

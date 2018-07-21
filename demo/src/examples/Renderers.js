@@ -15,7 +15,6 @@ const Deepness = ({ node, children }) => {
   return (
     <span>
       <i
-        id={node.id}
         className={className}>
       </i>
       { children }

@@ -20,7 +20,6 @@ const Selection = ({ node, children, onChange }) => {
   return (
     <span>
       <i
-        id={node.id}
         className={className}
         onClick={() => onChange({
           node: {

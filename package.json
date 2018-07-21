@@ -12,6 +12,7 @@
     "index.d.ts"
   ],
   "scripts": {
+    "prettier": "prettier --write '**/*.js'",
     "build": "nwb build-react-component --copy-files",
     "clean": "nwb clean-module && nwb clean-demo",
     "start": "nwb serve-react-demo",

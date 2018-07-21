@@ -1,3 +1,3 @@
 export default {
-  RENDERER: 'renderer'
+  RENDERER: 'renderer',
 };

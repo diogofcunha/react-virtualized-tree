@@ -13,15 +13,15 @@ export const getDocumentFetchUrl = doc => {
   url.hostname = 'raw.githubusercontent.com';
 
   return url.href;
-}
+};
 
 export const createEntry = (key, fileName, name, description, component) => ({
   [key]: {
     name,
     fileName,
     description,
-    component
-  }
+    component,
+  },
 });
 
 let ids = {};
@@ -36,7 +36,7 @@ const getUniqueId = () => {
   ids[candidateId] = true;
 
   return candidateId;
-}
+};
 
 export const constructTree = (maxDeepness, maxNumberOfChildren, minNumOfNodes, deepness = 1) => {
   return new Array(minNumOfNodes).fill(deepness).map((si, i) => {
@@ -50,8 +50,8 @@ export const constructTree = (maxDeepness, maxNumberOfChildren, minNumOfNodes, d
       state: {
         expanded: numberOfChildren ? Boolean(Math.round(Math.random())) : false,
         favorite: Boolean(Math.round(Math.random())),
-        deletable: Boolean(Math.round(Math.random()))
-      }
+        deletable: Boolean(Math.round(Math.random())),
+      },
     };
-  })
+  });
 };

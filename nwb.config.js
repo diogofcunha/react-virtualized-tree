@@ -9,17 +9,17 @@ module.exports = {
       externals: {
         react: 'React',
         'react-dom': 'ReactDOM',
-        'react-virtualized': 'ReactVirtualized'
-      }
-    }
+        'react-virtualized': 'ReactVirtualized',
+      },
+    },
   },
   webpack: {
     extra: {
-      plugins: [new StatsPlugin('/stats.json')]
+      plugins: [new StatsPlugin('/stats.json')],
     },
     uglify: false,
     html: {
-      template: 'demo/src/index.html'
+      template: 'demo/src/index.html',
     },
-  }
-}
+  },
+};

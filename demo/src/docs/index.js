@@ -1,11 +1,11 @@
 export default {
   renderers: {
-    name: 'Renderers'
+    name: 'Renderers',
   },
   extensions: {
-    name: 'Extensions'
+    name: 'Extensions',
   },
   filtering: {
-    name: 'Filtering'
-  }
+    name: 'Filtering',
+  },
 };

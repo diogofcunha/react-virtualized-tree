@@ -1,4 +1,4 @@
-import { wrapKeyDownEvent, KEY_CODES } from '../eventWrappers';
+import {wrapKeyDownEvent, KEY_CODES} from '../eventWrappers';
 
 describe('eventWrappers', () => {
   describe('wrapKeyDownEvent', () => {
@@ -6,16 +6,16 @@ describe('eventWrappers', () => {
       const bindedKeys = {
         [KEY_CODES.Tab]: null,
         [KEY_CODES.Alt]: null,
-        [KEY_CODES.Backspace]: null
+        [KEY_CODES.Backspace]: null,
       };
       const params = [5, 2, 8];
-      
+
       Object.keys(bindedKeys).forEach(keyCode => {
-        const handler = jest.fn();      
-        wrapKeyDownEvent(bindedKeys)(handler)({ keyCode }, ...params);
-  
+        const handler = jest.fn();
+        wrapKeyDownEvent(bindedKeys)(handler)({keyCode}, ...params);
+
         expect(handler).toHaveBeenCalledWith(...params);
-      })
+      });
     });
 
     it('should not call the handler for keys that are not binded', () => {
@@ -23,9 +23,9 @@ describe('eventWrappers', () => {
         [KEY_CODES.Tab]: null,
       };
       const params = [5, 2, 8];
-      const handler = jest.fn();      
-      wrapKeyDownEvent(bindedKeys)(handler)({ keyCode: KEY_CODES.Backspace }, ...params);
-  
+      const handler = jest.fn();
+      wrapKeyDownEvent(bindedKeys)(handler)({keyCode: KEY_CODES.Backspace}, ...params);
+
       expect(handler).not.toHaveBeenCalled();
     });
   });

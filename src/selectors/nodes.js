@@ -90,4 +90,4 @@ export const addNode = node => ({
 });
 
 export const getRowIndexFromId = (flattenedTree, id) => 
-  flattenedTree.findIndex((item, index) => item.id === id);
+  flattenedTree.findIndex((node) => node.id === id);

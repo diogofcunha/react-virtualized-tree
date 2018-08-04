@@ -35,6 +35,7 @@ export interface TreeProps {
   onChange: (nodes: Node[]) => void;
   children: (props: RendererProps) => JSX.Element
   nodeMarginLeft?: number;
+  scrollToId?: number;
 }
 
 export default class Tree extends React.Component<TreeProps> {}

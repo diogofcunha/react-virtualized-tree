@@ -32,7 +32,7 @@ export default class Tree extends React.Component {
   };
 
   render() {
-    const {nodes, width} = this.props;
+    const {nodes, width, scrollToIndex} = this.props;
 
     return (
       <AutoSizer disableWidth={Boolean(width)}>
@@ -45,6 +45,7 @@ export default class Tree extends React.Component {
             rowHeight={this._cache.rowHeight}
             rowRenderer={this.measureRowRenderer(nodes)}
             width={width || autoWidth}
+            scrollToIndex={scrollToIndex}
           />
         )}
       </AutoSizer>

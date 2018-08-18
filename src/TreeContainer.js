@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Tree from './Tree';
 import {UPDATE_TYPE} from './contants';
 import {getFlattenedTree} from './selectors/getFlattenedTree';
-import {deleteNodeFromTree, replaceNodeFromTree} from './selectors/nodes';
+import {deleteNodeFromTree, replaceNodeFromTree, getRowIndexFromId} from './selectors/nodes';
 import {Node} from './shapes/nodeShapes';
 import {createSelector} from 'reselect';
 
@@ -43,12 +43,15 @@ export default class TreeContainer extends React.Component {
   };
 
   render() {
+    const flattenedTree = getFlattenedTree(this.props.nodes);
+    const rowIndex = getRowIndexFromId(flattenedTree, this.props.scrollToId);
     return (
       <Tree
         nodeMarginLeft={this.props.nodeMarginLeft}
-        nodes={getFlattenedTree(this.props.nodes)}
+        nodes={flattenedTree}
         onChange={this.handleChange}
         NodeRenderer={this.props.children}
+        scrollToIndex={rowIndex}
       />
     );
   }
@@ -63,6 +66,7 @@ TreeContainer.propTypes = {
   children: PropTypes.func.isRequired,
   nodeMarginLeft: PropTypes.number,
   width: PropTypes.number,
+  scrollToId: PropTypes.number,
 };
 
 TreeContainer.defaultProps = {

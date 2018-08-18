@@ -3,7 +3,7 @@ import omit from 'lodash.omit';
 
 import {UPDATE_TYPE} from '../contants';
 
-export { getFlattenedTree } from './getFlattenedTree';
+export {getFlattenedTree} from './getFlattenedTree';
 
 export const getNodeRenderOptions = createSelector(
   node => (node.state || {}).expanded,
@@ -89,5 +89,4 @@ export const addNode = node => ({
   type: UPDATE_TYPE.ADD,
 });
 
-export const getRowIndexFromId = (flattenedTree, id) => 
-  flattenedTree.findIndex((node) => node.id === id);
+export const getRowIndexFromId = (flattenedTree, id) => flattenedTree.findIndex(node => node.id === id);

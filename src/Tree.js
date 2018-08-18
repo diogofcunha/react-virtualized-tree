@@ -32,11 +32,11 @@ export default class Tree extends React.Component {
   };
 
   render() {
-    const {nodes, scrollToIndex} = this.props;
+    const {nodes, width, scrollToIndex} = this.props;
 
     return (
-      <AutoSizer>
-        {({height, width}) => (
+      <AutoSizer disableWidth={Boolean(width)}>
+        {({height, width: autoWidth}) => (
           <List
             deferredMeasurementCache={this._cache}
             ref={r => (this._list = r)}
@@ -44,7 +44,7 @@ export default class Tree extends React.Component {
             rowCount={nodes.length}
             rowHeight={this._cache.rowHeight}
             rowRenderer={this.measureRowRenderer(nodes)}
-            width={width}
+            width={width || autoWidth}
             scrollToIndex={scrollToIndex}
           />
         )}
@@ -58,4 +58,5 @@ Tree.propTypes = {
   NodeRenderer: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   nodeMarginLeft: PropTypes.number,
+  width: PropTypes.number,
 };

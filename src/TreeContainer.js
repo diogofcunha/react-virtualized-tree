@@ -62,6 +62,7 @@ TreeContainer.propTypes = {
   onChange: PropTypes.func,
   children: PropTypes.func.isRequired,
   nodeMarginLeft: PropTypes.number,
+  width: PropTypes.number,
 };
 
 TreeContainer.defaultProps = {

@@ -30,7 +30,7 @@ export interface Extensions {
 }
 
 export interface TreeProps {
-  extensions: Extensions;
+  extensions?: Extensions;
   nodes: Node[];
   onChange: (nodes: Node[]) => void;
   children: (props: RendererProps) => JSX.Element;

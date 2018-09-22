@@ -72,11 +72,11 @@ interface GroupRendererProps {
 
 export interface FilteringContainerProps {
   children: (nodes: Node[]) => JSX.Element;
-  debouncer: (func: (...p: any[]) => any, timeout: number) => void;
-  groups: {[g: string]: Group};
-  selectedGroup: string;
-  groupRenderer: React.StatelessComponent<GroupRendererProps> | React.Component<GroupRendererProps>;
-  onSelectedGroupChange: (c: string) => void;
+  debouncer?: (func: (...p: any[]) => any, timeout: number) => void;
+  groups?: {[g: string]: Group};
+  selectedGroup?: string;
+  groupRenderer?: React.StatelessComponent<GroupRendererProps> | React.Component<GroupRendererProps>;
+  onSelectedGroupChange?: (c: string) => void;
 }
 
 export class FilteringContainer extends React.Component<FilteringContainerProps> {}

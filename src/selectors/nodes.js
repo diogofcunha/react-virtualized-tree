@@ -27,7 +27,9 @@ const NODE_OPERATION_TYPES = {
 
 const NODE_CHANGE_OPERATIONS = {
   CHANGE_NODE: (nodes, updatedNode) =>
-    nodes.map(n => (n.id === updatedNode.id ? omit(updatedNode, FLATTEN_TREE_PROPERTIES) : n)),
+    nodes.map(
+      n => (n.id === updatedNode.id ? omit({...updatedNode, children: [...n.children]}, FLATTEN_TREE_PROPERTIES) : n),
+    ),
   DELETE_NODE: (nodes, updatedNode) => nodes.filter(n => n.id !== updatedNode.id),
 };
 

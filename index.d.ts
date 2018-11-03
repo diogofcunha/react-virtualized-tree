@@ -41,20 +41,34 @@ export interface TreeProps {
 
 export default class Tree extends React.Component<TreeProps> {}
 
-export interface RendererProps {
+export interface RendererProps<T> {
   measure: () => void;
   onChange: onChange;
   node: FlattenedNode;
+  iconsClassNameMap?: T;
 }
 
-declare const Deletable: React.SFC<RendererProps>;
-declare const Expandable: React.SFC<RendererProps>;
-declare const Favorite: React.SFC<RendererProps>;
+type DeletableRenderProps = RendererProps<{delete?: string}>;
+
+type ExpandableRenderProps = RendererProps<{
+  expanded?: string;
+  collapsed?: string;
+  lastChild?: string;
+}>;
+
+type FavoriteRenderProps = RendererProps<{
+  favorite?: string;
+  notFavorite?: string;
+}>;
+
+declare const Deletable: React.SFC<DeletableRenderProps>;
+declare const Expandable: React.SFC<ExpandableRenderProps>;
+declare const Favorite: React.SFC<FavoriteRenderProps>;
 
 interface Renderers {
-  Deletable: React.SFC<RendererProps>;
-  Expandable: React.SFC<RendererProps>;
-  Favorite: React.SFC<RendererProps>;
+  Deletable: React.SFC<DeletableRenderProps>;
+  Expandable: React.SFC<ExpandableRenderProps>;
+  Favorite: React.SFC<FavoriteRenderProps>;
 }
 
 export const renderers: Renderers;

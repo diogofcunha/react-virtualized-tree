@@ -23,7 +23,7 @@ interface NodeAction {
   node: FlattenedNode;
 }
 
-type onChange = (updateParams: NodeAction) => void;
+type onChange = (nodes: Node[], node: Node) => Node[];
 
 export interface Extensions {
   updateTypeHandlers: {[type: number]: onChange};
@@ -43,7 +43,7 @@ export default class Tree extends React.Component<TreeProps> {}
 
 export interface RendererProps<T> {
   measure: () => void;
-  onChange: onChange;
+  onChange: (updateParams: NodeAction) => void;
   node: FlattenedNode;
   iconsClassNameMap?: T;
 }

@@ -33,7 +33,7 @@ export interface TreeProps {
   extensions?: Extensions;
   nodes: Node[];
   onChange: (nodes: Node[]) => void;
-  children: (props: RendererProps) => JSX.Element;
+  children: <T = any>(props: RendererProps<T>) => JSX.Element;
   nodeMarginLeft?: number;
   width?: number;
   scrollToId?: number;

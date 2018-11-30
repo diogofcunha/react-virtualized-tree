@@ -46,6 +46,7 @@ export interface RendererProps<T> {
   onChange: (updateParams: NodeAction) => void;
   node: FlattenedNode;
   iconsClassNameMap?: T;
+  children?: React.ReactNode;
 }
 
 type DeletableRenderProps = RendererProps<{delete?: string}>;

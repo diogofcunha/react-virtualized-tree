@@ -25,6 +25,7 @@
     "classnames": "^2.2.5",
     "lodash": "^4.17.4",
     "lodash.debounce": "^4.0.8",
+    "lodash.findindex": "^4.6.0",
     "lodash.isequal": "^4.5.0",
     "lodash.omit": "^4.5.0",
     "material-icons": "^0.1.0",

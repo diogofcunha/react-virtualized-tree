@@ -22,7 +22,7 @@ export default class Tree extends React.Component {
 
   measureRowRenderer = nodes => ({key, index, style, parent}) => {
     const {NodeRenderer} = this.props;
-    const node = nodes[index];
+    const node = nodes[index] || {deepness: 0};
 
     return (
       <CellMeasurer cache={this._cache} columnIndex={0} key={key} rowIndex={index} parent={parent}>
@@ -31,21 +31,28 @@ export default class Tree extends React.Component {
     );
   };
 
+  setRef = r => {
+    this._list = r;
+    this.props.registerChild && this.props.registerChild(r);
+  };
+
   render() {
-    const {nodes, width, scrollToIndex} = this.props;
+    const {nodes, width, scrollToIndex, onRowsRendered, rowCount} = this.props;
+    const finalRowCount = rowCount !== undefined ? rowCount : nodes.length;
 
     return (
       <AutoSizer disableWidth={Boolean(width)}>
         {({height, width: autoWidth}) => (
           <List
             deferredMeasurementCache={this._cache}
-            ref={r => (this._list = r)}
+            ref={this.setRef}
             height={height}
-            rowCount={nodes.length}
+            rowCount={finalRowCount}
             rowHeight={this._cache.rowHeight}
             rowRenderer={this.measureRowRenderer(nodes)}
             width={width || autoWidth}
             scrollToIndex={scrollToIndex}
+            onRowsRendered={onRowsRendered}
           />
         )}
       </AutoSizer>
@@ -59,4 +66,7 @@ Tree.propTypes = {
   onChange: PropTypes.func.isRequired,
   nodeMarginLeft: PropTypes.number,
   width: PropTypes.number,
+  registerChild: PropTypes.any,
+  onRowsRendered: PropTypes.func,
+  rowCount: PropTypes.number,
 };

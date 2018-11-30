@@ -52,6 +52,9 @@ export default class TreeContainer extends React.Component {
         onChange={this.handleChange}
         NodeRenderer={this.props.children}
         scrollToIndex={rowIndex}
+        registerChild={this.props.registerChild}
+        onRowsRendered={this.props.onRowsRendered}
+        rowCount={this.props.rowCount}
       />
     );
   }
@@ -67,6 +70,9 @@ TreeContainer.propTypes = {
   nodeMarginLeft: PropTypes.number,
   width: PropTypes.number,
   scrollToId: PropTypes.number,
+  registerChild: PropTypes.any,
+  onRowsRendered: PropTypes.func,
+  rowCount: PropTypes.number,
 };
 
 TreeContainer.defaultProps = {

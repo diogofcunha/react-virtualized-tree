@@ -2,6 +2,7 @@
 // Definitions by: Diogo Cunha
 
 import * as React from 'react';
+import {ListProps} from 'react-virtualized';
 
 interface BasicNode {
   id: number | string;
@@ -37,6 +38,9 @@ export interface TreeProps {
   nodeMarginLeft?: number;
   width?: number;
   scrollToId?: number;
+  onRowsRendered?: ListProps['onRowsRendered'];
+  registerChild?: React.Ref<any>;
+  rowCount?: number;
 }
 
 export default class Tree extends React.Component<TreeProps> {}

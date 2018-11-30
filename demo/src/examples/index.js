@@ -7,6 +7,7 @@ import ChangeRenderers from './ChangeRenderers';
 import Extensions from './Extensions';
 import Filterable from './Filterable';
 import NodeMeasure from './NodeMeasure';
+import InfiniteLoader from './InfiniteLoader';
 
 export default {
   ...Basic,
@@ -17,4 +18,5 @@ export default {
   ...Extensions,
   ...Filterable,
   ...NodeMeasure,
+  ...InfiniteLoader,
 };

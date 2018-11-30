@@ -1,5 +1,6 @@
 import {createSelector} from 'reselect';
 import omit from 'lodash.omit';
+import findIndex from 'lodash.findindex';
 
 import {UPDATE_TYPE} from '../contants';
 
@@ -47,7 +48,7 @@ export const replaceNodeFromTree = (nodes, updatedNode, operation = NODE_OPERATI
     return NODE_CHANGE_OPERATIONS[operation](nodes, updatedNode);
   }
 
-  const parentIndex = nodes.findIndex(n => n.id === parents[0]);
+  const parentIndex = findIndex(nodes, n => n.id === parents[0]);
   const preSiblings = nodes.slice(0, parentIndex);
   const postSiblings = nodes.slice(parentIndex + 1);
 
@@ -94,4 +95,4 @@ export const addNode = node => ({
   type: UPDATE_TYPE.ADD,
 });
 
-export const getRowIndexFromId = (flattenedTree, id) => flattenedTree.findIndex(node => node.id === id);
+export const getRowIndexFromId = (flattenedTree, id) => findIndex(flattenedTree, node => node.id === id);

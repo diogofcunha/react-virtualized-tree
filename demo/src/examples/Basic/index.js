@@ -107,7 +107,7 @@ class BasicTree extends Component {
             <Header as="h4">Ouput tree</Header>
             <div style={{height: 200}}>
               <Tree nodes={this.state.nodes} onChange={this.handleChange}>
-                {p => this.createNodeRenderer(this.state.selectedRenderers, p)}
+                {({style, ...p}) => <div style={style}>{this.createNodeRenderer(this.state.selectedRenderers, p)}</div>}
               </Tree>
             </div>
           </Grid.Column>

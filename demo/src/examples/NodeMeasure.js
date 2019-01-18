@@ -140,10 +140,12 @@ class NodeMeasure extends Component {
   render() {
     return (
       <Tree nodes={this.state.nodes} onChange={this.handleChange}>
-        {p => (
-          <FootballPlayerRenderer {...p}>
-            <Expandable {...p} />
-          </FootballPlayerRenderer>
+        {({style, ...p}) => (
+          <div style={style}>
+            <FootballPlayerRenderer {...p}>
+              <Expandable {...p} />
+            </FootballPlayerRenderer>
+          </div>
         )}
       </Tree>
     );

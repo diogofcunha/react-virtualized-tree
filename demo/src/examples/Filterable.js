@@ -74,12 +74,14 @@ class Filterable extends Component {
           {({nodes}) => (
             <div style={{height: 500}}>
               <Tree nodes={nodes} onChange={this.handleChange}>
-                {({node, ...rest}) => (
-                  <Expandable node={node} {...rest}>
-                    <Favorite node={node} {...rest}>
-                      {node.name}
-                    </Favorite>
-                  </Expandable>
+                {({style, node, ...rest}) => (
+                  <div style={style}>
+                    <Expandable node={node} {...rest}>
+                      <Favorite node={node} {...rest}>
+                        {node.name}
+                      </Favorite>
+                    </Expandable>
+                  </div>
                 )}
               </Tree>
             </div>

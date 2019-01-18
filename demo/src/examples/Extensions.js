@@ -85,12 +85,14 @@ class Extensions extends Component {
           },
         }}
       >
-        {({node, ...rest}) => (
-          <Expandable node={node} {...rest}>
-            <Selection node={node} {...rest}>
-              {node.name}
-            </Selection>
-          </Expandable>
+        {({style, node, ...rest}) => (
+          <div style={style}>
+            <Expandable node={node} {...rest}>
+              <Selection node={node} {...rest}>
+                {node.name}
+              </Selection>
+            </Expandable>
+          </div>
         )}
       </Tree>
     );

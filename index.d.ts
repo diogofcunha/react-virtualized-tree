@@ -46,6 +46,7 @@ export interface RendererProps<T> {
   onChange: (updateParams: NodeAction) => void;
   node: FlattenedNode;
   iconsClassNameMap?: T;
+  style: React.CSSProperties;
   children?: React.ReactNode;
 }
 

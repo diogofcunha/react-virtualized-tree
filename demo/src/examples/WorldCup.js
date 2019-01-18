@@ -83,21 +83,23 @@ class WorldCupExample extends Component {
   render() {
     return (
       <Tree nodes={this.state.nodes} onChange={this.handleChange}>
-        {({node, ...rest}) => {
+        {({style, node, ...rest}) => {
           const country = countries[node.id] && countries[node.id].flag.toLowerCase();
 
           return (
-            <Expandable node={node} {...rest}>
-              {country && <span className={`flag-icon flag-icon-${country}`} />}
-              <span
-                style={{
-                  marginLeft: 7,
-                  fontWeight: !country ? 'bold' : 'normal',
-                }}
-              >
-                {node.name}
-              </span>
-            </Expandable>
+            <div style={style}>
+              <Expandable node={node} {...rest}>
+                {country && <span className={`flag-icon flag-icon-${country}`} />}
+                <span
+                  style={{
+                    marginLeft: 7,
+                    fontWeight: !country ? 'bold' : 'normal',
+                  }}
+                >
+                  {node.name}
+                </span>
+              </Expandable>
+            </div>
           );
         }}
       </Tree>

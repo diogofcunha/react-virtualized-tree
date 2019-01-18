@@ -29,13 +29,15 @@ class LargeCollection extends Component {
   render() {
     return (
       <Tree nodes={this.state.nodes} onChange={this.handleChange}>
-        {({node, ...rest}) => (
-          <Expandable node={node} {...rest}>
-            {node.name}
-            <Deletable node={node} {...rest}>
-              <Favorite node={node} {...rest} />
-            </Deletable>
-          </Expandable>
+        {({style, node, ...rest}) => (
+          <div style={style}>
+            <Expandable node={node} {...rest}>
+              {node.name}
+              <Deletable node={node} {...rest}>
+                <Favorite node={node} {...rest} />
+              </Deletable>
+            </Expandable>
+          </div>
         )}
       </Tree>
     );

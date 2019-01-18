@@ -24,10 +24,12 @@ class Renderers extends Component {
   render() {
     return (
       <Tree nodes={Nodes}>
-        {({node, ...rest}) => (
-          <Deepness node={node} {...rest}>
-            {node.name}
-          </Deepness>
+        {({style, node, ...rest}) => (
+          <div style={style}>
+            <Deepness node={node} {...rest}>
+              {node.name}
+            </Deepness>
+          </div>
         )}
       </Tree>
     );

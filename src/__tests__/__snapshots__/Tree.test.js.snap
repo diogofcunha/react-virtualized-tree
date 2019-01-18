@@ -67,6 +67,11 @@ Object {
     },
   },
   "onChange": [MockFunction],
+  "style": Object {
+    "cursor": "pointer",
+    "marginLeft": NaN,
+    "userSelect": "none",
+  },
 }
 `;
 

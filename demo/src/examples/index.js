@@ -1,4 +1,3 @@
-import React from 'react';
 import LargeCollection from './LargeCollection';
 import Basic from './Basic';
 import Renderers from './Renderers';
@@ -7,6 +6,7 @@ import ChangeRenderers from './ChangeRenderers';
 import Extensions from './Extensions';
 import Filterable from './Filterable';
 import NodeMeasure from './NodeMeasure';
+import KeyboardNavigation from './KeyboardNavigation';
 
 export default {
   ...Basic,
@@ -17,4 +17,5 @@ export default {
   ...Extensions,
   ...Filterable,
   ...NodeMeasure,
+  ...KeyboardNavigation,
 };

@@ -1,4 +1,4 @@
-// Type definitions for react-virtualzed-tree
+// Type definitions for react-virtualized-tree
 // Definitions by: Diogo Cunha
 
 import * as React from 'react';
@@ -41,6 +41,8 @@ export interface TreeProps {
 
 export default class Tree extends React.Component<TreeProps> {}
 
+export type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
+
 export interface RendererProps<T> {
   measure: () => void;
   onChange: (updateParams: NodeAction) => void;
@@ -50,15 +52,18 @@ export interface RendererProps<T> {
   children?: React.ReactNode;
 }
 
-type DeletableRenderProps = RendererProps<{delete?: string}>;
+export type InjectedRendererProps = Omit<RendererProps<T>, 'iconsClassNameMap'>;
+export type CustomRendererProps = Omit<RendererProps<T>, 'style'>;
 
-type ExpandableRenderProps = RendererProps<{
+type DeletableRenderProps = CustomRendererProps<{delete?: string}>;
+
+type ExpandableRenderProps = CustomRendererProps<{
   expanded?: string;
   collapsed?: string;
   lastChild?: string;
 }>;
 
-type FavoriteRenderProps = RendererProps<{
+type FavoriteRenderProps = CustomRendererProps<{
   favorite?: string;
   notFavorite?: string;
 }>;

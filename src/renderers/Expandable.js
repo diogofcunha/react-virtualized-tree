@@ -27,7 +27,9 @@ const Expandable = ({
 
   return (
     <span onDoubleClick={handleChange}>
-      <i tabIndex={0} onKeyDown={submitEvent(handleChange)} onClick={handleChange} className={className} />
+      {hasChildren && (
+        <i tabIndex={0} onKeyDown={submitEvent(handleChange)} onClick={handleChange} className={className} />
+      )}
       {children}
     </span>
   );

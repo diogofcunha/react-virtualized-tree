@@ -42,7 +42,7 @@ class KeyboardNavigation extends Component {
 
 export default createEntry(
   'keyboard-nav',
-  'Keyboard Navigation',
+  'KeyboardNavigation',
   'Keyboard navigation',
   <div>
     <p>A tree that supports keyboard navigation</p>

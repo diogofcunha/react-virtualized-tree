@@ -62,4 +62,52 @@ describe('selectors -> nodes ->', () => {
       expect(nodeSelectors.getNodeRenderOptions({children: [{}]})).toMatchSnapshot();
     });
   });
+
+  describe('getNodeFromPath', () => {
+    test('should get a node from a path in the root of the tree', () => {
+      expect(nodeSelectors.getNodeFromPath([Nodes[0].id], Nodes)).toEqual(Nodes[0]);
+      expect(nodeSelectors.getNodeFromPath([Nodes[1].id], Nodes)).toEqual(Nodes[1]);
+      expect(nodeSelectors.getNodeFromPath([Nodes[2].id], Nodes)).toEqual(Nodes[2]);
+    });
+
+    test('should get a node from a path in the first set of children of the tree', () => {
+      expect(nodeSelectors.getNodeFromPath([Nodes[0].id, Nodes[0].children[1].id], Nodes)).toEqual(
+        Nodes[0].children[1],
+      );
+    });
+
+    test('should get a node from a path deep in the tree', () => {
+      expect(
+        nodeSelectors.getNodeFromPath(
+          [Nodes[0].id, Nodes[0].children[0].id, Nodes[0].children[0].children[1].id],
+          Nodes,
+        ),
+      ).toEqual(Nodes[0].children[0].children[1]);
+    });
+
+    test('should throw custom error when the path is invalid', () => {
+      expect(() => nodeSelectors.getNodeFromPath('', Nodes)).toThrowError('path is not an array');
+      expect(() => nodeSelectors.getNodeFromPath({}, Nodes)).toThrowError('path is not an array');
+      expect(() => nodeSelectors.getNodeFromPath(1245, Nodes)).toThrowError('path is not an array');
+      expect(() => nodeSelectors.getNodeFromPath(true, Nodes)).toThrowError('path is not an array');
+    });
+
+    test('should throw custom error when path does not exist in a middle node', () => {
+      const {id: existingId1} = Nodes[0];
+      const {id: existingId2} = Nodes[0].children[0].children[1];
+
+      expect(() => nodeSelectors.getNodeFromPath([existingId1, 25, existingId2], Nodes)).toThrowError(
+        `Could not find node at ${existingId1},25,${existingId2}`,
+      );
+    });
+
+    test('should throw custom error when path does not exist in the final node', () => {
+      const {id: existingId1} = Nodes[0];
+      const {id: existingId2} = Nodes[0].children[0];
+
+      expect(() => nodeSelectors.getNodeFromPath([existingId1, existingId2, 25], Nodes)).toThrowError(
+        `Could not find node at ${existingId1},${existingId2},25`,
+      );
+    });
+  });
 });

@@ -108,10 +108,18 @@ Array [
       Object {
         "children": Array [
           Object {
+            "children": Array [
+              Object {
+                "id": "c-3",
+                "name": "Leaf 3 Child",
+                "state": Object {},
+              },
+            ],
             "id": 3,
             "name": "Leaf 3",
             "state": Object {
               "deletable": true,
+              "expanded": false,
               "favorite": true,
             },
           },
@@ -215,10 +223,18 @@ Object {
       Object {
         "children": Array [
           Object {
+            "children": Array [
+              Object {
+                "id": "c-3",
+                "name": "Leaf 3 Child",
+                "state": Object {},
+              },
+            ],
             "id": 3,
             "name": "Leaf 3",
             "state": Object {
               "deletable": true,
+              "expanded": false,
               "favorite": true,
             },
           },
@@ -258,10 +274,18 @@ Object {
       Object {
         "children": Array [
           Object {
+            "children": Array [
+              Object {
+                "id": "c-3",
+                "name": "Leaf 3 Child",
+                "state": Object {},
+              },
+            ],
             "id": 3,
             "name": "Leaf 3",
             "state": Object {
               "deletable": true,
+              "expanded": false,
               "favorite": true,
             },
           },
@@ -301,10 +325,18 @@ Object {
       Object {
         "children": Array [
           Object {
+            "children": Array [
+              Object {
+                "id": "c-3",
+                "name": "Leaf 3 Child",
+                "state": Object {},
+              },
+            ],
             "id": 3,
             "name": "Leaf 3",
             "state": Object {
               "deletable": true,
+              "expanded": false,
               "favorite": true,
             },
           },

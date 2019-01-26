@@ -61,4 +61,47 @@ describe('TreeState', () => {
       expect(() => TreeState.getTree(() => {})).toThrowError('Expected a State instance but got function');
     });
   });
+
+  describe('getNumberOfVisibleDescendants', () => {
+    test('should fail for when invalid state is supplied', () => {
+      expect(() => TreeState.getNumberOfVisibleDescendants('state', 0)).toThrowError(
+        'Expected a State instance but got string',
+      );
+      expect(() => TreeState.getNumberOfVisibleDescendants(1225, 0)).toThrowError(
+        'Expected a State instance but got number',
+      );
+      expect(() => TreeState.getNumberOfVisibleDescendants([], 0)).toThrowError(
+        'Expected a State instance but got object',
+      );
+      expect(() => TreeState.getNumberOfVisibleDescendants({}, 0)).toThrowError(
+        'Expected a State instance but got object',
+      );
+      expect(() => TreeState.getNumberOfVisibleDescendants(true, 0)).toThrowError(
+        'Expected a State instance but got boolean',
+      );
+      expect(() => TreeState.getNumberOfVisibleDescendants(() => {}, 0)).toThrowError(
+        'Expected a State instance but got function',
+      );
+    });
+
+    test('should get a correct number of descendants for a node with deep descendants', () => {
+      expect(TreeState.getNumberOfVisibleDescendants(TreeState.createFromTree(Nodes), 0)).toEqual(4);
+    });
+
+    test('should get a correct number of descendants for a node without grand children', () => {
+      expect(TreeState.getNumberOfVisibleDescendants(TreeState.createFromTree(Nodes), 1)).toEqual(2);
+    });
+
+    test('should get a correct number of descendants for a node with deep descendants', () => {
+      expect(TreeState.getNumberOfVisibleDescendants(TreeState.createFromTree(Nodes), 0)).toEqual(4);
+    });
+
+    test('should get 0 descendants for a node that does not have any descendants in the root node', () => {
+      expect(TreeState.getNumberOfVisibleDescendants(TreeState.createFromTree(Nodes), 6)).toEqual(0);
+    });
+
+    test('should get 0 descendants for a node that does not have any descendants', () => {
+      expect(TreeState.getNumberOfVisibleDescendants(TreeState.createFromTree(Nodes), 3)).toEqual(0);
+    });
+  });
 });

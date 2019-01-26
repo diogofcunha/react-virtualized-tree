@@ -140,3 +140,35 @@ Array [
   },
 ]
 `;
+
+exports[`getFlattenedTreePaths, should match snapshot 1`] = `
+Array [
+  Array [
+    0,
+  ],
+  Array [
+    0,
+    2,
+  ],
+  Array [
+    0,
+    2,
+    3,
+  ],
+  Array [
+    0,
+    2,
+    4,
+  ],
+  Array [
+    0,
+    5,
+  ],
+  Array [
+    1,
+  ],
+  Array [
+    "z",
+  ],
+]
+`;

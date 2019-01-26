@@ -252,4 +252,115 @@ describe('TreeStateModifiers', () => {
       });
     });
   });
+
+  describe('deleteNodeAt', () => {
+    test('should fail when invalid state is supplied', () => {
+      expect(() => TreeStateModifiers.deleteNodeAt('state', 0)).toThrowError(
+        'Expected a State instance but got string',
+      );
+      expect(() => TreeStateModifiers.deleteNodeAt(1225, 0)).toThrowError('Expected a State instance but got number');
+      expect(() => TreeStateModifiers.deleteNodeAt([], 0)).toThrowError('Expected a State instance but got object');
+      expect(() => TreeStateModifiers.deleteNodeAt({}, 0)).toThrowError('Expected a State instance but got object');
+      expect(() => TreeStateModifiers.deleteNodeAt(true, 0)).toThrowError('Expected a State instance but got boolean');
+      expect(() => TreeStateModifiers.deleteNodeAt(() => {}, 0)).toThrowError(
+        'Expected a State instance but got function',
+      );
+    });
+
+    test('should fail with descriptive error when node at index does not exist', () => {
+      expect(() => TreeStateModifiers.deleteNodeAt(TreeState.createFromTree(Nodes), 20)).toThrowErrorMatchingSnapshot();
+    });
+
+    describe('flattened tree', () => {
+      test('should delete a root node with expanded children', () => {
+        const state = TreeState.createFromTree(Nodes);
+
+        deepFreeze(state);
+
+        const {flattenedTree} = TreeStateModifiers.deleteNodeAt(state, 0);
+
+        expect(flattenedTree).toMatchSnapshot();
+      });
+
+      test('should delete a root node without expanded children', () => {
+        const state = TreeState.createFromTree(Nodes);
+
+        deepFreeze(state);
+
+        const {flattenedTree} = TreeStateModifiers.deleteNodeAt(state, 5);
+
+        expect(flattenedTree).toMatchSnapshot();
+      });
+
+      test('should delete a child node with expanded children', () => {
+        const state = TreeState.createFromTree(Nodes);
+
+        deepFreeze(state);
+
+        const {flattenedTree} = TreeStateModifiers.deleteNodeAt(state, 1);
+
+        expect(flattenedTree).toMatchSnapshot();
+      });
+
+      test('should delete a child node without expanded children', () => {
+        const state = TreeState.createFromTree(Nodes);
+
+        deepFreeze(state);
+
+        const {flattenedTree} = TreeStateModifiers.deleteNodeAt(state, 2);
+
+        expect(flattenedTree).toMatchSnapshot();
+      });
+    });
+
+    describe('tree', () => {
+      test('should delete a root node with expanded children', () => {
+        const state = TreeState.createFromTree(Nodes);
+
+        deepFreeze(state);
+
+        const {tree} = TreeStateModifiers.deleteNodeAt(state, 0);
+
+        const changes = diff(state.tree, tree);
+
+        expect(changes).toMatchSnapshot();
+      });
+
+      test('should delete a root node without expanded children', () => {
+        const state = TreeState.createFromTree(Nodes);
+
+        deepFreeze(state);
+
+        const {tree} = TreeStateModifiers.deleteNodeAt(state, 6);
+
+        const changes = diff(state.tree, tree);
+
+        expect(changes).toMatchSnapshot();
+      });
+
+      test('should delete a child node without expanded children', () => {
+        const state = TreeState.createFromTree(Nodes);
+
+        deepFreeze(state);
+
+        const {tree} = TreeStateModifiers.deleteNodeAt(state, 2);
+
+        const changes = diff(state.tree, tree);
+
+        expect(changes).toMatchSnapshot();
+      });
+
+      test('should delete a child node with expanded children', () => {
+        const state = TreeState.createFromTree(Nodes);
+
+        deepFreeze(state);
+
+        const {tree} = TreeStateModifiers.deleteNodeAt(state, 1);
+
+        const changes = diff(state.tree, tree);
+
+        expect(changes).toMatchSnapshot();
+      });
+    });
+  });
 });

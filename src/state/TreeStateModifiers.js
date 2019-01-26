@@ -1,6 +1,11 @@
-import {getFlattenedTreePaths, doesChangeAffectFlattenedTree, isNodeExpanded} from '../selectors/getFlattenedTree';
-import TreeState, {validateState, State} from './TreeState';
-import {replaceNodeFromTree} from '../selectors/nodes';
+import {
+  getFlattenedTreePaths,
+  doesChangeAffectFlattenedTree,
+  isNodeExpanded,
+  nodeHasChildren,
+} from '../selectors/getFlattenedTree';
+import TreeState, {State} from './TreeState';
+import {replaceNodeFromTree, deleteNodeFromTree} from '../selectors/nodes';
 
 /**
  * @callback setNode
@@ -20,8 +25,6 @@ export default class TreeStateModifiers {
    * @return {State} An internal state representation
    */
   static editNodeAt = (state, index, setNode) => {
-    validateState(state);
-
     const node = TreeState.getNodeAt(state, index);
     const updatedNode = setNode(node);
     const flattenedTree = [...state.flattenedTree];
@@ -41,6 +44,30 @@ export default class TreeStateModifiers {
     }
 
     const tree = replaceNodeFromTree(state.tree, {...updatedNode, parents});
+
+    return new State(tree, flattenedTree);
+  };
+
+  /**
+   * Given a state, deletes a node
+   * @param {State} state - The current state
+   * @param {number} index - The visible row index
+   * @return {State} An internal state representation
+   */
+  static deleteNodeAt = (state, index) => {
+    const node = TreeState.getNodeAt(state, index);
+
+    const flattenedTree = [...state.flattenedTree];
+    const flattenedNodeMap = flattenedTree[index];
+    const parents = flattenedNodeMap.slice(0, flattenedNodeMap.length - 1);
+
+    const numberOfVisibleDescendants = nodeHasChildren(node)
+      ? TreeState.getNumberOfVisibleDescendants(state, index)
+      : 0;
+
+    flattenedTree.splice(index, 1 + numberOfVisibleDescendants);
+
+    const tree = deleteNodeFromTree(state.tree, {...node, parents});
 
     return new State(tree, flattenedTree);
   };

@@ -86,11 +86,19 @@ Array [
       Object {
         "children": Array [
           Object {
-            "children": Array [],
+            "children": Array [
+              Object {
+                "children": Array [],
+                "id": "c-3",
+                "name": "Leaf 3 Child",
+                "state": Object {},
+              },
+            ],
             "id": 3,
             "name": "Leaf 3",
             "state": Object {
               "deletable": true,
+              "expanded": false,
               "favorite": true,
             },
           },

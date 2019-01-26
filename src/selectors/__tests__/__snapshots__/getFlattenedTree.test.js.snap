@@ -7,10 +7,18 @@ Array [
       Object {
         "children": Array [
           Object {
+            "children": Array [
+              Object {
+                "id": "c-3",
+                "name": "Leaf 3 Child",
+                "state": Object {},
+              },
+            ],
             "id": 3,
             "name": "Leaf 3",
             "state": Object {
               "deletable": true,
+              "expanded": false,
               "favorite": true,
             },
           },
@@ -42,10 +50,18 @@ Array [
   Object {
     "children": Array [
       Object {
+        "children": Array [
+          Object {
+            "id": "c-3",
+            "name": "Leaf 3 Child",
+            "state": Object {},
+          },
+        ],
         "id": 3,
         "name": "Leaf 3",
         "state": Object {
           "deletable": true,
+          "expanded": false,
           "favorite": true,
         },
       },
@@ -66,6 +82,13 @@ Array [
     },
   },
   Object {
+    "children": Array [
+      Object {
+        "id": "c-3",
+        "name": "Leaf 3 Child",
+        "state": Object {},
+      },
+    ],
     "deepness": 2,
     "id": 3,
     "name": "Leaf 3",
@@ -75,6 +98,7 @@ Array [
     ],
     "state": Object {
       "deletable": true,
+      "expanded": false,
       "favorite": true,
     },
   },

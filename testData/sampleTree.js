@@ -18,9 +18,17 @@ export const Nodes = [
             id: 3,
             name: 'Leaf 3',
             state: {
+              expanded: false,
               favorite: true,
               deletable: true,
             },
+            children: [
+              {
+                id: 'c-3',
+                name: 'Leaf 3 Child',
+                state: {},
+              },
+            ],
           },
           {
             id: 4,

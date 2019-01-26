@@ -38,10 +38,18 @@ exports[`TreeState getNodeAt should get a for an existing rowId: 2nd row 1`] = `
 Object {
   "children": Array [
     Object {
+      "children": Array [
+        Object {
+          "id": "c-3",
+          "name": "Leaf 3 Child",
+          "state": Object {},
+        },
+      ],
       "id": 3,
       "name": "Leaf 3",
       "state": Object {
         "deletable": true,
+        "expanded": false,
         "favorite": true,
       },
     },
@@ -61,10 +69,18 @@ Object {
 
 exports[`TreeState getNodeAt should get a for an existing rowId: 3rd row 1`] = `
 Object {
+  "children": Array [
+    Object {
+      "id": "c-3",
+      "name": "Leaf 3 Child",
+      "state": Object {},
+    },
+  ],
   "id": 3,
   "name": "Leaf 3",
   "state": Object {
     "deletable": true,
+    "expanded": false,
     "favorite": true,
   },
 }

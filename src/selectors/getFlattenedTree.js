@@ -12,3 +12,20 @@ export const getFlattenedTree = (nodes, parents = []) =>
 
     return [...flattenedTree, nodeWithHelpers, ...getFlattenedTree(node.children, [...parents, node.id])];
   }, []);
+
+export const getFlattenedTreePaths = (nodes, parents = []) => {
+  const paths = [];
+
+  for (const node of nodes) {
+    const {id} = node;
+
+    if (!nodeHasChildren(node) || !isNodeExpanded(node)) {
+      paths.push(parents.concat(id));
+    } else {
+      paths.push(parents.concat(id));
+      paths.push(...getFlattenedTreePaths(node.children, [...parents, id]));
+    }
+  }
+
+  return paths;
+};

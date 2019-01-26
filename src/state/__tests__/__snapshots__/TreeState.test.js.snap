@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TreeState createFromTree should create state when a valid tree is supplied 1`] = `
+Array [
+  Array [
+    0,
+  ],
+  Array [
+    0,
+    2,
+  ],
+  Array [
+    0,
+    2,
+    3,
+  ],
+  Array [
+    0,
+    2,
+    4,
+  ],
+  Array [
+    0,
+    5,
+  ],
+  Array [
+    1,
+  ],
+  Array [
+    "z",
+  ],
+]
+`;
+
+exports[`TreeState getNodeAt should fail with a custom error when supplied rowId does not exist 1`] = `"Tried to get node at row \\"25\\" but got nothing, the tree are 7 visible rows"`;
+
+exports[`TreeState getNodeAt should get a for an existing rowId: 2nd row 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "id": 3,
+      "name": "Leaf 3",
+      "state": Object {
+        "deletable": true,
+        "favorite": true,
+      },
+    },
+    Object {
+      "id": 4,
+      "name": "Leaf 4",
+    },
+  ],
+  "id": 2,
+  "name": "Leaf 2",
+  "state": Object {
+    "deletable": true,
+    "expanded": true,
+  },
+}
+`;
+
+exports[`TreeState getNodeAt should get a for an existing rowId: 3rd row 1`] = `
+Object {
+  "id": 3,
+  "name": "Leaf 3",
+  "state": Object {
+    "deletable": true,
+    "favorite": true,
+  },
+}
+`;
+
+exports[`TreeState getNodeAt should get a for an existing rowId: 7th row 1`] = `
+Object {
+  "id": "z",
+  "name": "Leaf z",
+  "state": Object {
+    "deletable": true,
+    "favorite": true,
+  },
+}
+`;

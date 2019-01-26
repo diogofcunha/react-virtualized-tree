@@ -1,5 +1,5 @@
-const isNodeExpanded = node => node.state && node.state.expanded;
-const nodeHasChildren = node => node.children && node.children.length;
+export const isNodeExpanded = node => node.state && node.state.expanded;
+export const nodeHasChildren = node => node.children && node.children.length;
 
 export const getFlattenedTree = (nodes, parents = []) =>
   nodes.reduce((flattenedTree, node) => {
@@ -28,4 +28,8 @@ export const getFlattenedTreePaths = (nodes, parents = []) => {
   }
 
   return paths;
+};
+
+export const doesChangeAffectFlattenedTree = (previousNode, nextNode) => {
+  return isNodeExpanded(previousNode) !== isNodeExpanded(nextNode);
 };

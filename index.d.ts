@@ -147,4 +147,8 @@ export interface TreeState {
   getNumberOfVisibleDescendants: (state: State, index: number) => number;
 }
 
+export interface TreeStateModifiers {
+  editNodeAt: (state: State, index: number, setNode: (oldNode: Node) => Node) => State;
+}
+
 export const selectors: Selectors;

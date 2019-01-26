@@ -1,0 +1,232 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TreeStateModifiers editNodeAt flattened tree should collapse a node in a children node 1`] = `
+Array [
+  Array [
+    0,
+  ],
+  Array [
+    0,
+    2,
+  ],
+  Array [
+    0,
+    5,
+  ],
+  Array [
+    1,
+  ],
+  Array [
+    "z",
+  ],
+]
+`;
+
+exports[`TreeStateModifiers editNodeAt flattened tree should collapse a node in a root node 1`] = `
+Array [
+  Array [
+    0,
+  ],
+  Array [
+    1,
+  ],
+  Array [
+    "z",
+  ],
+]
+`;
+
+exports[`TreeStateModifiers editNodeAt flattened tree should expand a node in a children node 1`] = `
+Array [
+  Array [
+    0,
+  ],
+  Array [
+    0,
+    2,
+  ],
+  Array [
+    0,
+    2,
+    3,
+  ],
+  Array [
+    0,
+    2,
+    3,
+    "c-3",
+  ],
+  Array [
+    0,
+    2,
+    4,
+  ],
+  Array [
+    0,
+    5,
+  ],
+  Array [
+    1,
+  ],
+  Array [
+    "z",
+  ],
+]
+`;
+
+exports[`TreeStateModifiers editNodeAt flattened tree should expand a node in a root node 1`] = `
+Array [
+  Array [
+    0,
+  ],
+  Array [
+    0,
+    2,
+  ],
+  Array [
+    0,
+    2,
+    3,
+  ],
+  Array [
+    0,
+    2,
+    4,
+  ],
+  Array [
+    0,
+    5,
+  ],
+  Array [
+    1,
+  ],
+  Array [
+    1,
+    6,
+  ],
+  Array [
+    1,
+    9,
+  ],
+  Array [
+    "z",
+  ],
+]
+`;
+
+exports[`TreeStateModifiers editNodeAt should fail with descriptive error when node at index does not exist 1`] = `"Tried to get node at row \\"20\\" but got nothing, the tree are 7 visible rows"`;
+
+exports[`TreeStateModifiers editNodeAt tree should create state for a child node and keep the rest intact 1`] = `
+DiffNew {
+  "kind": "N",
+  "path": Array [
+    0,
+    "children",
+    1,
+    "state",
+  ],
+  "rhs": Object {
+    "expanded": true,
+  },
+}
+`;
+
+exports[`TreeStateModifiers editNodeAt tree should delete state for a child node and keep the rest intact 1`] = `
+DiffDeleted {
+  "kind": "D",
+  "lhs": Object {
+    "deletable": true,
+    "expanded": false,
+    "favorite": true,
+  },
+  "path": Array [
+    0,
+    "children",
+    0,
+    "children",
+    0,
+    "state",
+  ],
+}
+`;
+
+exports[`TreeStateModifiers editNodeAt tree should delete state for a root node and keep the rest intact 1`] = `
+DiffDeleted {
+  "kind": "D",
+  "lhs": Object {
+    "deletable": true,
+    "expanded": false,
+  },
+  "path": Array [
+    1,
+    "state",
+  ],
+}
+`;
+
+exports[`TreeStateModifiers editNodeAt tree should update a child node and keep the rest intact 1`] = `
+DiffEdit {
+  "kind": "E",
+  "lhs": "Leaf 3",
+  "path": Array [
+    0,
+    "children",
+    0,
+    "children",
+    0,
+    "name",
+  ],
+  "rhs": "Edited node",
+}
+`;
+
+exports[`TreeStateModifiers editNodeAt tree should update a child node state and keep the rest intact 1`] = `
+DiffEdit {
+  "kind": "E",
+  "lhs": true,
+  "path": Array [
+    0,
+    "children",
+    0,
+    "state",
+    "expanded",
+  ],
+  "rhs": false,
+}
+`;
+
+exports[`TreeStateModifiers editNodeAt tree should update a node in the root and keep the rest intact 1`] = `
+DiffEdit {
+  "kind": "E",
+  "lhs": "Leaf 1",
+  "path": Array [
+    0,
+    "name",
+  ],
+  "rhs": "Edit node 1",
+}
+`;
+
+exports[`TreeStateModifiers editNodeAt tree should update a node state in the root and keep the rest intact 1`] = `
+Array [
+  DiffEdit {
+    "kind": "E",
+    "lhs": false,
+    "path": Array [
+      1,
+      "state",
+      "expanded",
+    ],
+    "rhs": true,
+  },
+  DiffDeleted {
+    "kind": "D",
+    "lhs": true,
+    "path": Array [
+      1,
+      "state",
+      "deletable",
+    ],
+  },
+]
+`;

@@ -1,7 +1,7 @@
 import {getFlattenedTreePaths} from '../selectors/getFlattenedTree';
 import {getNodeFromPath} from '../selectors/nodes';
 
-class State {
+export class State {
   flattenedTree = null;
   tree = null;
 
@@ -39,6 +39,29 @@ export default class TreeState {
     }
 
     return getNodeFromPath(rowPath, state.tree);
+  };
+
+  /**
+   * Given a state and an index, finds the number of visible descendants
+   * @param {State} state - The current state
+   * @param {number} index - The visible row index
+   * @return {number} The number of visible descendants
+   */
+  static getNumberOfVisibleDescendants = (state, index) => {
+    const {id} = TreeState.getNodeAt(state, index);
+
+    const {flattenedTree} = state;
+    let i;
+
+    for (i = index; i < flattenedTree.length; i++) {
+      const path = flattenedTree[i];
+
+      if (!path.some(p => p === id)) {
+        break;
+      }
+    }
+
+    return Math.max(i - 1 - index, 0);
   };
 
   /**

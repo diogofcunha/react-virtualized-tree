@@ -144,6 +144,7 @@ export interface TreeState {
   getNodeAt: (state: State, index: number) => Node;
   getTree: (state: State) => Node[];
   createFromTree: (tree: Node[]) => State;
+  getNumberOfVisibleDescendants: (state: State, index: number) => number;
 }
 
 export const selectors: Selectors;

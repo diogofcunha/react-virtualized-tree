@@ -96,3 +96,5 @@ Object {
   },
 }
 `;
+
+exports[`TreeState getNodeDeepness should fail with a custom error when supplied rowId does not exist 1`] = `"Tried to get node at row \\"40\\" but got nothing, the tree are 7 visible rows"`;

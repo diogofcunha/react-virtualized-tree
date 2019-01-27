@@ -146,6 +146,7 @@ export interface TreeState {
   getTree: (state: State) => Node[];
   createFromTree: (tree: Node[]) => State;
   getNumberOfVisibleDescendants: (state: State, index: number) => number;
+  getNodeDeepness: (state: State, index: number) => number;
 }
 
 export interface TreeStateModifiers {

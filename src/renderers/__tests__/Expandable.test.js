@@ -23,6 +23,7 @@ describe('renderers Expandable', () => {
         collapsed: 'colpased',
       },
       measure: jest.fn(),
+      index: 1,
     };
 
     const props = {...baseProps, ...extraProps};
@@ -44,7 +45,7 @@ describe('renderers Expandable', () => {
 
         expandIconWrapper.simulate('click');
 
-        expect(props.onChange).toHaveBeenCalledWith(updateNode(props.node, {expanded: false}));
+        expect(props.onChange).toHaveBeenCalledWith({...updateNode(props.node, {expanded: false}), index: props.index});
       });
 
       it('pressing enter should call onChange with the correct params', () => {
@@ -52,7 +53,7 @@ describe('renderers Expandable', () => {
 
         expandIconWrapper.simulate('keyDown', {keyCode: KEY_CODES.Enter});
 
-        expect(props.onChange).toHaveBeenCalledWith(updateNode(props.node, {expanded: false}));
+        expect(props.onChange).toHaveBeenCalledWith({...updateNode(props.node, {expanded: false}), index: props.index});
       });
 
       it('double clicking in the parent node should call onChange with the correct params', () => {
@@ -60,7 +61,7 @@ describe('renderers Expandable', () => {
 
         wrapper.first().simulate('doubleClick');
 
-        expect(props.onChange).toHaveBeenCalledWith(updateNode(props.node, {expanded: false}));
+        expect(props.onChange).toHaveBeenCalledWith({...updateNode(props.node, {expanded: false}), index: props.index});
       });
     });
 
@@ -76,7 +77,7 @@ describe('renderers Expandable', () => {
 
         expandIconWrapper.simulate('click');
 
-        expect(props.onChange).toHaveBeenCalledWith(updateNode(props.node, {expanded: true}));
+        expect(props.onChange).toHaveBeenCalledWith({...updateNode(props.node, {expanded: true}), index: props.index});
       });
 
       it('pressing enter should call onChange with the correct params', () => {
@@ -84,7 +85,7 @@ describe('renderers Expandable', () => {
 
         expandIconWrapper.simulate('keyDown', {keyCode: KEY_CODES.Enter});
 
-        expect(props.onChange).toHaveBeenCalledWith(updateNode(props.node, {expanded: true}));
+        expect(props.onChange).toHaveBeenCalledWith({...updateNode(props.node, {expanded: true}), index: props.index});
       });
 
       it('double clicking in the parent node should call onChange with the correct params', () => {
@@ -92,7 +93,7 @@ describe('renderers Expandable', () => {
 
         wrapper.first().simulate('doubleClick');
 
-        expect(props.onChange).toHaveBeenCalledWith(updateNode(props.node, {expanded: true}));
+        expect(props.onChange).toHaveBeenCalledWith({...updateNode(props.node, {expanded: true}), index: props.index});
       });
     });
   });

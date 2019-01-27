@@ -14,6 +14,7 @@ const Favorite = ({
     notFavorite: 'mi mi-star-border',
   },
   children,
+  index,
 }) => {
   const {isFavorite} = getNodeRenderOptions(node);
 
@@ -22,7 +23,7 @@ const Favorite = ({
     [iconsClassNameMap.notFavorite]: !isFavorite,
   });
 
-  const handleChange = () => onChange(updateNode(node, {favorite: !isFavorite}));
+  const handleChange = () => onChange({...updateNode(node, {favorite: !isFavorite}), index});
 
   return (
     <span>

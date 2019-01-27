@@ -23,6 +23,7 @@ describe('renderers Favorite', () => {
         notFavorite: 'non-fav',
       },
       measure: jest.fn(),
+      index: 1,
     };
 
     const props = {...baseProps, ...extraProps};
@@ -45,7 +46,7 @@ describe('renderers Favorite', () => {
 
       favoriteIconWrapper.simulate('click');
 
-      expect(props.onChange).toHaveBeenCalledWith(updateNode(props.node, {favorite: false}));
+      expect(props.onChange).toHaveBeenCalledWith({...updateNode(props.node, {favorite: false}), index: props.index});
     });
 
     it('pressing enter should call onChange with the correct params', () => {
@@ -53,7 +54,7 @@ describe('renderers Favorite', () => {
 
       favoriteIconWrapper.simulate('keyDown', {keyCode: KEY_CODES.Enter});
 
-      expect(props.onChange).toHaveBeenCalledWith(updateNode(props.node, {favorite: false}));
+      expect(props.onChange).toHaveBeenCalledWith({...updateNode(props.node, {favorite: false}), index: props.index});
     });
   });
 
@@ -71,7 +72,7 @@ describe('renderers Favorite', () => {
 
       favoriteIconWrapper.simulate('click');
 
-      expect(props.onChange).toHaveBeenCalledWith(updateNode(props.node, {favorite: true}));
+      expect(props.onChange).toHaveBeenCalledWith({...updateNode(props.node, {favorite: true}), index: props.index});
     });
 
     it('pressing enter should call onChange with the correct params', () => {
@@ -79,7 +80,7 @@ describe('renderers Favorite', () => {
 
       favoriteIconWrapper.simulate('keyDown', {keyCode: KEY_CODES.Enter});
 
-      expect(props.onChange).toHaveBeenCalledWith(updateNode(props.node, {favorite: true}));
+      expect(props.onChange).toHaveBeenCalledWith({...updateNode(props.node, {favorite: true}), index: props.index});
     });
   });
 });

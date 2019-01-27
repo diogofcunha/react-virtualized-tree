@@ -45,6 +45,7 @@ export type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 
 export interface RendererProps<T> {
   measure: () => void;
+  index: number;
   onChange: (updateParams: NodeAction) => void;
   node: FlattenedNode;
   iconsClassNameMap?: T;

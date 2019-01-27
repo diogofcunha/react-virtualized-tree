@@ -13,6 +13,7 @@ const Deletable = ({
     delete: 'mi mi-delete',
   },
   children,
+  index,
 }) => {
   const {isDeletable} = getNodeRenderOptions(node);
 
@@ -20,7 +21,7 @@ const Deletable = ({
     [iconsClassNameMap.delete]: isDeletable,
   });
 
-  const handleChange = () => onChange(deleteNode(node));
+  const handleChange = () => onChange({...deleteNode(node), index});
 
   return (
     <span>

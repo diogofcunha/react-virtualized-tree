@@ -28,6 +28,7 @@ Object {
 
 exports[`Tree rowRenderer should render the Node renderer with the correct props 1`] = `
 Object {
+  "index": 0,
   "measure": [MockFunction],
   "node": Object {
     "children": Array [

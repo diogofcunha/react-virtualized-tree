@@ -21,12 +21,12 @@ export default class TreeStateModifiers {
    * Given a state, finds a node at a certain row index.
    * @param {State} state - The current state
    * @param {number} index - The visible row index
-   * @param {setNode} setNode - A function to update the node
+   * @param {setNode|Node} nodeUpdate - A function to update the node
    * @return {State} An internal state representation
    */
-  static editNodeAt = (state, index, setNode) => {
+  static editNodeAt = (state, index, nodeUpdate) => {
     const node = TreeState.getNodeAt(state, index);
-    const updatedNode = setNode(node);
+    const updatedNode = typeof nodeUpdate === 'function' ? nodeUpdate(node) : nodeUpdate;
     const flattenedTree = [...state.flattenedTree];
     const flattenedNodeMap = flattenedTree[index];
     const parents = flattenedNodeMap.slice(0, flattenedNodeMap.length - 1);

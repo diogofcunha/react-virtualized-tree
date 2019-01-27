@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 
-import Tree from '../../../src/TreeContainer';
+import UnstableFastTree from '../../../src/UnstableFastTree';
 import Renderers from '../../../src/renderers';
 import {createEntry, constructTree} from '../toolbelt';
+import TreeState from '../../../src/state/TreeState';
 
 const MIN_NUMBER_OF_PARENTS = 500;
-const MAX_NUMBER_OF_CHILDREN = 15;
+const MAX_NUMBER_OF_CHILDREN = 30;
 const MAX_DEEPNESS = 4;
 
 const {Deletable, Expandable, Favorite} = Renderers;
@@ -19,7 +20,7 @@ const totalNumberOfNodes = getTotalNumberOfElements(Nodes);
 
 class LargeCollection extends Component {
   state = {
-    nodes: Nodes,
+    nodes: TreeState.createFromTree(Nodes),
   };
 
   handleChange = nodes => {
@@ -28,7 +29,7 @@ class LargeCollection extends Component {
 
   render() {
     return (
-      <Tree nodes={this.state.nodes} onChange={this.handleChange}>
+      <UnstableFastTree nodes={this.state.nodes} onChange={this.handleChange}>
         {({style, node, ...rest}) => (
           <div style={style}>
             <Expandable node={node} {...rest}>
@@ -39,7 +40,7 @@ class LargeCollection extends Component {
             </Expandable>
           </div>
         )}
-      </Tree>
+      </UnstableFastTree>
     );
   }
 }

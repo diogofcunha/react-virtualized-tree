@@ -27,7 +27,7 @@ export const createEntry = (key, fileName, name, description, component) => ({
 let ids = {};
 
 const getUniqueId = () => {
-  const candidateId = Math.round(Math.random() * 1000000);
+  const candidateId = Math.round(Math.random() * 1000000000);
 
   if (ids[candidateId]) {
     return getUniqueId();

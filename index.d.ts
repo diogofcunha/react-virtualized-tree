@@ -150,7 +150,7 @@ export interface TreeState {
 }
 
 export interface TreeStateModifiers {
-  editNodeAt: (state: State, index: number, setNode: (oldNode: Node) => Node) => State;
+  editNodeAt: (state: State, index: number, updateNode: ((oldNode: Node) => Node) | Node) => State;
   deleteNodeAt: (state: State, index: number) => State;
 }
 

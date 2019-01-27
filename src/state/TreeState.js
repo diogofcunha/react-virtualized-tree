@@ -42,6 +42,26 @@ export default class TreeState {
   };
 
   /**
+   * Given a state, finds a node deepness at a certain row index.
+   * @param {State} state - The current state
+   * @param {number} index - The visible row index
+   * @return {number} The node deepness
+   */
+  static getNodeDeepness = (state, index) => {
+    validateState(state);
+
+    const rowPath = state.flattenedTree[index];
+
+    if (!rowPath) {
+      throw Error(
+        `Tried to get node at row "${index}" but got nothing, the tree are ${state.flattenedTree.length} visible rows`,
+      );
+    }
+
+    return rowPath.length - 1;
+  };
+
+  /**
    * Given a state and an index, finds the number of visible descendants
    * @param {State} state - The current state
    * @param {number} index - The visible row index

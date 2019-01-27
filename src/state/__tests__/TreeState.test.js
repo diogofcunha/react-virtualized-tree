@@ -62,6 +62,29 @@ describe('TreeState', () => {
     });
   });
 
+  describe('getNodeDeepness', () => {
+    test('should get the correct deepness for existing rowId', () => {
+      expect(TreeState.getNodeDeepness(TreeState.createFromTree(Nodes), 0)).toBe(0);
+      expect(TreeState.getNodeDeepness(TreeState.createFromTree(Nodes), 1)).toBe(1);
+      expect(TreeState.getNodeDeepness(TreeState.createFromTree(Nodes), 2)).toBe(2);
+      expect(TreeState.getNodeDeepness(TreeState.createFromTree(Nodes), 3)).toBe(2);
+      expect(TreeState.getNodeDeepness(TreeState.createFromTree(Nodes), 6)).toBe(0);
+    });
+
+    test('should fail with a custom error when supplied rowId does not exist', () => {
+      expect(() => TreeState.getNodeDeepness(TreeState.createFromTree(Nodes), 40)).toThrowErrorMatchingSnapshot();
+    });
+
+    test('should fail for when invalid state is supplied', () => {
+      expect(() => TreeState.getNodeDeepness('state', 0)).toThrowError('Expected a State instance but got string');
+      expect(() => TreeState.getNodeDeepness(1225, 0)).toThrowError('Expected a State instance but got number');
+      expect(() => TreeState.getNodeDeepness([], 0)).toThrowError('Expected a State instance but got object');
+      expect(() => TreeState.getNodeDeepness({}, 0)).toThrowError('Expected a State instance but got object');
+      expect(() => TreeState.getNodeDeepness(true, 0)).toThrowError('Expected a State instance but got boolean');
+      expect(() => TreeState.getNodeDeepness(() => {}, 0)).toThrowError('Expected a State instance but got function');
+    });
+  });
+
   describe('getNumberOfVisibleDescendants', () => {
     test('should fail for when invalid state is supplied', () => {
       expect(() => TreeState.getNumberOfVisibleDescendants('state', 0)).toThrowError(

@@ -10,6 +10,7 @@ const Expandable = ({
   onChange,
   node,
   children,
+  index,
   iconsClassNameMap = {
     expanded: 'mi mi-keyboard-arrow-down',
     collapsed: 'mi mi-keyboard-arrow-right',
@@ -23,7 +24,7 @@ const Expandable = ({
     [iconsClassNameMap.lastChild]: !hasChildren,
   });
 
-  const handleChange = () => onChange(updateNode(node, {expanded: !isExpanded}));
+  const handleChange = () => onChange({...updateNode(node, {expanded: !isExpanded}), index});
 
   return (
     <span onDoubleClick={handleChange}>

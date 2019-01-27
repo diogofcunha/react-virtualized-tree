@@ -22,6 +22,7 @@ describe('renderers Deletable', () => {
         delete: 'delete',
       },
       measure: jest.fn(),
+      index: 1,
     };
 
     const props = {...baseProps, ...extraProps};
@@ -42,7 +43,7 @@ describe('renderers Deletable', () => {
 
       deleteIconWrapper.simulate('click');
 
-      expect(props.onChange).toHaveBeenCalledWith(deleteNode(props.node));
+      expect(props.onChange).toHaveBeenCalledWith({...deleteNode(props.node), index: props.index});
     });
 
     it('pressing enter should call onChange with the correct params', () => {
@@ -50,7 +51,7 @@ describe('renderers Deletable', () => {
 
       deleteIconWrapper.simulate('keyDown', {keyCode: KEY_CODES.Enter});
 
-      expect(props.onChange).toHaveBeenCalledWith(deleteNode(props.node));
+      expect(props.onChange).toHaveBeenCalledWith({...deleteNode(props.node), index: props.index});
     });
   });
 

@@ -53,8 +53,8 @@ export interface RendererProps<T> {
   children?: React.ReactNode;
 }
 
-export interface InjectedRendererProps<T> extends Omit<RendererProps<T>, 'iconsClassNameMap'> {}
-export interface CustomRendererProps<T> extends Omit<RendererProps<T>, 'style'> {}
+export type InjectedRendererProps<T> = Omit<RendererProps<T>, 'iconsClassNameMap'>;
+export type CustomRendererProps<T> = Omit<RendererProps<T>, 'style'>;
 
 type DeletableRenderProps = CustomRendererProps<{delete?: string}>;
 

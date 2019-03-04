@@ -52,6 +52,7 @@ export default class TreeContainer extends React.Component {
         onChange={this.handleChange}
         NodeRenderer={this.props.children}
         scrollToIndex={rowIndex}
+        scrollToAlignment={this.props.scrollToAlignment}
       />
     );
   }
@@ -67,6 +68,7 @@ TreeContainer.propTypes = {
   nodeMarginLeft: PropTypes.number,
   width: PropTypes.number,
   scrollToId: PropTypes.number,
+  scrollToAlignment: PropTypes.string,
 };
 
 TreeContainer.defaultProps = {

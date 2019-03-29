@@ -53,6 +53,7 @@ export default class TreeContainer extends React.Component {
         NodeRenderer={this.props.children}
         scrollToIndex={rowIndex}
         scrollToAlignment={this.props.scrollToAlignment}
+        width={this.props.width}
       />
     );
   }

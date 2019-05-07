@@ -3,8 +3,10 @@
 
 import * as React from 'react';
 
+type NodeId = number | string;
+
 interface BasicNode {
-  id: number | string;
+  id: NodeId;
   name: string;
   state?: {[stateKey: string]: any};
 }
@@ -94,7 +96,7 @@ interface GroupRendererProps {
 }
 
 export interface FilteringContainerProps {
-  children: (nodes: Node[]) => JSX.Element;
+  children: (params: {nodes: Node[]; nodeParentMappings: {[id: NodeId]: NodeId[]}}) => JSX.Element;
   debouncer?: (func: (...p: any[]) => any, timeout: number) => void;
   groups?: {[g: string]: Group};
   selectedGroup?: string;

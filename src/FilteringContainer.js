@@ -65,7 +65,7 @@ export default class FilteringContainer extends React.Component {
     const relevantNodes =
       groups && selectedGroup && groups[selectedGroup]
         ? filterNodes(groups[selectedGroup].filter, nodes)
-        : {nodes, nodeParentMappings: []};
+        : {nodes, nodeParentMappings: {}};
 
     const {nodes: filteredNodes, nodeParentMappings} = filterTerm
       ? filterNodes(nameMatchesSearchTerm(filterTerm), relevantNodes.nodes)

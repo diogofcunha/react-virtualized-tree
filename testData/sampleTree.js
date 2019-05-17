@@ -78,15 +78,15 @@ export const COLLAPSED_NODE_IN_ROOT = {
   ],
 };
 
-export const Nodes = [
-  EXPANDED_NODE_IN_ROOT,
-  COLLAPSED_NODE_IN_ROOT,
-  {
-    id: 'z',
-    name: 'Leaf z',
-    state: {
-      deletable: true,
-      favorite: true,
-    },
+export const DELETABLE_IN_ROOT = {
+  id: 'z',
+  name: 'Leaf z',
+  state: {
+    deletable: true,
+    favorite: true,
   },
-];
+};
+
+export const DELETABLE_CHILDREN = EXPANDED_CHILDREN;
+
+export const Nodes = [EXPANDED_NODE_IN_ROOT, COLLAPSED_NODE_IN_ROOT, DELETABLE_IN_ROOT];

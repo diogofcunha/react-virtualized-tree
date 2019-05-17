@@ -1,3 +1,20 @@
+export const COLLAPSED_CHILDREN = {
+  id: 3,
+  name: 'Leaf 3',
+  state: {
+    expanded: false,
+    favorite: true,
+    deletable: true,
+  },
+  children: [
+    {
+      id: 'c-3',
+      name: 'Leaf 3 Child',
+      state: {},
+    },
+  ],
+};
+
 export const EXPANDED_CHILDREN = {
   id: 2,
   name: 'Leaf 2',
@@ -6,22 +23,7 @@ export const EXPANDED_CHILDREN = {
     deletable: true,
   },
   children: [
-    {
-      id: 3,
-      name: 'Leaf 3',
-      state: {
-        expanded: false,
-        favorite: true,
-        deletable: true,
-      },
-      children: [
-        {
-          id: 'c-3',
-          name: 'Leaf 3 Child',
-          state: {},
-        },
-      ],
-    },
+    COLLAPSED_CHILDREN,
     {
       id: 4,
       name: 'Leaf 4',
@@ -44,39 +46,41 @@ export const EXPANDED_NODE_IN_ROOT = {
   ],
 };
 
+export const COLLAPSED_NODE_IN_ROOT = {
+  id: 1,
+  name: 'Leaf 6',
+  state: {
+    expanded: false,
+    deletable: true,
+  },
+  children: [
+    {
+      id: 6,
+      name: 'Leaf 7',
+      state: {
+        expanded: false,
+      },
+      children: [
+        {
+          id: 7,
+          name: 'Leaf 8',
+        },
+        {
+          id: 8,
+          name: 'Leaf 9',
+        },
+      ],
+    },
+    {
+      id: 9,
+      name: 'Leaf 10',
+    },
+  ],
+};
+
 export const Nodes = [
   EXPANDED_NODE_IN_ROOT,
-  {
-    id: 1,
-    name: 'Leaf 6',
-    state: {
-      expanded: false,
-      deletable: true,
-    },
-    children: [
-      {
-        id: 6,
-        name: 'Leaf 7',
-        state: {
-          expanded: false,
-        },
-        children: [
-          {
-            id: 7,
-            name: 'Leaf 8',
-          },
-          {
-            id: 8,
-            name: 'Leaf 9',
-          },
-        ],
-      },
-      {
-        id: 9,
-        name: 'Leaf 10',
-      },
-    ],
-  },
+  COLLAPSED_NODE_IN_ROOT,
   {
     id: 'z',
     name: 'Leaf z',

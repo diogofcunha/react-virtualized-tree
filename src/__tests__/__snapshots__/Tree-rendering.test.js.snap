@@ -5,7 +5,7 @@ exports[`Tree integration should render as expected on mount 1`] = `
   data-testid="tree"
 >
   <div
-    style="margin-left: 0px; cursor: pointer;"
+    style="margin-left: 0px; user-select: none; cursor: pointer;"
   >
     <span
       data-haschildren="true"
@@ -15,7 +15,7 @@ exports[`Tree integration should render as expected on mount 1`] = `
     </span>
   </div>
   <div
-    style="margin-left: 30px; cursor: pointer;"
+    style="margin-left: 30px; user-select: none; cursor: pointer;"
   >
     <span
       data-haschildren="true"
@@ -25,7 +25,7 @@ exports[`Tree integration should render as expected on mount 1`] = `
     </span>
   </div>
   <div
-    style="margin-left: 60px; cursor: pointer;"
+    style="margin-left: 60px; user-select: none; cursor: pointer;"
   >
     <span
       data-haschildren="true"
@@ -35,7 +35,7 @@ exports[`Tree integration should render as expected on mount 1`] = `
     </span>
   </div>
   <div
-    style="margin-left: 60px; cursor: pointer;"
+    style="margin-left: 60px; user-select: none; cursor: pointer;"
   >
     <span
       data-haschildren="false"
@@ -45,7 +45,7 @@ exports[`Tree integration should render as expected on mount 1`] = `
     </span>
   </div>
   <div
-    style="margin-left: 30px; cursor: pointer;"
+    style="margin-left: 30px; user-select: none; cursor: pointer;"
   >
     <span
       data-haschildren="false"
@@ -55,7 +55,7 @@ exports[`Tree integration should render as expected on mount 1`] = `
     </span>
   </div>
   <div
-    style="margin-left: 0px; cursor: pointer;"
+    style="margin-left: 0px; user-select: none; cursor: pointer;"
   >
     <span
       data-haschildren="true"
@@ -65,7 +65,7 @@ exports[`Tree integration should render as expected on mount 1`] = `
     </span>
   </div>
   <div
-    style="margin-left: 0px; cursor: pointer;"
+    style="margin-left: 0px; user-select: none; cursor: pointer;"
   >
     <span
       data-haschildren="false"
@@ -82,7 +82,7 @@ exports[`Tree integration should render as expected on updates: all-expanded 1`]
   data-testid="tree"
 >
   <div
-    style="margin-left: 0px; cursor: pointer;"
+    style="margin-left: 0px; user-select: none; cursor: pointer;"
   >
     <span
       data-haschildren="true"
@@ -92,7 +92,7 @@ exports[`Tree integration should render as expected on updates: all-expanded 1`]
     </span>
   </div>
   <div
-    style="margin-left: 30px; cursor: pointer;"
+    style="margin-left: 30px; user-select: none; cursor: pointer;"
   >
     <span
       data-haschildren="true"
@@ -102,7 +102,7 @@ exports[`Tree integration should render as expected on updates: all-expanded 1`]
     </span>
   </div>
   <div
-    style="margin-left: 60px; cursor: pointer;"
+    style="margin-left: 60px; user-select: none; cursor: pointer;"
   >
     <span
       data-haschildren="true"
@@ -112,7 +112,7 @@ exports[`Tree integration should render as expected on updates: all-expanded 1`]
     </span>
   </div>
   <div
-    style="margin-left: 90px; cursor: pointer;"
+    style="margin-left: 90px; user-select: none; cursor: pointer;"
   >
     <span
       data-haschildren="false"
@@ -122,7 +122,7 @@ exports[`Tree integration should render as expected on updates: all-expanded 1`]
     </span>
   </div>
   <div
-    style="margin-left: 60px; cursor: pointer;"
+    style="margin-left: 60px; user-select: none; cursor: pointer;"
   >
     <span
       data-haschildren="false"
@@ -132,7 +132,7 @@ exports[`Tree integration should render as expected on updates: all-expanded 1`]
     </span>
   </div>
   <div
-    style="margin-left: 30px; cursor: pointer;"
+    style="margin-left: 30px; user-select: none; cursor: pointer;"
   >
     <span
       data-haschildren="false"
@@ -142,7 +142,7 @@ exports[`Tree integration should render as expected on updates: all-expanded 1`]
     </span>
   </div>
   <div
-    style="margin-left: 0px; cursor: pointer;"
+    style="margin-left: 0px; user-select: none; cursor: pointer;"
   >
     <span
       data-haschildren="true"
@@ -152,7 +152,7 @@ exports[`Tree integration should render as expected on updates: all-expanded 1`]
     </span>
   </div>
   <div
-    style="margin-left: 30px; cursor: pointer;"
+    style="margin-left: 30px; user-select: none; cursor: pointer;"
   >
     <span
       data-haschildren="true"
@@ -162,7 +162,7 @@ exports[`Tree integration should render as expected on updates: all-expanded 1`]
     </span>
   </div>
   <div
-    style="margin-left: 60px; cursor: pointer;"
+    style="margin-left: 60px; user-select: none; cursor: pointer;"
   >
     <span
       data-haschildren="false"
@@ -172,7 +172,7 @@ exports[`Tree integration should render as expected on updates: all-expanded 1`]
     </span>
   </div>
   <div
-    style="margin-left: 60px; cursor: pointer;"
+    style="margin-left: 60px; user-select: none; cursor: pointer;"
   >
     <span
       data-haschildren="false"
@@ -182,7 +182,7 @@ exports[`Tree integration should render as expected on updates: all-expanded 1`]
     </span>
   </div>
   <div
-    style="margin-left: 30px; cursor: pointer;"
+    style="margin-left: 30px; user-select: none; cursor: pointer;"
   >
     <span
       data-haschildren="false"
@@ -192,7 +192,7 @@ exports[`Tree integration should render as expected on updates: all-expanded 1`]
     </span>
   </div>
   <div
-    style="margin-left: 0px; cursor: pointer;"
+    style="margin-left: 0px; user-select: none; cursor: pointer;"
   >
     <span
       data-haschildren="false"
@@ -209,7 +209,7 @@ exports[`Tree integration should render as expected on updates: remove-in-pair-r
   data-testid="tree"
 >
   <div
-    style="margin-left: 0px; cursor: pointer;"
+    style="margin-left: 0px; user-select: none; cursor: pointer;"
   >
     <span
       data-haschildren="true"
@@ -219,7 +219,7 @@ exports[`Tree integration should render as expected on updates: remove-in-pair-r
     </span>
   </div>
   <div
-    style="margin-left: 30px; cursor: pointer;"
+    style="margin-left: 30px; user-select: none; cursor: pointer;"
   >
     <span
       data-haschildren="true"
@@ -229,7 +229,7 @@ exports[`Tree integration should render as expected on updates: remove-in-pair-r
     </span>
   </div>
   <div
-    style="margin-left: 60px; cursor: pointer;"
+    style="margin-left: 60px; user-select: none; cursor: pointer;"
   >
     <span
       data-haschildren="false"
@@ -239,7 +239,7 @@ exports[`Tree integration should render as expected on updates: remove-in-pair-r
     </span>
   </div>
   <div
-    style="margin-left: 60px; cursor: pointer;"
+    style="margin-left: 60px; user-select: none; cursor: pointer;"
   >
     <span
       data-haschildren="false"
@@ -249,7 +249,7 @@ exports[`Tree integration should render as expected on updates: remove-in-pair-r
     </span>
   </div>
   <div
-    style="margin-left: 30px; cursor: pointer;"
+    style="margin-left: 30px; user-select: none; cursor: pointer;"
   >
     <span
       data-haschildren="false"

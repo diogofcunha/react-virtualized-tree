@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
+    "jest": "^24.8.0",
     "lodash": "^4.17.4",
     "lodash.debounce": "^4.0.8",
     "lodash.findindex": "^4.6.0",
@@ -51,7 +52,6 @@
     "gh-pages": "^1.1.0",
     "husky": "^1.0.0-rc.13",
     "immutability-helper": "^2.6.4",
-    "jest": "^22.0.4",
     "lint-staged": "^7.2.0",
     "nwb": "^0.21.5",
     "prettier": "1.13.7",
@@ -77,7 +77,9 @@
       "src/**/*.{js,jsx,mjs}",
       "!src/**/index.js"
     ],
-    "setupTestFrameworkScriptFile": "<rootDir>/src/setupTests.js",
+    "setupFiles": [
+      "<rootDir>/src/setupTests.js"
+    ],
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}",
       "<rootDir>/src/**/?(*.)(spec|test).{js,jsx,mjs}"

@@ -1,3 +1,34 @@
+export const EXPANDED_CHILDREN = {
+  id: 2,
+  name: 'Leaf 2',
+  state: {
+    expanded: true,
+    deletable: true,
+  },
+  children: [
+    {
+      id: 3,
+      name: 'Leaf 3',
+      state: {
+        expanded: false,
+        favorite: true,
+        deletable: true,
+      },
+      children: [
+        {
+          id: 'c-3',
+          name: 'Leaf 3 Child',
+          state: {},
+        },
+      ],
+    },
+    {
+      id: 4,
+      name: 'Leaf 4',
+    },
+  ],
+};
+
 export const EXPANDED_NODE_IN_ROOT = {
   id: 0,
   name: 'Leaf 1',
@@ -5,36 +36,7 @@ export const EXPANDED_NODE_IN_ROOT = {
     expanded: true,
   },
   children: [
-    {
-      id: 2,
-      name: 'Leaf 2',
-      state: {
-        expanded: true,
-        deletable: true,
-      },
-      children: [
-        {
-          id: 3,
-          name: 'Leaf 3',
-          state: {
-            expanded: false,
-            favorite: true,
-            deletable: true,
-          },
-          children: [
-            {
-              id: 'c-3',
-              name: 'Leaf 3 Child',
-              state: {},
-            },
-          ],
-        },
-        {
-          id: 4,
-          name: 'Leaf 4',
-        },
-      ],
-    },
+    EXPANDED_CHILDREN,
     {
       id: 5,
       name: 'Leaf 5',

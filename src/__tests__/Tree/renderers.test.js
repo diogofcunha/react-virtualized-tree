@@ -3,7 +3,7 @@ jest.mock('react-virtualized');
 import React from 'react';
 import {render, cleanup, fireEvent} from 'react-testing-library';
 
-import Tree, {renderers} from '..';
+import Tree, {renderers} from '../..';
 import {
   Nodes,
   EXPANDED_NODE_IN_ROOT,
@@ -12,8 +12,8 @@ import {
   COLLAPSED_CHILDREN,
   DELETABLE_IN_ROOT,
   DELETABLE_CHILDREN,
-} from '../../testData/sampleTree';
-import NodeDiff from '../../tests/NodeDiff';
+} from '../../../testData/sampleTree';
+import NodeDiff from '../../../tests/NodeDiff';
 
 const {Expandable, Deletable, Favorite} = renderers;
 

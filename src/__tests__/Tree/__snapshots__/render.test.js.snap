@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Tree integration should render as expected on mount 1`] = `
+exports[`Tree rendering should render as expected on mount 1`] = `
 <div
   data-testid="tree"
 >
@@ -77,7 +77,7 @@ exports[`Tree integration should render as expected on mount 1`] = `
 </div>
 `;
 
-exports[`Tree integration should render as expected on updates: all-expanded 1`] = `
+exports[`Tree rendering should render as expected on updates: all-expanded 1`] = `
 <div
   data-testid="tree"
 >
@@ -204,7 +204,7 @@ exports[`Tree integration should render as expected on updates: all-expanded 1`]
 </div>
 `;
 
-exports[`Tree integration should render as expected on updates: remove-in-pair-root-pos 1`] = `
+exports[`Tree rendering should render as expected on updates: remove-in-pair-root-pos 1`] = `
 <div
   data-testid="tree"
 >

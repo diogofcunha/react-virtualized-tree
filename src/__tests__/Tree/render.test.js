@@ -3,8 +3,8 @@ jest.mock('react-virtualized');
 import React from 'react';
 import {render, cleanup, fireEvent} from 'react-testing-library';
 
-import Tree from '..';
-import {Nodes} from '../../testData/sampleTree';
+import Tree from '../..';
+import {Nodes} from '../../../testData/sampleTree';
 
 class Example extends React.Component {
   state = {
@@ -66,7 +66,7 @@ class Example extends React.Component {
   }
 }
 
-describe('Tree integration', () => {
+describe('Tree rendering', () => {
   afterEach(cleanup);
 
   test('should render as expected on mount', () => {

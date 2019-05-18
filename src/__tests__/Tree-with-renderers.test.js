@@ -20,6 +20,8 @@ const {Expandable, Deletable, Favorite} = renderers;
 const EXPAND_ICON_CN = 'EXPAND';
 const COLLAPSE_ICON_CN = 'COLLAPSE';
 const DELETE_ICON_CN = 'DELETE';
+const FAVORITE_ICON_CN = 'FAVORITE';
+const UNFAVORITE_ICON_CN = 'UNFAVORITE';
 
 class Example extends React.Component {
   state = {
@@ -45,7 +47,11 @@ class Example extends React.Component {
             >
               {node.name}
               <Deletable node={node} {...rest} iconsClassNameMap={{delete: DELETE_ICON_CN}}>
-                <Favorite node={node} {...rest} />
+                <Favorite
+                  node={node}
+                  {...rest}
+                  iconsClassNameMap={{favorite: FAVORITE_ICON_CN, notFavorite: UNFAVORITE_ICON_CN}}
+                />
               </Deletable>
             </Expandable>
           </div>
@@ -354,6 +360,144 @@ describe('Tree with exposed renderers', () => {
             ],
           }
         `);
+      });
+    });
+  });
+
+  describe('Favorite', () => {
+    describe('when favoring a node in the root', () => {
+      const getUnFavoriteInRoot = () => Nodes.find(n => n.state && !n.state.favorite);
+
+      test('should change the icon', () => {
+        const {getByTestId} = render(<Example />);
+        const {id} = getUnFavoriteInRoot();
+
+        let targetNode = getByTestId(`${id}`);
+
+        expect(targetNode.querySelector(`.${FAVORITE_ICON_CN}`)).toBeNull();
+
+        const collapsedNode = targetNode.querySelector(`.${UNFAVORITE_ICON_CN}`);
+        fireEvent.click(collapsedNode);
+
+        targetNode = getByTestId(`${id}`);
+
+        expect(targetNode.querySelector(`.${UNFAVORITE_ICON_CN}`)).toBeNull();
+        expect(targetNode.querySelector(`.${FAVORITE_ICON_CN}`)).not.toBeNull();
+      });
+
+      test('should only affect the node itself', () => {
+        const {getByTestId, container} = render(<Example />);
+        const diff = new NodeDiff(container);
+
+        const {id} = getUnFavoriteInRoot();
+
+        let targetNode = getByTestId(`${id}`);
+        const collapsedNode = targetNode.querySelector(`.${UNFAVORITE_ICON_CN}`);
+        fireEvent.click(collapsedNode);
+
+        expect(diff.run(container)).toEqual({changed: [`${id}`], unmounted: [], mounted: []});
+      });
+    });
+
+    describe('when favoring a node deep within', () => {
+      const getUnFavoriteDeep = () => EXPANDED_NODE_IN_ROOT.children.find(n => n.state && !n.state.favorite);
+
+      test('should change the icon', () => {
+        const {getByTestId} = render(<Example />);
+        const {id} = getUnFavoriteDeep();
+
+        let targetNode = getByTestId(`${id}`);
+
+        expect(targetNode.querySelector(`.${FAVORITE_ICON_CN}`)).toBeNull();
+
+        const collapsedNode = targetNode.querySelector(`.${UNFAVORITE_ICON_CN}`);
+        fireEvent.click(collapsedNode);
+
+        targetNode = getByTestId(`${id}`);
+
+        expect(targetNode.querySelector(`.${UNFAVORITE_ICON_CN}`)).toBeNull();
+        expect(targetNode.querySelector(`.${FAVORITE_ICON_CN}`)).not.toBeNull();
+      });
+
+      test('should only affect the node itself', () => {
+        const {getByTestId, container} = render(<Example />);
+        const diff = new NodeDiff(container);
+
+        const {id} = getUnFavoriteDeep();
+
+        let targetNode = getByTestId(`${id}`);
+        const collapsedNode = targetNode.querySelector(`.${UNFAVORITE_ICON_CN}`);
+        fireEvent.click(collapsedNode);
+
+        expect(diff.run(container)).toEqual({changed: [`${id}`], unmounted: [], mounted: []});
+      });
+    });
+
+    describe('when removing favorite from a node in the root', () => {
+      const getFavoriteInRoot = () => Nodes.find(n => n.state && n.state.favorite);
+
+      test('should change the icon', () => {
+        const {getByTestId} = render(<Example />);
+        const {id} = getFavoriteInRoot();
+
+        let targetNode = getByTestId(`${id}`);
+
+        expect(targetNode.querySelector(`.${UNFAVORITE_ICON_CN}`)).toBeNull();
+
+        const collapsedNode = targetNode.querySelector(`.${FAVORITE_ICON_CN}`);
+        fireEvent.click(collapsedNode);
+
+        targetNode = getByTestId(`${id}`);
+
+        expect(targetNode.querySelector(`.${FAVORITE_ICON_CN}`)).toBeNull();
+        expect(targetNode.querySelector(`.${UNFAVORITE_ICON_CN}`)).not.toBeNull();
+      });
+
+      test('should only affect the node itself', () => {
+        const {getByTestId, container} = render(<Example />);
+        const diff = new NodeDiff(container);
+
+        const {id} = getFavoriteInRoot();
+
+        let targetNode = getByTestId(`${id}`);
+        const collapsedNode = targetNode.querySelector(`.${FAVORITE_ICON_CN}`);
+        fireEvent.click(collapsedNode);
+
+        expect(diff.run(container)).toEqual({changed: [`${id}`], unmounted: [], mounted: []});
+      });
+    });
+
+    describe('when removing favorite from a node deep within', () => {
+      // Do it in the tree
+      const getFavoriteDeep = () => {
+        const n = EXPANDED_NODE_IN_ROOT.children.find(n => n.state && !n.state.favorite);
+      };
+
+      test('should change the icon', () => {
+        const {getByTestId} = render(<Example />);
+
+        let targetNode = getByTestId(`3`);
+
+        expect(targetNode.querySelector(`.${UNFAVORITE_ICON_CN}`)).toBeNull();
+
+        const collapsedNode = targetNode.querySelector(`.${FAVORITE_ICON_CN}`);
+        fireEvent.click(collapsedNode);
+
+        targetNode = getByTestId(`3`);
+
+        expect(targetNode.querySelector(`.${FAVORITE_ICON_CN}`)).toBeNull();
+        expect(targetNode.querySelector(`.${UNFAVORITE_ICON_CN}`)).not.toBeNull();
+      });
+
+      test('should only affect the node itself', () => {
+        const {getByTestId, container} = render(<Example />);
+        const diff = new NodeDiff(container);
+
+        let targetNode = getByTestId('3');
+        const collapsedNode = targetNode.querySelector(`.${FAVORITE_ICON_CN}`);
+        fireEvent.click(collapsedNode);
+
+        expect(diff.run(container)).toEqual({changed: [`3`], unmounted: [], mounted: []});
       });
     });
   });

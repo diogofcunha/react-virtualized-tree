@@ -1,14 +1,12 @@
 import React from 'react';
-import {shallow} from 'enzyme';
+import {render, cleanup, fireEvent} from 'react-testing-library';
 
 import DefaultGroupRenderer from '../DefaultGroupRenderer';
 
 describe('DefaultGroupRenderer', () => {
   const setup = (extraProps = {}) => {
-    const onChange = jest.fn();
-
     const props = {
-      onChange,
+      onChange: jest.fn(),
       groups: {
         ALL: {
           name: 'All',
@@ -27,31 +25,40 @@ describe('DefaultGroupRenderer', () => {
       ...extraProps,
     };
 
-    const wrapper = shallow(<DefaultGroupRenderer {...props} />);
-
     return {
-      wrapper,
+      ...render(<DefaultGroupRenderer {...props} />),
       props,
     };
   };
 
   it('should render an option for each group', () => {
-    const {wrapper} = setup();
+    const {container} = setup();
+    const options = container.querySelectorAll('option');
 
-    expect(wrapper.find('option').map(o => o.text())).toMatchSnapshot();
+    const optionsText = [];
+
+    options.forEach(o => {
+      optionsText.push(o.text);
+    });
+
+    expect(optionsText).toMatchSnapshot();
   });
 
   it('should render the select with the correct value', () => {
-    const {wrapper, props} = setup();
+    const {container, props} = setup();
+    const select = container.querySelector('select');
 
-    expect(wrapper.find('select').props().value).toBe(props.selectedGroup);
+    expect(select.value).toBe(props.selectedGroup);
   });
 
   it('changing the selection should call onChange with the correct params', () => {
-    const {wrapper, props} = setup();
+    const {props, container} = setup();
     const value = 'BOTTOM';
 
-    wrapper.find('select').simulate('change', {target: {value}});
+    const select = container.querySelector('select');
+    select.value = value;
+
+    fireEvent.change(select);
 
     expect(props.onChange).toHaveBeenCalledWith(value);
   });

@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
+    "jest": "^24.8.0",
     "lodash": "^4.17.4",
     "lodash.debounce": "^4.0.8",
     "lodash.findindex": "^4.6.0",
@@ -44,14 +45,11 @@
     "babel-preset-react-app": "^3.1.0",
     "deep-diff": "^1.0.2",
     "deep-freeze": "^0.0.1",
-    "enzyme": "^3.3.0",
-    "enzyme-adapter-react-16": "^1.1.1",
     "flag-icon-css": "^2.9.0",
     "focus-trap-react": "^5.0.1",
     "gh-pages": "^1.1.0",
     "husky": "^1.0.0-rc.13",
     "immutability-helper": "^2.6.4",
-    "jest": "^22.0.4",
     "lint-staged": "^7.2.0",
     "nwb": "^0.21.5",
     "prettier": "1.13.7",
@@ -65,6 +63,7 @@
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-test-renderer": "^16.2.0",
+    "react-testing-library": "^7.0.0",
     "react-virtualized": "^9.18.5",
     "semantic-release": "^15.6.3",
     "semantic-ui-react": "^0.77.1",
@@ -76,7 +75,9 @@
       "src/**/*.{js,jsx,mjs}",
       "!src/**/index.js"
     ],
-    "setupTestFrameworkScriptFile": "<rootDir>/src/setupTests.js",
+    "setupFiles": [
+      "<rootDir>/src/setupTests.js"
+    ],
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}",
       "<rootDir>/src/**/?(*.)(spec|test).{js,jsx,mjs}"

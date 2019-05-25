@@ -1,0 +1,262 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tree rendering should render as expected on mount 1`] = `
+<div
+  data-testid="tree"
+>
+  <div
+    style="margin-left: 0px; user-select: none; cursor: pointer;"
+  >
+    <span
+      data-haschildren="true"
+      data-testid="0"
+    >
+      Leaf 1
+    </span>
+  </div>
+  <div
+    style="margin-left: 30px; user-select: none; cursor: pointer;"
+  >
+    <span
+      data-haschildren="true"
+      data-testid="2"
+    >
+      Leaf 2
+    </span>
+  </div>
+  <div
+    style="margin-left: 60px; user-select: none; cursor: pointer;"
+  >
+    <span
+      data-haschildren="true"
+      data-testid="3"
+    >
+      Leaf 3
+    </span>
+  </div>
+  <div
+    style="margin-left: 60px; user-select: none; cursor: pointer;"
+  >
+    <span
+      data-haschildren="false"
+      data-testid="4"
+    >
+      Leaf 4
+    </span>
+  </div>
+  <div
+    style="margin-left: 30px; user-select: none; cursor: pointer;"
+  >
+    <span
+      data-haschildren="false"
+      data-testid="5"
+    >
+      Leaf 5
+    </span>
+  </div>
+  <div
+    style="margin-left: 0px; user-select: none; cursor: pointer;"
+  >
+    <span
+      data-haschildren="true"
+      data-testid="1"
+    >
+      Leaf 6
+    </span>
+  </div>
+  <div
+    style="margin-left: 0px; user-select: none; cursor: pointer;"
+  >
+    <span
+      data-haschildren="false"
+      data-testid="z"
+    >
+      Leaf z
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Tree rendering should render as expected on updates: all-expanded 1`] = `
+<div
+  data-testid="tree"
+>
+  <div
+    style="margin-left: 0px; user-select: none; cursor: pointer;"
+  >
+    <span
+      data-haschildren="true"
+      data-testid="0"
+    >
+      Leaf 1
+    </span>
+  </div>
+  <div
+    style="margin-left: 30px; user-select: none; cursor: pointer;"
+  >
+    <span
+      data-haschildren="true"
+      data-testid="2"
+    >
+      Leaf 2
+    </span>
+  </div>
+  <div
+    style="margin-left: 60px; user-select: none; cursor: pointer;"
+  >
+    <span
+      data-haschildren="true"
+      data-testid="3"
+    >
+      Leaf 3
+    </span>
+  </div>
+  <div
+    style="margin-left: 90px; user-select: none; cursor: pointer;"
+  >
+    <span
+      data-haschildren="false"
+      data-testid="c-3"
+    >
+      Leaf 3 Child
+    </span>
+  </div>
+  <div
+    style="margin-left: 60px; user-select: none; cursor: pointer;"
+  >
+    <span
+      data-haschildren="false"
+      data-testid="4"
+    >
+      Leaf 4
+    </span>
+  </div>
+  <div
+    style="margin-left: 30px; user-select: none; cursor: pointer;"
+  >
+    <span
+      data-haschildren="false"
+      data-testid="5"
+    >
+      Leaf 5
+    </span>
+  </div>
+  <div
+    style="margin-left: 0px; user-select: none; cursor: pointer;"
+  >
+    <span
+      data-haschildren="true"
+      data-testid="1"
+    >
+      Leaf 6
+    </span>
+  </div>
+  <div
+    style="margin-left: 30px; user-select: none; cursor: pointer;"
+  >
+    <span
+      data-haschildren="true"
+      data-testid="6"
+    >
+      Leaf 7
+    </span>
+  </div>
+  <div
+    style="margin-left: 60px; user-select: none; cursor: pointer;"
+  >
+    <span
+      data-haschildren="false"
+      data-testid="7"
+    >
+      Leaf 8
+    </span>
+  </div>
+  <div
+    style="margin-left: 60px; user-select: none; cursor: pointer;"
+  >
+    <span
+      data-haschildren="false"
+      data-testid="8"
+    >
+      Leaf 9
+    </span>
+  </div>
+  <div
+    style="margin-left: 30px; user-select: none; cursor: pointer;"
+  >
+    <span
+      data-haschildren="false"
+      data-testid="9"
+    >
+      Leaf 10
+    </span>
+  </div>
+  <div
+    style="margin-left: 0px; user-select: none; cursor: pointer;"
+  >
+    <span
+      data-haschildren="false"
+      data-testid="z"
+    >
+      Leaf z
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Tree rendering should render as expected on updates: remove-in-pair-root-pos 1`] = `
+<div
+  data-testid="tree"
+>
+  <div
+    style="margin-left: 0px; user-select: none; cursor: pointer;"
+  >
+    <span
+      data-haschildren="true"
+      data-testid="1"
+    >
+      Leaf 6
+    </span>
+  </div>
+  <div
+    style="margin-left: 30px; user-select: none; cursor: pointer;"
+  >
+    <span
+      data-haschildren="true"
+      data-testid="6"
+    >
+      Leaf 7
+    </span>
+  </div>
+  <div
+    style="margin-left: 60px; user-select: none; cursor: pointer;"
+  >
+    <span
+      data-haschildren="false"
+      data-testid="7"
+    >
+      Leaf 8
+    </span>
+  </div>
+  <div
+    style="margin-left: 60px; user-select: none; cursor: pointer;"
+  >
+    <span
+      data-haschildren="false"
+      data-testid="8"
+    >
+      Leaf 9
+    </span>
+  </div>
+  <div
+    style="margin-left: 30px; user-select: none; cursor: pointer;"
+  >
+    <span
+      data-haschildren="false"
+      data-testid="9"
+    >
+      Leaf 10
+    </span>
+  </div>
+</div>
+`;

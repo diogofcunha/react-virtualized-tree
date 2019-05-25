@@ -143,6 +143,32 @@ Array [
 ]
 `;
 
+exports[`FilteringContainer groups when groups exist should render a injected groupRenderer 1`] = `
+<div
+  data-testid="group-renderer"
+>
+  Group renderer! 
+  {"groups":{"EXPANDED":{"name":"Expanded"},"FAVORITES":{"name":"Favorites"}},"selectedGroup":"EXPANDED"}
+</div>
+`;
+
+exports[`FilteringContainer groups when groups exist should render the DefaultGroupRenderer when one is not injected as a prop 1`] = `
+<select
+  class="tree-group"
+>
+  <option
+    value="EXPANDED"
+  >
+    Expanded
+  </option>
+  <option
+    value="FAVORITES"
+  >
+    Favorites
+  </option>
+</select>
+`;
+
 exports[`FilteringContainer groups when groups exist should work when matched with filtering 1`] = `
 Array [
   Object {

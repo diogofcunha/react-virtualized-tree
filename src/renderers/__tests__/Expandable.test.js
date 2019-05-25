@@ -1,12 +1,12 @@
 import React from 'react';
-import {shallow} from 'enzyme';
+import {render, cleanup, fireEvent} from 'react-testing-library';
 
 import Expandable from '../Expandable';
 import {KEY_CODES} from '../../eventWrappers';
 import {updateNode} from '../../selectors/nodes';
 
 describe('renderers Expandable', () => {
-  const findExpandIcon = wrapper => wrapper.find('i');
+  afterEach(cleanup);
 
   const setup = (state = {}, extraProps = {}) => {
     const baseProps = {
@@ -18,48 +18,61 @@ describe('renderers Expandable', () => {
         deepness: 0,
         children: [{}],
       },
-      iconsClassNameMap: {
-        expanded: 'expanded',
-        collapsed: 'colpased',
-      },
       measure: jest.fn(),
       index: 1,
     };
 
     const props = {...baseProps, ...extraProps};
-    const wrapper = shallow(<Expandable {...props} />);
 
-    return {props, wrapper, expandIconWrapper: findExpandIcon(wrapper)};
+    return {
+      ...render(<Expandable {...props} />),
+      props,
+    };
   };
 
   describe('when contains children', () => {
     describe('when expanded', () => {
       it('should render a with the supplied className when expanded', () => {
-        const {expandIconWrapper, props} = setup({expanded: true});
+        const {container, props} = setup(
+          {expanded: true},
+          {
+            iconsClassNameMap: {
+              expanded: 'expanded',
+              collapsed: 'colpased',
+            },
+          },
+        );
 
-        expect(expandIconWrapper.hasClass(props.iconsClassNameMap.expanded)).toBeTruthy();
+        expect(container.querySelector(`.${props.iconsClassNameMap.expanded}`)).not.toBeNull();
+        expect(container.querySelector(`.mi.mi-keyboard-arrow-down`)).toBeNull();
+      });
+
+      it('should render a with the default className when expanded and className map is not supplied', () => {
+        const {container} = setup({expanded: true});
+
+        expect(container.querySelector(`.mi.mi-keyboard-arrow-down`)).not.toBeNull();
       });
 
       it('clicking should call onChange with the correct params', () => {
-        const {expandIconWrapper, props} = setup({expanded: true});
+        const {container, props} = setup({expanded: true});
 
-        expandIconWrapper.simulate('click');
+        fireEvent.click(container.querySelector('i'));
 
         expect(props.onChange).toHaveBeenCalledWith({...updateNode(props.node, {expanded: false}), index: props.index});
       });
 
       it('pressing enter should call onChange with the correct params', () => {
-        const {expandIconWrapper, props} = setup({expanded: true});
+        const {container, props} = setup({expanded: true});
 
-        expandIconWrapper.simulate('keyDown', {keyCode: KEY_CODES.Enter});
+        fireEvent.keyDown(container.querySelector('i'), {keyCode: KEY_CODES.Enter});
 
         expect(props.onChange).toHaveBeenCalledWith({...updateNode(props.node, {expanded: false}), index: props.index});
       });
 
       it('double clicking in the parent node should call onChange with the correct params', () => {
-        const {props, wrapper} = setup({expanded: true});
+        const {props, container} = setup({expanded: true});
 
-        wrapper.first().simulate('doubleClick');
+        fireEvent.doubleClick(container.querySelector('i'));
 
         expect(props.onChange).toHaveBeenCalledWith({...updateNode(props.node, {expanded: false}), index: props.index});
       });
@@ -67,31 +80,46 @@ describe('renderers Expandable', () => {
 
     describe('when collapsed', () => {
       it('should render a with the supplied className when expanded', () => {
-        const {expandIconWrapper, props} = setup({expanded: false});
+        const {container, props} = setup(
+          {expanded: false},
+          {
+            iconsClassNameMap: {
+              expanded: 'expanded',
+              collapsed: 'colpased',
+            },
+          },
+        );
 
-        expect(expandIconWrapper.hasClass(props.iconsClassNameMap.collapsed)).toBeTruthy();
+        expect(container.querySelector(`.${props.iconsClassNameMap.collapsed}`)).not.toBeNull();
+        expect(container.querySelector(`.mi.mi-keyboard-arrow-right`)).toBeNull();
+      });
+
+      it('should render a with the supplied default className when map is not supplied', () => {
+        const {container} = setup({expanded: false});
+
+        expect(container.querySelector(`.mi.mi-keyboard-arrow-right`)).not.toBeNull();
       });
 
       it('clicking should call onChange with the correct params', () => {
-        const {expandIconWrapper, props} = setup({expanded: false});
+        const {container, props} = setup({expanded: false});
 
-        expandIconWrapper.simulate('click');
+        fireEvent.click(container.querySelector('i'));
 
         expect(props.onChange).toHaveBeenCalledWith({...updateNode(props.node, {expanded: true}), index: props.index});
       });
 
       it('pressing enter should call onChange with the correct params', () => {
-        const {expandIconWrapper, props} = setup({expanded: false});
+        const {container, props} = setup({expanded: false});
 
-        expandIconWrapper.simulate('keyDown', {keyCode: KEY_CODES.Enter});
+        fireEvent.keyDown(container.querySelector('i'), {keyCode: KEY_CODES.Enter});
 
         expect(props.onChange).toHaveBeenCalledWith({...updateNode(props.node, {expanded: true}), index: props.index});
       });
 
       it('double clicking in the parent node should call onChange with the correct params', () => {
-        const {props, wrapper} = setup({expanded: false});
+        const {props, container} = setup({expanded: false});
 
-        wrapper.first().simulate('doubleClick');
+        fireEvent.doubleClick(container.querySelector('i'));
 
         expect(props.onChange).toHaveBeenCalledWith({...updateNode(props.node, {expanded: true}), index: props.index});
       });

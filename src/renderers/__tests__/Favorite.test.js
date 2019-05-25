@@ -1,12 +1,12 @@
 import React from 'react';
-import {shallow} from 'enzyme';
+import {render, cleanup, fireEvent} from 'react-testing-library';
 
 import Favorite from '../Favorite';
 import {KEY_CODES} from '../../eventWrappers';
 import {updateNode} from '../../selectors/nodes';
 
 describe('renderers Favorite', () => {
-  const findFavoriteIcon = wrapper => wrapper.find('i');
+  afterEach(cleanup);
 
   const setup = (state = {}, extraProps = {}) => {
     const baseProps = {
@@ -18,67 +18,91 @@ describe('renderers Favorite', () => {
         deepness: 0,
         children: [{}],
       },
-      iconsClassNameMap: {
-        favorite: 'fav',
-        notFavorite: 'non-fav',
-      },
       measure: jest.fn(),
       index: 1,
     };
 
     const props = {...baseProps, ...extraProps};
-    const wrapper = shallow(<Favorite {...props} />);
 
-    return {props, wrapper, favoriteIconWrapper: findFavoriteIcon(wrapper)};
+    return {
+      ...render(<Favorite {...props} />),
+      props,
+    };
   };
 
   describe('when favorite', () => {
-    const setupFavorite = (extraProps = {}) => setup({favorite: true}, extraProps);
+    it('should render an icon with the supplied className', () => {
+      const {container, props} = setup(
+        {favorite: true},
+        {
+          iconsClassNameMap: {
+            favorite: 'fav',
+            notFavorite: 'non-fav',
+          },
+        },
+      );
 
-    it('should render a with the supplied className', () => {
-      const {favoriteIconWrapper, props} = setupFavorite();
+      expect(container.querySelector(`.${props.iconsClassNameMap.favorite}`)).not.toBeNull();
+      expect(container.querySelector(`.mi.mi-star`)).toBeNull();
+    });
 
-      expect(favoriteIconWrapper.hasClass(props.iconsClassNameMap.favorite)).toBeTruthy();
+    it('should render an icon with the default className when a map is not provided', () => {
+      const {container} = setup({favorite: true});
+
+      expect(container.querySelector(`.mi.mi-star`)).not.toBeNull();
     });
 
     it('clicking should call onChange with the correct params', () => {
-      const {favoriteIconWrapper, props} = setupFavorite();
+      const {container, props} = setup({favorite: true});
 
-      favoriteIconWrapper.simulate('click');
+      fireEvent.click(container.querySelector('i'));
 
       expect(props.onChange).toHaveBeenCalledWith({...updateNode(props.node, {favorite: false}), index: props.index});
     });
 
     it('pressing enter should call onChange with the correct params', () => {
-      const {favoriteIconWrapper, props} = setupFavorite();
+      const {container, props} = setup({favorite: true});
 
-      favoriteIconWrapper.simulate('keyDown', {keyCode: KEY_CODES.Enter});
+      fireEvent.keyDown(container.querySelector('i'), {keyCode: KEY_CODES.Enter});
 
       expect(props.onChange).toHaveBeenCalledWith({...updateNode(props.node, {favorite: false}), index: props.index});
     });
   });
 
   describe('when not favorite', () => {
-    const setupNotFavorite = (extraProps = {}) => setup({favorite: false}, extraProps);
-
     it('should render a with the supplied className', () => {
-      const {favoriteIconWrapper, props} = setupNotFavorite();
+      const {container, props} = setup(
+        {favorite: false},
+        {
+          iconsClassNameMap: {
+            favorite: 'fav',
+            notFavorite: 'non-fav',
+          },
+        },
+      );
 
-      expect(favoriteIconWrapper.hasClass(props.iconsClassNameMap.notFavorite)).toBeTruthy();
+      expect(container.querySelector(`.${props.iconsClassNameMap.notFavorite}`)).not.toBeNull();
+      expect(container.querySelector(`.mi.mi-star-border`)).toBeNull();
+    });
+
+    it('should render an icon with the default className when a map is not provided', () => {
+      const {container} = setup({favorite: false});
+
+      expect(container.querySelector(`.mi.mi-star-border`)).not.toBeNull();
     });
 
     it('clicking should call onChange with the correct params', () => {
-      const {favoriteIconWrapper, props} = setupNotFavorite();
+      const {container, props} = setup({favorite: false});
 
-      favoriteIconWrapper.simulate('click');
+      fireEvent.click(container.querySelector('i'));
 
       expect(props.onChange).toHaveBeenCalledWith({...updateNode(props.node, {favorite: true}), index: props.index});
     });
 
     it('pressing enter should call onChange with the correct params', () => {
-      const {favoriteIconWrapper, props} = setupNotFavorite();
+      const {container, props} = setup({favorite: false});
 
-      favoriteIconWrapper.simulate('keyDown', {keyCode: KEY_CODES.Enter});
+      fireEvent.keyDown(container.querySelector('i'), {keyCode: KEY_CODES.Enter});
 
       expect(props.onChange).toHaveBeenCalledWith({...updateNode(props.node, {favorite: true}), index: props.index});
     });

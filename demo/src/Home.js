@@ -10,7 +10,7 @@ export default () => (
         <a href={'https://bvaughn.github.io/react-virtualized/#/components/List'}>react-virtualized</a>.
       </p>
       <p>Its main goal is to display tree like data in a beautiful and fast way.</p>
-      <p>Being a reactive library it uses children functions to achieve maximum extansability</p>
+      <p>Being a reactive library it uses children functions to achieve maximum extensibility</p>
       <p>
         The core idea behind it is that anyone using it is enable to create a tree as they wich just by rendering their
         own components or components exported by the tree

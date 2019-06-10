@@ -1,5 +1,5 @@
 # FilteringContainer
-FilteringComponent is a component that can be used to wrap to Tree in order to get filtering and group functionality for free.
+FilteringComponent is a component that can be used to wrap the Tree in order to get filtering and group functionality for free.
 
 To use this component you should know a little bit about [using functions as children](https://codedaily.io/tutorials/6/Using-Functions-as-Children-and-Render-Props-in-React-Components).
 

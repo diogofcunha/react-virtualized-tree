@@ -7,7 +7,7 @@ import DefaultGroupRenderer from './filtering/DefaultGroupRenderer';
 import {Node} from './shapes/nodeShapes';
 import {filterNodes} from './selectors/filtering';
 
-const nameMatchesSearchTerm = searchTerm => ({name}) => {
+const indexByName = searchTerm => ({name}) => {
   const upperCaseName = name.toUpperCase();
   const upperCaseSearchTerm = searchTerm.toUpperCase();
 
@@ -31,6 +31,7 @@ export default class FilteringContainer extends React.Component {
   static defaultProps = {
     debouncer: debounce,
     groupRenderer: DefaultGroupRenderer,
+    indexSearch: indexByName,
   };
 
   constructor(props) {
@@ -60,6 +61,7 @@ export default class FilteringContainer extends React.Component {
       selectedGroup,
       groupRenderer: GroupRenderer,
       onSelectedGroupChange,
+      indexSearch,
     } = this.props;
 
     const relevantNodes =
@@ -68,7 +70,7 @@ export default class FilteringContainer extends React.Component {
         : {nodes, nodeParentMappings: {}};
 
     const {nodes: filteredNodes, nodeParentMappings} = filterTerm
-      ? filterNodes(nameMatchesSearchTerm(filterTerm), relevantNodes.nodes)
+      ? filterNodes(indexSearch(filterTerm, relevantNodes.nodes), relevantNodes.nodes)
       : relevantNodes;
 
     return (
@@ -91,4 +93,5 @@ FilteringContainer.propTypes = {
   selectedGroup: PropTypes.string,
   groupRenderer: PropTypes.func,
   onSelectedGroupChange: PropTypes.func,
+  indexSearch: PropTypes.func,
 };

@@ -27,6 +27,11 @@ export default class UnstableFastTree extends React.Component {
     this.props.onChange(nodes);
   };
 
+  _onRowsRendered = ({startIndex, stopIndex}) => {
+    this.startIndex = startIndex;
+    this.stopIndex = stopIndex;
+  };
+
   render() {
     return (
       <Tree
@@ -34,6 +39,7 @@ export default class UnstableFastTree extends React.Component {
         nodes={this.props.nodes}
         onChange={this.handleChange}
         NodeRenderer={this.props.children}
+        onRowsRendered={this._onRowsRendered}
       />
     );
   }
@@ -53,8 +59,10 @@ UnstableFastTree.propTypes = {
   nodeMarginLeft: PropTypes.number,
   width: PropTypes.number,
   scrollToId: PropTypes.number,
+  scrollToIndex: PropTypes.number,
 };
 
 UnstableFastTree.defaultProps = {
   nodeMarginLeft: 30,
+  scrollToIndex: null,
 };

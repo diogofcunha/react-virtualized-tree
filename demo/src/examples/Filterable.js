@@ -25,6 +25,8 @@ class Filterable extends Component {
     groupsEnabled: true,
   };
 
+  treeRef = React.createRef();
+
   get _groupProps() {
     return this.state.groupsEnabled
       ? {
@@ -61,6 +63,9 @@ class Filterable extends Component {
   };
 
   render() {
+    if (this.treeRef.current) {
+      console.log(this.treeRef.current.startIndex, this.treeRef.current.stopIndex);
+    }
     return (
       <div>
         <Checkbox
@@ -73,7 +78,7 @@ class Filterable extends Component {
         <FilteringContainer nodes={this.state.nodes} {...this._groupProps}>
           {({nodes}) => (
             <div style={{height: 500}}>
-              <Tree nodes={nodes} onChange={this.handleChange}>
+              <Tree ref={this.treeRef} nodes={nodes} onChange={this.handleChange}>
                 {({style, node, ...rest}) => (
                   <div style={style}>
                     <Expandable node={node} {...rest}>

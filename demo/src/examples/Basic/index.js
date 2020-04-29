@@ -29,12 +29,13 @@ class BasicTree extends Component {
   treeRef = React.createRef();
 
   handleKeyDown = e => {
+    e.preventDefault();
     const {startIndex, stopIndex} = this.treeRef.current;
     const length = stopIndex - startIndex + 1;
     if (e.keyCode === 38) {
       this.setState(prev => ({currentIndex: prev.currentIndex - 1 < 0 ? 0 : (prev.currentIndex - 1) % length}));
     } else if (e.keyCode === 40) {
-      this.setState(prev => ({currentIndex: (prev.currentIndex + 1) % length}));
+      this.setState(prev => ({currentIndex: prev.currentIndex + 1}));
     } else if (e.keyCode === 32) {
       console.log(this.selectedNode);
     }
@@ -134,6 +135,7 @@ class BasicTree extends Component {
               <Tree
                 scrollToIndex={this.state.currentIndex}
                 ref={this.treeRef}
+                scrollToAlignment="end"
                 nodes={this.state.nodes}
                 onChange={this.handleChange}
               >

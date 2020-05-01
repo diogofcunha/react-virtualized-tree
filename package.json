@@ -1,6 +1,6 @@
 {
-  "name": "react-virtualized-tree",
-  "version": "2.0.2",
+  "name": "react-virtualized-tree-fork",
+  "version": "1.0.0",
   "description": "react-virtualized-tree React component",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -120,10 +120,8 @@
     "bracketSpacing": false,
     "jsxBracketSameLine": false
   },
-  "author": "Diogo Cunha",
-  "homepage": "https://diogofcunha.github.io/react-virtualized-tree/",
+  "author": "Ryan Zhu",
   "license": "MIT",
-  "repository": "https://github.com/diogofcunha/react-virtualized-tree/",
   "keywords": [
     "react",
     "tree",

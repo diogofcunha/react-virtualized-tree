@@ -23,6 +23,22 @@ class BasicTree extends Component {
     nodes: Nodes,
     availableRenderers: [Expandable, Deletable, Favorite],
     selectedRenderers: [Expandable, NodeNameRenderer],
+    currentIndex: null,
+  };
+
+  treeRef = React.createRef();
+
+  handleKeyDown = e => {
+    e.preventDefault();
+    const {startIndex, stopIndex} = this.treeRef.current;
+    const length = stopIndex - startIndex + 1;
+    if (e.keyCode === 38) {
+      this.setState(prev => ({currentIndex: prev.currentIndex - 1 < 0 ? 0 : (prev.currentIndex - 1) % length}));
+    } else if (e.keyCode === 40) {
+      this.setState(prev => ({currentIndex: prev.currentIndex + 1}));
+    } else if (e.keyCode === 32) {
+      console.log(this.selectedNode);
+    }
   };
 
   handleRendererMove = (dragIndex, hoverIndex) => {
@@ -81,7 +97,17 @@ class BasicTree extends Component {
     }));
   };
 
+  getStyle = (style, p) => {
+    if (p.index === this.state.currentIndex) {
+      this.selectedNode = p.node;
+    }
+    return {...style, border: p.index === this.state.currentIndex ? 'solid 1px black' : ''};
+  };
+
   render() {
+    if (this.treeRef.current) {
+      console.log(this.treeRef.current.startIndex, this.treeRef.current.stopIndex, this.state.currentIndex);
+    }
     const renderersAvailableForAdd = this.state.availableRenderers.filter(
       r => this.state.selectedRenderers.indexOf(r) === -1,
     );
@@ -105,9 +131,17 @@ class BasicTree extends Component {
           </Grid.Column>
           <Grid.Column>
             <Header as="h4">Ouput tree</Header>
-            <div style={{height: 200}}>
-              <Tree nodes={this.state.nodes} onChange={this.handleChange}>
-                {({style, ...p}) => <div style={style}>{this.createNodeRenderer(this.state.selectedRenderers, p)}</div>}
+            <div tabIndex={-1} onKeyDown={this.handleKeyDown} style={{height: 200}}>
+              <Tree
+                scrollToIndex={this.state.currentIndex}
+                ref={this.treeRef}
+                scrollToAlignment="end"
+                nodes={this.state.nodes}
+                onChange={this.handleChange}
+              >
+                {({style, ...p}) => (
+                  <div style={this.getStyle(style, p)}>{this.createNodeRenderer(this.state.selectedRenderers, p)}</div>
+                )}
               </Tree>
             </div>
           </Grid.Column>

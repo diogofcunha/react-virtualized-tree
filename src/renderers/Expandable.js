@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
 import {submitEvent} from '../eventWrappers';
-import {getNodeRenderOptions, updateNode} from '../selectors/nodes';
+import {getNodeRenderOptions, updateNode, updateNodeRecursively} from '../selectors/nodes';
 import {Renderer} from '../shapes/rendererShapes';
 
 const Expandable = ({
@@ -11,6 +11,7 @@ const Expandable = ({
   node,
   children,
   index,
+  enableShiftClick = false,
   iconsClassNameMap = {
     expanded: 'mi mi-keyboard-arrow-down',
     collapsed: 'mi mi-keyboard-arrow-right',
@@ -24,7 +25,13 @@ const Expandable = ({
     [iconsClassNameMap.lastChild]: !hasChildren,
   });
 
-  const handleChange = () => onChange({...updateNode(node, {expanded: !isExpanded}), index});
+  const handleChange = e => {
+    if (enableShiftClick && e.shiftKey) {
+      onChange({...updateNodeRecursively(node, {expanded: !isExpanded}), index});
+    } else {
+      onChange({...updateNode(node, {expanded: !isExpanded}), index});
+    }
+  };
 
   return (
     <span onDoubleClick={handleChange}>

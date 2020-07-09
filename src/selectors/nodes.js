@@ -85,6 +85,31 @@ export const updateNode = (originalNode, newState) => ({
   type: UPDATE_TYPE.UPDATE,
 });
 
+export const updateNodeRecursively = (originalNode, newState) => {
+  const result = {
+    node: _recursivelyUpdateNode(originalNode, newState),
+    type: UPDATE_TYPE.UPDATE,
+  };
+  console.log('originalNode', originalNode);
+  console.log('result', result);
+  return result;
+};
+
+export const _recursivelyUpdateNode = (originalNode, newState) => {
+  const {children = [], state, ...rest} = originalNode;
+  let node = {
+    ...rest,
+    state: {
+      ...state,
+      ...newState,
+    },
+  };
+  if (children.length > 0) {
+    node.children = children.map(childNode => _recursivelyUpdateNode(childNode, newState));
+  }
+  return node;
+};
+
 export const deleteNode = node => ({
   node,
   type: UPDATE_TYPE.DELETE,

@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import DefaultGroupRenderer from './filtering/DefaultGroupRenderer';
 import {Node} from './shapes/nodeShapes';
 import {filterNodes} from './selectors/filtering';
+import {_recursivelyUpdateNode} from './selectors/nodes';
 
 const nameMatchesSearchTerm = searchTerm => ({name}) => {
   const upperCaseName = name.toUpperCase();
@@ -40,7 +41,15 @@ export default class FilteringContainer extends React.Component {
   }
 
   setFilterTerm() {
-    this.setState(ps => ({filterTerm: ps.filterText}));
+    this.setState(
+      ps => ({filterTerm: ps.filterText}),
+      () => {
+        const {onChange, nodes} = this.props;
+        if (onChange) {
+          onChange(nodes.map(node => _recursivelyUpdateNode(node, {expanded: true})));
+        }
+      },
+    );
   }
 
   handleFilterTextChange = e => {
@@ -91,4 +100,5 @@ FilteringContainer.propTypes = {
   selectedGroup: PropTypes.string,
   groupRenderer: PropTypes.func,
   onSelectedGroupChange: PropTypes.func,
+  onChange: PropTypes.func,
 };

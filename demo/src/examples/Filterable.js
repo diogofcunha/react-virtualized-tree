@@ -75,7 +75,7 @@ class Filterable extends Component {
           onChange={this.handleGroupsToogle}
           style={{marginBottom: 15}}
         />
-        <FilteringContainer nodes={this.state.nodes} {...this._groupProps}>
+        <FilteringContainer nodes={this.state.nodes} {...this._groupProps} onChange={this.handleChange}>
           {({nodes}) => (
             <div style={{height: 500}}>
               <Tree ref={this.treeRef} nodes={nodes} onChange={this.handleChange}>

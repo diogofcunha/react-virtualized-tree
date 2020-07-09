@@ -90,8 +90,6 @@ export const updateNodeRecursively = (originalNode, newState) => {
     node: _recursivelyUpdateNode(originalNode, newState),
     type: UPDATE_TYPE.UPDATE,
   };
-  console.log('originalNode', originalNode);
-  console.log('result', result);
   return result;
 };
 

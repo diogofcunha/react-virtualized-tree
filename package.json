@@ -24,7 +24,6 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "jest": "^24.8.0",
     "lodash": "^4.17.4",
     "lodash.debounce": "^4.0.8",
     "lodash.findindex": "^4.6.0",
@@ -40,6 +39,7 @@
     "react-virtualized": "^9.13.0"
   },
   "devDependencies": {
+    "jest": "^24.8.0",
     "babel-jest": "^22.0.4",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",

@@ -43,7 +43,7 @@ export default class Tree extends React.Component {
         key={key}
         style={{
           ...style,
-          marginLeft: node.deepness * nodeMarginLeft,
+          paddingLeft: node.deepness * nodeMarginLeft,
           userSelect: 'none',
           cursor: 'pointer',
         }}

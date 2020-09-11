@@ -52,7 +52,7 @@ UnstableFastTree.propTypes = {
   children: PropTypes.func.isRequired,
   nodeMarginLeft: PropTypes.number,
   width: PropTypes.number,
-  scrollToId: PropTypes.number,
+  scrollToId: PropTypes.oneOfType([ PropTypes.string, PropTypes.number]),
 };
 
 UnstableFastTree.defaultProps = {

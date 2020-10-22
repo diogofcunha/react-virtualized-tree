@@ -32,6 +32,7 @@ export default class FilteringContainer extends React.Component {
     debouncer: debounce,
     groupRenderer: DefaultGroupRenderer,
     indexSearch: indexByName,
+    placeholder: 'Search...',
   };
 
   constructor(props) {
@@ -62,6 +63,7 @@ export default class FilteringContainer extends React.Component {
       groupRenderer: GroupRenderer,
       onSelectedGroupChange,
       indexSearch,
+      placeholder,
     } = this.props;
 
     const relevantNodes =
@@ -76,7 +78,7 @@ export default class FilteringContainer extends React.Component {
     return (
       <div className="tree-filter-container">
         <div className={classNames('tree-lookup-input', {group: !!groups})}>
-          <input value={filterText} onChange={this.handleFilterTextChange} placeholder="Search..." />
+          <input value={filterText} onChange={this.handleFilterTextChange} placeholder={placeholder} />
           <i aria-hidden="true" className="mi mi-11 mi-search" />
           {groups && <GroupRenderer groups={groups} selectedGroup={selectedGroup} onChange={onSelectedGroupChange} />}
         </div>
@@ -94,4 +96,5 @@ FilteringContainer.propTypes = {
   groupRenderer: PropTypes.func,
   onSelectedGroupChange: PropTypes.func,
   indexSearch: PropTypes.func,
+  placeholder: PropTypes.string,
 };

@@ -82,6 +82,18 @@ describe('FilteringContainer', () => {
 
       expect(getInjectedNodes()).toMatchSnapshot();
     });
+
+    it('should render with the default placeholder', () => {
+      const {wrapper} = setup();
+
+      expect(wrapper.getByPlaceholderText('Search...')).not.toBeNull();
+    });
+
+    it('should render the expected placeholder', () => {
+      const {wrapper} = setup({placeholder: 'Custom Placeholder'});
+
+      expect(wrapper.getByPlaceholderText('Custom Placeholder')).not.toBeNull();
+    });
   });
 
   describe('groups', () => {

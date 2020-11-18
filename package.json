@@ -66,7 +66,7 @@
     "react-test-renderer": "^16.2.0",
     "react-testing-library": "^7.0.0",
     "react-virtualized": "^9.18.5",
-    "semantic-release": "^15.6.3",
+    "semantic-release": "^17.2.3",
     "semantic-ui-react": "^0.77.1",
     "stats-webpack-plugin": "^0.6.2",
     "webpack-bundle-analyzer": "^3.3.2"

@@ -38,7 +38,7 @@ export interface TreeProps {
   children: <T = any>(props: RendererProps<T>) => JSX.Element;
   nodeMarginLeft?: number;
   width?: number;
-  scrollToId?: number;
+  scrollToId?: NodeId;
   scrollToAlignment?: string;
 }
 

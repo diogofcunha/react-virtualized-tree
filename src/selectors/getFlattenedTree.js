@@ -1,17 +1,33 @@
 export const isNodeExpanded = node => node.state && node.state.expanded;
 export const nodeHasChildren = node => node.children && node.children.length;
 
-export const getFlattenedTree = (nodes, parents = []) =>
-  nodes.reduce((flattenedTree, node) => {
+export const getFlattenedTree = (nodes, parents = []) => {
+  const flattenedTree = [];
+  const flattenNodes = [];
+
+  for (const node of nodes) {
+    flattenNodes.push({node, parents});
+  }
+
+  while (flattenNodes.length > 0) {
+    const {node, parents} = flattenNodes.pop();
+
     const deepness = parents.length;
     const nodeWithHelpers = {...node, deepness, parents};
 
-    if (!nodeHasChildren(node) || !isNodeExpanded(node)) {
-      return [...flattenedTree, nodeWithHelpers];
-    }
+    flattenedTree.push(nodeWithHelpers);
 
-    return [...flattenedTree, nodeWithHelpers, ...getFlattenedTree(node.children, [...parents, node.id])];
-  }, []);
+    if (nodeHasChildren(node) && isNodeExpanded(node)) {
+      const childParents = [...parents, node.id];
+
+      for (let i = node.children.length - 1; i >= 0; i--) {
+        flattenNodes.push({node: node.children[i], parents: childParents});
+      }
+    }
+  }
+
+  return flattenedTree;
+};
 
 export const getFlattenedTreePaths = (nodes, parents = []) => {
   const paths = [];

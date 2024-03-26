@@ -27,7 +27,7 @@ export default class TreeStateModifiers {
   static editNodeAt = (state, index, nodeUpdate) => {
     const node = TreeState.getNodeAt(state, index);
     const updatedNode = typeof nodeUpdate === 'function' ? nodeUpdate(node) : nodeUpdate;
-    const flattenedTree = [...state.flattenedTree];
+    let flattenedTree = [...state.flattenedTree];
     const flattenedNodeMap = flattenedTree[index];
     const parents = flattenedNodeMap.slice(0, flattenedNodeMap.length - 1);
 
@@ -37,7 +37,11 @@ export default class TreeStateModifiers {
       if (isNodeExpanded(updatedNode)) {
         const updatedNodeSubTree = getFlattenedTreePaths([updatedNode], parents);
 
-        flattenedTree.splice(index + 1, 0, ...updatedNodeSubTree.slice(1));
+        flattenedTree = [
+          ...flattenedTree.slice(0, index + 1),
+          ...updatedNodeSubTree.slice(1),
+          ...flattenedTree.slice(index + 1 + numberOfVisibleDescendants),
+        ];
       } else {
         flattenedTree.splice(index + 1, numberOfVisibleDescendants);
       }

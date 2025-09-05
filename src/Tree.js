@@ -6,6 +6,14 @@ import {FlattenedNode} from './shapes/nodeShapes';
 import TreeState, {State} from './state/TreeState';
 
 export default class Tree extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      topStickyHeader: null,
+    };
+    this._listRef = React.createRef();
+  }
+
   _cache = new CellMeasurerCache({
     fixedWidth: true,
     minHeight: 20,
@@ -35,8 +43,66 @@ export default class Tree extends React.Component {
       : nodes[index];
   };
 
+  isGroupHeader = node => {
+    return node.children && node.children.length > 0 && node.deepness === 0;
+  };
+
+  componentDidMount() {
+    if (this._listRef.current) {
+      const list = this._listRef.current;
+      const grid = list && list.Grid;
+      if (grid) {
+        this.handleScroll({
+          scrollTop: grid.state.scrollTop,
+        });
+      }
+    }
+  }
+
+  getAllHeaders = () => {
+    const rowCount = this.getRowCount();
+    const headers = [];
+    let cumulativeHeight = 0;
+
+    for (let i = 0; i < rowCount; i++) {
+      const node = this.getNode(i);
+
+      if (this.isGroupHeader(node)) {
+        headers.push({
+          node,
+          index: i,
+          top: cumulativeHeight,
+        });
+      }
+
+      cumulativeHeight += this._cache.rowHeight({index: i});
+    }
+
+    return headers;
+  };
+
+  handleScroll = ({scrollTop}) => {
+    if (!this._listRef.current) return;
+
+    const allHeaders = this.getAllHeaders();
+
+    const topStickyHeader = allHeaders.filter(h => h.top <= scrollTop).pop() || null;
+
+    const currentStickyId =
+      this.state.topStickyHeader && this.state.topStickyHeader.node && this.state.topStickyHeader.node.id;
+    const newStickyId = topStickyHeader && topStickyHeader.node && topStickyHeader.node.id;
+
+    if (currentStickyId !== newStickyId) {
+      this.setState({
+        topStickyHeader,
+      });
+    }
+  };
+
   rowRenderer = ({node, key, measure, style, NodeRenderer, index}) => {
     const {nodeMarginLeft} = this.props;
+    const isHeader = this.isGroupHeader(node);
+    const className = isHeader ? 'tree-group-header' : '';
 
     return (
       <NodeRenderer
@@ -47,10 +113,41 @@ export default class Tree extends React.Component {
           userSelect: 'none',
           cursor: 'pointer',
         }}
+        className={className}
         node={node}
         onChange={this.props.onChange}
         measure={measure}
         index={index}
+        isGroupHeader={isHeader}
+      />
+    );
+  };
+
+  renderStickyHeader = () => {
+    const {topStickyHeader} = this.state;
+    if (!topStickyHeader) return null;
+
+    const {NodeRenderer, nodeMarginLeft} = this.props;
+    const index = topStickyHeader.index;
+    const currentNode = this.getNode(index);
+
+    return (
+      <NodeRenderer
+        key={`sticky-header-${currentNode.id}`}
+        style={{
+          marginLeft: currentNode.deepness * nodeMarginLeft,
+          userSelect: 'none',
+          cursor: 'pointer',
+          width: '100%',
+          background: '#fff',
+          zIndex: 10,
+        }}
+        className="tree-group-header tree-sticky"
+        node={currentNode}
+        onChange={this.props.onChange}
+        index={index}
+        isGroupHeader={true}
+        isSticky={true}
       />
     );
   };
@@ -66,25 +163,58 @@ export default class Tree extends React.Component {
     );
   };
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.nodes !== this.props.nodes) {
+      this._cache.clearAll();
+      if (this._listRef.current) {
+        this._listRef.current.recomputeRowHeights();
+      }
+
+      this.forceUpdate();
+    }
+  }
+
   render() {
     const {nodes, width, scrollToIndex, scrollToAlignment} = this.props;
+    const {topStickyHeader} = this.state;
+    const stickyHeaderHeight = topStickyHeader ? this._cache.rowHeight({index: topStickyHeader.index}) : 0;
 
     return (
-      <AutoSizer disableWidth={Boolean(width)}>
-        {({height, width: autoWidth}) => (
-          <List
-            deferredMeasurementCache={this._cache}
-            ref={r => (this._list = r)}
-            height={height}
-            rowCount={this.getRowCount()}
-            rowHeight={this._cache.rowHeight}
-            rowRenderer={this.measureRowRenderer(nodes)}
-            width={width || autoWidth}
-            scrollToIndex={scrollToIndex}
-            scrollToAlignment={scrollToAlignment}
-          />
+      <div className="tree-container" style={{position: 'relative', height: '100%'}}>
+        {topStickyHeader && (
+          <div
+            className="tree-sticky-header-container"
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              zIndex: 100,
+              height: `${stickyHeaderHeight}px`,
+            }}
+          >
+            {this.renderStickyHeader()}
+          </div>
         )}
-      </AutoSizer>
+
+        <AutoSizer disableWidth={Boolean(width)}>
+          {({height, width: autoWidth}) => (
+            <List
+              deferredMeasurementCache={this._cache}
+              ref={this._listRef}
+              height={height}
+              rowCount={this.getRowCount()}
+              rowHeight={this._cache.rowHeight}
+              rowRenderer={this.measureRowRenderer(nodes)}
+              width={width || autoWidth}
+              scrollToIndex={scrollToIndex}
+              scrollToAlignment={scrollToAlignment}
+              onScroll={this.handleScroll}
+              overscanRowCount={20}
+            />
+          )}
+        </AutoSizer>
+      </div>
     );
   }
 }
